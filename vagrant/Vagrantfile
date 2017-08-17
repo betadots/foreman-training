@@ -1,0 +1,117 @@
+# This Vagrantfile is shared by different Vagrant environments.
+# Handle with care.
+require 'yaml'
+require 'ipaddr'
+
+# Nodes configuration is defined in config.yaml
+vagrantfile_dir = File.expand_path File.dirname(__FILE__)
+config_file = File.join(vagrantfile_dir, 'config.yaml')
+
+if !File.exist?(config_file)
+  throw("File config.yaml not found. Must be in same dir of Vagrantfile")
+end
+
+settings = YAML::load_file config_file
+
+# Network and Puppet basics
+network1_obj = IPAddr.new settings['network1']['range']
+network1_ip_range = network1_obj.to_range.to_a
+network1_range_start_offset = settings['network1']['ip_start_offset'] ? settings['network1']['ip_start_offset'] : 101
+network2_obj = IPAddr.new settings['network2']['range']
+network2_ip_range = network2_obj.to_range.to_a
+network2_range_start_offset = settings['network2']['ip_start_offset'] ? settings['network2']['ip_start_offset'] : 101
+code_dir = '/vagrant_foreman'
+
+# Define vms settings
+vms = []
+if settings['nodes'].is_a?(Array)
+  settings['nodes'].each_with_index do |node, _role_index|
+    count = node['count'] ? node['count'] : 1
+
+    (1..count).each do |vm_index|
+      vm = node.clone
+      vm['hostname_base'] = vm['hostname_base'] ? vm['hostname_base'] : vm['role']
+      vm['hostname'] = "%s" % [vm['hostname_base']]
+      vm['fqdn'] = vm['fqdn'] ? vm['fqdn'] : "%s.%s" % [vm['hostname_base'], settings['network1']['domain']]
+
+      if vm['ip_address']
+        vm['ip'] = vm['ip_address']
+      else
+        vm['ip1'] = network1_ip_range[ip_index].to_s
+        vm['ip2'] = network2_ip_range[ip_index].to_s
+        ip_index+=1
+      end
+
+      vm['aliases'] = [
+          "%s.%s" % [vm['hostname'], settings['network1']['domain']],
+          "%s-%02d" % [vm['hostname_base'], vm_index]
+      ]
+
+      vm['box'] = node['box'] ? node['box'] : settings['vm']['box']
+      vm['cpu'] = node['cpu'] ? node['cpu'] : settings['vm']['cpu']
+      vm['memory'] = node['memory'] ? node['memory'] : settings['vm']['memory']
+
+      vm['forwarded_port'] = node['forwarded_port'] ? node['forwarded_port'] : nil
+
+      vms.push(vm)
+    end
+  end
+end
+
+
+# Vagrant configuration
+Vagrant.configure("2") do |config|
+
+  # hostmanager config
+  if Vagrant.has_plugin?("vagrant-hostmanager")
+    config.hostmanager.enabled = settings['vagrant']['hostmanager.enabled'] ? settings['vagrant']['hostmanager.enabled'] : true
+    config.hostmanager.manage_host = settings['vagrant']['hostmanager.manage_host'] ? settings['vagrant']['hostmanager.manage_host'] : false
+    config.hostmanager.ignore_private_ip = settings['vagrant']['hostmanager.ignore_private_ip'] ? settings['vagrant']['hostmanager.ignore_private_ip'] : false
+    config.hostmanager.include_offline = settings['vagrant']['hostmanager.include_offline'] ? settings['vagrant']['hostmanager.include_offline'] : true
+  end
+
+  # See https://github.com/mitchellh/vagrant/issues/1673
+  config.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'"
+
+  vms.each do |node|
+    role = node['role'].clone
+    hostname = node['hostname'].clone
+    fqdn = node['fqdn'].clone
+    box = node['box'].clone
+    aliases = node['aliases'].clone + node['aliases']
+    forwarded_port = node['forwarded_port']
+    vm_box = settings['boxes']["#{box}"]['box']
+
+    config.vm.define fqdn do |node_config|
+      node_config.vm.box = vm_box
+      node_config.vm.hostname = fqdn
+      node_config.vm.network :private_network, ip: node['ip1']
+      node_config.vm.network :private_network, ip: node['ip2']
+
+      # configure all vm's
+      node_config.vm.provision "shell", path: '../scripts/vagrant-sethostname.sh', args: "#{fqdn}"
+      node_config.vm.provision "shell", path: '../scripts/vagrant-setup-centos-repos.sh'
+
+      if Vagrant.has_plugin?("vagrant-hostmanager")
+        node_config.hostmanager.aliases = aliases
+        node_config.hostmanager.manage_host = settings['vagrant']['hostmanager.manage_host']
+      end
+
+      # bootstrap foreman server
+      if node['role'] == 'foreman'
+        node_config.vm.synced_folder "../", code_dir, mount_options: ["ro"]
+        node_config.vm.provision "shell", path: "../scripts/bootstrap_foreman.sh"
+      end
+
+      if node['forwarded_port']
+        node_config.vm.network "forwarded_port", guest: node['forwarded_port']['guest'], host: node['forwarded_port']['host']
+      end
+
+      node_config.vm.provider "virtualbox" do |v|
+        v.customize ['modifyvm', :id, '--name', fqdn]
+        v.customize ['modifyvm', :id, '--cpus', node['cpu'].to_s]
+        v.customize ['modifyvm', :id, '--memory', node['memory'].to_s]
+      end
+    end
+  end
+end

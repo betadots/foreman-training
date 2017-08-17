@@ -1,0 +1,12 @@
+zone "training.example42.com" IN {
+        type master;
+        allow-update { key "foreman.training.example42.com"; };
+        file "foreman_domain";
+};
+
+zone "10.1000.10.in-addr.arpa" IN {
+        type master;
+        allow-update { key "foreman.training.example42.com"; };
+        file "foreman_ip";
+};
+
