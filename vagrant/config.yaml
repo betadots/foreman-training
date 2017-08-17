@@ -39,6 +39,9 @@ nodes:
   - role: sles
     count: 1
     box: suse12
+  - role: docker
+    count: 1
+    box: centos7
 
 # List of available Vagrant boxes with different OS to test on
 boxes:
