@@ -14,15 +14,15 @@ file { '/etc/named.foreman.zones':
   source => "${cfg_base_dir}/named.foreman.zones",
   notify => Service['named'],
 }
-file { '/etc/named/Kforeman.training.example42.com.+157+55347.key':
-  ensure  => file,
-  content => 'foreman.training.example42.com. IN KEY 512 3 157 9KC4RZuKpIvs+HAtGOFp4vSjD1z+GleFoj6H8Exft04c5geo/U/ppYLC 1I3NME5qmlnXLcvNElvUAFTtWtUsTw==',
-  mode    => '0600',
-  notify  => Service['named'],
-}
-file { '/etc/named/Kforeman.training.example42.com.+157+55347.private':
+file { '/var/named/Kforeman.training.+157+12851.key':
   ensure => file,
-  source => "${cfg_base_dir}/Kforeman.training.example42.com.private",
+  source => "${cfg_base_dir}/Kforeman.training.key",
+  mode   => '0600',
+  notify => Service['named'],
+}
+file { '/var/named/Kforeman.training.+157+12851.private':
+  ensure => file,
+  source => "${cfg_base_dir}/Kforeman.training.private",
   mode   => '0600',
   notify => Service['named'],
 }

@@ -1,0 +1,12 @@
+$ORIGIN example42.training.
+$TTL 1D
+@ IN SOA  @ foreman.example42.training. (
+                                        0 ; serial
+                                        1D  ; refresh
+                                        1H  ; retry
+                                        1W  ; expire
+                                        3H )  ; minimum
+        NS  @
+        A 10.100.10.101
+
+foreman IN  A 10.100.10.101

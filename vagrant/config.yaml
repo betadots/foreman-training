@@ -9,7 +9,7 @@ vm:
 network1:
   range: 10.42.48.0/24   # Network address and mask to use
   ip_start_offset: 101   # Starting ip in the network for automatic assignement
-  domain: training.example42.com    # Name of DNS domain for the created machines
+  domain: example42.training       # Name of DNS domain for the created machines
 
 network2:
   range: 10.100.10.0/24
