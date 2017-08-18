@@ -25,6 +25,8 @@ code_dir = '/vagrant_foreman'
 # Define vms settings
 vms = []
 if settings['nodes'].is_a?(Array)
+  network1_ip_index = network1_range_start_offset
+  network2_ip_index = network2_range_start_offset
   settings['nodes'].each_with_index do |node, _role_index|
     count = node['count'] ? node['count'] : 1
 
@@ -37,9 +39,10 @@ if settings['nodes'].is_a?(Array)
       if vm['ip_address']
         vm['ip'] = vm['ip_address']
       else
-        vm['ip1'] = network1_ip_range[ip_index].to_s
-        vm['ip2'] = network2_ip_range[ip_index].to_s
-        ip_index+=1
+        vm['ip1'] = network1_ip_range[network1_ip_index].to_s
+        vm['ip2'] = network2_ip_range[network2_ip_index].to_s
+        network1_ip_index+=1
+        network2_ip_index+=1
       end
 
       vm['aliases'] = [
@@ -50,8 +53,6 @@ if settings['nodes'].is_a?(Array)
       vm['box'] = node['box'] ? node['box'] : settings['vm']['box']
       vm['cpu'] = node['cpu'] ? node['cpu'] : settings['vm']['cpu']
       vm['memory'] = node['memory'] ? node['memory'] : settings['vm']['memory']
-
-      vm['forwarded_port'] = node['forwarded_port'] ? node['forwarded_port'] : nil
 
       vms.push(vm)
     end
@@ -79,7 +80,6 @@ Vagrant.configure("2") do |config|
     fqdn = node['fqdn'].clone
     box = node['box'].clone
     aliases = node['aliases'].clone + node['aliases']
-    forwarded_port = node['forwarded_port']
     vm_box = settings['boxes']["#{box}"]['box']
 
     config.vm.define fqdn do |node_config|
@@ -90,7 +90,6 @@ Vagrant.configure("2") do |config|
 
       # configure all vm's
       node_config.vm.provision "shell", path: '../scripts/vagrant-sethostname.sh', args: "#{fqdn}"
-      node_config.vm.provision "shell", path: '../scripts/vagrant-setup-centos-repos.sh'
 
       if Vagrant.has_plugin?("vagrant-hostmanager")
         node_config.hostmanager.aliases = aliases
@@ -101,10 +100,6 @@ Vagrant.configure("2") do |config|
       if node['role'] == 'foreman'
         node_config.vm.synced_folder "../", code_dir, mount_options: ["ro"]
         node_config.vm.provision "shell", path: "../scripts/bootstrap_foreman.sh"
-      end
-
-      if node['forwarded_port']
-        node_config.vm.network "forwarded_port", guest: node['forwarded_port']['guest'], host: node['forwarded_port']['host']
       end
 
       node_config.vm.provider "virtualbox" do |v|

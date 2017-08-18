@@ -30,9 +30,6 @@ nodes:
     memory: 6192
     cpu: 2
     box: centos7
-    forwarded_port:
-      guest: 443
-      host: 8443
   - role: debian
     count: 1
     box: debian8
