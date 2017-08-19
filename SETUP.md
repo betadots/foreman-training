@@ -36,4 +36,64 @@ Nun muessen die Dienste konfiguriert werden:
 
 ## Foreman Einrichtung fertigstellen
 
+### Smart proxies
 
+Foreman Login -> Infrastructure -> Smart proxies
+
+Actions -> Refresh
+
+Klick auf 'foreman.example42.training'
+
+Auf Fehler prüfen.
+
+### Netzwerk
+
+Foreman Login -> Infrastructure -> Subnets -> 'foreman.training'
+
+Tab Subnet: Primary DNS Server: 10.100.10.101
+Tab Domains: Auswaehlen 'example42.training'
+
+Submit
+
+### Domain
+
+Foreman Login -> Infrastructure -> Domains
+
+DNS Proxy -> 'foreman.example42.training' -> Submit
+
+### Puppet Environments
+
+    puppet module install garethr-docker
+    puppet module install puppetlabs-ntp
+
+Foreman Login -> Configure -> Puppet Environments -> 'Import environments from foreman.example42.training'
+
+### Provisionieren
+
+Foreman Login -> Infrastructure -> Provisioning Setup
+
+Pre-requisites: Provisioning Network: 10.100.10.101/24 -> Submit
+Network config: -> Submit
+Foreman Installer: 'Install provisioning with DHCP' -> Kopieren und Ausfuehren -> Next
+Installation Media: 'CentOS mirror' -> Submit
+
+## Docker Setup
+
+New Host
+Host: Host Group -> Provision from foreman.example42.training
+Host: Deploy on -> Bare Metal
+Host: Environment -> production
+Host: Puppet Master: foreman.example42.training
+Host: Puppet CA: foreman.example42.training
+
+Puppet Classes: docker
+
+Interfaces: Edit
+Eintragen: Mac Addresse und IP Adresse
+
+Hinweis: vagrant box docker starten und MAC Adresse in Virtualbox auslesen.
+
+
+Oprating System: root password
+
+    vagrant up docker.example42.training

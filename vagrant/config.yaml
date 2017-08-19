@@ -31,9 +31,10 @@ nodes:
     box: centos7
   - role: docker
     count: 1
-    box: centos7
+    box: empty
   - role: host
     count: 1
+    box: empty
 
 # List of available Vagrant boxes with different OS to test on
 boxes:
