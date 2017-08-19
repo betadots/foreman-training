@@ -32,10 +32,14 @@ nodes:
   - role: docker
     count: 1
     box: centos7
+  - role: host
+    count: 1
 
 # List of available Vagrant boxes with different OS to test on
 boxes:
   centos7:
     box: centos/7
     breed: puppetlabs
+  empty:
+    box: sridhav/empty
 
