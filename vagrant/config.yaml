@@ -10,7 +10,6 @@ network1:
   range: 10.42.48.0/24   # Network address and mask to use
   ip_start_offset: 101   # Starting ip in the network for automatic assignement
   domain: example42.training       # Name of DNS domain for the created machines
-
 network2:
   range: 10.100.10.0/24
   ip_start_offset: 101
@@ -30,12 +29,6 @@ nodes:
     memory: 6192
     cpu: 2
     box: centos7
-  - role: debian
-    count: 1
-    box: debian8
-  - role: sles
-    count: 1
-    box: suse12
   - role: docker
     count: 1
     box: centos7
@@ -44,11 +37,5 @@ nodes:
 boxes:
   centos7:
     box: centos/7
-    breed: puppetlabs
-  debian8:
-    box: debian/jessie64
-    breed: puppetlabs
-  suse12:
-    box: suse/sles12sp1
     breed: puppetlabs
 

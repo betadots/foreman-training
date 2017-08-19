@@ -4,6 +4,10 @@ $cfg_base_dir = '/vagrant_foreman/vagrant/config_files'
 package { ['bind', 'bind-utils']:
   ensure => present,
 }
+file { '/etc/rndc.key':
+  ensure => file,
+  mode   => '0644',
+}
 file { '/etc/named.conf':
   ensure => file,
   source => "${cfg_base_dir}/named.conf",
@@ -16,13 +20,13 @@ file { '/etc/named.foreman.zones':
 }
 file { '/var/named/Kforeman.training.+157+12851.key':
   ensure => file,
-  source => "${cfg_base_dir}/Kforeman.training.key",
+  source => "${cfg_base_dir}/Kforeman-training.key",
   mode   => '0600',
   notify => Service['named'],
 }
 file { '/var/named/Kforeman.training.+157+12851.private':
   ensure => file,
-  source => "${cfg_base_dir}/Kforeman.training.private",
+  source => "${cfg_base_dir}/Kforeman-training.private",
   mode   => '0600',
   notify => Service['named'],
 }

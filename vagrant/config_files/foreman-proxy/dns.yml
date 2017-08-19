@@ -1,0 +1,11 @@
+---
+# DNS management
+:enabled: true
+# valid providers:
+#   dns_dnscmd (Microsoft Windows native implementation)
+#   dns_nsupdate
+#   dns_nsupdate_gss (for GSS-TSIG support)
+#   dns_libvirt (dnsmasq via libvirt)
+:use_provider: dns_nsupdate
+# use this setting if you want to override default TTL setting (86400)
+:dns_ttl: 86400
