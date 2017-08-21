@@ -91,9 +91,7 @@ Puppet Classes: docker
 Interfaces: Edit
 Eintragen: Mac Addresse und IP Adresse
 
-Hinweis: vagrant box docker starten und MAC Adresse in Virtualbox auslesen.
-
+Hinweis: VirtualBox erzeugen und MAC Adresse in Virtualbox auslesen.
 
 Oprating System: root password
 
-    vagrant up docker.example42.training

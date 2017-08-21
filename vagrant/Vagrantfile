@@ -13,20 +13,16 @@ end
 
 settings = YAML::load_file config_file
 
-# Network and Puppet basics
-network1_obj = IPAddr.new settings['network1']['range']
-network1_ip_range = network1_obj.to_range.to_a
-network1_range_start_offset = settings['network1']['ip_start_offset'] ? settings['network1']['ip_start_offset'] : 101
-network2_obj = IPAddr.new settings['network2']['range']
-network2_ip_range = network2_obj.to_range.to_a
-network2_range_start_offset = settings['network2']['ip_start_offset'] ? settings['network2']['ip_start_offset'] : 101
+# Network
+network_obj = IPAddr.new settings['network']['range']
+network_ip_range = network_obj.to_range.to_a
+network_range_start_offset = settings['network']['ip_start_offset'] ? settings['network']['ip_start_offset'] : 101
 code_dir = '/vagrant_foreman'
 
 # Define vms settings
 vms = []
 if settings['nodes'].is_a?(Array)
-  network1_ip_index = network1_range_start_offset
-  network2_ip_index = network2_range_start_offset
+  network_ip_index = network_range_start_offset
   settings['nodes'].each_with_index do |node, _role_index|
     count = node['count'] ? node['count'] : 1
 
@@ -34,19 +30,17 @@ if settings['nodes'].is_a?(Array)
       vm = node.clone
       vm['hostname_base'] = vm['hostname_base'] ? vm['hostname_base'] : vm['role']
       vm['hostname'] = "%s" % [vm['hostname_base']]
-      vm['fqdn'] = vm['fqdn'] ? vm['fqdn'] : "%s.%s" % [vm['hostname_base'], settings['network1']['domain']]
+      vm['fqdn'] = vm['fqdn'] ? vm['fqdn'] : "%s.%s" % [vm['hostname_base'], settings['network']['domain']]
 
       if vm['ip_address']
         vm['ip'] = vm['ip_address']
       else
-        vm['ip1'] = network1_ip_range[network1_ip_index].to_s
-        vm['ip2'] = network2_ip_range[network2_ip_index].to_s
-        network1_ip_index+=1
-        network2_ip_index+=1
+        vm['ip'] = network_ip_range[network_ip_index].to_s
+        network_ip_index+=1
       end
 
       vm['aliases'] = [
-          "%s.%s" % [vm['hostname'], settings['network1']['domain']],
+          "%s.%s" % [vm['hostname'], settings['network']['domain']],
           "%s-%02d" % [vm['hostname_base'], vm_index]
       ]
 
@@ -85,8 +79,7 @@ Vagrant.configure("2") do |config|
     config.vm.define fqdn do |node_config|
       node_config.vm.box = vm_box
       node_config.vm.hostname = fqdn
-      node_config.vm.network :private_network, ip: node['ip1']
-      node_config.vm.network :private_network, ip: node['ip2']
+      node_config.vm.network :private_network, ip: node['ip']
 
       # configure all vm's
       node_config.vm.provision "shell", path: '../scripts/vagrant-sethostname.sh', args: "#{fqdn}"
