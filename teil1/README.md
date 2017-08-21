@@ -1,4 +1,4 @@
-# Foreman Training - Tel 1 - Smart Proxies
+# Foreman Training - Teil 1 - Smart Proxies
 
 Smart-Proxy ist ein Service, der auf einem System laeuft, welches Infrastruktur Komponenenten bereitstellt.
 Dazu gehoeren zum Beispiel:
