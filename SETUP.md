@@ -33,6 +33,7 @@ Nun muessen die Dienste konfiguriert werden:
     puppet apply /vagrant_foreman/scripts/01_install_service_dhcp.pp
     puppet apply /vagrant_foreman/scripts/02_install_service_bind.pp
     puppet apply /vagrant_foreman/scripts/03_foreman_proxy.pp
+    puppet apply /vagrant_foreman/scripts/04_selinux.pp
 
 Achtung! Dieses Setup kann nur einmal durchgefuehrt werden.
 Spaetestens das Provisionierungs Setup aendert diese Einstellungen grundlegend.
@@ -231,5 +232,22 @@ Foreman Login -> Infrastructure -> Compute Resource -> Create Compute Resource
 Name: docker from foreman
 Provider: docker
 URL: http://docker.example42.training:4243
+
+## Cockpit
+
+    yum install cockpit
+    systemctl start cockpit
+
+Einmal auf Cockpit zugreifen (vorher root passwort in der vagrantbox setzen):
+
+https://foreman.example42.training:9090
+
+Dann in Foreman cockpit verwenden:
+
+Foreman-Login -> Hosts -> All Hosts -> foreman.example42.training
+
+## DHCP Browser
+
+    yum install tfm-rubygem-foreman_dhcp_browser
 
 
