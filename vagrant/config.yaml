@@ -26,7 +26,7 @@ nodes:
     box: centos7
   - role: docker
     count: 1
-    box: empty
+    box: centos7
   - role: host
     count: 1
     box: empty

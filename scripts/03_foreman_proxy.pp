@@ -1,5 +1,12 @@
 $cfg_base_dir = '/vagrant_foreman/vagrant/config_files'
 
+file { '/etc/rndc_foreman.key':
+  ensure => file,
+  source => '/etc/rndc.key',
+  mode   => '0644',
+  notify => Service['foreman-proxy'],
+}
+
 $foreman_proxy_files = [
   'dhcp.yml',
   'dhcp_isc.yml',

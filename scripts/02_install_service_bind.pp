@@ -4,10 +4,6 @@ $cfg_base_dir = '/vagrant_foreman/vagrant/config_files'
 package { ['bind', 'bind-utils']:
   ensure => present,
 }
-file { '/etc/rndc.key':
-  ensure => file,
-  mode   => '0644',
-}
 file { '/etc/named.conf':
   ensure => file,
   source => "${cfg_base_dir}/named.conf",
@@ -53,4 +49,8 @@ service { 'named':
 file { '/etc/resolv.conf':
   ensure => file,
   source => "${cfg_base_dir}/resolv.conf",
+}
+file { '/etc/rndc.key':
+  ensure => file,
+  mode   => '0644',
 }
