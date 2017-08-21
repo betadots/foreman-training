@@ -216,7 +216,6 @@ Erweiterungen installieren:
 
     yum install -y tfm-rubygem-foreman_docker
     yum install -y tfm-rubygem-foreman_docker-doc
-    yum install -y tfm-rubygem-foreman_cockpit
 
 
 ### Plugins als GEM
@@ -235,7 +234,13 @@ URL: http://docker.example42.training:4243
 
 ## Cockpit
 
-    yum install cockpit
+Auf der foreman instanz:
+
+    yum install -y tfm-rubygem-foreman_cockpit
+
+Auf allen anderen Systemen:
+
+    yum install -y cockpit
     systemctl start cockpit
 
 Einmal auf Cockpit zugreifen (vorher root passwort in der vagrantbox setzen):
@@ -248,6 +253,10 @@ Foreman-Login -> Hosts -> All Hosts -> foreman.example42.training
 
 ## DHCP Browser
 
-    yum install tfm-rubygem-foreman_dhcp_browser
+    yum install -y tfm-rubygem-foreman_dhcp_browser
 
+
+## Remote execution
+
+    yum install -y tfm-rubygem-foreman_remote_execution
 
