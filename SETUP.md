@@ -154,23 +154,82 @@ Submit
 
 ## Docker Setup
 
-New Host
-Host: Host Group -> Provision from foreman.example42.training
-Host: Deploy on -> Bare Metal
-Host: Environment -> production
-Host: Puppet Master: foreman.example42.training
-Host: Puppet CA: foreman.example42.training
+    vagrant up docker.example42.training
 
-Puppet Classes: docker
+### Puppet Zertifikat signieren:
 
-Interfaces: Edit
-Eintragen: Mac Addresse und DNS Name (FQDN)
+Foreman Login -> Infrastructure -> Smart Proxies -> foreman.example42.training
 
-Hinweis: VirtualBox erzeugen und MAC Adresse in Virtualbox auslesen.
+Puppet CA -> Orange Klicken -> Sign
 
-Oprating System: root password
+### Initialer Puppet Lauf
 
-Hardware model: VirtualBox
+    vagrant ssh docker.example42.training
+    sudo -i
+    puppet agent --test 
+
+## Host Klassifizieren
+
+Foreman Login -> Hosts -> All Hosts -> docker.example42.training -> Edit -> Puppet CLasses -> Docker auswaehlen
+
+## Puppet Klassen Parameter aendern
+
+### Globale Defaults (Smart Class Variables)
+
+Foreman Login -> Configure -> Smart Class Parameters
+
+search:  puppetclass =  docker and  parameter =  tcp_bind
+
+Klick auf tcp_bind
+
+Default behavior:
+  Override: OK
+  Key type: string
+  Default value: tcp://0.0.0.0:4243
+
+Submit
+
+Jetzt noch ein Puppet Lauf auf docker.example42.training
+
+## Plugins
+
+Einige Erweiterungen sind nicht Bestandteil der allgemeinen Installation.
 
 
-Jetzt die VM booten....
+### Plugins als Paket:
+
+YUM Repositoriy fuer Plugins aktivieren (wurde durch den Installer bereits erledigt:
+
+    # /etc/yum.repos.d/foreman-plugins.repo
+    [foreman-plugins]
+    name=Foreman plugins
+    baseurl=http://yum.theforeman.org/plugins/1.15/el7/x86_64/
+    enabled=1
+    gpgcheck=0
+
+Vorhandene Plugins anschauen:
+
+    yum search tfm-rubygem-foreman
+
+Erweiterungen installieren:
+
+    yum install -y tfm-rubygem-foreman_docker
+    yum install -y tfm-rubygem-foreman_docker-doc
+    yum install -y tfm-rubygem-foreman_cockpit
+
+
+### Plugins als GEM
+
+    scl enable tfm bash
+    gem install <foreman plugin>
+
+
+## Compute Resource
+
+Foreman Login -> Infrastructure -> Compute Resource -> Create Compute Resource
+
+Name: docker from foreman
+Provider: docker
+URL: http://docker.example42.training:4243
+
+
