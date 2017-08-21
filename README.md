@@ -4,8 +4,11 @@
 # Inhalt
 
 Teil 1 - Smart Proxies
+
 Teil 2 - Provisionieren
+
 Teil 3 - Docker Host deployment
+
 Teil 4 - Plugins
 
 # License
