@@ -12,10 +12,10 @@ sudo yum -y localinstall http://dl.fedoraproject.org/pub/epel/epel-release-lates
 
 
 echo "Yum update"
-sudo yum update
+sudo yum -y update
 
 echo "Katello installation"
-sudo yum install katello
+sudo yum -y install katello
 
 echo "installing some tools: tree vim net-tools"
 sudo yum -y install tree vim net-tools
