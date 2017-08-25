@@ -11,6 +11,8 @@ Teil 3 - Docker Host deployment
 
 Teil 4 - Plugins
 
+Teil 5 - Katello
+
 # License
 Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License
 

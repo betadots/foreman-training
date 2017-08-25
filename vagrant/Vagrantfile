@@ -95,6 +95,11 @@ Vagrant.configure("2") do |config|
         node_config.vm.provision "shell", path: "../scripts/bootstrap_foreman.sh"
       end
 
+      if node['role'] == 'katello'
+        node_config.vm.synced_folder "../", code_dir, mount_options: ["ro"]
+        node_config.vm.provision "shell", path: "../scripts/bootstrap_katello.sh"
+      end
+
       # bootstrap docker server
       if node['role'] == 'docker'
         node_config.vm.synced_folder "../", code_dir, mount_options: ["ro"]

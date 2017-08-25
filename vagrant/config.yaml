@@ -24,6 +24,10 @@ nodes:
     memory: 6192
     cpu: 2
     box: centos7
+  - role: katello
+    memory: 6192
+    cpu: 2
+    box: centos7
   - role: docker
     count: 1
     box: centos7
