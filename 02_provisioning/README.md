@@ -1,5 +1,19 @@
 # Foreman Training - Teil 2 - Provisionieren
 
+Das Provisionieren besteht aus:
+  - Betriebssystem und -version
+  - OS Architektur
+  - Installations Medium (Repository Server)
+  - Provisionierungstemplates
+
+## Provisioning OS
+
+Es koennen meherere OS ausgewaehlt werden.
+Das OS mit Version und Architektur der Foreman Instanz ist automatisch hinzugefuegt worden.
+
+## Provisioning Repository Server
+
+Default Repository Server fuer unterschiedliche Betriebssysteme sind bereits standardmaessig angelegt.
 
 ## Provisioning Templates
 
