@@ -33,7 +33,7 @@ Klick auf tcp_bind
 Default behavior:
 -  Override: OK
 -  Key type: string
--  Default value: tcp://0.0.0.0:4243
+-  Default value: ```tcp://0.0.0.0:4243```
 
 Submit
 
