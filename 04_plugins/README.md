@@ -36,9 +36,9 @@ Erweiterungen installieren:
 
 Foreman Login -> Infrastructure -> Compute Resource -> Create Compute Resource
 
-Name: docker from foreman
-Provider: docker
-URL: http://docker.example42.training:4243
+- Name: docker from foreman
+- Provider: docker
+- URL: http://docker.example42.training:4243
 
 ## Cockpit
 
