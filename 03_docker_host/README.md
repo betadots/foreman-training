@@ -26,14 +26,14 @@ Foreman Login -> Hosts -> All Hosts -> docker.example42.training -> Edit -> Pupp
 
 Foreman Login -> Configure -> Smart Class Parameters
 
-search:  puppetclass =  docker and  parameter =  tcp_bind
+search:  ```puppetclass =  docker and  parameter =  tcp_bind```
 
 Klick auf tcp_bind
 
 Default behavior:
-  Override: OK
-  Key type: string
-  Default value: tcp://0.0.0.0:4243
+-  Override: OK
+-  Key type: string
+-  Default value: tcp://0.0.0.0:4243
 
 Submit
 

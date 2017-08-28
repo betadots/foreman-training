@@ -135,6 +135,5 @@ Submit
 
 ### Host in VirtualBox starten
 
-- Partition Table: 
 
 
