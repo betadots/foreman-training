@@ -49,6 +49,8 @@ Submit
 
 Foreman Login -> Infrastructure -> Domains
 
-DNS Proxy -> 'foreman.example42.training' -> Submit
+Auf 'example42.training' klicken -> Tab Domain ->
+
+DNS Proxy -> 'foreman.example42.training' auswaehlen -> Submit
 
 

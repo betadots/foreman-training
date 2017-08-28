@@ -107,8 +107,34 @@ Submit
 
 ### Host erzeugen in VirtualBox:
 
-New -> Host -> 1024 MB RAM -> 20 GB HDD
+New -> Host -> 2048 MB RAM -> 8 GB HDD
 
-Boot Einstellungen aendern: Festplatte -> Netzwerk
+Boot Einstellungen aendern: 1. Festplatte -> 2. Netzwerk
 Netzwerk aendern: gleiches vboxnet, wie foreman.example42.training
+MAC Adresse notieren
+
+### Host in Foreman anlegen
+
+Foreman Login -> Hosts -> Create Host
+
+Host Tab:
+- Name: hostname (ohne Domain)
+- Hostgroup: Provision from foreman
+- Environment: Production (sollte automatisch aus der Hostgroup rausfallen)
+
+Interfaces Tab:
+- Edit
+  - Mac Adresse eintragen und OK zum speichern
+
+Operating System Tab:
+- Operating System: auswaehlen (CentOS Linux 7.3...)
+- Media: Mirror waehlen
+- Partition Table: Kickstart default
+- PXE Loader: PXELinux BIOS
+Submit
+
+### Host in VirtualBox starten
+
+- Partition Table: 
+
 
