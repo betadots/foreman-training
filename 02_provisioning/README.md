@@ -41,9 +41,15 @@ Foreman Login -> Hosts -> Provisioning Templates
 
 1. Stelle: Templates mit OS Assoziieren
 
+1.a. kind = PXE
+
 "Kickstart default PXELinux" auswaehlen -> Association -> OS auswaehlen
 
+1.b. kind = provision
+
 "Kickstart default" auswaehlen -> Association -> OS auswaehlen
+
+1.c. kind = finish
 
 "Kickstart default finish" auswaehlen -> Association -> OS auswaehlen
 
