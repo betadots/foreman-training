@@ -73,8 +73,8 @@ Operatingsystem Family angeben!
 2. Stelle: OS mit Templates Assoziieren
 
 - Partition Table -> "Kickstart default" auswaehlen
-- Installation media -> "CentOS mirror" auswaehlen (oder das vorher angelegten Installation media)
-- Templates -> alle Templates auswaehlen
+- Installation media -> "CentOS mirror" auswaehlen (oder das vorher angelegten Installation media auswaehlen)
+- Templates -> alle Templates auswaehlen, die man auswaehlen kann.
 
 Submit
 

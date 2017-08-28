@@ -1,6 +1,7 @@
 Vagrantfile:
 - check for plugins
 - check vagrant on Linux, eth1 missing
+- iptables postrouting permanent machen
 
 Preparation for Training:
 - vagrant box install centos/7

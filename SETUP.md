@@ -1,5 +1,9 @@
 # Foreman Training
 
+## VirtualBox Vorbereitung
+
+Unbedingt pruefen, ob die Host-only Netzwerke einen DHCP Server aktiviert haben !!
+
 ## Initialisieren:
 
 Es werden zwei Vagrant Plugins eingesetzt:
@@ -16,6 +20,9 @@ Danach Login:
 
     vagrant ssh foreman.example42.training
     sudo -i
+
+Pruefen, ob eth1 Interface eine IP hat, ```ip a```. Wenn nein: ```ifup eth1```
+
     foreman-installer -i
 
 Den Output sichern. z.B.:
