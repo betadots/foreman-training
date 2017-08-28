@@ -61,9 +61,9 @@ Beispiel Suchen: kind=PXELinux
 
 2. Stelle: OS mit Templates Assoziieren
 
-Partition Table -> "Kickstart default" auswaehlen
-Installation media -> "CentOS mirror" auswaehlen
-Templates -> alle Templates auswaehlen
+- Partition Table -> "Kickstart default" auswaehlen
+- Installation media -> "CentOS mirror" auswaehlen
+- Templates -> alle Templates auswaehlen
 
 Submit
 
@@ -75,10 +75,10 @@ Foreman Login -> Administrator -> Settings
 
 Foreman Login -> Infrastructure -> Provisioning Setup
 
-Pre-requisites: Provisioning Network: 10.100.10.101/24 -> Submit
-Network config: -> Submit (Bei Fehler das Netzwerk umbenennen)
-Foreman Installer: 'Install provisioning with DHCP' -> Kopieren und Ausfuehren -> Next
-Installation Media: 'CentOS mirror' -> Submit
+- Pre-requisites: Provisioning Network: 10.100.10.101/24 -> Submit
+- Network config: -> Submit (Bei Fehler das Netzwerk umbenennen) (provision.example42.training)
+- Foreman Installer: 'Install provisioning with DHCP' -> Kopieren und Ausfuehren -> Next
+- Installation Media: 'CentOS mirror' -> Submit
 
 ACHTUNG: nach dem foreman installer Kommando unbedingt die /etc/named/options.conf forwarders pruefen!!
 
@@ -87,9 +87,10 @@ ACHTUNG: nach dem foreman installer Kommando unbedingt die /etc/named/options.co
 Host Group braucht das Puppet Environment
 
 Foreman Login -> Configure -> Host Groups
-"Provision from foreman.example42.training" auswaehlen
-Host Group: Puppet Environment setzen (Production)
-Operating System: PXE Loader auswaehlen (PXELinux BIOS)
+
+- "Provision from foreman.example42.training" auswaehlen
+- Host Group: Puppet Environment setzen (Production)
+- Operating System: PXE Loader auswaehlen (PXELinux BIOS)
 
 Submit
 
