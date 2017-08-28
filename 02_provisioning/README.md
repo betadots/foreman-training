@@ -37,7 +37,7 @@ Beispiel Suchen: kind=PXELinux
 
 ### Provisionierungs Templates mit OS Assoziieren
 
-Foreman Login -> Hosts -> Provisioning Templates
+#### Foreman Login -> Hosts -> Provisioning Templates
 
 1. Stelle: Templates mit OS Assoziieren
 
@@ -53,9 +53,11 @@ Foreman Login -> Hosts -> Provisioning Templates
 
 "Kickstart default finish" auswaehlen -> Association -> OS auswaehlen
 
+1.d. PXE bauen
+
 "Build PXE Default"
 
-Foreman Login -> Hosts -> Operating Systems
+#### Foreman Login -> Hosts -> Operating Systems
 
 2. Stelle: OS mit Templates Assoziieren
 
