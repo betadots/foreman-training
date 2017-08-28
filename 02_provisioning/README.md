@@ -107,6 +107,8 @@ Submit
 
 ### Host erzeugen in VirtualBox:
 
+Hinweis: die Images werden initial in eine RAM Disk geladen. Deshalb benoetigt die VM mindesten 1516 MB RAM.
+
 New -> Host -> 2048 MB RAM -> 8 GB HDD
 
 Boot Einstellungen aendern: 1. Festplatte -> 2. Netzwerk
@@ -134,6 +136,4 @@ Operating System Tab:
 Submit
 
 ### Host in VirtualBox starten
-
-
 

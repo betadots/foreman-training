@@ -23,9 +23,8 @@ Vorhandene Plugins anschauen:
 Erweiterungen installieren:
 
     yum install -y tfm-rubygem-foreman_docker
-    yum install -y tfm-rubygem-foreman_docker-doc
 
-Nach der Installation httpd service neu starten:
+Nach jeder Plugin Installation httpd service neu starten:
 
     service httpd restart
 
@@ -70,32 +69,4 @@ Auf docker.example42.training:
     watch docker ps
 
 
-
-## Cockpit
-
-Auf der foreman instanz:
-
-    yum install -y tfm-rubygem-foreman_cockpit
-
-Auf allen anderen Systemen:
-
-    yum install -y cockpit
-    systemctl start cockpit
-
-Einmal auf Cockpit zugreifen (vorher root passwort in der vagrantbox setzen):
-
-https://foreman.example42.training:9090
-
-Dann in Foreman cockpit verwenden:
-
-Foreman-Login -> Hosts -> All Hosts -> foreman.example42.training
-
-## DHCP Browser
-
-    yum install -y tfm-rubygem-foreman_dhcp_browser
-
-
-## Remote execution
-
-    yum install -y tfm-rubygem-foreman_remote_execution
 

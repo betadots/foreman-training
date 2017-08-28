@@ -1,6 +1,9 @@
-# Foreman Training - Teil 3 - Docker Host
+# Foreman Training - Teil 4 - Configuration Management
 
-## Docker Setup
+1. bestehendes System
+2. provisioniertes System
+
+## 1. Docker Setup
 
     vagrant up docker.example42.training
 
@@ -37,5 +40,14 @@ Default behavior:
 
 Submit
 
-Jetzt noch ein Puppet Lauf auf docker.example42.training
+Jetzt noch ein Puppet Lauf auf docker.example42.training anstossen:
+
+    puppet agent --test
+
+## Apache
+
+    vagrant up apache.example42.training
+
+Schritte von vorher wiederholen.
+
 
