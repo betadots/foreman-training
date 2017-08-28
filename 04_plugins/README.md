@@ -51,12 +51,15 @@ Foreman Login -> Containers -> Create Container
 
 Compute Resource:
 - Docker -> Next Step
+
 Image:
 - Search: centos (Fehler im Browser koennen ignoriert werden)
 - Tag: latest -> Next Step
+
 Basic Options:
 - Name: ping_heise (keine Leerzeichen! Keine Grossbuchstaben!)
 - Command: ping -c 20 heise.de -> Next Step
+
 Environment:
 - Shell TTY aktivieren -> Submit
 
