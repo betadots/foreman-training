@@ -41,7 +41,7 @@ Beispiel Suchen: kind=PXELinux
 
 1. Stelle: Templates mit OS Assoziieren
 
-1.a. kind = PXE
+1.a. kind = PXELinux
 
 "Kickstart default PXELinux" auswaehlen -> Association -> OS auswaehlen
 
@@ -57,12 +57,23 @@ Beispiel Suchen: kind=PXELinux
 
 "Build PXE Default"
 
+#### Installation media
+
+Wenn man einen eigenen anstelle der CentOS Mirror verwenden moechte:
+
+Foreman Login -> Hosts -> Installation Media -> Create medium
+
+Name eintragen, bei "Path" den http Pfad eintragen.
+Achtung: auf Namensaufloesung achten!
+
+Operatingsystem Family angeben!
+
 #### Foreman Login -> Hosts -> Operating Systems
 
 2. Stelle: OS mit Templates Assoziieren
 
 - Partition Table -> "Kickstart default" auswaehlen
-- Installation media -> "CentOS mirror" auswaehlen
+- Installation media -> "CentOS mirror" auswaehlen (oder das vorher angelegten Installation media)
 - Templates -> alle Templates auswaehlen
 
 Submit
@@ -93,4 +104,11 @@ Foreman Login -> Configure -> Host Groups
 - Operating System: PXE Loader auswaehlen (PXELinux BIOS)
 
 Submit
+
+### Host erzeugen in VirtualBox:
+
+New -> Host -> 1024 MB RAM -> 20 GB HDD
+
+Boot Einstellungen aendern: Festplatte -> Netzwerk
+Netzwerk aendern: gleiches vboxnet, wie foreman.example42.training
 
