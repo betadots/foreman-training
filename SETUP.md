@@ -5,7 +5,7 @@
 Es werden zwei Vagrant Plugins eingesetzt:
 
     vagrant plugin install vagrant-hostmanager
-    vagrnat plugin install vagrant-vbguest
+    vagrant plugin install vagrant-vbguest
 
 Jetzt kann die VM instantiiert werden:
 
