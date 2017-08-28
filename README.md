@@ -3,15 +3,41 @@
 
 # Inhalt
 
-Teil 1 - Smart Proxies
+Tag 1:
 
-Teil 2 - Provisionieren
+Teil 01 - Installation
 
-Teil 3 - Docker Host deployment
+Teil 02 - Provisionierung
 
-Teil 4 - Plugins
+Teil 03 - Provisionining Debian:
 
-Teil 5 - Katello
+Teil 04 - Configurations Management
+
+Teil 05 - Deprovisionierung
+
+Tag 2:
+
+Teil 06 - Compute Resources
+
+Teil 07 - Foreman CLI:
+
+Teil 08 - Plugins
+
+Teil 09 - RBAC und Self Service
+
+Optionale Erweiterungen:
+
+Teil 11 - Katello
+
+Teil 12 - Integration in bestehende Infrastruktur
+
+Teil 13 - Backup und Recovery
+
+# Vorbereitung:
+
+Vagrant installieren und:
+
+    vagrant box install centos/7
 
 # License
 Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License

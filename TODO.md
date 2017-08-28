@@ -1,17 +1,17 @@
 Vagrantfile:
-- check for plugins
+- check for plugins # DONE
 - check vagrant on Linux, eth1 missing
 - iptables postrouting permanent machen
 
 Preparation for Training:
-- vagrant box install centos/7
+- vagrant box install centos/7 # DONE
 - use internal mirror
 
 TFTP:
 - woher kommen die Images?
 
 Training:
-- start minimal, without Puppet server - not possible
+- start minimal, without Puppet server - not possible - DONE
 - differentiate strictly between Puppet agent (foreman-installer) and Puppet Server (cfgmgmt)
 
 BIND:
@@ -24,7 +24,7 @@ Hammer CLI
 Freestyle
 RBAC + Self Service
 
-Ordering:
+Ordering: - DONE
 Day 1: vormittag
 0. installation
 1. show provisioning (base os)
