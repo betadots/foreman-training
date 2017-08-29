@@ -89,6 +89,9 @@ Foreman Login -> Infrastructure -> Domains -> Create Domain
 
 Submit
 
+# DON'T DO NEXT STEP!!!!
+# Das kommt beim Provisionierungs Setup automatisch!!!
+
 ### Netzwerk
 
 Foreman Login -> Infrastructure -> Subnets -> Create Subnet

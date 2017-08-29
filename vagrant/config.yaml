@@ -1,7 +1,7 @@
 ---
 # Default settings for all vms (they can be overridden on each node)
 vm:
-  memory: 512                  # MB or RAM to assign
+  memory: 1612                  # MB or RAM to assign
   cpu: 1                       # Number of vCPU to assign to the VM
   box: centos7                 # Box used for the VM, from the boxes list below
 

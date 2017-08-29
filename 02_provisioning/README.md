@@ -70,6 +70,8 @@ Operatingsystem Family angeben!
 
 #### Foreman Login -> Hosts -> Operating Systems
 
+OS auswaehlen
+
 2. Stelle: OS mit Templates Assoziieren
 
 - Partition Table -> "Kickstart default" auswaehlen
@@ -78,7 +80,7 @@ Operatingsystem Family angeben!
 
 Submit
 
-ACHTUNG: beim Verwenden der default templates muss safemode : false gesetzt werden.
+ACHTUNG: beim Verwenden der default templates muss safemode_render : false gesetzt werden.
 Foreman Login -> Administrator -> Settings
 
 
@@ -87,9 +89,9 @@ Foreman Login -> Administrator -> Settings
 Foreman Login -> Infrastructure -> Provisioning Setup
 
 - Pre-requisites: Provisioning Network: 10.100.10.101/24 -> Submit
-- Network config: -> Submit (Bei Fehler das Netzwerk umbenennen) (provision.example42.training)
+- Network config: DNS Domain: provision.example42.training - Name: provision -> Submit
 - Foreman Installer: 'Install provisioning with DHCP' -> Kopieren und Ausfuehren -> Next
-- Installation Media: 'CentOS mirror' -> Submit
+- Installation Media: 'CentOS mirror' (oder vorher angeletes Installations Medium auswaehlen) -> Submit
 
 ACHTUNG: nach dem foreman installer Kommando unbedingt die /etc/named/options.conf forwarders pruefen!!
 
@@ -102,6 +104,8 @@ Foreman Login -> Configure -> Host Groups
 - "Provision from foreman.example42.training" auswaehlen
 - Host Group: Puppet Environment setzen (Production)
 - Operating System: PXE Loader auswaehlen (PXELinux BIOS)
+- Root passwort setzen
+
 
 Submit
 
