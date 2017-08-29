@@ -37,7 +37,7 @@ Beispiel Suchen: kind=PXELinux
 
 ### Provisionierungs Templates mit OS Assoziieren
 
-#### Foreman Login -> Hosts -> Provisioning Templates
+Foreman Login -> Hosts -> Provisioning Templates
 
 1. Stelle: Templates mit OS Assoziieren
 
@@ -57,7 +57,7 @@ Beispiel Suchen: kind=PXELinux
 
 "Build PXE Default"
 
-#### Installation media
+### Installation media
 
 Wenn man einen eigenen anstelle der CentOS Mirror verwenden moechte:
 
@@ -68,7 +68,9 @@ Achtung: auf Namensaufloesung achten!
 
 Operatingsystem Family angeben!
 
-#### Foreman Login -> Hosts -> Operating Systems
+### OS mit Provisionierungs Templates assoziieren
+
+Foreman Login -> Hosts -> Operating Systems
 
 OS auswaehlen
 
@@ -89,13 +91,13 @@ Foreman Login -> Administrator -> Settings
 Foreman Login -> Infrastructure -> Provisioning Setup
 
 - Pre-requisites: Provisioning Network: 10.100.10.101/24 -> Submit
-- Network config: DNS Domain: example42.training - Name: exampel42.training -> Submit
+- Network config: DNS Domain: example42.training - Name: provision.example42.training -> Submit
 - Foreman Installer: 'Install provisioning with DHCP' -> Kopieren und Ausfuehren -> Next
 - Installation Media: 'CentOS mirror' (oder vorher angeletes Installations Medium auswaehlen) -> Submit
 
 ACHTUNG: nach dem foreman installer Kommando unbedingt die /etc/named/options.conf forwarders pruefen!!
 
-### DHCP IP Range setzen
+### DHCP IP Range pruefen
 
 Foreman Login -> Infrastructure -> Subnets -> example42.training
 
@@ -103,7 +105,7 @@ Start of IP Range: 10.100.10.120
 
 End of IP Range: 10.100.10.240
 
-### Host Group
+## Host Group
 
 Host Group braucht das Puppet Environment
 
@@ -117,7 +119,7 @@ Foreman Login -> Configure -> Host Groups
 
 Submit
 
-### Host erzeugen in VirtualBox:
+## Host erzeugen in VirtualBox:
 
 Hinweis: die Images werden initial in eine RAM Disk geladen. Deshalb benoetigt die VM mindesten 1516 MB RAM.
 
@@ -127,7 +129,7 @@ Boot Einstellungen aendern: 1. Festplatte -> 2. Netzwerk
 Netzwerk aendern: gleiches vboxnet, wie foreman.example42.training
 MAC Adresse notieren
 
-### Host in Foreman anlegen
+## Host in Foreman anlegen
 
 Foreman Login -> Hosts -> Create Host
 
@@ -147,5 +149,5 @@ Operating System Tab:
 - PXE Loader: PXELinux BIOS
 Submit
 
-### Host in VirtualBox starten
+## Host in VirtualBox starten
 

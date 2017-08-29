@@ -89,10 +89,7 @@ Foreman Login -> Infrastructure -> Domains -> 'example42.training'
 
 Submit
 
-# DON'T DO NEXT STEP!!!!
-# Das kommt beim Provisionierungs Setup automatisch!!!
-
-### Netzwerk
+## Netzwerk
 
 Foreman Login -> Infrastructure -> Subnets -> Create Subnet
 
