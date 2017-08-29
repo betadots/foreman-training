@@ -22,6 +22,14 @@ alle laufenden Vagrant Boxen loeschen:
     sudo -i
     foreman-installer --scenario katello -i
 
+Katello Dienste konfigurieren:
+
+    puppet apply /vagrant_foreman/scripts/00_router_config.pp
+    puppet apply /vagrant_foreman/scripts/01_install_service_dhcp.pp
+    puppet apply /vagrant_foreman/scripts/02_install_service_bind.pp
+    puppet apply /vagrant_foreman/scripts/03_foreman_proxy.pp
+    puppet apply /vagrant_foreman/scripts/04_selinux.pp
+    puppet apply /vagrant_foreman/scripts/05_katello_services.pp
 
 ## Repository erzeugen
 

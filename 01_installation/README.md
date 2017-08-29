@@ -82,7 +82,7 @@ Haken setzen -> Update
 
 ## Domain
 
-Foreman Login -> Infrastructure -> Domains -> Create Domain
+Foreman Login -> Infrastructure -> Domains -> 'example42.training'
 
 - Tab Domain: DNS domain: 'example42.training'
 - Tab Domain: DNS Proxy: 'foreman.example42.training'
