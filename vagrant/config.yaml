@@ -28,10 +28,10 @@ nodes:
     memory: 8192
     cpu: 2
     box: centos7
-  - role: docker
+  - role: docker.provision
     count: 1
     box: centos7
-  - role: host
+  - role: host.provision
     count: 1
     box: empty
 

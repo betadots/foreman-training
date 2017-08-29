@@ -19,9 +19,6 @@ sudo yum makecache
 echo "Yum update"
 sudo yum -y update
 
-echo "Katello installation"
-sudo yum -y install katello
-
 echo "installing some tools: tree vim net-tools"
 sudo yum -y install tree vim net-tools
 
