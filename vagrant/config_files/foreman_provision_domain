@@ -1,4 +1,4 @@
-$ORIGIN example42.training.
+$ORIGIN provision.example42.training.
 $TTL 60
 @ IN SOA  @ foreman.example42.training. (
                                         1 ; serial
@@ -6,8 +6,5 @@ $TTL 60
                                         60  ; retry
                                         60  ; expire
                                         60 )  ; minimum
-        NS  foreman.example42.training.
 
-foreman IN  A 10.100.10.102
-provision IN NS foreman.example42.training.
-
+ NS foreman.exampe42.training.

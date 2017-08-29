@@ -15,3 +15,32 @@ Alternativ kann man vor der Installation das Answer File bearbeiten:
 
     vagrant up katello.example42.training
 
+Moegliche Tasks:
+ - Repository fuer CentOS 7.2 und 7.3
+ - Nodes fuer upgrade
+
+
+# Repository erzeugen
+
+## Yum
+
+Katello Login -> Content -> GPG Keys
+
+Key kopieren vom mirror
+
+Katello Login -> Content -> Products -> Repo Discovery
+
+yum + URL
+
+Daten ausfuellen
+
+Katello Login -> Content -> Sync Status
+
+Repo auswaehlen und sync starten (benoetigt ca. 8 GB Fetsplattenplatz pro OS Version)
+
+## Docker Registry
+
+Katello Login -> Content -> Products -> 
+
+
+
