@@ -1,11 +1,11 @@
 $ORIGIN 10.100.10.in-addr.arpa.
 $TTL 60
-@ IN SOA  @ foreman.example42.training. (
+@ IN SOA  @ katello.example42.training. (
                                         0 ; serial
                                         60  ; refresh
                                         60  ; retry
                                         60  ; expire
                                         60 )  ; minimum
-        NS  foreman.example42.training.
+        NS  katello.example42.training.
 
-101 IN  PTR foreman.example42.training.
+102 IN  PTR katello.example42.training.

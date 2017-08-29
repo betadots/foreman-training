@@ -107,7 +107,7 @@ Vagrant.configure("2") do |config|
       end
 
       # bootstrap docker server
-      if node['role'] == 'docker.provison'
+      if node['role'] == 'docker'
         node_config.vm.synced_folder "../", code_dir, mount_options: ["ro"]
         node_config.vm.provision "shell", path: "../scripts/bootstrap_system.sh"
       end

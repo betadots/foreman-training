@@ -28,11 +28,13 @@ nodes:
     memory: 8192
     cpu: 2
     box: centos7
-  - role: docker.provision
+  - role: docker
     count: 1
+    fqdn: docker.provision.example42.training
     box: centos7
-  - role: host.provision
+  - role: host
     count: 1
+    fqdn: host.provision.example42.training
     box: empty
 
 # List of available Vagrant boxes with different OS to test on

@@ -80,30 +80,31 @@ Foreman Login -> Configure -> Puppet Environments -> 'Import environments from f
 
 Haken setzen -> Update
 
+## Domain
+
+Foreman Login -> Infrastructure -> Domains -> Create Domain
+
+- Tab Domain: DNS domain: 'provision.example42.training'
+- Tab Domain: DNS Proxy: 'foreman.example42.training'
+
+Submit
+
 ### Netzwerk
 
 Foreman Login -> Infrastructure -> Subnets -> Create Subnet
 
-Tab Subnet: Name: example42.training
-Tab Subnet: Network Address: 10.100.10.0
-Tab Subnet: Network Prefix: 24
-Tab Subnet: Primary DNS Server: 10.100.10.101
-Tab Subnet: IPAM: DHCP
-Tab Subnet: Start of IP Range: 10.100.10.120
-Tab Subnet: End of IP Range: 10.100.10.240
+- Tab Subnet: Name: provision.example42.training
+- Tab Subnet: Network Address: 10.100.10.0
+- Tab Subnet: Network Prefix: 24
+- Tab Subnet: Gateway Address: 10.100.10.101
+- Tab Subnet: Primary DNS Server: 10.100.10.101
+- Tab Subnet: IPAM: DHCP
+- Tab Subnet: Start of IP Range: 10.100.10.120
+- Tab Subnet: End of IP Range: 10.100.10.240
 
-Tab Domains: Auswaehlen 'example42.training'
+- Tab Domains: provision.exampe42.training ausaehlen
 
-Tab Proxies: DHCP, TFTP und DNS Proxy (Smart Proxy): foreman.example42.training
+- Tab Proxies: foreman.example42.training bei DHCP, TFTP und Reverse DNS ausaehlen
 
 Submit
-
-### Domain
-
-Foreman Login -> Infrastructure -> Domains
-
-Auf 'example42.training' klicken -> Tab Domain ->
-
-DNS Proxy -> 'foreman.example42.training' auswaehlen -> Submit
-
 

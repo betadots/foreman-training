@@ -8,29 +8,36 @@ Statt dessen soll katello vor der foreman installation vorbereitet werden:
 
 WICHTIG: Vor der Installation muss die Uhrzeit bereits korrekt gesetzt sein!
 
-Alternativ kann man vor der Installation das Answer File bearbeiten:
-/etc/foreman-installer/scenarios.d/katello-answers.yaml
+## Vorbereitung
 
-1. Vagrant
+alle laufenden Vagrant Boxen loeschen:
+
+    cd vagrant
+    vagrant destroy -f
+
+## Katello starten
 
     vagrant up katello.example42.training
+    vagrant ssh katello.example42.training
+    sudo -i
+    foreman-installer --scenario katello -i
 
-Moegliche Tasks:
- - Repository fuer CentOS 7.2 und 7.3
- - Nodes fuer upgrade
 
+## Repository erzeugen
 
-# Repository erzeugen
-
-## Yum
+### Yum
 
 Katello Login -> Content -> GPG Keys
 
-Key kopieren vom mirror
+CentOS GPG Key kopieren vom mirror (http://mirror.centos.org/centos/RPM-GPG-KEY-CentOS-7)
 
 Katello Login -> Content -> Products -> Repo Discovery
 
-yum + URL
+yum + URL ausfuellen
+
+Click Discover
+
+os/x86_64 auswaehlen.
 
 Daten ausfuellen
 
@@ -38,9 +45,6 @@ Katello Login -> Content -> Sync Status
 
 Repo auswaehlen und sync starten (benoetigt ca. 8 GB Fetsplattenplatz pro OS Version)
 
-## Docker Registry
-
-Katello Login -> Content -> Products -> 
 
 
 
