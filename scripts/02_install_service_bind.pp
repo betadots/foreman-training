@@ -33,13 +33,6 @@ file { '/var/named/foreman_domain':
   group  => 'named',
   notify => Service['named'],
 }
-file { '/var/named/foreman_provision_domain':
-  ensure => file,
-  source => "${cfg_base_dir}/foreman_provision_domain",
-  owner  => 'named',
-  group  => 'named',
-  notify => Service['named'],
-}
 file { '/var/named/foreman_ip':
   ensure => file,
   source => "${cfg_base_dir}/foreman_ip",

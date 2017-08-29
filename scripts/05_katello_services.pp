@@ -27,6 +27,11 @@ file { '/etc/named.conf':
   source => "${cfg_base_dir}/named.conf.katello",
   notify => Service['named'],
 }
+file { '/etc/named.foreman.zones':
+  ensure => file,
+  source => "${cfg_base_dir}/named.foreman.zones.katello",
+  notify => Service['named'],
+}
 $zones = [ 'domain', 'ip', 'provision_domain']
 $zones.each |$zone| {
   file { "/var/named/foreman_${zone}":
@@ -40,3 +45,7 @@ service { 'named':
   enable => true,
 }
 
+file { '/etc/resolv.conf':
+  ensure   => file,
+  source => "${cfg_base_dir}/resolv.conf.katello",
+}

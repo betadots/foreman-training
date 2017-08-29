@@ -31,23 +31,44 @@ Katello Dienste konfigurieren:
     puppet apply /vagrant_foreman/scripts/04_selinux.pp
     puppet apply /vagrant_foreman/scripts/05_katello_services.pp
 
+
+# REBOOT !!!!
+
+Katello hat ein Problem, bei der initialen Installation alle Dienste sauber zu starten.
+
+    reboot
+
 ## Repository erzeugen
 
 ### Yum
 
+1. GPG Key
+
 Katello Login -> Content -> GPG Keys
+
+Default Organization auswaehlen -> Create GPG Key
+
+Name: CentOS7
 
 CentOS GPG Key kopieren vom mirror (http://mirror.centos.org/centos/RPM-GPG-KEY-CentOS-7)
 
+2. Repository
+
 Katello Login -> Content -> Products -> Repo Discovery
 
-yum + URL ausfuellen
+Repository Type: Yum Repositories
+
+URL: http://mirror.centos.org/centos/7 (oder lokaler Mirror)
 
 Click Discover
 
 os/x86_64 auswaehlen.
 
-Daten ausfuellen
+Name: CentOS7
+
+GPG Key: aus Liste auswaehlen
+
+Verify SSL: ?? probieren....
 
 Katello Login -> Content -> Sync Status
 
