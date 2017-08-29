@@ -89,11 +89,19 @@ Foreman Login -> Administrator -> Settings
 Foreman Login -> Infrastructure -> Provisioning Setup
 
 - Pre-requisites: Provisioning Network: 10.100.10.101/24 -> Submit
-- Network config: DNS Domain: provision.example42.training - Name: provision -> Submit
+- Network config: DNS Domain: example42.training - Name: exampel42.training -> Submit
 - Foreman Installer: 'Install provisioning with DHCP' -> Kopieren und Ausfuehren -> Next
 - Installation Media: 'CentOS mirror' (oder vorher angeletes Installations Medium auswaehlen) -> Submit
 
 ACHTUNG: nach dem foreman installer Kommando unbedingt die /etc/named/options.conf forwarders pruefen!!
+
+### DHCP IP Range setzen
+
+Foreman Login -> Infrastructure -> Subnets -> example42.training
+
+Start of IP Range: 10.100.10.120
+
+End of IP Range: 10.100.10.240
 
 ### Host Group
 

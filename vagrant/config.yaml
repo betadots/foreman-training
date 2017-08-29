@@ -30,11 +30,9 @@ nodes:
     box: centos7
   - role: docker
     count: 1
-    fqdn: docker.provision.example42.training
     box: centos7
   - role: host
     count: 1
-    fqdn: host.provision.example42.training
     box: empty
 
 # List of available Vagrant boxes with different OS to test on

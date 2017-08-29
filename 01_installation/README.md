@@ -84,7 +84,7 @@ Haken setzen -> Update
 
 Foreman Login -> Infrastructure -> Domains -> Create Domain
 
-- Tab Domain: DNS domain: 'provision.example42.training'
+- Tab Domain: DNS domain: 'example42.training'
 - Tab Domain: DNS Proxy: 'foreman.example42.training'
 
 Submit
@@ -96,7 +96,7 @@ Submit
 
 Foreman Login -> Infrastructure -> Subnets -> Create Subnet
 
-- Tab Subnet: Name: provision.example42.training
+- Tab Subnet: Name: example42.training
 - Tab Subnet: Network Address: 10.100.10.0
 - Tab Subnet: Network Prefix: 24
 - Tab Subnet: Gateway Address: 10.100.10.101
@@ -105,7 +105,7 @@ Foreman Login -> Infrastructure -> Subnets -> Create Subnet
 - Tab Subnet: Start of IP Range: 10.100.10.120
 - Tab Subnet: End of IP Range: 10.100.10.240
 
-- Tab Domains: provision.exampe42.training ausaehlen
+- Tab Domains: example42.training ausaehlen
 
 - Tab Proxies: foreman.example42.training bei DHCP, TFTP und Reverse DNS ausaehlen
 
