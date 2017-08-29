@@ -28,6 +28,9 @@ sudo yum -y install tree vim net-tools
 echo "installing foreman installer"
 sudo yum -y install foreman-release-scl
 
+echo "Katello installation part 2"
+sudo yum -y install katello
+
 echo "fix for https://github.com/theforeman/puppet-foreman/issues/580"
 sudo mkdir -p /var/lib/tftpboot/boot
 

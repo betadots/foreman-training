@@ -7,19 +7,19 @@ Tag 1:
 
 Teil 01 - Installation
 
-Teil 02 - Provisionierung
+Teil 02 - Provisionierung CentOS - GUI und CLI - gemeinsam
 
-Teil 03 - Provisionining Debian:
+Teil 03 - Provisionierung Debian - selbstaendig
 
-Teil 04 - Configurations Management
+Teil 04 - Konfigurations Management - CLI?
 
-Teil 05 - Deprovisionierung
+Teil 05 - Deprovisionierung - CLI?
 
 Tag 2:
 
-Teil 06 - Compute Resources
+Teil 06 - Verwalten bestehender Systeme
 
-Teil 07 - Foreman CLI:
+Teil 07 - Compute Resources - Docker und Cloud
 
 Teil 08 - Plugins
 
