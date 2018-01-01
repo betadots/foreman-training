@@ -104,7 +104,7 @@ Foreman Login -> Infrastructure -> Subnets -> Create Subnet
 
 - Tab Domains: example42.training ausaehlen
 
-- Tab Proxies: foreman.example42.training bei DHCP, TFTP und Reverse DNS ausaehlen
+- Tab Proxies: foreman.example42.training bei DHCP, TFTP und Reverse DNS auswaehlen
 
 Submit
 

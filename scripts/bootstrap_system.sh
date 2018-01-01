@@ -17,6 +17,8 @@ echo "using forman dns"
 cat << EOF > /etc/resolv.conf
 domain example42.training
 nameserver 10.100.10.101
+nameserver 8.8.8.8
+options timeout:1
 EOF
 
 echo "setting puppet server"

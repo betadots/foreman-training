@@ -4,12 +4,12 @@ echo "Yum update"
 sudo yum update
 
 echo "Installing Repo Packages"
-echo "Puppet 4"
-sudo yum -y install https://yum.puppetlabs.com/puppetlabs-release-pc1-el-7.noarch.rpm
+echo "Puppet 5"
+sudo yum -y install https://yum.puppetlabs.com/puppet5/puppet5-release-el-7.noarch.rpm
 echo "epel"
 sudo yum -y install http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 echo "foreman"
-sudo yum -y install https://yum.theforeman.org/releases/1.15/el7/x86_64/foreman-release.rpm
+sudo yum -y install https://yum.theforeman.org/releases/1.16/el7/x86_64/foreman-release.rpm
 
 echo "installing some tools: tree vim net-tools"
 sudo yum -y install tree vim net-tools
