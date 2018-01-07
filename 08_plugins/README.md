@@ -52,3 +52,5 @@ Foreman-Login -> Hosts -> All Hosts -> foreman.example42.training
     yum install -y tfm-rubygem-foreman_remote_execution
     service httpd restart
 
+
+Weiter mit Teil 9 [RBAC](../09_RBAC_self_service)

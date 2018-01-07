@@ -51,3 +51,5 @@ Jetzt noch ein Puppet Lauf auf docker.example42.training anstossen:
 Schritte von vorher wiederholen.
 
 
+Weiter mit Teil 5 [Deprovisionieren](../05_deprovisioning)
+

@@ -1,7 +1,0 @@
-# Compute Resources
-
-## VMware
-
-## Docker
-
-

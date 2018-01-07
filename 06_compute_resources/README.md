@@ -69,4 +69,5 @@ Auf docker.example42.training:
     watch docker ps
 
 
+Weiter mit Teil 7 [Hammer CLI](../07_hammer_cli)
 

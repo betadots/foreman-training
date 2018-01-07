@@ -108,3 +108,4 @@ Foreman Login -> Infrastructure -> Subnets -> Create Subnet
 
 Submit
 
+Weiter geht es mit Teil 2 [Provisionieren](../02_provisioning)
