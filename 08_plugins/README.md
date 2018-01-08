@@ -1,4 +1,4 @@
-# Foreman Training - Teil 4 - Plugins
+# Foreman Training - Teil 8 - Plugins
 
 ## Plugins
 
@@ -49,8 +49,14 @@ Foreman-Login -> Hosts -> All Hosts -> foreman.example42.training
 
 ## Remote execution
 
-    yum install -y tfm-rubygem-foreman_remote_execution
+    foreman-installer --enable-foreman-plugin-remote-execution\
+                      --enable-foreman-proxy-plugin-remote-execution-ssh
+
     service httpd restart
+    service foreman-tasks restart
+    service foreman-proxy restart
+
+    ssh-copy-id -i ~foreman-proxy/.ssh/id_rsa_foreman_proxy.pub root@<target>
 
 
 Weiter mit Teil 9 [RBAC](../09_RBAC_self_service)

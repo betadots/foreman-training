@@ -151,6 +151,15 @@ Operating System Tab:
 - PXE Loader: PXELinux BIOS
 Submit
 
+## Foreman 1.16:
+
+Puppet 4 aktivieren:
+
+Foreman Login -> Configure -> Hostgroups -> Provision from foreman.example42.com
+
+Tab Parameters:
+- Global Parameter: Add parameter: name: 'enable-puppetlabs-pc1-rep', Value: true
+
 ## Host in VirtualBox starten
 
 Weiter geht es mit Teil 3 [Provisionieren von Debian](../03_provisionining_debian)
