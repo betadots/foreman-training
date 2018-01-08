@@ -39,6 +39,10 @@ Vagrant installieren und:
 
     vagrant box install centos/7
 
+ACHTUNG: wenn die VirtualBox Erweiterungen noch nicht geladen wurden, dann muss nach dem Anlegen der foreman VM der DHCP Server am Host-only networking deaktiviert und das Linux System neu gebootet werden.
+
+Ansonsten erkennt VirtualBox nicht die Änderung am host-only Networking.
+
 Weiter geht es mit Teil1: [Installation](01_installation)
 
 # License

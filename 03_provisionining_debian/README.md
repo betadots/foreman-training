@@ -17,7 +17,7 @@ Tab Operating System -> Release Name: stretch (!!!!!)
 Tab Operating System -> Description: Debian 9.3
 Tab Operating System -> Architecture: x86_64
 
-Tab Partition Table -> Pressed Default
+Tab Partition Table -> Preseed Default
 
 Tab Installation Media -> Debian Mirror
 
@@ -32,15 +32,15 @@ Foreman Login -> Hosts -> Provisioning Templates
 
 1.a. kind = PXELinux
 
-"Pressed default PXELinux" auswaehlen -> Association -> OS auswaehlen
+"Preseed default PXELinux" auswaehlen -> Association -> OS auswaehlen
 
 1.b. kind = provision
 
-"Pressed default" auswaehlen -> Association -> OS auswaehlen
+"Preseed default" auswaehlen -> Association -> OS auswaehlen
 
 1.c. kind = finish
 
-"Pressed default finish" auswaehlen -> Association -> OS auswaehlen
+"Preseed default finish" auswaehlen -> Association -> OS auswaehlen
 
 1.d. PXE bauen
 
@@ -65,7 +65,7 @@ OS auswaehlen
 
 2. Stelle: OS mit Templates Assoziieren
 
-- Partition Table -> "Pressed default" auswaehlen
+- Partition Table -> "Preseed default" auswaehlen
 - Installation media -> "Debian mirror" auswaehlen (oder das vorher angelegten Installation media auswaehlen)
 - Templates -> alle Templates auswaehlen, die man auswaehlen kann.
 

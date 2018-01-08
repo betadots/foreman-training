@@ -133,6 +133,8 @@ MAC Adresse notieren
 
 Foreman Login -> Hosts -> Create Host
 
+ACHTUNG: nicht docker als hostname nehmen. Dieser Name wird in Teil 4 verwendet.
+
 Host Tab:
 - Name: hostname (ohne Domain)
 - Hostgroup: Provision from foreman

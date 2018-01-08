@@ -60,6 +60,9 @@ Dazu gehoeren zum Beispiel:
   - TFTP Server
   - DNS Server
 
+## Foreman Web Interface
+
+https://foreman.example42.training
 
 ## Smart proxies
 
