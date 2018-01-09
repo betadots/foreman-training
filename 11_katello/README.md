@@ -40,11 +40,13 @@ Katello hat ein Problem, bei der initialen Installation alle Dienste sauber zu s
 
 Nach reboot die share wieder mounten:
 
+    sudo -i
+
     mount -t vboxsf vagrant_foreman /vagrant_foreman
 
     rm /etc/network_config
-    puppet apply scripts/00_router_config.pp
-    puppet apply scripts/06_katello_reboot.pp
+    puppet apply /vagrant_foreman/scripts/00_router_config.pp
+    puppet apply /vagrant_foreman/scripts/06_katello_reboot.pp
 
 ## Repository erzeugen
 
