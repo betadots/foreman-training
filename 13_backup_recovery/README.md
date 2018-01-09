@@ -1,8 +1,13 @@
-# Foreman Training - Backup und Recovery (optional)
+# Foreman Training - Teil 13 - Backup und Recovery (optional)
 
 ## Datenbank
 
 ## Konfigurationen
 
+# Katello
+
+katello-backup
+
+katello-restore
 
 

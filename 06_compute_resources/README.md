@@ -1,4 +1,4 @@
-# Foreman Training - Teil 4 - Plugins
+# Foreman Training - Teil 6 - Plugins
 
 ## Plugins
 

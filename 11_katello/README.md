@@ -1,4 +1,4 @@
-# Katello
+# Foreman Training - Teil 11 - Katello
 
 ACHTUNG: Katello benoetigt mindestens 8 GB RAM!
 

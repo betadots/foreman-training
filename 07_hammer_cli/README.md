@@ -1,4 +1,6 @@
-# Foreman Config von der Kommandozeile
+# Foreman Training - Teil 7 - Hammer CLI
+
+Foreman Config von der Kommandozeile
 
 ## hammer
 

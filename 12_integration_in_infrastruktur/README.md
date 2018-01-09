@@ -1,4 +1,4 @@
-# Foreman Training - Integration in bestehende Infrastruktur (optional)
+# Foreman Training - Teil 12 - Integration in bestehende Infrastruktur (optional)
 
 ## Netzwerk
 

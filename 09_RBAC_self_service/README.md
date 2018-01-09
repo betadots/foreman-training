@@ -1,4 +1,4 @@
-# Foreman Training - Role Based Access Control und Self Service
+# Foreman Training - Teil 9 - Role Based Access Control und Self Service
 
 LDAP/AD integration is possible
 
