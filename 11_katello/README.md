@@ -44,9 +44,8 @@ Nach reboot die share wieder mounten:
 
     mount -t vboxsf vagrant_foreman /vagrant_foreman
 
-    rm /etc/network_config
+    rm /etc/gateway_config
     puppet apply /vagrant_foreman/scripts/00_router_config.pp
-    puppet apply /vagrant_foreman/scripts/06_katello_reboot.pp
 
 ## Repository erzeugen
 
@@ -73,6 +72,8 @@ URL: http://mirror.centos.org/centos/7 (oder lokaler Mirror)
 Click Discover
 
 os/x86_64 auswaehlen.
+
+Klick: Create selected
 
 Name: CentOS7
 
@@ -159,6 +160,11 @@ Katello Login -> Infrastructure -> Subnets -> Create Subnet
 - Tab Subnet: IPAM: DHCP
 - Tab Subnet: Start IP range: 10.100.10.120
 - Tab Subnet: End IP range: 10.100.10.240
+
+- Tab Domain: provision.example42.training
+- Tab Proxies: all auswaehlen
+- Tab Locations: Default Location auswaehlen
+
 
 Submit
 

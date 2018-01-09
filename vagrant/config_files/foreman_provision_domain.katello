@@ -7,4 +7,4 @@ $TTL 60
                                         60  ; expire
                                         60 )  ; minimum
 
- NS katello.exampe42.training.
+ NS katello.example42.training.

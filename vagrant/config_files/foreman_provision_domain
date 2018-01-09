@@ -7,4 +7,4 @@ $TTL 60
                                         60  ; expire
                                         60 )  ; minimum
 
- NS foreman.exampe42.training.
+ NS foreman.example42.training.
