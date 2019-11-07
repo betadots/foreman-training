@@ -82,40 +82,53 @@ OS auswaehlen
 
 Submit
 
-ACHTUNG: beim Verwenden der default templates muss safemode_render : false gesetzt werden.
+ACHTUNG: beim Verwenden der default templates muss safemode_render : No gesetzt werden.
 Foreman Login -> Administrator -> Settings
 
-
-## Provisionieren
-
-Foreman Login -> Infrastructure -> Provisioning Setup
-
-- Pre-requisites: Provisioning Network: 10.100.10.101/24 -> Submit
-- Network config: DNS Domain: example42.training - Name: provision.example42.training -> Submit
-- Foreman Installer: 'Install provisioning with DHCP' -> Kopieren und Ausfuehren -> Next
-- Installation Media: 'CentOS mirror' (oder vorher angeletes Installations Medium auswaehlen) -> Submit
-
-ACHTUNG: nach dem foreman installer Kommando unbedingt die /etc/named/options.conf forwarders pruefen!!
-
-### DHCP IP Range pruefen
-
-Foreman Login -> Infrastructure -> Subnets -> example42.training
-
-Start of IP Range: 10.100.10.120
-
-End of IP Range: 10.100.10.240
+Suche nach safemode
 
 ## Host Group
 
 Host Group braucht das Puppet Environment
 
-Foreman Login -> Configure -> Host Groups
+Foreman Login -> Configure -> Host Groups -> Create Host Group
 
-- "Provision from foreman.example42.training" auswaehlen
-- Host Group: Puppet Environment setzen (Production)
-- Operating System: PXE Loader auswaehlen (PXELinux BIOS)
-- Root passwort setzen
+Tab Host Group:
 
+- Name: Training
+- Environment: Production
+- Puppet Master: foreman.example42.training
+- Puppet CA: foreman.example42.training
+
+Tab Puppet Classes
+
+keine Klasse auswählen !!
+
+Tab Network
+
+- Domain: example42.training
+- IPv4 Subnet: example42.training
+
+Tab Operating System
+
+- Architecture: x86_64
+- Operatingsystem: CentOS...
+- Media: CentOS Mirror (oder den vorher angelegten auswählen)
+- Partition Table: Kickstart
+- PXE Loader: PXELinux BIOS
+- Root Password: <eines setzen>
+
+Wenn Puppet explizit ausgeschaltet werden soll:
+
+Tab Parameters:
+
+Host Group Parameters: Add Parameter:
+
+enable-puppet: boolean: false
+
+Wenn Puppet 6 aktiviert werden soll:
+
+enable-puppetlabs-puppet6-repo: boolean: true
 
 Submit
 
@@ -126,7 +139,9 @@ Hinweis: die Images werden initial in eine RAM Disk geladen. Deshalb benoetigt d
 New -> Host -> 2048 MB RAM -> 8 GB HDD
 
 Boot Einstellungen aendern: 1. Festplatte -> 2. Netzwerk
+
 Netzwerk aendern: gleiches vboxnet, wie foreman.example42.training
+
 MAC Adresse notieren
 
 ## Host in Foreman anlegen
@@ -137,30 +152,31 @@ ACHTUNG: nicht docker als hostname nehmen. Dieser Name wird in Teil 4 verwendet.
 
 Host Tab:
 - Name: hostname (ohne Domain)
-- Hostgroup: Provision from foreman
+- Hostgroup: Training
 - Environment: Production (sollte automatisch aus der Hostgroup rausfallen)
 
 Interfaces Tab:
 - Edit
   - Mac Adresse eintragen und OK zum speichern
 
+ACHTUNG: MAC Adresse mit Doppelpunkten eintragen!!! aa:bb:cc:dd:ee
+
 Operating System Tab:
+
 - Operating System: auswaehlen (CentOS Linux 7.3...)
 - Media: Mirror waehlen
 - Partition Table: Kickstart default
 - PXE Loader: PXELinux BIOS
+
 Submit
 
-## Foreman 1.16:
-
-Puppet 4 aktivieren:
-
-Foreman Login -> Configure -> Hostgroups -> Provision from foreman.example42.com
-
-Tab Parameters:
-- Global Parameter: Add parameter: name: 'enable-puppetlabs-pc1-rep', Value: true
+Es erscheint ein "New in progress" Balken.
 
 ## Host in VirtualBox starten
+
+Wenn man alles richtig gemacht hat, bootet die VM via DHCP und fängt die Installation an.
+
+Die Installation kann je nach verwendetem Repository Server einige Zeit dauern.
 
 Weiter geht es mit Teil 3 [Provisionieren von Debian](../03_provisionining_debian)
 Oder mit Teil 4 [CfgMgmt](../04_cfgmgmt)

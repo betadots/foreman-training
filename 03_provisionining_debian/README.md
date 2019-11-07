@@ -1,7 +1,7 @@
 # Foreman Training - Teil 3 - Provisionieren Debian
 
 TFTP images werden von folgender URL heruntergeladen:
-http://ftp.debian.org/debian/dists/stretch/main/installer-amd64/current/images/netboot/debian-installer/amd64/
+http://ftp.debian.org/debian/dists/<release name>/main/installer-amd64/current/images/netboot/debian-installer/amd64/
 
 Der host wird anhand des Mirrors gesetzt.
 Bei lokalen Mirrorn unbedingt beachten, dass die Installer Images mit gemirrort werden.

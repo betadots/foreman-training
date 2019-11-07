@@ -76,7 +76,7 @@ Auf aktive Services und Fehler pruefen.
 
 ### Puppet Environments
 
-    puppet module install garethr-docker
+    puppet module install puppetlabs-docker
     puppet module install puppetlabs-apache
 
 Foreman Login -> Configure -> Puppet Environments -> 'Import environments from foreman.example42.training'
