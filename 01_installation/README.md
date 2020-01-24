@@ -49,6 +49,8 @@ Nun muessen die Dienste konfiguriert werden:
 Achtung! Dieses Setup kann nur einmal durchgefuehrt werden.
 Spaetestens das Provisionierungs Setup aendert diese Einstellungen grundlegend.
 
+Namensauflösung prüfe Evtl in `/etc/named.conf` einen anderen "forwarder" eintragen (8.8.8.8).
+
 
 # Foreman Training - Smart Proxies
 

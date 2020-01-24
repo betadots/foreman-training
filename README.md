@@ -35,9 +35,26 @@ Teil 13 - Backup und Recovery
 
 # Vorbereitung:
 
-Vagrant installieren und:
+[Vagrant](https://www.vagrantup.com/) installieren und CentOS 7 image lokal ablegen:
 
-    vagrant box install centos/7
+    vagrant box add centos/7
+
+    ==> box: Loading metadata for box 'centos/7'
+        box: URL: https://vagrantcloud.com/centos/7
+    This box can work with multiple providers! The providers that it
+    can work with are listed below. Please review the list and choose
+    the provider you will be working with.
+    
+    1) hyperv
+    2) libvirt
+    3) virtualbox
+    4) vmware_desktop
+
+    Enter your choice: 3
+    ==> box: Adding box 'centos/7' (v1905.1) for provider: virtualbox
+        box: Downloading: https://vagrantcloud.com/centos/boxes/7/versions/1905.1/providers/virtualbox.box
+        box: Download redirected to host: cloud.centos.org
+    ==> box: Successfully added box 'centos/7' (v1905.1) for 'virtualbox'!
 
 ACHTUNG: wenn die VirtualBox Erweiterungen noch nicht geladen wurden, dann muss nach dem Anlegen der foreman VM der DHCP Server am Host-only networking deaktiviert und das Linux System neu gebootet werden.
 
