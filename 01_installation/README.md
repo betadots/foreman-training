@@ -15,6 +15,10 @@ Es werden zwei Vagrant Plugins eingesetzt:
     vagrant plugin install vagrant-hostmanager
     vagrant plugin install vagrant-vbguest
 
+Falls die Plugins schon installiert waren, kann man prüfen, ob Aktualisierungen vorliegen:
+
+    vagrant plugin update
+
 Jetzt kann die VM instantiiert werden:
 
     cd vagrant
