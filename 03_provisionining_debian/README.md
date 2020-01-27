@@ -11,10 +11,15 @@ Bei lokalen Mirrorn unbedingt beachten, dass die Installer Images mit gemirrort 
 Foreman Login -> Hosts -> Operating System -> Create Operating System
 
 Tab Operating System -> Name: Debian
+
 Tab Operating System -> Major: 9
+
 Tab Operating System -> Minor: 3
+
 Tab Operating System -> Release Name: stretch (!!!!!)
+
 Tab Operating System -> Description: Debian 9.3
+
 Tab Operating System -> Architecture: x86_64
 
 Tab Partition Table -> Preseed Default
