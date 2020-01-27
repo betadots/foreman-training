@@ -21,8 +21,8 @@ vagrant:
 # it can be enforced a defined host name, added alieses, port forwarding
 nodes:
   - role: foreman
-    memory: 6192
-    cpu: 2
+    memory: 8192
+    cpu: 4
     box: centos7
   - role: katello
     memory: 8192
