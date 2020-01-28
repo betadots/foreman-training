@@ -26,6 +26,8 @@ Tab Partition Table -> Preseed Default
 
 Tab Installation Media -> Debian Mirror
 
+Achtung: Templates können erst nach dem nächsten Schritt ausgewählt werden!
+
 Submit
 
 
@@ -53,7 +55,7 @@ Foreman Login -> Hosts -> Provisioning Templates
 
 ### Installation media
 
-Wenn man einen eigenen anstelle der CentOS Mirror verwenden moechte:
+Wenn man einen eigenen anstelle der Debian Mirror verwenden moechte:
 
 Foreman Login -> Hosts -> Installation Media -> Create medium
 
@@ -75,9 +77,6 @@ OS auswaehlen
 - Templates -> alle Templates auswaehlen, die man auswaehlen kann.
 
 Submit
-
-ACHTUNG: beim Verwenden der default templates muss safemode_render : false gesetzt werden.
-Foreman Login -> Administrator -> Settings
 
 
 ## Host erzeugen in VirtualBox:

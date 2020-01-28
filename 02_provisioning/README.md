@@ -82,11 +82,6 @@ OS auswaehlen
 
 Submit
 
-ACHTUNG: beim Verwenden der default templates muss safemode_render : No gesetzt werden.
-Foreman Login -> Administrator -> Settings
-
-Suche nach safemode
-
 ## Host Group
 
 Host Group braucht das Puppet Environment
