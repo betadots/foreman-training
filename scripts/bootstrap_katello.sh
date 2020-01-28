@@ -2,11 +2,11 @@
 
 echo "Installing Repo Packages"
 echo "Katello"
-sudo yum -y install http://fedorapeople.org/groups/katello/releases/yum/3.4/katello/el7/x86_64/katello-repos-latest.rpm
+sudo yum -y install http://fedorapeople.org/groups/katello/releases/yum/3.14/katello/el7/x86_64/katello-repos-latest.rpm
 echo "foreman"
-sudo yum -y install http://yum.theforeman.org/releases/1.15/el7/x86_64/foreman-release.rpm
-echo "Puppet 4"
-sudo yum -y install https://yum.puppetlabs.com/puppetlabs-release-pc1-el-7.noarch.rpm
+sudo yum -y install http://yum.theforeman.org/releases/1.23/el7/x86_64/foreman-release.rpm
+echo "Puppet 6"
+sudo yum -y install https://yum.puppetlabs.com/puppet6/puppet6-release-el-7.noarch.rpm
 echo "epel"
 sudo yum -y install http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 
