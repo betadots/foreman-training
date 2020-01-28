@@ -284,3 +284,26 @@ Am Anfang der Webseite steht, welche Aktionen ausgefuehrt werden.
 
 Nach Abschluss VirtualBox Host starten
 
+## Host Collections
+
+Innerhalb von Host Collections werden die folgenden Komponenten n Zusammenhang gesetzt:
+
+- Products (Repositories)
+- Nodes
+
+Foreman Login -> Hosts -> Host Collections -> Create Host Collection
+
+Name angeben (Host Collection 1) und den neu angelegten Host hinzufügen.
+
+Für weitere Funktionalität wird eine subscription benötigt und der katello-agent muss installiert werden.
+
+    curl  --insecure --output katello-ca-consumer-latest.noarch.rpm https://katello.example42.training/pub/katello-ca-consumer-latest.noarch.rpm
+    yum localinstall katello-ca-consumer-latest.noarch.rpm
+
+    subscription-manager register --org="Default_Organization" --environment="Library"
+
+Wenn das Foreman Client Repo eingebunden ist, kann das katello-agent Paket installiert werden.
+
+Weitere Informationen: https://theforeman.org/plugins/katello/3.14/installation/clients.html#manual
+
+
