@@ -4,8 +4,8 @@ echo "Yum update"
 sudo yum update
 
 echo "Installing Repo Packages"
-echo "Puppet 4"
-sudo yum -y install https://yum.puppetlabs.com/puppetlabs-release-pc1-el-7.noarch.rpm
+echo "Puppet 6"
+sudo yum -y install https://yum.puppetlabs.com/puppet6-release-el-7.noarch.rpm
 
 echo "installing some tools: tree vim net-tools"
 sudo yum -y install tree vim net-tools
