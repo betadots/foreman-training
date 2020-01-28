@@ -28,8 +28,11 @@ Katello Dienste konfigurieren:
     puppet apply /vagrant_foreman/scripts/01_install_service_dhcp.pp
     puppet apply /vagrant_foreman/scripts/02_install_service_bind.pp
     puppet apply /vagrant_foreman/scripts/03_foreman_proxy.pp
-    puppet apply /vagrant_foreman/scripts/04_selinux.pp
+    # puppet apply /vagrant_foreman/scripts/04_selinux.pp
     puppet apply /vagrant_foreman/scripts/05_katello_services.pp
+
+Achtng: bei 01_install_service_dhcp können Fehler auftreten.
+Diese können ignoriert werden.
 
 
 # REBOOT !!!!
@@ -40,12 +43,18 @@ Katello hat ein Problem, bei der initialen Installation alle Dienste sauber zu s
 
 Nach reboot die share wieder mounten:
 
+    vagrant ssh katello.example42.training
     sudo -i
-
     mount -t vboxsf vagrant_foreman /vagrant_foreman
 
     rm /etc/gateway_config
     puppet apply /vagrant_foreman/scripts/00_router_config.pp
+
+Achtung: /etc/resolv.conf prüfen:
+
+    # /etc/resolv.conf
+    domain example42.training
+    nameserver 10.100.10.102
 
 ## Repository erzeugen
 
