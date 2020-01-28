@@ -62,13 +62,13 @@ Achtung: /etc/resolv.conf prüfen:
 
 1. GPG Key
 
-Katello Login -> Content -> GPG Keys
-
-Default Organization auswaehlen -> Create GPG Key
+Katello Login -> Content -> Content Credentials -> Create Content Credential
 
 Name: CentOS7
 
 CentOS GPG Key kopieren vom mirror (http://mirror.centos.org/centos/RPM-GPG-KEY-CentOS-7)
+
+Save
 
 2. Repository
 
@@ -80,7 +80,9 @@ URL: http://mirror.centos.org/centos/7 (oder lokaler Mirror)
 
 Click Discover
 
-os/x86_64 auswaehlen.
+Das kann einige Zeit dauern (5 min und mehr).
+
+os/x86_64 und updates/x86_64 auswaehlen.
 
 Klick: Create selected
 
@@ -107,6 +109,13 @@ Start Date: Datum von heute
 Start Time: 1,5 Stunden vorher (UTC time auf System)
 
 Save
+
+Products Tab auswählen.
+
+Add auswählen
+
+CentOS7 auswählen und Klick auf "Add selected"
+
 
 Katello Login -> Content -> Sync Status
 
@@ -150,9 +159,8 @@ Katello Login -> Infrastructure -> Smart Proxies -> Actions -> Pfeil -> Refresh
 
 ### Domain
 
-Katello Login -> Infrastructure -> Domains -> Create Domain
+Katello Login -> Infrastructure -> Domains -> example42.training
 
-- Tab Domain: DNS domain: provision.example42.training
 - DNS Proxy: katello.example42.training
 
 Submit
@@ -161,7 +169,7 @@ Submit
 
 Katello Login -> Infrastructure -> Subnets -> Create Subnet
 
-- Tab Subnet: Name: provision.example42.training
+- Tab Subnet: Name: example42.training
 - Tab Subnet: Network Address: 10.100.10.0
 - Tab Subnet: Network prefix: 24
 - Tab Subnet: Gateway address: 10.100.10.102
@@ -170,7 +178,7 @@ Katello Login -> Infrastructure -> Subnets -> Create Subnet
 - Tab Subnet: Start IP range: 10.100.10.120
 - Tab Subnet: End IP range: 10.100.10.240
 
-- Tab Domain: provision.example42.training
+- Tab Domain: example42.training
 - Tab Proxies: all auswaehlen
 - Tab Locations: Default Location auswaehlen
 
@@ -189,6 +197,8 @@ Submit
 
 
 ## Einrichten der Organisation
+
+Bug in altemKatello (< 1.20)
 
 Katello Login -> Default Organization -> Manage Organizations -> Edit Pfeil -> Assign the 1 host with no organization to Default Organization
 
@@ -232,11 +242,12 @@ Katello Login -> Configure -> Host Groups -> Create Host Group
 - Tab Host Group: Puppet Master: katello.example42.training
 - Tab Host Group: Puppet CA: katello.example42.training
 
-- Tab Network: Domain: provision.example42.training
-- Tab Network: IPv4 Subnet: provision.example42.training
+- Tab Network: Domain: example42.training
+- Tab Network: IPv4 Subnet: example42.training
 
 - Tab Operatingsystem: Architecture: x86_64
 - Tab Operatingsystem: Operating System: CentOS_Linux_7
+- Tab Operatingsystem: Media: my reo mirror
 - Tab Operatingsystem: Partition Table: Kickstart Default
 - Tab Operatingsystem: Root passwort: setzen
 
@@ -270,7 +281,6 @@ Submit
 
 Am Anfang der Webseite steht, welche Aktionen ausgefuehrt werden.
 
-Safemode_render????
 
 Nach Abschluss VirtualBox Host starten
 
