@@ -31,6 +31,9 @@ nodes:
   - role: docker
     count: 1
     box: centos7
+  - role: apache
+    count: 1
+    box: centos7
   - role: host
     count: 1
     box: empty
