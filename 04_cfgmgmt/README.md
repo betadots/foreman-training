@@ -21,7 +21,9 @@ Puppet CA -> Orange Klicken -> Sign
 
 ## Host Klassifizieren
 
-Foreman Login -> Hosts -> All Hosts -> docker.example42.training -> Edit -> Puppet Classes -> Docker auswaehlen
+Foreman Login -> Hosts -> All Hosts -> docker.example42.training -> Edit -> Puppet Classes -> Docker auswaehlen, Klasse ```docker``` aktivieren.
+
+Submit
 
 ## Puppet Klassen Parameter aendern
 
