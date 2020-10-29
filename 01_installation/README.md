@@ -36,6 +36,20 @@ Pruefen, ob eth1 Interface eine IP hat, ```ip a```. Wenn nein: ```ifup eth1```
 
     foreman-installer -i
 
+Am Installer die notwendigen Komponenten auswählen:
+
+- 3. [✗] Configure foreman_cli_ansible
+- 12. [✗] Configure foreman_plugin_ansible
+- 31. [✗] Configure foreman_plugin_remote_execution
+- 44. [✗] Configure foreman_proxy_plugin_ansible
+- 56. [✗] Configure foreman_proxy_plugin_remote_execution_ssh
+
+Dann Punkt 59 - Save und run auswählen.
+
+Achtung:
+
+Wenn hier eine Fehlermeldung kommt: `Forward DNS points to 127.0.1.1 which is not configured on this server`, dann in `/etc/hosts` sicherstellen, dass folgender Eintrag weg kommt `127.0.1.1 foreman.example42.training foreman` und folgender Eintrag hinzugefügt wird: `10.100.10.101 foreman.example42.training foreman`
+
 Den Output sichern. z.B.:
 
       Success!
@@ -56,8 +70,11 @@ Nun muessen die Dienste konfiguriert werden:
 Achtung! Dieses Setup kann nur einmal durchgefuehrt werden.
 Spaetestens das Provisionierungs Setup aendert diese Einstellungen grundlegend.
 
-Namensauflösung prüfe Evtl in `/etc/named.conf` einen anderen "forwarder" eintragen (8.8.8.8).
+Namensauflösung prüfen: `ping -c1 heise.de`
 
+Evtl in `/etc/named.conf` einen anderen "forwarder" eintragen (8.8.8.8) und named neu starten: `systemctl restart named`.
+
+Weitermachen, wenn die Namensauflösung funktioniert.
 
 # Foreman Training - Smart Proxies
 
@@ -88,7 +105,16 @@ Auf aktive Services und Fehler pruefen.
     puppet module install puppetlabs-docker
     puppet module install puppetlabs-apache
 
-Foreman Login -> Configure -> Puppet Environments -> 'Import environments from foreman.example42.training'
+Foreman Login -> Configure -> Puppet -> Environments -> 'Import environments from foreman.example42.training'
+
+Haken setzen -> Update
+
+### Ansible Roles
+
+    ansible-galaxy install geerlingguy.apache -p /etc/ansible/roles
+    ansible-galaxy install geerlingguy.mysql -p /etc/ansible/roles
+
+Foreman Login -> Configure -> Ansible -> Roles -> 'Import from foreman.example42.training'
 
 Haken setzen -> Update
 
@@ -116,7 +142,7 @@ Foreman Login -> Infrastructure -> Subnets -> Create Subnet
 
 - Tab Domains: example42.training ausaehlen
 
-- Tab Proxies: foreman.example42.training bei DHCP, TFTP und Reverse DNS auswaehlen
+- Tab Proxies: foreman.example42.training bei DHCP, TFTP, HTTPBoot und Reverse DNS auswaehlen
 
 Submit
 
