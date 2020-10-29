@@ -38,11 +38,11 @@ Pruefen, ob eth1 Interface eine IP hat, ```ip a```. Wenn nein: ```ifup eth1```
 
 Am Installer die notwendigen Komponenten auswählen:
 
-- 3. [✗] Configure foreman_cli_ansible
-- 12. [✗] Configure foreman_plugin_ansible
-- 31. [✗] Configure foreman_plugin_remote_execution
-- 44. [✗] Configure foreman_proxy_plugin_ansible
-- 56. [✗] Configure foreman_proxy_plugin_remote_execution_ssh
+    3. [✗] Configure foreman_cli_ansible
+    12. [✗] Configure foreman_plugin_ansible
+    31. [✗] Configure foreman_plugin_remote_execution
+    44. [✗] Configure foreman_proxy_plugin_ansible
+    56. [✗] Configure foreman_proxy_plugin_remote_execution_ssh
 
 Dann Punkt 59 - Save und run auswählen.
 
