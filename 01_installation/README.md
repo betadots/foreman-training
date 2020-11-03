@@ -11,6 +11,14 @@ Wenn im DHCP Server Daten hinterlegt sind, diese bitte durch '0.0.0.0' ersetzen 
 
 Don't ask.
 
+## Vagrant
+
+Bitte eine aktuelle Version von Vagrant installieren: https://www.vagrantup.com/downloads
+
+Debian: deb Paket runterladen und installieren: `sudo dpkg -i ~/Downloads/vagrant*.deb`
+
+CentOS: RPM Paket herunterladen und installieren: `sudo rpm-ihv ~/Downloads/vagrant*.rpm`
+
 ## Initialisieren:
 
 Es werden zwei Vagrant Plugins eingesetzt:
@@ -37,7 +45,7 @@ Nun das GitHub repository auf die Workstation/das Trainingslaptop installieren:
 Jetzt kann die VM instantiiert werden:
 
     cd vagrant
-    vagrant up foreman.example42.training
+    vagrant up foreman.example42.training --provider virtualbox
 
 Danach Login:
 
