@@ -74,7 +74,7 @@ Wenn hier eine Fehlermeldung kommt: `Forward DNS points to 127.0.1.1 which is no
 
 Achtung 2: 
 
-Wenn eine Fehlermldung kommt `invalid byte sequence in US-ASCII (ArgumentError)`, dann muss die Local gesetzt werden: `export LANG=C`
+Wenn eine Fehlermldung kommt `invalid byte sequence in US-ASCII (ArgumentError)`, dann muss die Local gesetzt werden: `export LANG=enUS.UTF-8`
 
 Den Output sichern. z.B.:
 
