@@ -72,6 +72,10 @@ Achtung:
 
 Wenn hier eine Fehlermeldung kommt: `Forward DNS points to 127.0.1.1 which is not configured on this server`, dann in `/etc/hosts` sicherstellen, dass folgender Eintrag weg kommt `127.0.1.1 foreman.example42.training foreman` und folgender Eintrag hinzugefügt wird: `10.100.10.101 foreman.example42.training foreman`
 
+Achtung 2: 
+
+Wenn eine Fehlermldung kommt `invalid byte sequence in US-ASCII (ArgumentError)`, dann muss die Local gesetzt werden: `export LANG=C`
+
 Den Output sichern. z.B.:
 
       Success!
