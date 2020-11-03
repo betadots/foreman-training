@@ -84,7 +84,7 @@ Submit
 
 ## Host Group
 
-Host Group braucht das Puppet Environment
+Wenn man Puppet einsetzen will, brauchen Host Groups das Puppet Environment
 
 Foreman Login -> Configure -> Host Groups -> Create Host Group
 
