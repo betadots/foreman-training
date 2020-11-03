@@ -66,6 +66,8 @@ Foreman Login -> Hosts -> Installation Media -> Create medium
 Name eintragen, bei "Path" den http Pfad eintragen.
 Achtung: auf Namensaufloesung achten!
 
+Wichtig: im Linuxhotel bitte unbedingt den Mirror verwenden: path: `http://centos.linuxhotel.de/7/os/x86_64`
+
 Operatingsystem Family angeben!
 
 ### OS mit Provisionierungs Templates assoziieren
