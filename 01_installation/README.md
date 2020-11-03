@@ -19,6 +19,8 @@ Debian: deb Paket runterladen und installieren: `sudo dpkg -i ~/Downloads/vagran
 
 CentOS: RPM Paket herunterladen und installieren: `sudo rpm-ihv ~/Downloads/vagrant*.rpm`
 
+Falls Vargant vorher schon installiert war, muss man die Plugins reaktivieren: `vagrant plugin expunge --reinstall`
+
 ## Initialisieren:
 
 Es werden zwei Vagrant Plugins eingesetzt:
