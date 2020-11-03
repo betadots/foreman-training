@@ -14,18 +14,6 @@ file { '/etc/named.foreman.zones':
   source => "${cfg_base_dir}/named.foreman.zones",
   notify => Service['named'],
 }
-file { '/var/named/Kforeman.training.+157+12851.key':
-  ensure => file,
-  source => "${cfg_base_dir}/Kforeman-training.key",
-  mode   => '0600',
-  notify => Service['named'],
-}
-file { '/var/named/Kforeman.training.+157+12851.private':
-  ensure => file,
-  source => "${cfg_base_dir}/Kforeman-training.private",
-  mode   => '0600',
-  notify => Service['named'],
-}
 file { '/var/named/foreman_domain':
   ensure => file,
   source => "${cfg_base_dir}/foreman_domain",

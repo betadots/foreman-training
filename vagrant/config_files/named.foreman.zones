@@ -1,12 +1,12 @@
 zone "example42.training" IN {
         type master;
-        allow-update { key "foreman.training"; };
+        allow-update { key "rndc-key"; };
         file "foreman_domain";
 };
 
 zone "10.100.10.in-addr.arpa" IN {
         type master;
-        allow-update { key "foreman.training"; };
+        allow-update { key "rndc-key"; };
         file "foreman_ip";
 };
 
