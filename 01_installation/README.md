@@ -22,6 +22,11 @@ Falls die Plugins schon installiert waren, kann man prüfen, ob Aktualisierungen
 
     vagrant plugin update
 
+Nun das GitHub repository auf die Workstation/das Trainingslaptop installieren:
+
+    git clone https://github.com/example42/foreman-training
+    cd foreman-training
+    
 Jetzt kann die VM instantiiert werden:
 
     cd vagrant
