@@ -96,6 +96,11 @@ Nun muessen die Dienste konfiguriert werden:
 Achtung! Dieses Setup kann nur einmal durchgefuehrt werden.
 Spaetestens das Provisionierungs Setup aendert diese Einstellungen grundlegend.
 
+Wenn man die Vargant Instanz neu starten muss, muss die Router config neu gesetzt werden. Dazu muss erst das Flagfile geloescht werden:
+
+    rm /etc/gateway_config
+    puppet apply /vagrant_foreman/scripts/00_router_config.pp
+
 Namensauflösung prüfen: `ping -c1 heise.de`
 
 Evtl in `/etc/named.conf` einen anderen "forwarder" eintragen (8.8.8.8) und named neu starten: `systemctl restart named`.
