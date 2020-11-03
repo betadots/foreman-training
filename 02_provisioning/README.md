@@ -177,6 +177,9 @@ Es erscheint ein "New in progress" Balken.
 
 ## Host in VirtualBox starten
 
+Achting: bitte mit dem Starten der VM etwas warten.
+Foreman muss im Hintergrund die Images für den TFTP Server herunterladen!!!
+
 Wenn man alles richtig gemacht hat, bootet die VM via DHCP und fängt die Installation an.
 
 Die Installation kann je nach verwendetem Repository Server einige Zeit dauern.
