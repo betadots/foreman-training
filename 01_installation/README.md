@@ -137,7 +137,6 @@ Haken setzen -> Update
 
 ### Ansible Roles
 
-    ansible-galaxy collection install ericsysmin.docker -p /etc/ansible/roles
     ansible-galaxy install geerlingguy.apache -p /etc/ansible/roles
     ansible-galaxy install geerlingguy.mysql -p /etc/ansible/roles
 
