@@ -22,6 +22,11 @@ Falls die Plugins schon installiert waren, kann man prüfen, ob Aktualisierungen
 
     vagrant plugin update
 
+Als nächstes brauchen wir einen GIT Client. Je nach OS bitte installieren:
+
+- Debian: sudo apt-get install git
+- CentOS: sudo yum install git
+
 Nun das GitHub repository auf die Workstation/das Trainingslaptop installieren:
 
     git clone https://github.com/example42/foreman-training
