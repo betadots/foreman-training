@@ -96,10 +96,11 @@ Nun muessen die Dienste konfiguriert werden:
 Achtung! Dieses Setup kann nur einmal durchgefuehrt werden.
 Spaetestens das Provisionierungs Setup aendert diese Einstellungen grundlegend.
 
-Wenn man die Vargant Instanz neu starten muss, muss die Router config neu gesetzt werden. Dazu muss erst das Flagfile geloescht werden:
+Wenn man die Vargant Instanz neu starten muss, muss die Router config und die resolve.conf neu gesetzt werden. Dazu muss erst das Flagfile geloescht werden, dann muss die Konfiguratoin wieder hergestellt werden:
 
     rm /etc/gateway_config
     puppet apply /vagrant_foreman/scripts/00_router_config.pp
+    puppet apply /vagrant_foreman/scripts/02_install_service_bind.pp
 
 Namensauflösung prüfen: `ping -c1 heise.de`
 
