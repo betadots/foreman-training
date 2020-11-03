@@ -91,6 +91,9 @@ Foreman Login -> Configure -> Host Groups -> Create Host Group
 Tab Host Group:
 
 - Name: Training
+
+Die folgenden Eintraege werden nur bei der Verwendung von Puppet benoetigt:
+
 - Environment: Production
 - Puppet Master: foreman.example42.training
 - Puppet CA: foreman.example42.training
@@ -148,6 +151,9 @@ ACHTUNG: nicht docker als hostname nehmen. Dieser Name wird in Teil 4 verwendet.
 Host Tab:
 - Name: hostname (ohne Domain)
 - Hostgroup: Training
+
+Die folgende Einstellung ist nur vorhanden, wenn man in der Hostgruppe Puppet aktiviert hat.
+
 - Environment: Production (sollte automatisch aus der Hostgroup rausfallen)
 
 Interfaces Tab:
