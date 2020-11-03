@@ -22,7 +22,9 @@ Falls die Plugins schon installiert waren, kann man prüfen, ob Aktualisierungen
 
     vagrant plugin update
 
-Als nächstes brauchen wir einen GIT Client. Je nach OS bitte installieren:
+Als nächstes brauchen wir einen GIT Client. Mit `which git` oder `git --version` prüfen, ob GIT installiert ist.
+
+Wenn nicht: Je nach OS bitte installieren:
 
 - Debian: sudo apt-get install git
 - CentOS: sudo yum install git
