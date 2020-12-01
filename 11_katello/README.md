@@ -22,6 +22,14 @@ alle laufenden Vagrant Boxen loeschen:
     sudo -i
     foreman-installer --scenario katello -i
 
+ACHTUNG: wenn es zu Problemen wegen VirtualBox Guest Additions kommt:
+
+    vagrant ssh katello.example42.training
+    sudo yum upgrade
+    sudo shutdown now
+    vagrant halt katello.example42.training
+    vagrant up katello.example42.training
+    
 Katello Dienste konfigurieren:
 
     puppet apply /vagrant_foreman/scripts/00_router_config.pp
