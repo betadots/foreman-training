@@ -15,7 +15,7 @@ alle laufenden Vagrant Boxen loeschen:
     cd vagrant
     vagrant destroy -f
 
-## Katello starten
+## Katello VM starten
 
     vagrant up katello.example42.training
 
@@ -27,7 +27,7 @@ ACHTUNG: wenn es zu Problemen wegen VirtualBox Guest Additions kommt:
     vagrant halt katello.example42.training
     vagrant up katello.example42.training
 
-## Einloggen
+## Einloggen und Installation
 
     vagrant ssh katello.example42.training
     sudo -i
@@ -54,8 +54,19 @@ Im Foreman Installer können einige Optionen direkt bei der Installation ausgewa
 
 Nun Punkt `61 Save and run` auswaehlen.
 
+Die Installation dauert.
+Nach einiger Zeit kommt eine Abschlussmeldung:
 
-Katello Dienste konfigurieren:
+      Success!
+      * Foreman is running at https://katello.example42.training
+          Initial credentials are admin / sTExyUd2ThWVKWJP
+      * To install an additional Foreman proxy on separate machine continue by running:
+
+          foreman-proxy-certs-generate --foreman-proxy-fqdn "$FOREMAN_PROXY" --certs-tar "/root/$FOREMAN_PROXY-certs.tar"
+      * Foreman Proxy is running at https://katello.example42.training:9090
+      The full log is at /var/log/foreman-installer/katello.log
+
+## Katello Dienste konfigurieren:
 
     puppet apply /vagrant_foreman/scripts/00_router_config.pp
     puppet apply /vagrant_foreman/scripts/01_install_service_dhcp.pp
@@ -64,7 +75,7 @@ Katello Dienste konfigurieren:
     # puppet apply /vagrant_foreman/scripts/04_selinux.pp
     puppet apply /vagrant_foreman/scripts/05_katello_services.pp
 
-Achtng: bei 01_install_service_dhcp können Fehler auftreten.
+Achtng: bei 01\_install\_service\_dhcp können Fehler auftreten.
 Diese können ignoriert werden.
 
 
@@ -93,7 +104,7 @@ Achtung: /etc/resolv.conf prüfen:
 
 ### Yum
 
-1. GPG Key
+#### GPG Key einbinden
 
 Katello Login -> Content -> Content Credentials -> Create Content Credential
 
@@ -103,7 +114,7 @@ CentOS GPG Key kopieren vom mirror (http://mirror.centos.org/centos/RPM-GPG-KEY-
 
 Save
 
-2. Repository
+#### Repository anlegen
 
 Katello Login -> Content -> Products -> Repo Discovery
 
@@ -115,7 +126,7 @@ Click Discover
 
 Das kann einige Zeit dauern (5 min und mehr).
 
-os/x86_64 und updates/x86_64 auswaehlen.
+os/x86\_64 und updates/x86\_64 auswaehlen.
 
 Klick: Create selected
 
@@ -127,7 +138,7 @@ Verify SSL: ?? probieren....
 
 Run Repository Creation
 
-3. Syncen
+#### Repositories Syncen
 
 Katello Login -> Content -> Sync Plans
 
@@ -154,9 +165,9 @@ Katello Login -> Content -> Sync Status
 
 Repo auswaehlen und sync starten (benoetigt ca. 8 GB Festplattenplatz pro OS Version)
 
-4. Intiiales Syncen
+#### Intiiales Syncen
 
-Katello Login -> Content -> Products -> CentOS7 -> os x86_64
+Katello Login -> Content -> Products -> CentOS7 -> os x86\_64
 
 Download Policy: Immediate
 
