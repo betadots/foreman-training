@@ -2,13 +2,15 @@
 
 echo "Installing Repo Packages"
 echo "foreman"
-sudo yum -y install http://yum.theforeman.org/releases/1.24/el7/x86_64/foreman-release.rpm
+sudo yum -y localinstall https://yum.theforeman.org/releases/2.2/el7/x86_64/foreman-release.rpm
 echo "Katello"
-sudo yum -y install http://fedorapeople.org/groups/katello/releases/yum/3.14/katello/el7/x86_64/katello-repos-latest.rpm
+sudo yum -y localinstall https://fedorapeople.org/groups/katello/releases/yum/3.17/katello/el7/x86_64/katello-repos-latest.rpm
 echo "Puppet 6"
-sudo yum -y install https://yum.puppetlabs.com/puppet6/puppet6-release-el-7.noarch.rpm
-echo "epel"
-sudo yum -y install http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+sudo yum -y localinstall https://yum.puppet.com/puppet6-release-el-7.noarch.rpm
+#echo "epel"
+#sudo yum -y install http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+echo "RH SCL"
+sudo yum -y install epel-release centos-release-scl-rh
 
 
 echo "yum cleanup"
@@ -22,14 +24,17 @@ sudo yum -y update
 echo "installing some tools: tree vim net-tools"
 sudo yum -y install tree vim net-tools
 
-echo "installing foreman installer"
-sudo yum -y install foreman-release-scl
+echo "python-qpid fix (https://community.theforeman.org/t/katello-installation-broken/21374)"
+sudo yum -y localinstall https://download-ib01.fedoraproject.org/pub/epel/7/aarch64/Packages/p/python2-qpid-1.37.0-4.el7.noarch.rpm
 
 echo "Katello installation part 2"
 sudo yum -y install katello
 
-echo "fix for https://github.com/theforeman/puppet-foreman/issues/580"
-sudo mkdir -p /var/lib/tftpboot/boot
+if [ ! -d /var/lib/tftpboot/boot ]; then
+  echo "fix for https://github.com/theforeman/puppet-foreman/issues/580"
+  echo "creating boot directory foir tftpserver"
+  sudo mkdir -p /var/lib/tftpboot/boot
+fi
 
 echo "Jetzt einloggen, root user werden und installer starten"
 echo "vagrant ssh katello.example42.training"

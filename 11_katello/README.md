@@ -18,18 +18,43 @@ alle laufenden Vagrant Boxen loeschen:
 ## Katello starten
 
     vagrant up katello.example42.training
-    vagrant ssh katello.example42.training
-    sudo -i
-    foreman-installer --scenario katello -i
 
 ACHTUNG: wenn es zu Problemen wegen VirtualBox Guest Additions kommt:
 
     vagrant ssh katello.example42.training
-    sudo yum upgrade
+    sudo yum -y upgrade
     sudo shutdown now
     vagrant halt katello.example42.training
     vagrant up katello.example42.training
-    
+
+## Einloggen
+
+    vagrant ssh katello.example42.training
+    sudo -i
+    foreman-installer --scenario katello -i
+
+Achtung:
+
+Wenn hier eine Fehlermeldung kommt: `Forward DNS points to 127.0.1.1 which is not configured on this server`, dann in `/etc/hosts` sicherstellen, dass folgender Eintrag weg kommt `127.0.1.1 katello.example42.training katello` und folgender Eintrag hinzugefügt wird: `10.100.10.101 katello.example42.training katello`
+
+Achtung 2:
+
+Wenn eine Fehlermldung kommt invalid byte sequence in US-ASCII (ArgumentError), dann muss die Local gesetzt werden: `export LANG=en_US.UTF-8`
+
+Im Foreman Installer können einige Optionen direkt bei der Installation ausgewaehlt werden:
+
+    4. [✓] Configure foreman_cli_ansible
+    9. [✓] Configure foreman_cli_remote_execution
+    10. [✓] Configure foreman_cli_tasks
+    19. [✓] Configure foreman_plugin_ansible
+    35. [✓] Configure foreman_plugin_remote_execution
+    42. [✓] Configure foreman_plugin_tasks
+    47. [✓] Configure foreman_proxy_plugin_ansible
+    56. [✓] Configure foreman_proxy_plugin_remote_execution_ssh
+
+Nun Punkt `61 Save and run` auswaehlen.
+
+
 Katello Dienste konfigurieren:
 
     puppet apply /vagrant_foreman/scripts/00_router_config.pp
