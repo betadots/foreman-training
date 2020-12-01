@@ -35,7 +35,7 @@ ACHTUNG: wenn es zu Problemen wegen VirtualBox Guest Additions kommt:
 
 Achtung:
 
-Wenn hier eine Fehlermeldung kommt: `Forward DNS points to 127.0.1.1 which is not configured on this server`, dann in `/etc/hosts` sicherstellen, dass folgender Eintrag weg kommt `127.0.1.1 katello.example42.training katello` und folgender Eintrag hinzugefügt wird: `10.100.10.101 katello.example42.training katello`
+Wenn hier eine Fehlermeldung kommt: `Forward DNS points to 127.0.1.1 which is not configured on this server`, dann in `/etc/hosts` sicherstellen, dass folgender Eintrag weg kommt `127.0.1.1 katello.example42.training katello` und folgender Eintrag hinzugefügt wird: `10.100.10.102 katello.example42.training katello`
 
 Achtung 2:
 
@@ -43,14 +43,14 @@ Wenn eine Fehlermldung kommt invalid byte sequence in US-ASCII (ArgumentError), 
 
 Im Foreman Installer können einige Optionen direkt bei der Installation ausgewaehlt werden:
 
-    4. [✓] Configure foreman_cli_ansible
-    9. [✓] Configure foreman_cli_remote_execution
-    10. [✓] Configure foreman_cli_tasks
-    19. [✓] Configure foreman_plugin_ansible
-    35. [✓] Configure foreman_plugin_remote_execution
-    42. [✓] Configure foreman_plugin_tasks
-    47. [✓] Configure foreman_proxy_plugin_ansible
-    56. [✓] Configure foreman_proxy_plugin_remote_execution_ssh
+    4. [✓] Configure foreman\_cli\_ansible
+    9. [✓] Configure foreman\_cli\_remote\_execution
+    10. [✓] Configure foreman\_cli\_tasks
+    19. [✓] Configure foreman\_plugin\_ansible
+    35. [✓] Configure foreman\_plugin\_remote\_execution
+    42. [✓] Configure foreman\_plugin\_tasks
+    47. [✓] Configure foreman\_proxy\_plugin\_ansible
+    56. [✓] Configure foreman\_proxy\_plugin\_remote\_execution\_ssh
 
 Nun Punkt `61 Save and run` auswaehlen.
 
@@ -78,8 +78,12 @@ Nach einiger Zeit kommt eine Abschlussmeldung:
 Achtng: bei 01\_install\_service\_dhcp können Fehler auftreten.
 Diese können ignoriert werden.
 
+Als nächstes muss die Namensauflösung geprüft werden: `dig heise.de`
 
-# REBOOT !!!!
+Wenn das Kommando keine IP zurückliefert, muss in `/etc/named.conf` der Forwarder Eintrag geprüft und passend gesetzt werden. Nach der Änderung an `/etc/named.conf`muss der DNS Service neu gestartet werden: `sysctl restart named`
+
+
+## REBOOT - allem Anschein nach nicht mehr notwendig (Version Katello 3.17)
 
 Katello hat ein Problem, bei der initialen Installation alle Dienste sauber zu starten.
 
