@@ -36,8 +36,8 @@ Als nächstes brauchen wir einen GIT Client. Mit `which git` oder `git --version
 
 Wenn nicht: Je nach OS bitte installieren:
 
-- Debian: sudo apt-get install git
-- CentOS: sudo yum install git
+- Debian: `sudo apt-get install git`
+- CentOS: `sudo yum install git`
 
 Nun das GitHub repository auf die Workstation/das Trainingslaptop installieren:
 
@@ -48,6 +48,28 @@ Jetzt kann die VM instantiiert werden:
 
     cd vagrant
     vagrant up foreman.example42.training --provider virtualbox
+
+Durch Änderungen an den Repositories (die Kernel liegen jetzt auf Vault) wird man eine Fehlermeldung bekommen:
+
+    ==> foreman.example42.training: Checking for guest additions in VM...
+        foreman.example42.training: No guest additions were detected on the base box for this VM! Guest
+        foreman.example42.training: additions are required for forwarded ports, shared folders, host only
+        foreman.example42.training: networking, and more. If SSH fails on this machine, please install
+        foreman.example42.training: the guest additions and repackage the box to continue.
+        foreman.example42.training:
+        foreman.example42.training: This is not an error message; everything may continue to work properly,
+        foreman.example42.training: in which case you may ignore this message.
+
+In diesem Fall muss man manuell ein Update der VM durchführen:
+
+    vagrant ssh foreman.example42.training
+    sudo yum update -y
+    exit
+
+Nun muss der Provisionierungsprozess neu gestartet werden:
+
+    vagrant reload --provision foreman.example42.training
+
 
 Danach Login:
 
@@ -75,6 +97,8 @@ Wenn hier eine Fehlermeldung kommt: `Forward DNS points to 127.0.1.1 which is no
 Achtung 2: 
 
 Wenn eine Fehlermldung kommt `invalid byte sequence in US-ASCII (ArgumentError)`, dann muss die Local gesetzt werden: `export LANG=en_US.UTF-8`
+
+Wenn man sich von einem Apple System aus eingeloggt hat, muss man eine Umgebungsvariable löschen: `unset LC_CTYPE`
 
 Den Output sichern. z.B.:
 

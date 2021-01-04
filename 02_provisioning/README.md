@@ -187,5 +187,14 @@ Wenn man timeout oder not found Fehler bekommt, hat man nicht lange genug gewart
 
 Die Installation kann je nach verwendetem Repository Server einige Zeit dauern.
 
+Zur Überprüfung der Installation kann man dann von der Foreman Instanz aus via SSH auf den neu erzeugten Host zugreifen:
+
+    ssh <name> -l root
+    yum install -y net-tools
+    netstat -rn
+    cat /etc/resolv.conf
+    ping -c1 heise.de
+
+
 Weiter geht es mit Teil 3 [Provisionieren von Debian](../03_provisionining_debian)
 Oder mit Teil 4 [CfgMgmt](../04_cfgmgmt)

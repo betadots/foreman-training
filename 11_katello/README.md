@@ -39,7 +39,7 @@ Wenn hier eine Fehlermeldung kommt: `Forward DNS points to 127.0.1.1 which is no
 
 Achtung 2:
 
-Wenn eine Fehlermldung kommt invalid byte sequence in US-ASCII (ArgumentError), dann muss die Local gesetzt werden: `export LANG=en_US.UTF-8`
+Wenn eine Fehlermldung kommt invalid byte sequence in US-ASCII (ArgumentError), dann muss die Locale gesetzt werden: `export LANG=en_US.UTF-8`
 
 Im Foreman Installer können einige Optionen direkt bei der Installation ausgewaehlt werden:
 
@@ -75,7 +75,7 @@ Nach einiger Zeit kommt eine Abschlussmeldung:
     # puppet apply /vagrant_foreman/scripts/04_selinux.pp
     puppet apply /vagrant_foreman/scripts/05_katello_services.pp
 
-Achtng: bei 01\_install\_service\_dhcp können Fehler auftreten.
+Achtung: bei 01\_install\_service\_dhcp können Fehler auftreten.
 Diese können ignoriert werden.
 
 Als nächstes muss die Namensauflösung geprüft werden: `dig heise.de`
@@ -246,7 +246,7 @@ Submit
 
 ## Einrichten der Organisation
 
-Bug in altemKatello (< 1.20)
+Bug in altem Katello (< 1.20)
 
 Katello Login -> Default Organization -> Manage Organizations -> Edit Pfeil -> Assign the 1 host with no organization to Default Organization
 
@@ -334,7 +334,7 @@ Nach Abschluss VirtualBox Host starten
 
 ## Host Collections
 
-Innerhalb von Host Collections werden die folgenden Komponenten n Zusammenhang gesetzt:
+Innerhalb von Host Collections werden die folgenden Komponenten in Zusammenhang gesetzt:
 
 - Products (Repositories)
 - Nodes
