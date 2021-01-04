@@ -19,13 +19,27 @@ alle laufenden Vagrant Boxen loeschen:
 
     vagrant up katello.example42.training
 
-ACHTUNG: wenn es zu Problemen wegen VirtualBox Guest Additions kommt:
+Durch Änderungen an den Repositories (die Kernel liegen jetzt auf Vault) wird man eine Fehlermeldung bekommen:
+
+    ==> katello.example42.training: Checking for guest additions in VM...
+        katello.example42.training: No guest additions were detected on the base box for this VM! Guest
+        katello.example42.training: additions are required for forwarded ports, shared folders, host only
+        katello.example42.training: networking, and more. If SSH fails on this machine, please install
+        katello.example42.training: the guest additions and repackage the box to continue.
+        katello.example42.training:
+        katello.example42.training: This is not an error message; everything may continue to work properly,
+        katello.example42.training: in which case you may ignore this message.
+
+In diesem Fall muss man manuell ein Update der VM durchführen:
 
     vagrant ssh katello.example42.training
-    sudo yum -y upgrade
-    sudo shutdown now
-    vagrant halt katello.example42.training
-    vagrant up katello.example42.training
+    sudo yum update -y
+    exit
+
+Nun muss der Provisionierungsprozess neu gestartet werden:
+
+    vagrant reload --provision katello.example42.training
+
 
 ## Einloggen und Installation
 
@@ -129,8 +143,9 @@ URL: http://mirror.centos.org/centos/7 (oder lokaler Mirror)
 Click Discover
 
 Das kann einige Zeit dauern (5 min und mehr).
+Katello holt sich dabei die Metainformationen der gesamten CentOS 7 Repositories.
 
-os/x86\_64 und updates/x86\_64 auswaehlen.
+`os/x86_64` und `updates/x86_64` auswaehlen.
 
 Klick: Create selected
 
@@ -138,7 +153,7 @@ Name: CentOS7
 
 GPG Key: aus Liste auswaehlen
 
-Verify SSL: ?? probieren....
+Verify SSL: nur aktivieren, wenn man eine eigen CA verwendet. Ansonsten muss die Self-signed CA und das Katello HTTPS Zertifikat allen Systemen bekannt gemacht werden.
 
 Run Repository Creation
 
@@ -178,7 +193,7 @@ Download Policy: Immediate
 Select Action -> Sync Now
 
 
-## Docker
+## Docker (optional)
 
 Katello Login -> Content -> Products -> Create Product
 
@@ -203,6 +218,7 @@ Save
 ## Smart Proxies
 
 Katello Login -> Infrastructure -> Smart Proxies -> Actions -> Pfeil -> Refresh
+
 ## DNS
 
 ### Domain
