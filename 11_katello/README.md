@@ -370,4 +370,10 @@ Wenn das Foreman Client Repo eingebunden ist, kann das katello-agent Paket insta
 
 Weitere Informationen: https://theforeman.org/plugins/katello/3.14/installation/clients.html#manual
 
+# Debian Repositories
+
+Debian Repositories werden anders behandet.
+Hier muss zuerst ein Produkt und beim Repository eine URL angegeben werden.
+
+Zusätzlich muss man die Distribution und Komponente sowie Architektur angegeben werden.
 
