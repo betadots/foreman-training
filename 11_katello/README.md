@@ -88,35 +88,20 @@ Nach einiger Zeit kommt eine Abschlussmeldung:
     puppet apply /vagrant_foreman/scripts/03_foreman_proxy.pp
     # puppet apply /vagrant_foreman/scripts/04_selinux.pp
     puppet apply /vagrant_foreman/scripts/05_katello_services.pp
+    puppet apply /vagrant_foreman/scripts/06_tftp.pp
 
 Achtung: bei 01\_install\_service\_dhcp können Fehler auftreten.
 Diese können ignoriert werden.
 
-Als nächstes muss die Namensauflösung geprüft werden: `dig heise.de`
+Als nächstes muss die Namensauflösung geprüft werden: `ping -c1 heise.de`
 
 Wenn das Kommando keine IP zurückliefert, muss in `/etc/named.conf` der Forwarder Eintrag geprüft und passend gesetzt werden. Nach der Änderung an `/etc/named.conf`muss der DNS Service neu gestartet werden: `sysctl restart named`
 
+## Login in Katello
 
-## REBOOT - allem Anschein nach nicht mehr notwendig (Version Katello 3.17)
+Im Browser:
 
-Katello hat ein Problem, bei der initialen Installation alle Dienste sauber zu starten.
-
-    reboot
-
-Nach reboot die share wieder mounten:
-
-    vagrant ssh katello.example42.training
-    sudo -i
-    mount -t vboxsf vagrant_foreman /vagrant_foreman
-
-    rm /etc/gateway_config
-    puppet apply /vagrant_foreman/scripts/00_router_config.pp
-
-Achtung: /etc/resolv.conf prüfen:
-
-    # /etc/resolv.conf
-    domain example42.training
-    nameserver 10.100.10.102
+    https://katello.example42.training
 
 ## Repository erzeugen
 
@@ -375,5 +360,5 @@ Weitere Informationen: https://theforeman.org/plugins/katello/3.14/installation/
 Debian Repositories werden anders behandet.
 Hier muss zuerst ein Produkt und beim Repository eine URL angegeben werden.
 
-Zusätzlich muss man die Distribution und Komponente sowie Architektur angegeben werden.
+Zusätzlich muss die Distribution und Komponente sowie Architektur angegeben werden.
 

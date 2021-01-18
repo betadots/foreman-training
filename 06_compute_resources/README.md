@@ -1,4 +1,6 @@
-# Foreman Training - Teil 6 - Plugins
+# Foreman Training - Teil 6 - Compute Resources
+
+Hier geht es um VMware, Docker, ....
 
 ## Plugins
 
