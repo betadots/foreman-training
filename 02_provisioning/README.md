@@ -79,7 +79,7 @@ OS auswaehlen
 2. Stelle: OS mit Templates Assoziieren
 
 - Partition Table -> "Kickstart default" auswaehlen
-- Installation media -> "CentOS mirror" auswaehlen (oder das vorher angelegten Installation media auswaehlen)
+- Installation media -> "CentOS 7 mirror" auswaehlen (oder das vorher angelegten Installation media auswaehlen)
 - Templates -> alle Templates auswaehlen, die man auswaehlen kann.
 
 Submit
@@ -97,8 +97,8 @@ Tab Host Group:
 Die folgenden Eintraege werden nur bei der Verwendung von Puppet benoetigt:
 
 - Environment: Production
-- Puppet Master: foreman.example42.training
-- Puppet CA: foreman.example42.training
+- Puppet Proxy: foreman.example42.training
+- Puppet CA Proxy: foreman.example42.training
 
 Tab Puppet Classes
 

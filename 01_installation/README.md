@@ -83,12 +83,12 @@ Pruefen, ob eth1 Interface eine IP hat, ```ip a```. Wenn nein: ```ifup eth1```
 Am Installer die notwendigen Komponenten auswählen:
 
     3. [✗] Configure foreman_cli_ansible
-    12. [✗] Configure foreman_plugin_ansible
-    31. [✗] Configure foreman_plugin_remote_execution
-    44. [✗] Configure foreman_proxy_plugin_ansible
-    56. [✗] Configure foreman_proxy_plugin_remote_execution_ssh
+    13. [✗] Configure foreman_plugin_ansible
+    33. [✗] Configure foreman_plugin_remote_execution
+    47. [✗] Configure foreman_proxy_plugin_ansible
+    59. [✗] Configure foreman_proxy_plugin_remote_execution_ssh
 
-Dann Punkt 59 - Save und run auswählen.
+Dann Punkt 62 - Save und run auswählen.
 
 Achtung:
 
@@ -116,6 +116,7 @@ Nun muessen die Dienste konfiguriert werden:
     puppet apply /vagrant_foreman/scripts/02_install_service_bind.pp
     puppet apply /vagrant_foreman/scripts/03_foreman_proxy.pp
     puppet apply /vagrant_foreman/scripts/04_selinux.pp
+    puppet apply /vagrant_foreman/scripts/06_tftp.pp
 
 Achtung! Dieses Setup kann nur einmal durchgefuehrt werden.
 Spaetestens das Provisionierungs Setup aendert diese Einstellungen grundlegend.

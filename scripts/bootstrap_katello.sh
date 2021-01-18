@@ -2,13 +2,11 @@
 
 echo "Installing Repo Packages"
 echo "foreman"
-sudo yum -y localinstall https://yum.theforeman.org/releases/2.2/el7/x86_64/foreman-release.rpm
+sudo yum -y localinstall https://yum.theforeman.org/releases/2.3/el7/x86_64/foreman-release.rpm
 echo "Katello"
-sudo yum -y localinstall https://fedorapeople.org/groups/katello/releases/yum/3.17/katello/el7/x86_64/katello-repos-latest.rpm
+sudo yum -y localinstall https://fedorapeople.org/groups/katello/releases/yum/3.18/katello/el7/x86_64/katello-repos-latest.rpm
 echo "Puppet 6"
 sudo yum -y localinstall https://yum.puppet.com/puppet6-release-el-7.noarch.rpm
-#echo "epel"
-#sudo yum -y install http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 echo "RH SCL"
 sudo yum -y install epel-release centos-release-scl-rh
 
