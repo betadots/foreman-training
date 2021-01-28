@@ -5,6 +5,8 @@ echo "foreman"
 sudo yum -y localinstall https://yum.theforeman.org/releases/2.3/el7/x86_64/foreman-release.rpm
 echo "Katello"
 sudo yum -y localinstall https://fedorapeople.org/groups/katello/releases/yum/3.18/katello/el7/x86_64/katello-repos-latest.rpm
+echo "Katello-Client"
+sudo yum -y localinstall https://yum.theforeman.org/client/2.3/el7/x86_64/foreman-client-release.rpm
 echo "Puppet 6"
 sudo yum -y localinstall https://yum.puppet.com/puppet6-release-el-7.noarch.rpm
 echo "RH SCL"
