@@ -117,7 +117,29 @@ CentOS GPG Key kopieren vom mirror (http://mirror.centos.org/centos/RPM-GPG-KEY-
 
 Save
 
+Wiederholen fuer PostgreSQL GPG Key mit https://download.postgresql.org/pub/repos/yum/RPM-GPG-KEY-PGDG-11
+
 #### Repository anlegen
+
+ACHTUNG: Das Anlegen von lokalen Repositories benoetigt viel Plattenplatz und viel Bandbreite.
+Diese Schritte sollten nur gemacht werden, wenn man:
+
+- eine schnelle Internetanbindung hat (min 50 MBit)
+- genug Plattenplatz verfuegbar ist (min 20 GB)
+
+#### Repository anlegen - klein (1 GB - Dauer: ca 5-10 Minuten)
+
+Katello Login -> Content -> Products -> Repo Discovery
+
+Repository Type: Yum Repositories
+
+URL: https://yum.theforeman.org/client/2.3
+
+Click Discover
+
+`/el-7/x86_64` auswaehlen
+
+#### Repository anlegen - gross (20 GB - Dauer: ca 1 Stunde)
 
 Katello Login -> Content -> Products -> Repo Discovery
 
@@ -142,7 +164,31 @@ Verify SSL: nur aktivieren, wenn man eine eigen CA verwendet. Ansonsten muss die
 
 Run Repository Creation
 
-#### Repositories Syncen
+### Debian
+
+Debian Repositories werden anders behandet.
+Hier muss zuerst ein Produkt und beim Repository eine URL angegeben werden.
+
+Zusätzlich muss die Distribution und Komponente sowie Architektur angegeben werden.
+
+Content -> Producst -> Create Product
+
+Name angeben -> Save
+
+In der Uebersicht: "New Repository" auswaehlen.
+
+Bei "Type" `deb` auswaehlen und die Repo Informationen eintragen:
+
+Upstream URL: http://ftp.de.debian.org
+
+Release: stable/unstable/buster, ...
+
+Componentes: main, free, non-free, ...
+
+Architectures: amd64, arm, i386, ...
+
+
+### Repositories Syncen
 
 Katello Login -> Content -> Sync Plans
 
@@ -167,9 +213,13 @@ CentOS7 auswählen und Klick auf "Add selected"
 
 Katello Login -> Content -> Sync Status
 
-Repo auswaehlen und sync starten (benoetigt ca. 8 GB Festplattenplatz pro OS Version)
+`os x86_64` repo auswaehlen und sync starten (benoetigt temporaer waehrend des syncs ca. 20 GB und danach ca 11GB Festplattenplatz pro OS Version)
 
-#### Intiiales Syncen
+Achtung: Sync kann bis zu 1h dauern! Die Dauer haengt von der Bandbreite des Internetzugangs ab.
+
+`updates x86_64`benötigt ca 8 GB RAM waehrend des Syncs und 5 GB danach. Dauer des Sync ca 30 min.
+
+#### Initiales Syncen
 
 Katello Login -> Content -> Products -> CentOS7 -> os x86\_64
 
@@ -177,6 +227,44 @@ Download Policy: Immediate
 
 Select Action -> Sync Now
 
+## Content Views
+
+Mit content views koennen verschiedene Konstellationen und Versionen von Repos verwaltet werden.
+
+z.B. Basis OS Repo + Monitoring + eigenes Repo
+
+Katello Login -> Content -> Content Views
+
+Content Views koennen versioniert werden und man kann neue Versionen ueber das Webinterface erzeugen.
+
+## Lifecycle Environments
+
+Mit Lifecycle Environments verwaltet man Content Views (hinzufuegen, promoten, entfernen).
+Das Default Lifecycle Environment nennt sich Library. Innerhalb dieser Library koennen weitere Environments angeegt werden.
+
+z.B. Production, Testing, Pre-Prod
+
+Ueber die Content Views kann man nun Content an ein Lifecycle Environment "promoten".
+
+## Alles zusammen bringen
+
+Wenn man einen Host oder eine Hostegruppe anlegt, kann man das Liefecycle Environment mit angeben.
+Damit kann man festlegen, welche Hosts oder Hostgruppen, welche Repositories zugeweisen bekommen sollen.
+
+## Content Hosts
+
+Katello Login -> Hosts -> Content Hosts
+
+Hier wird bei "Subscription Status" ein Rotes Kreuz stehen.
+
+Auf dem Katello Server (als Root User):
+
+    curl --insecure --output katello-ca-consumer-latest.noarch.rpm https://katello.example42.training/pub/katello-ca-consumer-latest.noarch.rpm
+    yum localinstall katello-ca-consumer-latest.noarch.rpm
+    subscription-manager register --org="Default_Organization" --activationkey="Productoin Activation Key"
+    yum install -y katello-agent
+
+ACHTUNG: in Katello 4 wird von katello-agent auf Remote Execution gewechselt!!
 
 ## Docker (optional)
 
@@ -199,6 +287,8 @@ URL: https://registry.hub.docker.com
 Upstream Repository Name: fedora/ssh
 
 Save
+
+# Nun geht es mit dem Foreman Teil weiter:
 
 ## Smart Proxies
 
@@ -227,6 +317,8 @@ Katello Login -> Infrastructure -> Subnets -> Create Subnet
 - Tab Subnet: Start IP range: 10.100.10.120
 - Tab Subnet: End IP range: 10.100.10.240
 
+- Tab Remote Execution: den Proxy auswaehlen
+
 - Tab Domain: example42.training
 - Tab Proxies: all auswaehlen
 - Tab Locations: Default Location auswaehlen
@@ -238,7 +330,7 @@ Submit
 
 Katello Login -> Hosts -> Installation Media -> Create Installation Medium
 
-- Name: CentOS7
+- Name: CentOS Katello
 - Path: http://katello.example42.training/pulp/repos/Default_Organization/Library/custom/CentOS7/os_x86_64/
 - Operating System Family: RedHat
 
@@ -268,42 +360,52 @@ Submit
 
 ## Provisionierung
 
+Katello Login -> Hosts -> Provisioning Templates
+
 Teil 1: Templates an OS binden
 
-  - kind = PXELinux
-  - kind = provision
-  - kind = finish
+  - kind = PXELinux -> Kickstart default PXELinux -> Association pruefen
+  - kind = provision -> Kickstart Default -> Association pruefen
+  - kind = finish -> Kickstart Default finish -> Association pruefen
+
+Katello Login -> Hosts -> Operating System
 
 Teil 2: OS an Templates binden
 
-- Installation Media
-- Templates: entfernen von Katello Kickstart Default User Data
+- Installation Media -> CentOS Katello hinzufuegen
 
 ## Host Groups anlegen
 
 Katello Login -> Configure -> Host Groups -> Create Host Group
 
 - Tab Host Group: Name: Katello Hostgroup
-- Tab Host Group: Lifecycle Environment: Library
-- Tab Host Group: Content View: Default Organization Content View
+- Tab Host Group: Lifecycle Environment: Production
+- Tab Host Group: Content View: Base OS + Monitoring
 - Tab Host Group: Content Source: katello.example42.training
-- Tab Host Group: Puppet Environment: production
-- Tab Host Group: Puppet Master: katello.example42.training
-- Tab Host Group: Puppet CA: katello.example42.training
+- Tab Host Group: Puppet Environment: production (optional)
+- Tab Host Group: Puppet Master: katello.example42.training (optional)
+- Tab Host Group: Puppet CA: katello.example42.training (optional)
+
+- Tab Ansible Roles: (optional)
+- Tab Puppet Classes: (optional)
 
 - Tab Network: Domain: example42.training
 - Tab Network: IPv4 Subnet: example42.training
 
+Katello Bug!!!! Erst "All media" auswaehlen und speichern, danach kann man auf "Synced COntent" wechseln!!!
 - Tab Operatingsystem: Architecture: x86_64
-- Tab Operatingsystem: Operating System: CentOS_Linux_7
-- Tab Operatingsystem: Media: my reo mirror
+- Tab Operatingsystem: Operating System: CentOS-7
+- Tab Operatingsystem: Media Selection: All Media
+- Tab Operatingsystem: Synced Content: CentOS Katello
 - Tab Operatingsystem: Partition Table: Kickstart Default
+- Tab Operatingsystem: PXE Loader: PXELinux BIOS
 - Tab Operatingsystem: Root passwort: setzen
 
 - Tab Location: Default Location auswaehlen
 
 Submit
-
+i
+Hostgruppe auswaehlen und im Tab Operatingsystem Media Selection auf "Synced Content" und Synced Content auf "os_x86_64" aendern.
 
 
 ## Host erzeugen in VirtualBox
@@ -355,10 +457,4 @@ Wenn das Foreman Client Repo eingebunden ist, kann das katello-agent Paket insta
 
 Weitere Informationen: https://theforeman.org/plugins/katello/3.14/installation/clients.html#manual
 
-# Debian Repositories
-
-Debian Repositories werden anders behandet.
-Hier muss zuerst ein Produkt und beim Repository eine URL angegeben werden.
-
-Zusätzlich muss die Distribution und Komponente sowie Architektur angegeben werden.
 
