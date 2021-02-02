@@ -307,6 +307,24 @@ Katello Login -> Content -> Content Views
 
 Content Views koennen versioniert werden und man kann neue Versionen ueber das Webinterface erzeugen.
 
+Content Views -> Create Content View
+
+Name: Katello Client
+
+Repo hinzufuegen:
+
+Yum Content -> Repositories -> Add
+
+`el7 x86_64` auswaehlen
+
+Add Repositories
+
+Jetzt kann eine neue Version der COntent View erzeugt werden: "Publish New Version"
+
+Save
+
+Bevor wir diese Content View "promoten" koennen muessen wir die Lifecycle Environments erzeugen.
+
 ## Lifecycle Environments
 
 Mit Lifecycle Environments verwaltet man Content Views (hinzufuegen, promoten, entfernen).
@@ -316,10 +334,33 @@ z.B. Production, Testing, Pre-Prod
 
 Ueber die Content Views kann man nun Content an ein Lifecycle Environment "promoten".
 
+Content -> Lifecycle -> Lifecycle Environments -> Create Environment Path
+
+Name: Production
+
+Save
+
 ## Alles zusammen bringen
 
-Wenn man einen Host oder eine Hostegruppe anlegt, kann man das Liefecycle Environment mit angeben.
-Damit kann man festlegen, welche Hosts oder Hostgruppen, welche Repositories zugeweisen bekommen sollen.
+Eine Content View Version kann man an ein Lifecycle Environmetn verknuepfen:
+
+Content -> Content Views -> Katello Client -> Promote
+
+Lifecycle Environment(s) auswaehlen (hier: Production)
+
+Bevor wir nun einen Host an diese Lifecycle Environment anbinden koennen brauchen wir einen Activation Key oder muessen uns mit User/Password am Katello Server authentifizieren.
+
+Wir machen das mit einem Activation Key:
+
+### Activation Key
+
+Content -> Lifecycle -> Activation Keys -> Create Activation Key
+
+Name: Katello-Client
+Environment: Production auswaehlen
+Content View: Katello Client auswaehlen
+
+Save
 
 ## Content Hosts
 
@@ -330,8 +371,9 @@ Hier wird bei "Subscription Status" ein Rotes Kreuz stehen.
 Auf dem Katello Server (als Root User):
 
     curl --insecure --output katello-ca-consumer-latest.noarch.rpm https://katello.example42.training/pub/katello-ca-consumer-latest.noarch.rpm
-    yum localinstall katello-ca-consumer-latest.noarch.rpm
-    subscription-manager register --org="Default_Organization" --activationkey="Production Activation Key"
+    yum localinstall -y katello-ca-consumer-latest.noarch.rpm
+    subscription-manager register --org="Default_Organization" --activationkey="Katello Client"
+    subscription-manager list --available
     yum install -y katello-agent
 
 ACHTUNG: in Katello 4 wird von katello-agent auf Remote Execution gewechselt!!
@@ -396,7 +438,7 @@ Katello Login -> Infrastructure -> Subnets -> Create Subnet
 
 Submit
 
-## lokalen Repo Mirror bekannt machen
+## lokalen Repo Mirror bekannt machen (nur wenn man das CentOS Repository als COntent erzeugt hat.)
 
 Katello Login -> Hosts -> Installation Media -> Create Installation Medium
 
@@ -462,11 +504,14 @@ Katello Login -> Configure -> Host Groups -> Create Host Group
 - Tab Network: Domain: example42.training
 - Tab Network: IPv4 Subnet: example42.training
 
-Katello Bug!!!! Erst "All media" auswaehlen und speichern, danach kann man auf "Synced COntent" wechseln!!!
+Das geht nur, wenn man das CentOS Repository als Content erzeugt hat. Alternativ Upstream Mirror angeben.
+
+Katello Bug!!!! Erst "All media" auswaehlen und speichern, danach kann man auf "Synced Content" wechseln!!!
 - Tab Operatingsystem: Architecture: x86_64
 - Tab Operatingsystem: Operating System: CentOS-7
 - Tab Operatingsystem: Media Selection: All Media
 - Tab Operatingsystem: Synced Content: CentOS Katello
+
 - Tab Operatingsystem: Partition Table: Kickstart Default
 - Tab Operatingsystem: PXE Loader: PXELinux BIOS
 - Tab Operatingsystem: Root passwort: setzen
@@ -474,7 +519,9 @@ Katello Bug!!!! Erst "All media" auswaehlen und speichern, danach kann man auf "
 - Tab Location: Default Location auswaehlen
 
 Submit
-i
+
+Nur wenn CentOS als COntent erzeugt wurde:
+
 Hostgruppe auswaehlen und im Tab Operatingsystem Media Selection auf "Synced Content" und Synced Content auf "os_x86_64" aendern.
 
 
