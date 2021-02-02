@@ -95,7 +95,20 @@ Diese können ignoriert werden.
 
 Als nächstes muss die Namensauflösung geprüft werden: `ping -c1 heise.de`
 
-Wenn das Kommando keine IP zurückliefert, muss in `/etc/named.conf` der Forwarder Eintrag geprüft und passend gesetzt werden. Nach der Änderung an `/etc/named.conf`muss der DNS Service neu gestartet werden: `sysctl restart named`
+Wenn das Kommando keine IP zurückliefert, muss in `/etc/named.conf` der Forwarder Eintrag geprüft und passend gesetzt werden.
+
+z.B.
+
+    options {
+      listen-on port 53 { any; };
+      directory       "/var/named";
+      allow-query     { any; };
+      dnssec-enable   no;
+      forwarders      { 8.8.8.8; };	<- Anpassen z.B. auf Google DNS Server
+    };
+    ...
+
+Nach der Änderung an `/etc/named.conf`muss der DNS Service neu gestartet werden: `sysctl restart named`
 
 ## Login in Katello
 
