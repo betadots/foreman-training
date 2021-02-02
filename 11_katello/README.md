@@ -108,7 +108,7 @@ z.B.
     };
     ...
 
-Nach der Änderung an `/etc/named.conf`muss der DNS Service neu gestartet werden: `sysctl restart named`
+Nach der Änderung an `/etc/named.conf`muss der DNS Service neu gestartet werden: `systemctl restart named`
 
 ## Login in Katello
 
