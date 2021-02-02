@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "Yum update"
-sudo yum update
+sudo yum update -y
 
 echo "Installing Repo Packages"
 echo "Puppet 6"
