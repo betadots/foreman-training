@@ -80,6 +80,11 @@ Nach einiger Zeit kommt eine Abschlussmeldung:
       * Foreman Proxy is running at https://katello.example42.training:9090
       The full log is at /var/log/foreman-installer/katello.log
 
+Falls man diese Ausgabe nicht gesichert hat und das Passwort verloren hat, kann man das initiale Passwort aus der Answer-Datei auslesen:
+
+    grep initial_admin_password /etc/foreman-installer/scenarios.d/katello-answers.yaml
+      initial_admin_password: sTExyUd2ThWVKWJP
+
 ## Katello Dienste konfigurieren:
 
     puppet apply /vagrant_foreman/scripts/00_router_config.pp
