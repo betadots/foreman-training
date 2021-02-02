@@ -137,6 +137,10 @@ Save
 
 Wiederholen fuer PostgreSQL GPG Key mit https://download.postgresql.org/pub/repos/yum/RPM-GPG-KEY-PGDG-11
 
+Wiederholen fuer Foreman Client: https://theforeman.org/static/keys/643253F71B82B1BEAF2E1D4FA439BD55AC2AD9F1.pub
+
+Wiederholen für Debian 10: https://ftp-master.debian.org/keys/archive-key-10.asc
+
 #### Repository anlegen
 
 ACHTUNG: Das Anlegen von lokalen Repositories benoetigt viel Plattenplatz und viel Bandbreite.
@@ -144,6 +148,8 @@ Diese Schritte sollten nur gemacht werden, wenn man:
 
 - eine schnelle Internetanbindung hat (min 50 MBit)
 - genug Plattenplatz verfuegbar ist (min 20 GB)
+
+Idealerweise legen die Teilnehmer nur das "kleine" Foreman Client Repository an.
 
 #### Repository anlegen - klein (1 GB - Dauer: ca 5-10 Minuten)
 
@@ -156,6 +162,16 @@ URL: https://yum.theforeman.org/client/2.3
 Click Discover
 
 `/el-7/x86_64` auswaehlen
+
+Klick: Create selected
+
+Name: Foreman Client 2.3
+
+GPG Key: aus Liste auswaehlen
+
+Verify SSL: nur aktivieren, wenn man eine eigen CA verwendet. Ansonsten muss die Self-signed CA und das Katello HTTPS Zertifikat allen Systemen bekannt gemacht werden.
+
+Run Repository Creation
 
 #### Repository anlegen - gross (20 GB - Dauer: ca 1 Stunde)
 
@@ -182,18 +198,23 @@ Verify SSL: nur aktivieren, wenn man eine eigen CA verwendet. Ansonsten muss die
 
 Run Repository Creation
 
-### Debian
+### Debian - gross (min 30GB - Dauer: ca 3 Stunden)
+
+ACHTUNG: das Debian Repository ist zu gross fuer die Training VM!!!!
+Der Sync bricht ab mit `no space left on device`!
 
 Debian Repositories werden anders behandet.
 Hier muss zuerst ein Produkt und beim Repository eine URL angegeben werden.
 
 Zusätzlich muss die Distribution und Komponente sowie Architektur angegeben werden.
 
-Content -> Producst -> Create Product
+Content -> Product -> Create Product
 
 Name angeben -> Save
 
 In der Uebersicht: "New Repository" auswaehlen.
+
+Name angeben: Debian 10
 
 Bei "Type" `deb` auswaehlen und die Repo Informationen eintragen:
 
@@ -204,6 +225,37 @@ Release: stable/unstable/buster, ...
 Componentes: main, free, non-free, ...
 
 Architectures: amd64, arm, i386, ...
+
+Verify SSL: aus
+
+Mirror on Sync: an
+
+Publish via HTTP: an
+
+GPG Key: NICHT auswaehlen, der oben erzeugte GPG Key schoen verkehrt zu sein.
+
+Save
+
+### SLES
+
+Fuer SLES gibt es 2 Wege:
+
+1. mit einem SMT Server
+2. SCCM Plugin
+
+Weitere Details findet man auf der Webseite von Foreman: https://theforeman.org/plugins/katello/nightly/user_guide/suse_content/index.html
+
+Wir beschreiben den Weg mit SCCM Plugin.
+Wenn SMT Server genutzt wird, dann wird ein normales Repository angelegt.
+
+#### SCCM Plugin
+
+Installation: `yum install -y tfm-rubygem-foreman_scc_manager`
+Datenbank aktualisieren: `foreman-rake db:migrate`
+Neustart Foreman: `systemctl restart foreman`
+
+Nun hat man unter COntent einen neuen Eintrag: SuSE Subscription
+Hier kann man einen SCCM Account angeben.
 
 
 ### Repositories Syncen
@@ -279,7 +331,7 @@ Auf dem Katello Server (als Root User):
 
     curl --insecure --output katello-ca-consumer-latest.noarch.rpm https://katello.example42.training/pub/katello-ca-consumer-latest.noarch.rpm
     yum localinstall katello-ca-consumer-latest.noarch.rpm
-    subscription-manager register --org="Default_Organization" --activationkey="Productoin Activation Key"
+    subscription-manager register --org="Default_Organization" --activationkey="Production Activation Key"
     yum install -y katello-agent
 
 ACHTUNG: in Katello 4 wird von katello-agent auf Remote Execution gewechselt!!
