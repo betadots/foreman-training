@@ -4,7 +4,7 @@
 
 Unbedingt pruefen, ob die Host-only Netzwerke einen DHCP Server aktiviert haben !!
 
-VirtualBox -> Datei -> Einstellungen -> Netzwerk -> Host-Only Netzwerk -> DHCP Server
+VirtualBox -> Datei -> Host-Only Netzwerk -> DHCP Server
 
 Wenn der Host-Only DHCP Server aktiv ist: deaktivieren.
 Wenn im DHCP Server Daten hinterlegt sind, diese bitte durch '0.0.0.0' ersetzen (auch wenn man DHCP danach ausschaltet.
