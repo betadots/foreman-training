@@ -378,7 +378,7 @@ Auf dem Katello Server (als Root User):
 
     curl --insecure --output katello-ca-consumer-latest.noarch.rpm https://katello.example42.training/pub/katello-ca-consumer-latest.noarch.rpm
     yum localinstall -y katello-ca-consumer-latest.noarch.rpm
-    subscription-manager register --org="Default_Organization" --activationkey="Katello Client"
+    subscription-manager register --org="Default_Organization" --activationkey="Katello-Client"
     subscription-manager list --available
     yum install -y katello-agent
 
