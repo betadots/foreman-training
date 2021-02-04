@@ -194,7 +194,7 @@ Name: CentOS7
 
 GPG Key: aus Liste auswaehlen
 
-Verify SSL: nur aktivieren, wenn man eine eigen CA verwendet. Ansonsten muss die Self-signed CA und das Katello HTTPS Zertifikat allen Systemen bekannt gemacht werden.
+Verify SSL: nur aktivieren, wenn man upstream SSL pruefen moechte.
 
 Run Repository Creation
 

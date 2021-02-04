@@ -32,5 +32,5 @@ Beispiel Ausgabe:
 
 6. Login: `vagrant ssh <vm name>`
 
-
+7. Reprovisionieren: `vagrant reload --provision <vm name>`
 
