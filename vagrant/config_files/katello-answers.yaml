@@ -1,0 +1,676 @@
+# Format:
+# <classname>: false - don't include this class
+# <classname>: true - include and use the defaults
+# <classname>:
+#   <param>: <value> - include and override the default(s)
+#
+# See params.pp in each class for what options are available
+
+---
+certs:
+  log_dir: "/var/log/certs"
+  node_fqdn: katello.example42.training
+  cname: []
+  generate: true
+  regenerate: false
+  deploy: true
+  ca_common_name: katello.example42.training
+  country: US
+  state: North Carolina
+  city: Raleigh
+  org: Katello
+  org_unit: SomeOrgUnit
+  expiration: '7300'
+  ca_expiration: '36500'
+  server_cert:
+  server_key:
+  server_cert_req:
+  server_ca_cert:
+  pki_dir: "/etc/pki/katello"
+  ssl_build_dir: "/root/ssl-build"
+  user: root
+  group: foreman
+  default_ca_name: katello-default-ca
+  server_ca_name: katello-server-ca
+  tar_file:
+foreman:
+  foreman_url: https://katello.example42.training
+  unattended: true
+  unattended_url:
+  apache: true
+  passenger: false
+  passenger_ruby: "/usr/bin/tfm-ruby"
+  passenger_ruby_package: tfm-rubygem-passenger-native
+  plugin_prefix: tfm-rubygem-foreman_
+  servername: katello.example42.training
+  serveraliases:
+  - foreman
+  ssl: true
+  version: present
+  plugin_version: present
+  db_manage: true
+  db_host:
+  db_port:
+  db_database:
+  db_username: foreman
+  db_password: tZMixJtBYsmCmN7oLfvEeYKcA3jSYHDM
+  db_sslmode:
+  db_root_cert:
+  db_pool: 5
+  db_manage_rake: true
+  app_root: "/usr/share/foreman"
+  manage_user: true
+  user: foreman
+  group: foreman
+  user_groups: []
+  rails_env: production
+  vhost_priority: '05'
+  server_port: 80
+  server_ssl_port: 443
+  server_ssl_ca: "/etc/pki/katello/certs/katello-default-ca.crt"
+  server_ssl_chain: "/etc/pki/katello/certs/katello-server-ca.crt"
+  server_ssl_cert: "/etc/pki/katello/certs/katello-apache.crt"
+  server_ssl_certs_dir: ''
+  server_ssl_key: "/etc/pki/katello/private/katello-apache.key"
+  server_ssl_crl: ''
+  server_ssl_protocol:
+  server_ssl_verify_client: optional
+  client_ssl_ca: "/etc/foreman/proxy_ca.pem"
+  client_ssl_cert: "/etc/foreman/client_cert.pem"
+  client_ssl_key: "/etc/foreman/client_key.pem"
+  oauth_active: true
+  oauth_map_users: false
+  oauth_consumer_key: fwyN5eKocmDxAS52W4nuTgXeFiFP5RGT
+  oauth_consumer_secret: yZJvPmFYdufQSSbKQLjtmdw2fYY3VKCw
+  passenger_prestart: true
+  passenger_min_instances: 1
+  passenger_start_timeout: 90
+  initial_admin_username: admin
+  initial_admin_password: 63h7EuVxQhbQ43nb
+  initial_admin_first_name:
+  initial_admin_last_name:
+  initial_admin_email:
+  initial_admin_locale:
+  initial_admin_timezone:
+  initial_organization: Default Organization
+  initial_location: Default Location
+  ipa_authentication: false
+  http_keytab: "/etc/httpd/conf/http.keytab"
+  pam_service: foreman
+  ipa_manage_sssd: true
+  websockets_encrypt: true
+  websockets_ssl_key: "/etc/pki/katello/private/katello-apache.key"
+  websockets_ssl_cert: "/etc/pki/katello/certs/katello-apache.crt"
+  logging_level: info
+  logging_type: file
+  logging_layout: multiline_request_pattern
+  loggers: {}
+  email_delivery_method:
+  email_smtp_address:
+  email_smtp_port: 25
+  email_smtp_domain:
+  email_smtp_authentication: none
+  email_smtp_user_name:
+  email_smtp_password:
+  telemetry_prefix: fm_rails
+  telemetry_prometheus_enabled: false
+  telemetry_statsd_enabled: false
+  telemetry_statsd_host: 127.0.0.1:8125
+  telemetry_statsd_protocol: statsd
+  telemetry_logger_enabled: false
+  telemetry_logger_level: DEBUG
+  dynflow_pool_size: 5
+  jobs_manage_service: true
+  jobs_service_ensure: running
+  jobs_service_enable: true
+  jobs_sidekiq_redis_url:
+  hsts_enabled: true
+  cors_domains: []
+  foreman_service_puma_threads_min: 0
+  foreman_service_puma_threads_max: 16
+  foreman_service_puma_workers: 2
+  rails_cache_store:
+    type: file
+  keycloak: false
+  keycloak_app_name: foreman-openidc
+  keycloak_realm: ssl-realm
+foreman::cli:
+  foreman_url:
+  version: installed
+  manage_root_config: true
+  username:
+  password:
+  refresh_cache: false
+  request_timeout: 120
+  ssl_ca_file:
+  hammer_plugin_prefix: tfm-rubygem-hammer_cli_
+foreman::cli::ansible: {}
+foreman::cli::azure: false
+foreman::cli::discovery: false
+foreman::cli::kubevirt: false
+foreman::cli::openscap: false
+foreman::cli::remote_execution: {}
+foreman::cli::tasks: {}
+foreman::cli::templates: false
+foreman::cli::virt_who_configure: false
+foreman::compute::ec2: false
+foreman::compute::gce: false
+foreman::compute::libvirt: false
+foreman::compute::openstack: false
+foreman::compute::ovirt: false
+foreman::compute::vmware: false
+foreman::plugin::ansible: {}
+foreman::plugin::azure: false
+foreman::plugin::bootdisk: false
+foreman::plugin::chef: false
+foreman::plugin::column_view: false
+foreman::plugin::default_hostgroup: false
+foreman::plugin::digitalocean: false
+foreman::plugin::discovery: false
+foreman::plugin::expire_hosts: false
+foreman::plugin::hooks: false
+foreman::plugin::kubevirt: false
+foreman::plugin::leapp: false
+foreman::plugin::memcache: false
+foreman::plugin::monitoring: false
+foreman::plugin::openscap: false
+foreman::plugin::puppetdb: false
+foreman::plugin::remote_execution: {}
+foreman::plugin::remote_execution::cockpit: false
+foreman::plugin::rh_cloud: false
+foreman::plugin::salt: false
+foreman::plugin::setup: false
+foreman::plugin::snapshot_management: false
+foreman::plugin::statistics: false
+foreman::plugin::tasks:
+  automatic_cleanup: false
+  cron_line: 45 19 * * *
+foreman::plugin::templates: false
+foreman::plugin::virt_who_configure: false
+foreman_proxy:
+  repo:
+  gpgcheck: true
+  version: present
+  ensure_packages_version: present
+  bind_host:
+  - "*"
+  http_port: 8000
+  ssl_port: 9090
+  groups: []
+  log: "/var/log/foreman-proxy/proxy.log"
+  log_level: INFO
+  log_buffer: 2000
+  log_buffer_errors: 1000
+  http: false
+  ssl: true
+  ssl_ca: "/etc/foreman-proxy/ssl_ca.pem"
+  ssl_cert: "/etc/foreman-proxy/ssl_cert.pem"
+  ssl_key: "/etc/foreman-proxy/ssl_key.pem"
+  foreman_ssl_ca: "/etc/foreman-proxy/foreman_ssl_ca.pem"
+  foreman_ssl_cert: "/etc/foreman-proxy/foreman_ssl_cert.pem"
+  foreman_ssl_key: "/etc/foreman-proxy/foreman_ssl_key.pem"
+  trusted_hosts:
+  - katello.example42.training
+  ssl_disabled_ciphers: []
+  tls_disabled_versions: []
+  manage_sudoersd: true
+  use_sudoersd: true
+  use_sudoers: true
+  puppetca: true
+  puppetca_listen_on: https
+  ssldir: "/etc/puppetlabs/puppet/ssl"
+  puppetdir: "/etc/puppetlabs/puppet"
+  puppetca_cmd: "/opt/puppetlabs/bin/puppet cert"
+  puppet_group: puppet
+  puppetca_provider: puppetca_hostname_whitelisting
+  autosignfile: "/etc/puppetlabs/puppet/autosign.conf"
+  puppetca_sign_all: false
+  puppetca_tokens_file: "/var/lib/foreman-proxy/tokens.yml"
+  puppetca_token_ttl: 360
+  puppetca_certificate:
+  manage_puppet_group: false
+  puppet: true
+  puppet_listen_on: https
+  puppet_url: https://katello.example42.training:8140
+  puppet_ssl_ca: "/etc/puppetlabs/puppet/ssl/certs/ca.pem"
+  puppet_ssl_cert: "/etc/puppetlabs/puppet/ssl/certs/katello.example42.training.pem"
+  puppet_ssl_key: "/etc/puppetlabs/puppet/ssl/private_keys/katello.example42.training.pem"
+  puppet_api_timeout: 30
+  templates: false
+  templates_listen_on: both
+  template_url: http://katello.example42.training:8000
+  registration: true
+  registration_listen_on: https
+  logs: true
+  logs_listen_on: https
+  httpboot:
+  httpboot_listen_on: both
+  tftp: false
+  tftp_listen_on: https
+  tftp_managed: true
+  tftp_manage_wget: true
+  tftp_syslinux_filenames:
+  - "/usr/share/syslinux/chain.c32"
+  - "/usr/share/syslinux/mboot.c32"
+  - "/usr/share/syslinux/menu.c32"
+  - "/usr/share/syslinux/memdisk"
+  - "/usr/share/syslinux/pxelinux.0"
+  tftp_root: "/var/lib/tftpboot"
+  tftp_dirs:
+  - "/var/lib/tftpboot/pxelinux.cfg"
+  - "/var/lib/tftpboot/grub"
+  - "/var/lib/tftpboot/grub2"
+  - "/var/lib/tftpboot/boot"
+  - "/var/lib/tftpboot/ztp.cfg"
+  - "/var/lib/tftpboot/poap.cfg"
+  tftp_servername:
+  tftp_replace_grub2_cfg: false
+  dhcp: false
+  dhcp_listen_on: https
+  dhcp_managed: true
+  dhcp_provider: isc
+  dhcp_subnets: []
+  dhcp_option_domain:
+  - example42.training
+  dhcp_search_domains:
+  dhcp_interface: eth0
+  dhcp_additional_interfaces: []
+  dhcp_gateway:
+  dhcp_range:
+  dhcp_pxeserver:
+  dhcp_pxefilename: pxelinux.0
+  dhcp_network:
+  dhcp_netmask:
+  dhcp_nameservers: default
+  dhcp_server: 127.0.0.1
+  dhcp_config: "/etc/dhcp/dhcpd.conf"
+  dhcp_leases: "/var/lib/dhcpd/dhcpd.leases"
+  dhcp_key_name:
+  dhcp_key_secret:
+  dhcp_omapi_port: 7911
+  dhcp_peer_address:
+  dhcp_node_type: standalone
+  dhcp_failover_address: 10.0.2.15
+  dhcp_failover_port: 519
+  dhcp_max_response_delay: 30
+  dhcp_max_unacked_updates: 10
+  dhcp_mclt: 300
+  dhcp_load_split: 255
+  dhcp_load_balance: 3
+  dhcp_manage_acls: true
+  dns: false
+  dns_listen_on: https
+  dns_managed: true
+  dns_provider: nsupdate
+  dns_interface: eth0
+  dns_zone: example42.training
+  dns_reverse:
+  dns_server: 127.0.0.1
+  dns_ttl: 86400
+  dns_tsig_keytab: "/etc/foreman-proxy/dns.keytab"
+  dns_tsig_principal: foremanproxy/katello.example42.training@EXAMPLE42.TRAINING
+  dns_forwarders: []
+  libvirt_network: default
+  libvirt_connection: qemu:///system
+  bmc: false
+  bmc_listen_on: https
+  bmc_default_provider: ipmitool
+  bmc_ssh_user: root
+  bmc_ssh_key: "/usr/share/foreman/.ssh/id_rsa"
+  bmc_ssh_powerstatus: 'true'
+  bmc_ssh_powercycle: shutdown -r +1
+  bmc_ssh_poweroff: shutdown +1
+  bmc_ssh_poweron: 'false'
+  realm: false
+  realm_listen_on: https
+  realm_provider: freeipa
+  realm_keytab: "/etc/foreman-proxy/freeipa.keytab"
+  realm_principal: realm-proxy@EXAMPLE.COM
+  freeipa_config: "/etc/ipa/default.conf"
+  freeipa_remove_dns: true
+  keyfile: "/etc/rndc.key"
+  register_in_foreman: true
+  foreman_base_url: https://katello.example42.training
+  registered_name: katello.example42.training
+  registered_proxy_url:
+  oauth_effective_user: admin
+  oauth_consumer_key: fwyN5eKocmDxAS52W4nuTgXeFiFP5RGT
+  oauth_consumer_secret: yZJvPmFYdufQSSbKQLjtmdw2fYY3VKCw
+foreman_proxy_content:
+  parent_fqdn: katello.example42.training
+  pulp_admin_password: Vfufvqqjpw9dtK7gpcXsecKRsZpik88H
+  pulp_max_speed:
+  pulp_num_workers:
+  pulp_proxy_password:
+  pulp_proxy_port:
+  pulp_proxy_url:
+  pulp_proxy_username:
+  pulp_puppet_wsgi_processes: 1
+  pulp_ca_cert:
+  pulp_worker_timeout: 60
+  puppet: true
+  reverse_proxy: false
+  reverse_proxy_port: 8443
+  ssl_protocol:
+  qpid_router: true
+  qpid_router_hub_addr:
+  qpid_router_hub_port: 5646
+  qpid_router_agent_addr:
+  qpid_router_agent_port: 5647
+  qpid_router_broker_addr: localhost
+  qpid_router_broker_port: 5671
+  qpid_router_logging_level: info+
+  qpid_router_logging: syslog
+  qpid_router_logging_path: "/var/log/qdrouterd"
+  qpid_router_ssl_ciphers:
+  qpid_router_ssl_protocols:
+  qpid_router_sasl_mech: PLAIN
+  qpid_router_sasl_username: katello_agent
+  qpid_router_sasl_password: NrokTFyPMwi6PAvD
+  enable_ostree: false
+  enable_yum: true
+  enable_file: true
+  proxy_pulp_deb_to_pulpcore: true
+  proxy_pulp_isos_to_pulpcore: true
+  proxy_pulp_yum_to_pulpcore: true
+  enable_puppet: true
+  enable_docker: true
+  enable_deb: true
+  manage_broker: true
+  pulpcore_manage_postgresql: true
+  pulpcore_postgresql_host: localhost
+  pulpcore_postgresql_port: 5432
+  pulpcore_postgresql_user: pulp
+  pulpcore_postgresql_password: BUsxv2HPybfVRssLzUPwq6cYajsU27t5
+  pulpcore_postgresql_db_name: pulpcore
+  pulpcore_postgresql_ssl: false
+  pulpcore_postgresql_ssl_require: true
+  pulpcore_postgresql_ssl_cert: "/etc/pki/katello/certs/pulpcore-database.crt"
+  pulpcore_postgresql_ssl_key: "/etc/pki/katello/private/pulpcore-database.key"
+  pulpcore_postgresql_ssl_root_ca: "/etc/pki/tls/certs/ca-bundle.crt"
+  pulpcore_worker_count: 8
+foreman_proxy::plugin::ansible:
+  enabled: true
+  listen_on: https
+  ansible_dir: "/usr/share/foreman-proxy"
+  working_dir: "/tmp"
+  host_key_checking: false
+  stdout_callback: yaml
+  roles_path:
+  - "/etc/ansible/roles"
+  - "/usr/share/ansible/roles"
+  ssh_args: "-o ProxyCommand=none -C -o ControlMaster=auto -o ControlPersist=60s"
+  install_runner: true
+  manage_runner_repo: true
+foreman_proxy::plugin::chef: false
+foreman_proxy::plugin::dhcp::infoblox: false
+foreman_proxy::plugin::dhcp::remote_isc: false
+foreman_proxy::plugin::discovery: false
+foreman_proxy::plugin::dns::infoblox: false
+foreman_proxy::plugin::monitoring: false
+foreman_proxy::plugin::openscap: false
+foreman_proxy::plugin::pulp:
+  enabled: true
+  listen_on: https
+  pulpnode_enabled: false
+  pulpcore_enabled: true
+  pulpcore_api_url: https://katello.example42.training
+  pulpcore_content_url: https://katello.example42.training/pulp/content
+  pulpcore_mirror: false
+  version:
+  pulp_url: https://katello.example42.training/pulp
+  pulp_dir: "/var/lib/pulp"
+  pulp_content_dir: "/var/lib/pulp/content"
+  puppet_content_dir:
+  mongodb_dir: "/var/lib/mongodb"
+foreman_proxy::plugin::remote_execution::ssh:
+  enabled: true
+  listen_on: https
+  generate_keys: true
+  install_key: false
+  ssh_identity_dir: "/var/lib/foreman-proxy/ssh"
+  ssh_identity_file: id_rsa_foreman_proxy
+  ssh_keygen: "/usr/bin/ssh-keygen"
+  local_working_dir: "/var/tmp"
+  remote_working_dir: "/var/tmp"
+  ssh_kerberos_auth: false
+  async_ssh: false
+foreman_proxy::plugin::salt: false
+katello:
+  candlepin_oauth_key:
+  candlepin_oauth_secret:
+  rest_client_timeout: 3600
+  qpid_wcache_page_size: 4
+  qpid_interface: lo
+  qpid_hostname: localhost
+  num_pulp_workers:
+  pulp_worker_timeout: 60
+  pulp_max_speed:
+  enable_ostree: false
+  enable_yum: true
+  enable_file: true
+  enable_puppet: true
+  enable_docker: true
+  enable_deb: true
+  use_pulp_2_for_file: false
+  use_pulp_2_for_docker: false
+  use_pulp_2_for_yum: false
+  use_pulp_2_for_deb: false
+  repo_export_dir: "/var/lib/pulp/katello-export"
+  candlepin_db_host: localhost
+  candlepin_db_port:
+  candlepin_db_name: candlepin
+  candlepin_db_user: candlepin
+  candlepin_db_password:
+  candlepin_db_ssl: false
+  candlepin_db_ssl_verify: true
+  candlepin_manage_db: true
+  pulp_db_name: pulp_database
+  pulp_db_seeds: localhost:27017
+  pulp_db_username:
+  pulp_db_password:
+  pulp_db_replica_set:
+  pulp_db_ssl: false
+  pulp_db_ssl_keyfile:
+  pulp_db_ssl_certfile:
+  pulp_db_verify_ssl: true
+  pulp_db_ca_path: "/etc/pki/tls/certs/ca-bundle.crt"
+  pulp_db_unsafe_autoretry: false
+  pulp_db_write_concern:
+  pulp_manage_db: true
+puppet:
+  version: present
+  user: puppet
+  group: puppet
+  dir: "/etc/puppetlabs/puppet"
+  codedir: "/etc/puppetlabs/code"
+  vardir: "/opt/puppetlabs/puppet/cache"
+  logdir: "/var/log/puppetlabs/puppet"
+  rundir: "/var/run/puppetlabs"
+  ssldir: "/etc/puppetlabs/puppet/ssl"
+  sharedir: "/opt/puppetlabs/puppet"
+  manage_packages: true
+  dir_owner: root
+  dir_group:
+  package_provider:
+  package_source:
+  port: 8140
+  pluginsync: true
+  splay: false
+  splaylimit: 1800
+  autosign: "/etc/puppetlabs/puppet/autosign.conf"
+  autosign_entries: []
+  autosign_mode: '0664'
+  autosign_content:
+  autosign_source:
+  runinterval: 1800
+  usecacheonfailure: true
+  runmode: service
+  run_hour:
+  run_minute:
+  unavailable_runmodes: []
+  cron_cmd:
+  systemd_cmd:
+  systemd_randomizeddelaysec: 0
+  agent_noop: false
+  show_diff: false
+  module_repository:
+  http_connect_timeout:
+  http_read_timeout:
+  ca_server:
+  ca_port:
+  ca_crl_filepath:
+  prerun_command:
+  postrun_command:
+  dns_alt_names: []
+  use_srv_records: false
+  srv_domain: example42.training
+  pluginsource: puppet:///plugins
+  pluginfactsource: puppet:///pluginfacts
+  additional_settings: {}
+  agent_additional_settings: {}
+  agent_restart_command: "/usr/bin/systemctl reload-or-restart puppet"
+  classfile: "$statedir/classes.txt"
+  hiera_config: "$confdir/hiera.yaml"
+  auth_template: puppet/auth.conf.erb
+  allow_any_crl_auth: false
+  auth_allowed:
+  - "$1"
+  client_package:
+  - puppet-agent
+  agent: true
+  remove_lock: true
+  report: true
+  client_certname: katello.example42.training
+  puppetmaster:
+  systemd_unit_name: puppet-run
+  service_name: puppet
+  syslogfacility:
+  environment: production
+  server: true
+  server_admin_api_whitelist:
+  - localhost
+  - katello.example42.training
+  server_manage_user: true
+  server_user: puppet
+  server_group: puppet
+  server_dir: "/etc/puppetlabs/puppet"
+  server_ip: 0.0.0.0
+  server_port: 8140
+  server_ca: true
+  server_ca_crl_sync: false
+  server_crl_enable:
+  server_ca_auth_required: true
+  server_ca_client_self_delete: false
+  server_ca_client_whitelist:
+  - localhost
+  - katello.example42.training
+  server_custom_trusted_oid_mapping:
+  server_http: false
+  server_http_port: 8139
+  server_reports: foreman
+  server_puppetserver_dir: "/etc/puppetlabs/puppetserver"
+  server_puppetserver_vardir: "/opt/puppetlabs/server/data/puppetserver"
+  server_puppetserver_rundir: "/var/run/puppetlabs/puppetserver"
+  server_puppetserver_logdir: "/var/log/puppetlabs/puppetserver"
+  server_puppetserver_version:
+  server_external_nodes: "/etc/puppetlabs/puppet/node.rb"
+  server_trusted_external_command:
+  server_cipher_suites:
+  - TLS_DHE_RSA_WITH_AES_128_GCM_SHA256
+  - TLS_DHE_RSA_WITH_AES_256_GCM_SHA384
+  - TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+  - TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+  - TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+  - TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+  server_config_version:
+  server_connect_timeout: 120000
+  server_git_repo: false
+  server_default_manifest: false
+  server_default_manifest_path: "/etc/puppet/manifests/default_manifest.pp"
+  server_default_manifest_content: ''
+  server_environments_owner: apache
+  server_environments_group:
+  server_environments_mode: '0755'
+  server_envs_dir: "/etc/puppetlabs/code/environments"
+  server_envs_target:
+  server_common_modules_path:
+  - "/etc/puppetlabs/code/environments/common"
+  - "/etc/puppetlabs/code/modules"
+  - "/opt/puppetlabs/puppet/modules"
+  - "/usr/share/puppet/modules"
+  server_git_repo_mode: '0755'
+  server_git_repo_path: "/opt/puppetlabs/puppet/cache/puppet.git"
+  server_git_repo_group: puppet
+  server_git_repo_user: puppet
+  server_git_branch_map: {}
+  server_idle_timeout: 1200000
+  server_post_hook_content: puppet/server/post-receive.erb
+  server_post_hook_name: post-receive
+  server_storeconfigs: false
+  server_ruby_load_paths:
+  - "/opt/puppetlabs/puppet/lib/ruby/vendor_ruby"
+  server_ssl_dir: "/etc/puppetlabs/puppet/ssl"
+  server_ssl_dir_manage: true
+  server_ssl_key_manage: true
+  server_ssl_protocols:
+  - TLSv1.2
+  server_ssl_chain_filepath: "/etc/puppetlabs/puppet/ssl/ca/ca_crt.pem"
+  server_package:
+  server_version:
+  server_certname: katello.example42.training
+  server_request_timeout: 60
+  server_strict_variables: false
+  server_additional_settings: {}
+  server_foreman: true
+  server_foreman_url: https://katello.example42.training
+  server_foreman_ssl_ca: "/etc/pki/katello/puppet/puppet_client_ca.crt"
+  server_foreman_ssl_cert: "/etc/pki/katello/puppet/puppet_client.crt"
+  server_foreman_ssl_key: "/etc/pki/katello/puppet/puppet_client.key"
+  server_foreman_facts: true
+  server_puppet_basedir: "/opt/puppetlabs/puppet/lib/ruby/vendor_ruby/puppet"
+  server_parser: current
+  server_environment_timeout:
+  server_jvm_java_bin: "/usr/bin/java"
+  server_jvm_config: "/etc/sysconfig/puppetserver"
+  server_jvm_min_heap_size: 2G
+  server_jvm_max_heap_size: 2G
+  server_jvm_extra_args:
+  server_jvm_cli_args:
+  server_jruby_gem_home: "/opt/puppetlabs/server/data/puppetserver/jruby-gems"
+  server_max_active_instances: 4
+  server_max_requests_per_instance: 0
+  server_max_queued_requests: 0
+  server_max_retry_delay: 1800
+  server_multithreaded: false
+  server_use_legacy_auth_conf: false
+  server_check_for_updates: true
+  server_environment_class_cache_enabled: false
+  server_allow_header_cert_info: false
+  server_web_idle_timeout: 30000
+  server_puppetserver_jruby9k: false
+  server_puppetserver_metrics:
+  server_metrics_jmx_enable: true
+  server_metrics_graphite_enable: false
+  server_metrics_graphite_host: 127.0.0.1
+  server_metrics_graphite_port: 2003
+  server_metrics_server_id: katello.example42.training
+  server_metrics_graphite_interval: 5
+  server_metrics_allowed:
+  server_puppetserver_experimental: true
+  server_puppetserver_auth_template:
+  server_puppetserver_trusted_agents: []
+  server_puppetserver_trusted_certificate_extensions: []
+  server_compile_mode:
+  server_acceptor_threads:
+  server_selector_threads:
+  server_ssl_acceptor_threads:
+  server_ssl_selector_threads:
+  server_max_threads:
+  server_ca_allow_sans: false
+  server_ca_allow_auth_extensions: false
+  server_ca_enable_infra_crl: false
+  server_max_open_files:
+  server_versioned_code_id:
+  server_versioned_code_content:
+
