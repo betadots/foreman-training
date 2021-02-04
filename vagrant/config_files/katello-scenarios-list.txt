@@ -1,0 +1,18 @@
+ls -la /etc/foreman-installer/scenarios.d/
+total 60
+drwxr-xr-x. 2 root root  4096 Feb  3 11:53 .
+drwxr-xr-x. 3 root root    50 Feb  3 11:21 ..
+-rw-r--r--. 1 root root     0 Feb  3 11:53 .installed
+-rw-------. 1 root root  2306 Feb  3 11:21 foreman-answers.yaml
+-rw-r--r--. 1 root root  2395 Feb  3 11:21 foreman-migrations-applied
+-rw-------. 1 root root  1426 Feb  3 11:22 foreman-proxy-content-answers.yaml
+-rw-r--r--. 1 root root   941 Feb  3 11:22 foreman-proxy-content-migrations-applied
+lrwxrwxrwx. 1 root root    68 Feb  3 11:22 foreman-proxy-content.migrations -> /usr/share/foreman-installer/config/foreman-proxy-content.migrations
+-rw-------. 1 root root   907 Feb  3 11:22 foreman-proxy-content.yaml
+lrwxrwxrwx. 1 root root    54 Feb  3 11:21 foreman.migrations -> /usr/share/foreman-installer/config/foreman.migrations
+-rw-------. 1 root root   809 Feb  3 11:21 foreman.yaml
+-rw-------. 1 root root 20571 Feb  3 11:43 katello-answers.yaml
+-rw-r--r--. 1 root root  2082 Feb  3 11:22 katello-migrations-applied
+lrwxrwxrwx. 1 root root    54 Feb  3 11:22 katello.migrations -> /usr/share/foreman-installer/config/katello.migrations
+-rw-------. 1 root root   935 Feb  4 15:08 katello.yaml
+lrwxrwxrwx. 1 root root    12 Feb  3 11:43 last_scenario.yaml -> katello.yaml
