@@ -360,6 +360,8 @@ Name: Katello-Client
 Environment: Production auswaehlen
 Content View: Katello Client auswaehlen
 
+oder: keine Content View angeben und nach dem Erzeugen des Activation Keys unter Subscriptions die gewuenschten Repositories asuwaehlen.
+
 Save
 
 ## Content Hosts
