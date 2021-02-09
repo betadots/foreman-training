@@ -22,7 +22,7 @@ file { '/etc/dhcp/dhcpd.conf':
   notify => Service['dhcpd'],
 }
 service { 'dhcpd':
-  enable => true,
   ensure => running,
+  enable => true,
 }
 

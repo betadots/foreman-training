@@ -1,4 +1,7 @@
+$cfg_base_dir = '/vagrant_foreman/vagrant/config_files'
+
 file { '/etc/sysctl.d/99-router.conf':
+  ensure  => file,
   content => "net.ipv4.ip_forward=1\n",
   notify  => Exec['sysctl reload'],
 }
@@ -7,26 +10,13 @@ exec { 'sysctl reload':
   refreshonly => true,
 }
 
-file { '/etc/gateway_config':
+file { '/etc/sysconfig/iptables':
   ensure => file,
-  notify => [
-    Exec['iptables postrouting'],
-    Exec['iptables forward'],
-    Exec['iptables forward established'],
-  ],
+  source => "${cfg_base_dir}/iptables.sysconfig",
+  notify => Exec['restore iptables'],
 }
 
-exec { 'iptables postrouting':
-  command     => '/sbin/iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE',
-  refreshonly => true,
-}
-
-exec { 'iptables forward':
-  command     => '/sbin/iptables -A FORWARD -i eth1 -j ACCEPT',
-  refreshonly => true,
-}
-
-exec { 'iptables forward established':
-  command     => '/sbin/iptables -A FORWARD -i eth0 -o eth1 -m state --state RELATED,ESTABLISHED -j ACCEPT',
+exec { 'restore iptables':
+  command     => '/bin/cat /etc/sysconfig/iptables | /sbin/iptables-restore',
   refreshonly => true,
 }

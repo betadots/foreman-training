@@ -10,3 +10,9 @@ zone "10.100.10.in-addr.arpa" IN {
         file "foreman_ip";
 };
 
+zone "provision.example42.training" IN {
+        type master;
+        allow-update { key "rndc-key"; };
+        file "foreman_provision_domain";
+};
+
