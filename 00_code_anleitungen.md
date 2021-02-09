@@ -12,12 +12,11 @@ Beispiel Ausgabe:
 
     Current machine states:
 
-    foreman.example42.training not created (virtualbox)
-    katello.example42.training running (virtualbox)
+    foreman.example42.training running (virtualbox)
     docker.example42.training  not created (virtualbox)
     apache.example42.training  not created (virtualbox)
     host.example42.training    not created (virtualbox)
-
+    
     This environment represents multiple VMs. The VMs are all listed
     above with their current state. For more information about a specific
     VM, run `vagrant status NAME`.
@@ -33,4 +32,3 @@ Beispiel Ausgabe:
 6. Login: `vagrant ssh <vm name>`
 
 7. Reprovisionieren: `vagrant reload --provision <vm name>`
-

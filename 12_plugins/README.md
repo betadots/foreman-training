@@ -4,6 +4,7 @@
 
 Einige Erweiterungen sind nicht Bestandteil der allgemeinen Installation.
 
+Eine Uebersicht ueber vorhandene Plugins findet man auf der Webseite von Foreman: https://projects.theforeman.org/projects/foreman/wiki/List_of_Plugins
 
 ### Plugins als Paket:
 
@@ -26,7 +27,7 @@ Vorhandene Plugins anschauen:
 Auf der foreman instanz:
 
     yum install -y tfm-rubygem-foreman_cockpit
-    service httpd restart
+    systemctl restart foreman
 
 Auf allen anderen Systemen:
 
@@ -44,16 +45,14 @@ Foreman-Login -> Hosts -> All Hosts -> foreman.example42.training
 ## DHCP Browser
 
     yum install -y tfm-rubygem-foreman_dhcp_browser
-    service httpd restart
-
+    systemctl restart foreman
 
 ## Remote execution
 
     foreman-installer --enable-foreman-plugin-remote-execution\
                       --enable-foreman-proxy-plugin-remote-execution-ssh
 
-    service httpd restart
-    service foreman-tasks restart
-    service foreman-proxy restart
+    systemctl restart foreman
+    systemctl restart foreman-proxy
 
     ssh-copy-id -i ~foreman-proxy/.ssh/id_rsa_foreman_proxy.pub root@<target>
