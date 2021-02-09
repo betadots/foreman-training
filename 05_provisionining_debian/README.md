@@ -12,13 +12,13 @@ Foreman Login -> Hosts -> Operating System -> Create Operating System
 
 Tab Operating System -> Name: Debian
 
-Tab Operating System -> Major: 9
+Tab Operating System -> Major: 10
 
 Tab Operating System -> Minor: 3
 
-Tab Operating System -> Release Name: stretch (!!!!!)
+Tab Operating System -> Release Name: buster
 
-Tab Operating System -> Description: Debian 9.3
+Tab Operating System -> Description: Debian 10.3
 
 Tab Operating System -> Architecture: x86_64
 
@@ -64,6 +64,8 @@ Achtung: auf Namensaufloesung achten!
 
 Operatingsystem Family angeben!
 
+Wenn man ein Lifecycle Environment nutzen moecht,e kann man dies hier auswaehlen.
+
 ### OS mit Provisionierungs Templates assoziieren
 
 Foreman Login -> Hosts -> Operating Systems
@@ -103,7 +105,7 @@ Interfaces Tab:
   - Mac Adresse eintragen und OK zum speichern
 
 Operating System Tab:
-- Operating System: auswaehlen (Debian 8.3...)
+- Operating System: auswaehlen (Debian 10.3...)
 - Media: Mirror waehlen
 - Partition Table: Preeseed default
 - PXE Loader: PXELinux BIOS
@@ -111,4 +113,4 @@ Submit
 
 ## Host in VirtualBox starten
 
-Weiter mit Teil 4 [CfgMgmt](../04_cfgmgmt)
+Weiter mit Teil 6 [Deprovisionieren](../06_deprovision)

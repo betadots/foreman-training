@@ -6,5 +6,5 @@ Host auswaehlen und "delete"
 
 
 
-Weiter mit Teil 6 [Cloud/Compute](../06_compute_resources)
+Weiter mit Teil 7 [Cloud/Compute](../07_compute_resources)
 

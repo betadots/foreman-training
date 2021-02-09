@@ -1,10 +1,40 @@
-# Foreman Training - Teil 2 - Provisionieren
+# Foreman Training - Teil 4 - Provisionieren CentOS
 
 Das Provisionieren besteht aus:
   - Betriebssystem und -version
   - OS Architektur
   - Installations Medium (Repository Server)
   - Provisionierungstemplates
+
+Zusaetlich lassen wir mit Foreman die Vergabe von IP Adressen (DHCP) und die Namensaufloesung (DNS) verwalten.
+
+## Domain
+
+Foreman Login -> Infrastructure -> Domains -> 'example42.training'
+
+- Tab Domain: DNS domain: 'example42.training'
+- Tab Domain: DNS Proxy: 'foreman.example42.training'
+
+Submit
+
+## Netzwerk
+
+Foreman Login -> Infrastructure -> Subnets -> Create Subnet
+
+- Tab Subnet: Name: example42.training
+- Tab Subnet: Network Address: 10.100.10.0
+- Tab Subnet: Network Prefix: 24
+- Tab Subnet: Gateway Address: 10.100.10.101
+- Tab Subnet: Primary DNS Server: 10.100.10.101
+- Tab Subnet: IPAM: DHCP
+- Tab Subnet: Start of IP Range: 10.100.10.120
+- Tab Subnet: End of IP Range: 10.100.10.240
+
+- Tab Domains: example42.training ausaehlen
+
+- Tab Proxies: foreman.example42.training bei DHCP, TFTP, HTTPBoot und Reverse DNS auswaehlen
+
+Submit
 
 ## Provisioning OS
 
@@ -14,6 +44,7 @@ Das OS mit Version und Architektur der Foreman Instanz ist automatisch hinzugefu
 ## Provisioning Repository Server
 
 Default Repository Server fuer unterschiedliche Betriebssysteme sind bereits standardmaessig angelegt.
+Hier eventuell die Lifecycle Environment Repositories auswaehlen.
 
 ## Provisioning Templates
 
@@ -70,6 +101,16 @@ Wichtig: im Linuxhotel bitte unbedingt den Mirror verwenden: path: `http://cento
 
 Operatingsystem Family angeben!
 
+#### lokalen Repo Mirror bekannt machen (nur wenn man das CentOS Repository als Content erzeugt hat.)
+
+Katello Login -> Hosts -> Installation Media -> Create Installation Medium
+
+- Name: CentOS Katello
+- Path: http://katello.example42.training/pulp/repos/Default_Organization/Library/custom/CentOS7/os_x86_64/
+- Operating System Family: RedHat
+
+Submit
+
 ### OS mit Provisionierungs Templates assoziieren
 
 Foreman Login -> Hosts -> Operating Systems
@@ -92,7 +133,7 @@ Foreman Login -> Configure -> Host Groups -> Create Host Group
 
 Tab Host Group:
 
-- Name: Training
+- Name: Hostgruppe auswaehlen
 
 Die folgenden Eintraege werden nur bei der Verwendung von Puppet benoetigt:
 
@@ -196,5 +237,5 @@ Zur Überprüfung der Installation kann man dann von der Foreman Instanz aus via
     ping -c1 heise.de
 
 
-Weiter geht es mit Teil 3 [Provisionieren von Debian](../03_provisionining_debian)
-Oder mit Teil 4 [CfgMgmt](../04_cfgmgmt)
+Weiter geht es mit Teil 5 [Provisionieren von Debian](../05_provisionining_debian)
+Oder mit Teil 6 [Deprovisionieren](../06_deprovision)

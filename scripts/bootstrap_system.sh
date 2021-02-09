@@ -27,11 +27,9 @@ cat << EOF > /etc/puppetlabs/puppet/puppet.conf
 server = foreman.example42.training
 EOF
 
-echo "first puppet run"
-sudo /opt/puppetlabs/bin/puppet agent --test
-
-echo "Jetzt einloggen, root user werden und puppet agent starten"
-echo "vagrant ssh docker.example42.training"
+echo "Jetzt einloggen und root user werden"
+echo "vagrant ssh <vm name>"
 echo "sudo -i"
+echo "Wenn Puppet genutzt werden soll, kann der Agent gestartet werden:"
 echo "puppet agent --test"
 

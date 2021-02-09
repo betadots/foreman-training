@@ -26,9 +26,9 @@ Erweiterungen installieren:
 
     yum install -y tfm-rubygem-foreman_docker
 
-Nach jeder Plugin Installation httpd service neu starten:
+Nach jeder Plugin Installation Foreman service neu starten:
 
-    service httpd restart
+    systemctl restart foreman
 
 ### Plugins als GEM
 
@@ -71,5 +71,5 @@ Auf docker.example42.training:
     watch docker ps
 
 
-Weiter mit Teil 7 [Hammer CLI](../07_hammer_cli)
+Weiter mit Teil 8 [Integration in Infrastruktur](../08_integration_in_infrastruktur)
 

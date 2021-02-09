@@ -6,5 +6,6 @@
 
 ## existierende Systeme
 
-## DNS delagation
+## DNS delegation
 
+Weiter mit Teil 9 [Hammer CLI](../09_hammer_cli)

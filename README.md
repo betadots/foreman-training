@@ -1,64 +1,69 @@
-# Foreman Training
-(c) 2017 - example42 GmbH
+# Foreman/Katello Training
+(c) 2021 - example42 GmbH
+
+# Hard- und Software Anforderungen
+
+Im Rahmen dieses Trainings werden VM's gestartet. Fuer diese muss genug RAM und CPU und Festplatte vorhanden sein.
+
+Minimale Anforderungen:
+
+- min 4 CPU Cores
+- min 16 GB RAM
+- min 50 GB freien Festplattenplatz
+
+Als Betriebssystem koennen Mac OS oder Linux eingesetzt werden. Mit Windows wurde das Training noch nicht getestet.
+
+Es werden die folgenden Softwarekomponenten genutzt:
+
+- VirtualBox
+- vagrant
+- git
 
 # Inhalt
 
 Tag 1:
 
-Teil 01 - Installation
+01 - Installation
 
-Teil 02 - Provisionierung CentOS - GUI und CLI - gemeinsam
-
-Teil 03 - Provisionierung Debian - selbstaendig
-
-Teil 04 - Konfigurations Management - CLI?
-
-Teil 05 - Deprovisionierung - CLI?
+02 - Content - Pakete, Repositories, Versionierung
 
 Tag 2:
 
-Teil 06 - Verwalten bestehender Systeme
+03 - Konfigurations Management - Puppet/Ansible
 
-Teil 07 - Compute Resources - Docker und Cloud
+04 - Provisionierung CentOS
 
-Teil 08 - Plugins
+05 - Provisionierung Debian
 
-Teil 09 - RBAC und Self Service
+06 - Deprovisionierung
 
-Optionale Erweiterungen:
+07 - Compute Resources - Container, Cloud, VM
 
-Teil 11 - Katello
+Tag 3:
 
-Teil 12 - Integration in bestehende Infrastruktur
+08 - Verwalten bestehender Systeme
 
-Teil 13 - Backup und Recovery
+09 - Hammer CLI
 
-# Vorbereitung:
+10 - Wartung - Backup, Restore, Update
 
-[Vagrant](https://www.vagrantup.com/) installieren und CentOS 7 image lokal ablegen:
+11 - Mandaten, Lokationen, User, Gruppen
 
-    vagrant box add centos/7
+12 - Plugins
 
-    ==> box: Loading metadata for box 'centos/7'
-        box: URL: https://vagrantcloud.com/centos/7
-    This box can work with multiple providers! The providers that it
-    can work with are listed below. Please review the list and choose
-    the provider you will be working with.
-    
-    1) hyperv
-    2) libvirt
-    3) virtualbox
-    4) vmware_desktop
+# Trainings Unterlagen holen
 
-    Enter your choice: 3
-    ==> box: Adding box 'centos/7' (v1905.1) for provider: virtualbox
-        box: Downloading: https://vagrantcloud.com/centos/boxes/7/versions/1905.1/providers/virtualbox.box
-        box: Download redirected to host: cloud.centos.org
-    ==> box: Successfully added box 'centos/7' (v1905.1) for 'virtualbox'!
+Zuerst brauchen wir einen GIT Client. Mit `which git` oder `git --version` prüfen, ob GIT installiert ist.
 
-ACHTUNG: wenn die VirtualBox Erweiterungen noch nicht geladen wurden, dann muss nach dem Anlegen der foreman VM der DHCP Server am Host-only networking deaktiviert und das Linux System neu gebootet werden.
+Wenn nicht: Je nach OS bitte installieren:
 
-Ansonsten erkennt VirtualBox nicht die Änderung am host-only Networking.
+- Debian: `sudo apt-get install git`
+- CentOS: `sudo yum install git`
+
+Nun das GitHub repository auf die Workstation/das Trainingslaptop herunterladen:
+
+    git clone https://github.com/example42/foreman-training
+    cd foreman-training
 
 Weiter geht es mit Teil1: [Installation](01_installation)
 
@@ -67,5 +72,3 @@ Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License
 
 # Contributing
 Contributing to this repository is possible as long as the original author is always referenced.
-
-
