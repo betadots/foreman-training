@@ -27,7 +27,6 @@ Snapshot der VM erzeugen, danach kann Foreman wieder gestartet werden:
 
     systemctl start foreman
 
-
 2. Bare Metall:
 
 Auf Bare Metall reichen Snapshots von einzelnen Filesystemen nicht aus.
@@ -36,7 +35,7 @@ Hier kann man foreman-maintain Erweiterung verwenden:
 
     foreman-maintain backup offline /tmp/backup
 
-Weitere Informationen: https://theforeman.org/plugins/foreman_maintain/0.2/index.html
+Weitere Informationen: [https://theforeman.org/plugins/foreman_maintain/0.2/index.html](https://theforeman.org/plugins/foreman_maintain/0.2/index.html)
 
 ## Restore
 

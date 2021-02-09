@@ -149,5 +149,3 @@ Beispiel:
     wget -q -O /dev/null --no-check-certificate http://foreman.example42.training/unattended/built?token=cd1e1fc5-1881-4c47-8513-405acebe1a1e
     ) 2>&1 | tee /root/install.post.log
     exit 0
-
-

@@ -4,9 +4,9 @@
 
 Einige Erweiterungen sind nicht Bestandteil der allgemeinen Installation.
 
-Eine Uebersicht ueber vorhandene Plugins findet man auf der Webseite von Foreman: https://projects.theforeman.org/projects/foreman/wiki/List_of_Plugins
+Eine Uebersicht ueber vorhandene Plugins findet man auf der Webseite von Foreman: [https://projects.theforeman.org/projects/foreman/wiki/List_of_Plugins](https://projects.theforeman.org/projects/foreman/wiki/List_of_Plugins)
 
-### Plugins als Paket:
+### Plugins als Paket
 
 YUM Repositoriy fuer Plugins aktivieren (wurde durch den Installer bereits erledigt:
 
@@ -20,7 +20,6 @@ YUM Repositoriy fuer Plugins aktivieren (wurde durch den Installer bereits erled
 Vorhandene Plugins anschauen:
 
     yum search tfm-rubygem-foreman
-
 
 ## Cockpit
 

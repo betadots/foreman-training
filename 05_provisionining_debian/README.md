@@ -1,7 +1,7 @@
 # Foreman Training - Teil 3 - Provisionieren Debian
 
 TFTP images werden von folgender URL heruntergeladen:
-http://ftp.debian.org/debian/dists/<release name>/main/installer-amd64/current/images/netboot/debian-installer/amd64/
+http://ftp.debian.org/debian/dists/buster/main/installer-amd64/current/images/netboot/debian-installer/amd64/
 
 Der host wird anhand des Mirrors gesetzt.
 Bei lokalen Mirrorn unbedingt beachten, dass die Installer Images mit gemirrort werden.
@@ -29,7 +29,6 @@ Tab Installation Media -> Debian Mirror
 Achtung: Templates können erst nach dem nächsten Schritt ausgewählt werden!
 
 Submit
-
 
 ### Provisionierungs Templates mit OS Assoziieren
 
@@ -80,8 +79,7 @@ OS auswaehlen
 
 Submit
 
-
-## Host erzeugen in VirtualBox:
+## Host erzeugen in VirtualBox
 
 Hinweis: die Images werden initial in eine RAM Disk geladen. Deshalb benoetigt die VM mindesten 1516 MB RAM.
 
@@ -96,19 +94,23 @@ MAC Adresse notieren
 Foreman Login -> Hosts -> Create Host
 
 Host Tab:
+
 - Name: hostname (ohne Domain)
 - Hostgroup: Provision from foreman
 - Environment: Production (sollte automatisch aus der Hostgroup rausfallen)
 
 Interfaces Tab:
+
 - Edit
   - Mac Adresse eintragen und OK zum speichern
 
 Operating System Tab:
+
 - Operating System: auswaehlen (Debian 10.3...)
 - Media: Mirror waehlen
 - Partition Table: Preeseed default
 - PXE Loader: PXELinux BIOS
+
 Submit
 
 ## Host in VirtualBox starten

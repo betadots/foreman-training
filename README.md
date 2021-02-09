@@ -1,4 +1,6 @@
+
 # Foreman/Katello Training
+
 (c) 2021 - example42 GmbH
 
 # Hard- und Software Anforderungen
@@ -68,7 +70,9 @@ Nun das GitHub repository auf die Workstation/das Trainingslaptop herunterladen:
 Weiter geht es mit Teil1: [Installation](01_installation)
 
 # License
+
 Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License
 
 # Contributing
+
 Contributing to this repository is possible as long as the original author is always referenced.

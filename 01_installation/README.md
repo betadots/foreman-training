@@ -1,8 +1,9 @@
+
 # Foreman Training - Teil 1 - Installation
 
 ## Vagrant Installation
 
-Bitte eine aktuelle Version von Vagrant installieren: https://www.vagrantup.com/downloads
+Bitte eine aktuelle Version von Vagrant installieren: [https://www.vagrantup.com/downloads](https://www.vagrantup.com/downloads)
 Achtung: wenn Vagrant schon installiert ist, dann unbedingt pruefen, ob die Version aktuell ist!
 
 Debian: deb Paket runterladen und installieren: `sudo dpkg -i ~/Downloads/vagrant*.deb`
@@ -10,7 +11,7 @@ CentOS: RPM Paket herunterladen und installieren: `sudo rpm-ihv ~/Downloads/vagr
 
 Falls Vargant vorher schon installiert war, muss man die Plugins reaktivieren: `vagrant plugin expunge --reinstall`
 
-## Vagrant Erweiterungen:
+## Vagrant Erweiterungen
 
 Es werden zwei Vagrant Plugins eingesetzt:
 
@@ -60,6 +61,7 @@ Wenn der Host-Only DHCP Server aktiv ist: deaktivieren.
 Wenn im DHCP Server Daten hinterlegt sind, diese bitte durch '0.0.0.0' ersetzen (auch wenn man DHCP danach ausschaltet.
 
 Wenn man den DHCP Server deaktivieren musste, muss das Linux System neu gestartet werden! Don't ask.
+
 ## VM starten
 
 Jetzt kann die VM instantiiert werden:
@@ -79,6 +81,7 @@ Wenn man am Abend das Laptop auschalten will, muss man die VM vorher sichern (ni
 Am naechsten Tag kann die VM wieder geladen werden:
 
     vagrant resume foreman.example42.training
+
 ## VM pruefen
 
 Pruefen, ob eth1 Interface eine IP hat, ```ip a```. Wenn nein: ```ifup eth1```
@@ -89,7 +92,7 @@ Der Foreman Installer erwartet eine Namensauflösung innerhalb der VM.
 
 In `/etc/hosts` sicherstellen, dass folgender Eintrag weg kommt `127.0.1.1 foreman.example42.training foreman` und folgender Eintrag hinzugefügt wird: `10.100.10.101 foreman.example42.training foreman`
 
-Achtung 2: 
+Achtung 2:
 
 Der Foreman Installer erwartet eine sauber konfigurierte locale: `export LANG=en_US.UTF-8`
 
@@ -171,7 +174,7 @@ z.B. (Auszug)
       directory       "/var/named";
       allow-query     { any; };
       dnssec-enable   no;
-      forwarders      { 8.8.8.8; };	<- Anpassen z.B. auf Google DNS Server
+      forwarders      { 8.8.8.8; }; <- Anpassen z.B. auf Google DNS Server
     };
     ...
 
@@ -181,19 +184,19 @@ Weitermachen, wenn die Namensauflösung funktioniert.
 
 ## Foreman Web Interface
 
-Einloggen als Admin mit dem Brwoser: https://foreman.example42.training
+Einloggen als Admin mit dem Brwoser: [https://foreman.example42.training](https://foreman.example42.training)
 
 # Foreman Smart Proxies
 
 Smart-Proxy ist ein Service, der auf einem System laeuft, welches Infrastruktur Komponenenten bereitstellt.
 Dazu gehoeren zum Beispiel:
 
-  - Repository Server
-  - Puppet Server
-  - Ansible Executor
-  - DHCP Server
-  - TFTP Server
-  - DNS Server
+- Repository Server
+- Puppet Server
+- Ansible Executor
+- DHCP Server
+- TFTP Server
+- DNS Server
 
 Die Einstellungen für Smart Proxies koennen im Webinterface analysiert werden:
 

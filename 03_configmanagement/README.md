@@ -2,6 +2,7 @@
 
 Mit Foreman kann man Konfigurationsmanagement verwalten.
 Es werden die folgenden CfgMgmt unterstuetzt:
+
 - Puppet
 - Ansible
 - Chef
@@ -74,9 +75,10 @@ search:  `puppetclass =  docker and  parameter =  tcp_bind`
 Klick auf tcp_bind
 
 Default behavior:
--  Override: OK
--  Key type: string
--  Default value: `'tcp://0.0.0.0:4243'`
+
+- Override: OK
+- Key type: string
+- Default value: `'tcp://0.0.0.0:4243'`
 
 Submit
 
@@ -110,7 +112,7 @@ Generell gibt es 4 grobe Ansaetze zum Erzeugen von Hostgruppen:
 |                     | *dev/rhel6*/**loghost**  | *acmeweb/backend*/**web-dev** | *Munich/web-qa*/**web-frontend** |
 |                     | **qa**                   | **infra**                     | **Boston**                       |
 
-(Quelle: https://access.redhat.com/documentation/en-us/red_hat_satellite/6.7/html/planning_for_red_hat_satellite/chap-red_hat_satellite-architecture_guide-host_grouping_concepts)
+Quelle: [https://access.redhat.com/documentation/en-us/red_hat_satellite/6.7/html/planning_for_red_hat_satellite/chap-red_hat_satellite-architecture_guide-host_grouping_concepts](https://access.redhat.com/documentation/en-us/red_hat_satellite/6.7/html/planning_for_red_hat_satellite/chap-red_hat_satellite-architecture_guide-host_grouping_concepts)
 
 Alternativ kann man auch die Foreman Locations nutzen. Aktuell haben wir nur eine Default Location
 
@@ -158,14 +160,14 @@ Wichtig: nach Änderungen an der Datei muss der Foreman Service neu gestartet we
 
 ## Facts auf Hosts setzen
 
-### Puppet
+### Puppet Facts
 
 Puppet Facts koennen als YAML oder JSON Datei angegeben werden:
 
     # /etc/puppetlabs/facter/facts.d/foreman_default_hostgroup.yaml
     stage: 'prod'
 
-### Ansible
+### Ansible Facts
 
 Ansible Facts koennen als JSON oder INI Datei angegeben werden:
 
@@ -187,7 +189,7 @@ Beispiel:
       "stage": "prod"
     }
 
-## Puppet Zertifikat signieren:
+## Puppet Zertifikat signieren
 
 Foreman Login -> Infrastructure -> Smart Proxies -> foreman.example42.training
 
@@ -198,7 +200,6 @@ Puppet CA -> Orange Klicken -> Sign
     vagrant ssh docker.example42.training
     sudo -i
     puppet agent --test 
-
 
 ## Apache
 

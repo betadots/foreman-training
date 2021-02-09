@@ -16,15 +16,15 @@ Foreman Login -> Content -> Content Credentials -> Create Content Credential
 
 Name: CentOS7
 
-CentOS GPG Key kopieren vom mirror (http://mirror.centos.org/centos/RPM-GPG-KEY-CentOS-7)
+CentOS GPG Key kopieren vom mirror [http://mirror.centos.org/centos/RPM-GPG-KEY-CentOS-7](http://mirror.centos.org/centos/RPM-GPG-KEY-CentOS-7)
 
 Save
 
-Wiederholen fuer PostgreSQL GPG Key mit https://download.postgresql.org/pub/repos/yum/RPM-GPG-KEY-PGDG-11
+Wiederholen fuer PostgreSQL GPG Key mit [https://download.postgresql.org/pub/repos/yum/RPM-GPG-KEY-PGDG-11](https://download.postgresql.org/pub/repos/yum/RPM-GPG-KEY-PGDG-11)
 
-Wiederholen fuer Foreman Client: https://theforeman.org/static/keys/643253F71B82B1BEAF2E1D4FA439BD55AC2AD9F1.pub
+Wiederholen fuer Foreman Client: [https://theforeman.org/static/keys/643253F71B82B1BEAF2E1D4FA439BD55AC2AD9F1.pub](https://theforeman.org/static/keys/643253F71B82B1BEAF2E1D4FA439BD55AC2AD9F1.pub)
 
-Wiederholen für Debian 10: https://ftp-master.debian.org/keys/archive-key-10.asc
+Wiederholen für Debian 10: [https://ftp-master.debian.org/keys/archive-key-10.asc](https://ftp-master.debian.org/keys/archive-key-10.asc)
 
 ## Repository erzeugen
 
@@ -37,7 +37,6 @@ Diese Schritte sollten nur gemacht werden, wenn man:
 Idealerweise legen die Teilnehmer nur das "kleine" Foreman Client Repository an.
 
 ### Repository anlegen
-
 
 #### Foreman Client Repository - klein (1 GB - Dauer: ca 5-10 Minuten)
 
@@ -131,7 +130,7 @@ Fuer SLES gibt es 2 Wege:
 1. mit einem SMT Server
 2. SCCM Plugin
 
-Weitere Details findet man auf der Webseite von Foreman: https://theforeman.org/plugins/katello/nightly/user_guide/suse_content/index.html
+Weitere Details findet man auf der Webseite von Foreman: [https://theforeman.org/plugins/katello/nightly/user_guide/suse_content/index.html](https://theforeman.org/plugins/katello/nightly/user_guide/suse_content/index.html)
 
 Wir beschreiben den Weg mit SCCM Plugin.
 Wenn SMT Server genutzt wird, dann wird ein normales Repository angelegt.
@@ -197,7 +196,7 @@ Ein Repository auswählen und Klick auf "Add selected"
 
 Foreman Login -> Content -> Sync Status
 
-Repository auswaehlen und sync starten 
+Repository auswaehlen und sync starten
 
 ### Initiales Syncen
 
@@ -290,7 +289,7 @@ Auf dem Foreman Server (als Root User):
     subscription-manager list --available
     yum install -y katello-agent
 
-Weitere Informationen: https://theforeman.org/plugins/katello/3.14/installation/clients.html#manual
+Weitere Informationen: [https://theforeman.org/plugins/katello/3.14/installation/clients.html#manual](https://theforeman.org/plugins/katello/3.14/installation/clients.html#manual)
 
 ACHTUNG: in Katello 4 wird von katello-agent auf Remote Execution gewechselt!!
 

@@ -1,10 +1,11 @@
 # Foreman Training - Teil 4 - Provisionieren CentOS
 
 Das Provisionieren besteht aus:
-  - Betriebssystem und -version
-  - OS Architektur
-  - Installations Medium (Repository Server)
-  - Provisionierungstemplates
+
+- Betriebssystem und -version
+- OS Architektur
+- Installations Medium (Repository Server)
+- Provisionierungstemplates
 
 Zusaetlich lassen wir mit Foreman die Vergabe von IP Adressen (DHCP) und die Namensaufloesung (DNS) verwalten.
 
@@ -52,13 +53,12 @@ Foreman Login -> Hosts -> Provisioning Templates
 
 Templates unterscheiden sich nach Funktionalitaet:
 
-  - PXELinux, PXEGrub, PXEGrub2 : werden auf den TFTP Server deployed
-  - Provision : Kickstart oder Preseed fuer unattended Installation
-  - Finish : Post-Install Scripts
-  - user_data: Post-Install fuer Cloud VMs
-  - Script : generische Skripte
-  - iPXE : {g,i}PXE anstelle von PXE
-
+- PXELinux, PXEGrub, PXEGrub2 : werden auf den TFTP Server deployed
+- Provision : Kickstart oder Preseed fuer unattended Installation
+- Finish : Post-Install Scripts
+- user_data: Post-Install fuer Cloud VMs
+- Script : generische Skripte
+- iPXE : {g,i}PXE anstelle von PXE
 
 Normalerweise werden nur die ersten 3 benoetigt.
 
@@ -157,7 +157,7 @@ Tab Operating System
 - Media: CentOS Mirror (oder den vorher angelegten auswählen)
 - Partition Table: Kickstart
 - PXE Loader: PXELinux BIOS
-- Root Password: <eines setzen>
+- Root Password: 'eines setzen'
 
 Wenn Puppet explizit ausgeschaltet werden soll:
 
@@ -173,7 +173,7 @@ enable-puppetlabs-puppet6-repo: boolean: true
 
 Submit
 
-## Host erzeugen in VirtualBox:
+## Host erzeugen in VirtualBox
 
 Hinweis: die Images werden initial in eine RAM Disk geladen. Deshalb benoetigt die VM mindesten 1516 MB RAM.
 
@@ -192,6 +192,7 @@ Foreman Login -> Hosts -> Create Host
 ACHTUNG: nicht docker als hostname nehmen. Dieser Name wird in Teil 4 verwendet.
 
 Host Tab:
+
 - Name: hostname (ohne Domain)
 - Hostgroup: Training
 
@@ -200,6 +201,7 @@ Die folgende Einstellung ist nur vorhanden, wenn man in der Hostgruppe Puppet ak
 - Environment: Production (sollte automatisch aus der Hostgroup rausfallen)
 
 Interfaces Tab:
+
 - Edit
   - Mac Adresse eintragen und OK zum speichern
 
@@ -235,7 +237,6 @@ Zur Überprüfung der Installation kann man dann von der Foreman Instanz aus via
     netstat -rn
     cat /etc/resolv.conf
     ping -c1 heise.de
-
 
 Weiter geht es mit Teil 5 [Provisionieren von Debian](../05_provisionining_debian)
 Oder mit Teil 6 [Deprovisionieren](../06_deprovision)
