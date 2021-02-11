@@ -1,6 +1,9 @@
 
 # Foreman Training - Teil 1 - Installation
 
+Fuer eine Installation auf einer existierenden VM bitte das Dokument [../01_installation_vm](../01_installation_vm) verwenden.
+Achtung: eine so erzeugt VM kann nicht fuer das Training verwendet werden!
+
 ## Vagrant Installation
 
 Bitte eine aktuelle Version von Vagrant installieren: [https://www.vagrantup.com/downloads](https://www.vagrantup.com/downloads)
