@@ -84,7 +84,18 @@ Submit
 
 ### Config Management starten
 
+Achtung: SSH Zugang muss eingerichtet werden fuer dei remote command execution:
+
+    mkdir /root/.ssh
+    cat /var/lib/foreman-proxy/ssh/id_rsa_foreman_proxy.pub >> /root/.ssh/authorized_keys
+
 In der Host Ansicht (Foreman Login -> All Hosts -> Edit) kann man unter "Schedule Remote Job" wahlweise das Starten des Puppet Agent ("Run Puppet Once") oder das Abarbeiten des Ansible Codes ("Run Ansible Roles") starten.
+
+Achtung: wenn man Ansible UND Puppet verwendet, dann muss man Foreman mitteilen, welcher Job fuer Puppet Agent Lauf verwendet werden soll: Ansible oder SSH.
+
+Foireman Login -> Administer -> Remote Execution Features -> puppet_run_host auswaehlen
+
+Job Template: Puppet Run Once - SSH Default auswaehlen.
 
 ## Host Groups
 

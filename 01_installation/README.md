@@ -10,7 +10,7 @@ Bitte eine aktuelle Version von Vagrant installieren: [https://www.vagrantup.com
 Achtung: wenn Vagrant schon installiert ist, dann unbedingt pruefen, ob die Version aktuell ist!
 
 Debian: deb Paket runterladen und installieren: `sudo dpkg -i ~/Downloads/vagrant*.deb`
-CentOS: RPM Paket herunterladen und installieren: `sudo rpm-ihv ~/Downloads/vagrant*.rpm`
+CentOS: RPM Paket herunterladen und installieren: `sudo rpm -ihv ~/Downloads/vagrant*.rpm`
 
 Falls Vargant vorher schon installiert war, muss man die Plugins reaktivieren: `vagrant plugin expunge --reinstall`
 
@@ -121,13 +121,16 @@ Nun Punkt `61 Save and run` auswaehlen.
 Die Installation dauert.
 Nach einiger Zeit kommt eine Abschlussmeldung:
 
-      Success!
+    Upgrade Step 15/15: katello:upgrades:3.18:add_cvv_export_history_metadata.   Success!
       * Foreman is running at https://foreman.example42.training
-          Initial credentials are admin / <hier steht das initiale passwort>
-      * To install an additional Foreman proxy on separate machine continue by running:
-
-          foreman-proxy-certs-generate --foreman-proxy-fqdn "$FOREMAN_PROXY" --certs-tar "/root/$FOREMAN_PROXY-certs.tar"
+          Initial credentials are admin / LpobAfv5XTW6pVx7
+      * To install an additional Foreman proxy on separate machine continue by
+running:
+    
+          foreman-proxy-certs-generate --foreman-proxy-fqdn "$FOREMAN_PROXY"
+    --certs-tar "/root/$FOREMAN_PROXY-certs.tar"
       * Foreman Proxy is running at https://foreman.example42.training:9090
+    
       The full log is at /var/log/foreman-installer/katello.log
 
 Falls man diese Ausgabe nicht gesichert hat und das Passwort verloren hat, kann man das initiale Passwort aus der Answer-Datei auslesen:
@@ -151,7 +154,7 @@ Wir nutzen im Training dafuer Puppet Manifeste, die lokal deployed werden:
     puppet apply /vagrant_foreman/scripts/05_katello_services.pp
     puppet apply /vagrant_foreman/scripts/06_tftp.pp
 
-Achtung: bei 01\_install\_service\_dhcp können Fehler auftreten.
+Achtung: bei 01\_install\_service\_bind können Fehler auftreten.
 Diese können ignoriert werden.
 
 Achtung! Dieses Setup kann nur einmal durchgefuehrt werden.
