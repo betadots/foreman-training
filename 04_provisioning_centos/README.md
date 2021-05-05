@@ -106,7 +106,7 @@ Operatingsystem Family angeben!
 Katello Login -> Hosts -> Installation Media -> Create Installation Medium
 
 - Name: CentOS Katello
-- Path: http://katello.example42.training/pulp/repos/Default_Organization/Library/custom/CentOS7/os_x86_64/
+- Path: `http://foreman.example42.training/pulp/repos/Default_Organization/Library/custom/CentOS7/os_x86_64/`
 - Operating System Family: RedHat
 
 Submit
@@ -239,4 +239,4 @@ Zur Überprüfung der Installation kann man dann von der Foreman Instanz aus via
     ping -c1 heise.de
 
 Weiter geht es mit Teil 5 [Provisionieren von Debian](../05_provisionining_debian)
-Oder mit Teil 6 [Deprovisionieren](../06_deprovision)
+Oder mit Teil 6 [Deprovisionieren](../06_deprovisioning)

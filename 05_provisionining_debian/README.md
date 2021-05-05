@@ -115,4 +115,4 @@ Submit
 
 ## Host in VirtualBox starten
 
-Weiter mit Teil 6 [Deprovisionieren](../06_deprovision)
+Weiter mit Teil 6 [Deprovisionieren](../06_deprovisioning)

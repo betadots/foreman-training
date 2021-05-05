@@ -1,6 +1,6 @@
 # Foreman Training - Teil 6 - Compute Resources
 
-Hier geht es um VMware, Docker, ....
+Hier geht es um VMware, AWS, GCE, ....
 
 ## Plugins
 
@@ -23,6 +23,8 @@ Vorhandene Plugins anschauen:
 
 Erweiterungen installieren:
 
+NEIN! Deprecated! Aktuell gibt es kein Docker Plugin fuer Foreman/Katello!
+
     yum install -y tfm-rubygem-foreman_docker
 
 Nach jeder Plugin Installation Foreman service neu starten:
@@ -42,34 +44,5 @@ Foreman Login -> Infrastructure -> Compute Resource -> Create Compute Resource
 - Provider: docker
 - URL: http://docker.example42.training:4243
 
-Bei Fehlermeldung bitte seboolean fuer passenger aktivieren (siehe SETUP.md)
-
-### Container anlegen
-
-Foreman Login -> Containers -> Create Container
-
-Compute Resource:
-
-- Docker -> Next Step
-
-Image:
-
-- Search: centos (Fehler im Browser koennen ignoriert werden)
-- Tag: latest -> Next Step
-
-Basic Options:
-
-- Name: ping_heise (keine Leerzeichen! Keine Grossbuchstaben!)
-- Command: ping -c 20 heise.de -> Next Step
-
-Environment:
-
-- Shell TTY aktivieren -> Submit
-
-Jetzt Container starten
-
-Auf docker.example42.training:
-
-    watch docker ps
 
 Weiter mit Teil 8 [Integration in Infrastruktur](../08_integration_in_infrastruktur)

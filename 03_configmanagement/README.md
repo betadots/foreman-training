@@ -147,6 +147,19 @@ Auswaehlen des Plugins:
 
 `61. Save and run` aswaehlen.
 
+Wenn hier ein Fahler kommt:
+
+    Error while evaluating a Method call, Class[Foreman::Plugin::Default_hostgroup]: parameter 'hostgroups' index 0 entry '[]' expects a Hash value, got Undef
+
+Bug bei Foreman: https://projects.theforeman.org/issues/31462
+
+Dann das RPM Paket installieren:
+
+    yum install tfm-rubygem-foreman_default_hostgroup.noarch
+    foreman-rake db:migrate
+    systemctl restart foreman
+
+
 Nach der Installation muss das Plugin konfiguriert werden:
 
 In der Konfigurationsdatei wird folgende generelle Syntax erwartet:
@@ -176,6 +189,7 @@ Wichtig: nach Änderungen an der Datei muss der Foreman Service neu gestartet we
 Puppet Facts koennen als YAML oder JSON Datei angegeben werden:
 
     # /etc/puppetlabs/facter/facts.d/foreman_default_hostgroup.yaml
+    ---
     stage: 'prod'
 
 ### Ansible Facts
