@@ -64,7 +64,7 @@ Wenn nicht: Je nach OS bitte installieren:
 
 Nun das GitHub repository auf die Workstation/das Trainingslaptop herunterladen:
 
-    git clone https://github.com/example42/foreman-training
+    git clone https://github.com/tuxmea/foreman-training
     cd foreman-training
 
 Weiter geht es mit Teil1: [Installation](01_installation)
