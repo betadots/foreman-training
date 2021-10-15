@@ -107,14 +107,14 @@ Jetzt kann der Foreman Installer gestartet werden:
 
     foreman-installer --scenario katello -i
 
-    4. [✓] Configure foreman\_cli\_ansible
-    9. [✓] Configure foreman\_cli\_remote\_execution
-    10. [✓] Configure foreman\_cli\_tasks
-    19. [✓] Configure foreman\_plugin\_ansible
-    35. [✓] Configure foreman\_plugin\_remote\_execution
-    42. [✓] Configure foreman\_plugin\_tasks
-    47. [✓] Configure foreman\_proxy\_plugin\_ansible
-    56. [✓] Configure foreman\_proxy\_plugin\_remote\_execution\_ssh
+    4. [✓] Configure foreman_cli_ansible
+    9. [✓] Configure foreman_cli_remote_execution
+    10. [✓] Configure foreman_cli_tasks
+    19. [✓] Configure foreman_plugin_ansible
+    35. [✓] Configure foreman_plugin_remote_execution
+    42. [✓] Configure foreman_plugin_tasks
+    47. [✓] Configure foreman_proxy_plugin_ansible
+    56. [✓] Configure foreman_proxy_plugin_remote_execution_ssh
 
 Nun Punkt `61 Save and run` auswaehlen.
 
@@ -124,8 +124,7 @@ Nach einiger Zeit kommt eine Abschlussmeldung:
     Upgrade Step 15/15: katello:upgrades:3.18:add_cvv_export_history_metadata.   Success!
       * Foreman is running at https://foreman.example42.training
           Initial credentials are admin / LpobAfv5XTW6pVx7
-      * To install an additional Foreman proxy on separate machine continue by
-running:
+      * To install an additional Foreman proxy on separate machine continue by running:
     
           foreman-proxy-certs-generate --foreman-proxy-fqdn "$FOREMAN_PROXY"
     --certs-tar "/root/$FOREMAN_PROXY-certs.tar"
