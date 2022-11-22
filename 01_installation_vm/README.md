@@ -19,7 +19,7 @@ Wenn man sich von einem Apple System aus eingeloggt hat, muss man eine Umgebungs
 
 Am einfaschsten ist es, wenn man das foreman-trainign Repository auf die VM kopiert (clont):
 
-    git clone https://github.com/example42/foreman-training
+    git clone https://github.com/betadots/foreman-training
     cd foreman-training
 
 Danach kann man das bootstrap script ausfuehren:
@@ -87,12 +87,12 @@ Die Installation dauert.
 Nach einiger Zeit kommt eine Abschlussmeldung:
 
       Success!
-      * Foreman is running at https://foreman.example42.training
+      * Foreman is running at https://foreman.betadots.training
           Initial credentials are admin / <hier steht das initiale passwort>
       * To install an additional Foreman proxy on separate machine continue by running:
 
           foreman-proxy-certs-generate --foreman-proxy-fqdn "$FOREMAN_PROXY" --certs-tar "/root/$FOREMAN_PROXY-certs.tar"
-      * Foreman Proxy is running at https://foreman.example42.training:9090
+      * Foreman Proxy is running at https://foreman.betadots.training:9090
       The full log is at /var/log/foreman-installer/katello.log
 
 Falls man diese Ausgabe nicht gesichert hat und das Passwort verloren hat, kann man das initiale Passwort aus der Answer-Datei auslesen:

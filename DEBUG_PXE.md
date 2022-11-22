@@ -4,7 +4,7 @@ Meistens gibt es Fehler im Kickstart File.
 
 Kickstart Datei holen:
 
-curl 'http://foreman.example42.training/unattended/provision/?token=cd1e1fc5-1881-4c47-8513-405acebe1a1e'
+curl 'http://foreman.betadots.training/unattended/provision/?token=cd1e1fc5-1881-4c47-8513-405acebe1a1e'
 
 Beispiel:
 
@@ -15,7 +15,7 @@ Beispiel:
     keyboard us
     skipx
 
-    network --bootproto dhcp --hostname docker.example42.training --device=08:00:27:62:6a:19
+    network --bootproto dhcp --hostname docker.betadots.training --device=08:00:27:62:6a:19
     rootpw --iscrypted $5$WqZcimGL$ZdHoU3.WMENAnxSb3RbNRL2RovmpXYWum1U9jn61u68
     firewall --service=ssh
     authconfig --useshadow --passalgo=SHA256 --kickstart
@@ -50,7 +50,7 @@ Beispiel:
     ) 2>&1 | tee /mnt/sysimage/root/install.postnochroot.log
     %end
     %post
-    logger "Starting anaconda docker.example42.training postinstall"
+    logger "Starting anaconda docker.betadots.training postinstall"
     exec < /dev/tty3 > /dev/tty3
     #changing to VT 3 so that we can see whats going on....
     /usr/bin/chvt 3
@@ -125,10 +125,10 @@ Beispiel:
     pluginsync      = true
     report          = true
     ignoreschedules = true
-    ca_server       = foreman.example42.training
-    certname        = docker.example42.training
+    ca_server       = foreman.betadots.training
+    certname        = docker.betadots.training
     environment     = production
-    server          = foreman.example42.training
+    server          = foreman.betadots.training
 
     EOF
 
@@ -140,12 +140,12 @@ Beispiel:
     # export a custom fact called 'is_installer' to allow detection of the installer environment in Puppet modules
     export FACTER_is_installer=true
     # passing a non-existent tag like "no_such_tag" to the puppet agent only initializes the node
-    /usr/bin/puppet agent --config /etc/puppet/puppet.conf --onetime --tags no_such_tag --server foreman.example42.training --no-daemonize
+    /usr/bin/puppet agent --config /etc/puppet/puppet.conf --onetime --tags no_such_tag --server foreman.betadots.training --no-daemonize
 
     sync
 
     # Inform the build system that we are done.
     echo "Informing Foreman that we are built"
-    wget -q -O /dev/null --no-check-certificate http://foreman.example42.training/unattended/built?token=cd1e1fc5-1881-4c47-8513-405acebe1a1e
+    wget -q -O /dev/null --no-check-certificate http://foreman.betadots.training/unattended/built?token=cd1e1fc5-1881-4c47-8513-405acebe1a1e
     ) 2>&1 | tee /root/install.post.log
     exit 0

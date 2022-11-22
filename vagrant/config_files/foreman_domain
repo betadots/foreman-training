@@ -1,13 +1,13 @@
-$ORIGIN example42.training.
+$ORIGIN betadots.training.
 $TTL 60
-@ IN SOA  @ foreman.example42.training. (
+@ IN SOA  @ foreman.betadots.training. (
                                         1 ; serial
                                         60  ; refresh
                                         60  ; retry
                                         60  ; expire
                                         60 )  ; minimum
-        NS  foreman.example42.training.
+        NS  foreman.betadots.training.
 
 foreman IN  A 10.100.10.101
-provision IN NS foreman.example42.training.
+provision IN NS foreman.betadots.training.
 

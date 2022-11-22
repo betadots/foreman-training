@@ -9,12 +9,12 @@
 ---
 certs:
   log_dir: "/var/log/certs"
-  node_fqdn: katello.example42.training
+  node_fqdn: katello.betadots.training
   cname: []
   generate: true
   regenerate: false
   deploy: true
-  ca_common_name: katello.example42.training
+  ca_common_name: katello.betadots.training
   country: US
   state: North Carolina
   city: Raleigh
@@ -34,7 +34,7 @@ certs:
   server_ca_name: katello-server-ca
   tar_file:
 foreman:
-  foreman_url: https://katello.example42.training
+  foreman_url: https://katello.betadots.training
   unattended: true
   unattended_url:
   apache: true
@@ -42,7 +42,7 @@ foreman:
   passenger_ruby: "/usr/bin/tfm-ruby"
   passenger_ruby_package: tfm-rubygem-passenger-native
   plugin_prefix: tfm-rubygem-foreman_
-  servername: katello.example42.training
+  servername: katello.betadots.training
   serveraliases:
   - foreman
   ssl: true
@@ -210,7 +210,7 @@ foreman_proxy:
   foreman_ssl_cert: "/etc/foreman-proxy/foreman_ssl_cert.pem"
   foreman_ssl_key: "/etc/foreman-proxy/foreman_ssl_key.pem"
   trusted_hosts:
-  - katello.example42.training
+  - katello.betadots.training
   ssl_disabled_ciphers: []
   tls_disabled_versions: []
   manage_sudoersd: true
@@ -231,14 +231,14 @@ foreman_proxy:
   manage_puppet_group: false
   puppet: true
   puppet_listen_on: https
-  puppet_url: https://katello.example42.training:8140
+  puppet_url: https://katello.betadots.training:8140
   puppet_ssl_ca: "/etc/puppetlabs/puppet/ssl/certs/ca.pem"
-  puppet_ssl_cert: "/etc/puppetlabs/puppet/ssl/certs/katello.example42.training.pem"
-  puppet_ssl_key: "/etc/puppetlabs/puppet/ssl/private_keys/katello.example42.training.pem"
+  puppet_ssl_cert: "/etc/puppetlabs/puppet/ssl/certs/katello.betadots.training.pem"
+  puppet_ssl_key: "/etc/puppetlabs/puppet/ssl/private_keys/katello.betadots.training.pem"
   puppet_api_timeout: 30
   templates: false
   templates_listen_on: both
-  template_url: http://katello.example42.training:8000
+  template_url: http://katello.betadots.training:8000
   registration: true
   registration_listen_on: https
   logs: true
@@ -271,7 +271,7 @@ foreman_proxy:
   dhcp_provider: isc
   dhcp_subnets: []
   dhcp_option_domain:
-  - example42.training
+  - betadots.training
   dhcp_search_domains:
   dhcp_interface: eth0
   dhcp_additional_interfaces: []
@@ -303,12 +303,12 @@ foreman_proxy:
   dns_managed: true
   dns_provider: nsupdate
   dns_interface: eth0
-  dns_zone: example42.training
+  dns_zone: betadots.training
   dns_reverse:
   dns_server: 127.0.0.1
   dns_ttl: 86400
   dns_tsig_keytab: "/etc/foreman-proxy/dns.keytab"
-  dns_tsig_principal: foremanproxy/katello.example42.training@EXAMPLE42.TRAINING
+  dns_tsig_principal: foremanproxy/katello.betadots.training@EXAMPLE42.TRAINING
   dns_forwarders: []
   libvirt_network: default
   libvirt_connection: qemu:///system
@@ -330,14 +330,14 @@ foreman_proxy:
   freeipa_remove_dns: true
   keyfile: "/etc/rndc.key"
   register_in_foreman: true
-  foreman_base_url: https://katello.example42.training
-  registered_name: katello.example42.training
+  foreman_base_url: https://katello.betadots.training
+  registered_name: katello.betadots.training
   registered_proxy_url:
   oauth_effective_user: admin
   oauth_consumer_key: fwyN5eKocmDxAS52W4nuTgXeFiFP5RGT
   oauth_consumer_secret: yZJvPmFYdufQSSbKQLjtmdw2fYY3VKCw
 foreman_proxy_content:
-  parent_fqdn: katello.example42.training
+  parent_fqdn: katello.betadots.training
   pulp_admin_password: Vfufvqqjpw9dtK7gpcXsecKRsZpik88H
   pulp_max_speed:
   pulp_num_workers:
@@ -414,11 +414,11 @@ foreman_proxy::plugin::pulp:
   listen_on: https
   pulpnode_enabled: false
   pulpcore_enabled: true
-  pulpcore_api_url: https://katello.example42.training
-  pulpcore_content_url: https://katello.example42.training/pulp/content
+  pulpcore_api_url: https://katello.betadots.training
+  pulpcore_content_url: https://katello.betadots.training/pulp/content
   pulpcore_mirror: false
   version:
-  pulp_url: https://katello.example42.training/pulp
+  pulp_url: https://katello.betadots.training/pulp
   pulp_dir: "/var/lib/pulp"
   pulp_content_dir: "/var/lib/pulp/content"
   puppet_content_dir:
@@ -524,7 +524,7 @@ puppet:
   postrun_command:
   dns_alt_names: []
   use_srv_records: false
-  srv_domain: example42.training
+  srv_domain: betadots.training
   pluginsource: puppet:///plugins
   pluginfactsource: puppet:///pluginfacts
   additional_settings: {}
@@ -541,7 +541,7 @@ puppet:
   agent: true
   remove_lock: true
   report: true
-  client_certname: katello.example42.training
+  client_certname: katello.betadots.training
   puppetmaster:
   systemd_unit_name: puppet-run
   service_name: puppet
@@ -550,7 +550,7 @@ puppet:
   server: true
   server_admin_api_whitelist:
   - localhost
-  - katello.example42.training
+  - katello.betadots.training
   server_manage_user: true
   server_user: puppet
   server_group: puppet
@@ -564,7 +564,7 @@ puppet:
   server_ca_client_self_delete: false
   server_ca_client_whitelist:
   - localhost
-  - katello.example42.training
+  - katello.betadots.training
   server_custom_trusted_oid_mapping:
   server_http: false
   server_http_port: 8139
@@ -618,12 +618,12 @@ puppet:
   server_ssl_chain_filepath: "/etc/puppetlabs/puppet/ssl/ca/ca_crt.pem"
   server_package:
   server_version:
-  server_certname: katello.example42.training
+  server_certname: katello.betadots.training
   server_request_timeout: 60
   server_strict_variables: false
   server_additional_settings: {}
   server_foreman: true
-  server_foreman_url: https://katello.example42.training
+  server_foreman_url: https://katello.betadots.training
   server_foreman_ssl_ca: "/etc/pki/katello/puppet/puppet_client_ca.crt"
   server_foreman_ssl_cert: "/etc/pki/katello/puppet/puppet_client.crt"
   server_foreman_ssl_key: "/etc/pki/katello/puppet/puppet_client.key"
@@ -654,7 +654,7 @@ puppet:
   server_metrics_graphite_enable: false
   server_metrics_graphite_host: 127.0.0.1
   server_metrics_graphite_port: 2003
-  server_metrics_server_id: katello.example42.training
+  server_metrics_server_id: katello.betadots.training
   server_metrics_graphite_interval: 5
   server_metrics_allowed:
   server_puppetserver_experimental: true

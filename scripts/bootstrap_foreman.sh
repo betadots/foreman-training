@@ -37,6 +37,6 @@ if [ ! -d /var/lib/tftpboot/boot ]; then
 fi
 
 echo "Jetzt einloggen, root user werden und installer starten"
-echo "vagrant ssh foreman.example42.training"
+echo "vagrant ssh foreman.betadots.training"
 echo "sudo -i"
 echo "foreman-installer --scenario katello -i"

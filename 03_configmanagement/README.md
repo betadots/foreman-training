@@ -20,7 +20,7 @@ Zuerst installieren wir 2 Puppet Module:
 
 Jetzt werden die Module in Foreman bekannt gemacht:
 
-Foreman Login -> Configure -> Puppet -> Environments -> 'Import environments from foreman.example42.training'
+Foreman Login -> Configure -> Puppet -> Environments -> 'Import environments from foreman.betadots.training'
 
 Haken setzen -> Update
 
@@ -34,7 +34,7 @@ Zuerst installieren wir 3 Ansible Rollen:
 
 Danach werden die Rollen Foreman bekannt gemacht:
 
-Foreman Login -> Configure -> Ansible -> Roles -> 'Import from foreman.example42.training'
+Foreman Login -> Configure -> Ansible -> Roles -> 'Import from foreman.betadots.training'
 
 Haken setzen -> Update
 
@@ -216,19 +216,19 @@ Beispiel:
 
 ## Puppet Zertifikat signieren
 
-Foreman Login -> Infrastructure -> Smart Proxies -> foreman.example42.training
+Foreman Login -> Infrastructure -> Smart Proxies -> foreman.betadots.training
 
 Puppet CA -> Orange Klicken -> Sign
 
 ## Initialer Puppet Lauf
 
-    vagrant ssh docker.example42.training
+    vagrant ssh docker.betadots.training
     sudo -i
     puppet agent --test 
 
 ## Apache
 
-    vagrant up apache.example42.training
+    vagrant up apache.betadots.training
 
 Schritte von vorher wiederholen.
 

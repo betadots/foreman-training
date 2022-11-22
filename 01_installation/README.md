@@ -70,20 +70,20 @@ Wenn man den DHCP Server deaktivieren musste, muss das Linux System neu gestarte
 Jetzt kann die VM instantiiert werden:
 
     cd vagrant
-    vagrant up foreman.example42.training --provider virtualbox
+    vagrant up foreman.betadots.training --provider virtualbox
 
 Danach Login:
 
-    vagrant ssh foreman.example42.training
+    vagrant ssh foreman.betadots.training
     sudo -i
 
 Wenn man am Abend das Laptop auschalten will, muss man die VM vorher sichern (nicht runterfahren!):
 
-    vagrant suspend foreman.example42.training
+    vagrant suspend foreman.betadots.training
 
 Am naechsten Tag kann die VM wieder geladen werden:
 
-    vagrant resume foreman.example42.training
+    vagrant resume foreman.betadots.training
 
 ## VM pruefen
 
@@ -93,7 +93,7 @@ Achtung:
 
 Der Foreman Installer erwartet eine Namensauflösung innerhalb der VM.
 
-In `/etc/hosts` sicherstellen, dass folgender Eintrag weg kommt `127.0.1.1 foreman.example42.training foreman` und folgender Eintrag hinzugefügt wird: `10.100.10.101 foreman.example42.training foreman`
+In `/etc/hosts` sicherstellen, dass folgender Eintrag weg kommt `127.0.1.1 foreman.betadots.training foreman` und folgender Eintrag hinzugefügt wird: `10.100.10.101 foreman.betadots.training foreman`
 
 Achtung 2:
 
@@ -122,13 +122,13 @@ Die Installation dauert.
 Nach einiger Zeit kommt eine Abschlussmeldung:
 
     Upgrade Step 15/15: katello:upgrades:3.18:add_cvv_export_history_metadata.   Success!
-      * Foreman is running at https://foreman.example42.training
+      * Foreman is running at https://foreman.betadots.training
           Initial credentials are admin / LpobAfv5XTW6pVx7
       * To install an additional Foreman proxy on separate machine continue by running:
     
           foreman-proxy-certs-generate --foreman-proxy-fqdn "$FOREMAN_PROXY"
     --certs-tar "/root/$FOREMAN_PROXY-certs.tar"
-      * Foreman Proxy is running at https://foreman.example42.training:9090
+      * Foreman Proxy is running at https://foreman.betadots.training:9090
     
       The full log is at /var/log/foreman-installer/katello.log
 
@@ -189,7 +189,7 @@ Weitermachen, wenn die Namensauflösung funktioniert.
 
 ## Foreman Web Interface
 
-Einloggen als Admin mit dem Brwoser: [https://foreman.example42.training](https://foreman.example42.training)
+Einloggen als Admin mit dem Brwoser: [https://foreman.betadots.training](https://foreman.betadots.training)
 
 # Foreman Smart Proxies
 
@@ -209,7 +209,7 @@ Foreman Login -> Infrastructure -> Smart proxies
 
 Actions -> Refresh
 
-Klick auf 'foreman.example42.training'
+Klick auf 'foreman.betadots.training'
 
 Auf aktive Services und Fehler pruefen.
 

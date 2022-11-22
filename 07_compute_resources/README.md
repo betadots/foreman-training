@@ -42,7 +42,7 @@ Foreman Login -> Infrastructure -> Compute Resource -> Create Compute Resource
 
 - Name: docker from foreman
 - Provider: docker
-- URL: http://docker.example42.training:4243
+- URL: http://docker.betadots.training:4243
 
 
 Weiter mit Teil 8 [Integration in Infrastruktur](../08_integration_in_infrastruktur)

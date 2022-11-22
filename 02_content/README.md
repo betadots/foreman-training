@@ -4,7 +4,7 @@
 
 Im Browser:
 
-    https://foreman.example42.training
+    https://foreman.betadots.training
 
 ## Content Credentials
 
@@ -283,7 +283,7 @@ Hier wird bei "Subscription Status" ein Rotes Kreuz stehen.
 
 Auf dem Foreman Server (als Root User):
 
-    curl --insecure --output katello-ca-consumer-latest.noarch.rpm https://foreman.example42.training/pub/katello-ca-consumer-latest.noarch.rpm
+    curl --insecure --output katello-ca-consumer-latest.noarch.rpm https://foreman.betadots.training/pub/katello-ca-consumer-latest.noarch.rpm
     yum localinstall -y katello-ca-consumer-latest.noarch.rpm
     subscription-manager register --org="Default_Organization" --activationkey="Katello-Client"
     subscription-manager list --available

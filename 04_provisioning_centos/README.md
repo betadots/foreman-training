@@ -11,10 +11,10 @@ Zusaetlich lassen wir mit Foreman die Vergabe von IP Adressen (DHCP) und die Nam
 
 ## Domain
 
-Foreman Login -> Infrastructure -> Domains -> 'example42.training'
+Foreman Login -> Infrastructure -> Domains -> 'betadots.training'
 
-- Tab Domain: DNS domain: 'example42.training'
-- Tab Domain: DNS Proxy: 'foreman.example42.training'
+- Tab Domain: DNS domain: 'betadots.training'
+- Tab Domain: DNS Proxy: 'foreman.betadots.training'
 
 Submit
 
@@ -22,7 +22,7 @@ Submit
 
 Foreman Login -> Infrastructure -> Subnets -> Create Subnet
 
-- Tab Subnet: Name: example42.training
+- Tab Subnet: Name: betadots.training
 - Tab Subnet: Network Address: 10.100.10.0
 - Tab Subnet: Network Prefix: 24
 - Tab Subnet: Gateway Address: 10.100.10.101
@@ -31,9 +31,9 @@ Foreman Login -> Infrastructure -> Subnets -> Create Subnet
 - Tab Subnet: Start of IP Range: 10.100.10.120
 - Tab Subnet: End of IP Range: 10.100.10.240
 
-- Tab Domains: example42.training ausaehlen
+- Tab Domains: betadots.training ausaehlen
 
-- Tab Proxies: foreman.example42.training bei DHCP, TFTP, HTTPBoot und Reverse DNS auswaehlen
+- Tab Proxies: foreman.betadots.training bei DHCP, TFTP, HTTPBoot und Reverse DNS auswaehlen
 
 Submit
 
@@ -106,7 +106,7 @@ Operatingsystem Family angeben!
 Katello Login -> Hosts -> Installation Media -> Create Installation Medium
 
 - Name: CentOS Katello
-- Path: `http://foreman.example42.training/pulp/repos/Default_Organization/Library/custom/CentOS7/os_x86_64/`
+- Path: `http://foreman.betadots.training/pulp/repos/Default_Organization/Library/custom/CentOS7/os_x86_64/`
 - Operating System Family: RedHat
 
 Submit
@@ -138,8 +138,8 @@ Tab Host Group:
 Die folgenden Eintraege werden nur bei der Verwendung von Puppet benoetigt:
 
 - Environment: Production
-- Puppet Proxy: foreman.example42.training
-- Puppet CA Proxy: foreman.example42.training
+- Puppet Proxy: foreman.betadots.training
+- Puppet CA Proxy: foreman.betadots.training
 
 Tab Puppet Classes
 
@@ -147,8 +147,8 @@ keine Klasse auswählen !!
 
 Tab Network
 
-- Domain: example42.training
-- IPv4 Subnet: example42.training
+- Domain: betadots.training
+- IPv4 Subnet: betadots.training
 
 Tab Operating System
 
@@ -181,7 +181,7 @@ New -> Host -> 2048 MB RAM -> 8 GB HDD
 
 Boot Einstellungen aendern: 1. Festplatte -> 2. Netzwerk
 
-Netzwerk aendern: gleiches vboxnet, wie foreman.example42.training
+Netzwerk aendern: gleiches vboxnet, wie foreman.betadots.training
 
 MAC Adresse notieren
 

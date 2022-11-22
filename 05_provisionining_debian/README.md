@@ -86,7 +86,7 @@ Hinweis: die Images werden initial in eine RAM Disk geladen. Deshalb benoetigt d
 New -> Host -> 2048 MB RAM -> 8 GB HDD
 
 Boot Einstellungen aendern: 1. Festplatte -> 2. Netzwerk
-Netzwerk aendern: gleiches vboxnet, wie foreman.example42.training
+Netzwerk aendern: gleiches vboxnet, wie foreman.betadots.training
 MAC Adresse notieren
 
 ## Host in Foreman anlegen

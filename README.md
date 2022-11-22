@@ -1,8 +1,7 @@
 
 # Foreman/Katello Training
 
-(c) 2021 - example42 GmbH
-(c) 2021 - betadots GmbH
+(c) 2022 - betadots GmbH
 
 # Hard- und Software Anforderungen
 

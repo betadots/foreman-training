@@ -9,7 +9,7 @@
 
 ---
 foreman:
-  foreman_url: https://foreman.example42.training
+  foreman_url: https://foreman.betadots.training
   puppetrun: false
   unattended: true
   authentication: true
@@ -18,7 +18,7 @@ foreman:
   passenger_ruby_package: tfm-rubygem-passenger-native
   plugin_prefix: tfm-rubygem-foreman_
   use_vhost: true
-  servername: foreman.example42.training
+  servername: foreman.betadots.training
   serveraliases:
   - foreman
   ssl: true
@@ -58,13 +58,13 @@ foreman:
   server_ssl_port: 443
   server_ssl_ca: /etc/puppetlabs/puppet/ssl/certs/ca.pem
   server_ssl_chain: /etc/puppetlabs/puppet/ssl/certs/ca.pem
-  server_ssl_cert: /etc/puppetlabs/puppet/ssl/certs/foreman.example42.training.pem
+  server_ssl_cert: /etc/puppetlabs/puppet/ssl/certs/foreman.betadots.training.pem
   server_ssl_certs_dir: ''
-  server_ssl_key: /etc/puppetlabs/puppet/ssl/private_keys/foreman.example42.training.pem
+  server_ssl_key: /etc/puppetlabs/puppet/ssl/private_keys/foreman.betadots.training.pem
   server_ssl_crl: /etc/puppetlabs/puppet/ssl/crl.pem
   client_ssl_ca: /etc/puppetlabs/puppet/ssl/certs/ca.pem
-  client_ssl_cert: /etc/puppetlabs/puppet/ssl/certs/foreman.example42.training.pem
-  client_ssl_key: /etc/puppetlabs/puppet/ssl/private_keys/foreman.example42.training.pem
+  client_ssl_cert: /etc/puppetlabs/puppet/ssl/certs/foreman.betadots.training.pem
+  client_ssl_key: /etc/puppetlabs/puppet/ssl/private_keys/foreman.betadots.training.pem
   keepalive: true
   max_keepalive_requests: 100
   keepalive_timeout: 5
@@ -87,8 +87,8 @@ foreman:
   pam_service: foreman
   ipa_manage_sssd: true
   websockets_encrypt: true
-  websockets_ssl_key: /etc/puppetlabs/puppet/ssl/private_keys/foreman.example42.training.pem
-  websockets_ssl_cert: /etc/puppetlabs/puppet/ssl/certs/foreman.example42.training.pem
+  websockets_ssl_key: /etc/puppetlabs/puppet/ssl/private_keys/foreman.betadots.training.pem
+  websockets_ssl_cert: /etc/puppetlabs/puppet/ssl/certs/foreman.betadots.training.pem
   logging_level: info
   loggers: {}
   email_config_method: database
@@ -133,13 +133,13 @@ foreman_proxy:
   http: false
   ssl: true
   ssl_ca: /etc/puppetlabs/puppet/ssl/certs/ca.pem
-  ssl_cert: /etc/puppetlabs/puppet/ssl/certs/foreman.example42.training.pem
-  ssl_key: /etc/puppetlabs/puppet/ssl/private_keys/foreman.example42.training.pem
+  ssl_cert: /etc/puppetlabs/puppet/ssl/certs/foreman.betadots.training.pem
+  ssl_key: /etc/puppetlabs/puppet/ssl/private_keys/foreman.betadots.training.pem
   foreman_ssl_ca:
   foreman_ssl_cert:
   foreman_ssl_key:
   trusted_hosts:
-  - foreman.example42.training
+  - foreman.betadots.training
   ssl_disabled_ciphers: []
   manage_sudoersd: true
   use_sudoersd: true
@@ -165,15 +165,15 @@ foreman_proxy:
   puppetssh_wait: false
   salt_puppetrun_cmd: puppet.run
   puppet_user: root
-  puppet_url: https://foreman.example42.training:8140
+  puppet_url: https://foreman.betadots.training:8140
   puppet_ssl_ca: /etc/puppetlabs/puppet/ssl/certs/ca.pem
-  puppet_ssl_cert: /etc/puppetlabs/puppet/ssl/certs/foreman.example42.training.pem
-  puppet_ssl_key: /etc/puppetlabs/puppet/ssl/private_keys/foreman.example42.training.pem
+  puppet_ssl_cert: /etc/puppetlabs/puppet/ssl/certs/foreman.betadots.training.pem
+  puppet_ssl_key: /etc/puppetlabs/puppet/ssl/private_keys/foreman.betadots.training.pem
   puppet_use_environment_api:
   puppet_api_timeout: 30
   templates: false
   templates_listen_on: both
-  template_url: http://foreman.example42.training:8000
+  template_url: http://foreman.betadots.training:8000
   logs: true
   logs_listen_on: https
   tftp: true
@@ -201,7 +201,7 @@ foreman_proxy:
   dhcp_provider: isc
   dhcp_subnets: []
   dhcp_option_domain:
-  - example42.training
+  - betadots.training
   dhcp_search_domains:
   dhcp_interface: eth0
   dhcp_gateway: 192.168.100.1
@@ -219,12 +219,12 @@ foreman_proxy:
   dns_managed: true
   dns_provider: nsupdate
   dns_interface: eth0
-  dns_zone: example42.training
+  dns_zone: betadots.training
   dns_reverse:
   dns_server: 127.0.0.1
   dns_ttl: 86400
   dns_tsig_keytab: /etc/foreman-proxy/dns.keytab
-  dns_tsig_principal: foremanproxy/foreman.example42.training@EXAMPLE42.TRAINING
+  dns_tsig_principal: foremanproxy/foreman.betadots.training@EXAMPLE42.TRAINING
   dns_forwarders: []
   libvirt_network: default
   libvirt_connection: qemu:///system
@@ -241,8 +241,8 @@ foreman_proxy:
   freeipa_remove_dns: true
   keyfile: /etc/rndc.key
   register_in_foreman: true
-  foreman_base_url: https://foreman.example42.training
-  registered_name: foreman.example42.training
+  foreman_base_url: https://foreman.betadots.training
+  registered_name: foreman.betadots.training
   registered_proxy_url:
   oauth_effective_user: admin
   oauth_consumer_key: frtfJQggfbQ9m6mUzQ3NDpcdgJeBcY33
@@ -291,7 +291,7 @@ puppet:
   postrun_command:
   dns_alt_names: []
   use_srv_records: false
-  srv_domain: example42.training
+  srv_domain: betadots.training
   pluginsource: puppet:///plugins
   pluginfactsource: puppet:///pluginfacts
   additional_settings: {}
@@ -309,7 +309,7 @@ puppet:
   - puppet-agent
   agent: true
   remove_lock: true
-  client_certname: foreman.example42.training
+  client_certname: foreman.betadots.training
   puppetmaster:
   systemd_unit_name: puppet-run
   service_name: puppet
@@ -318,7 +318,7 @@ puppet:
   server: true
   server_admin_api_whitelist:
   - localhost
-  - foreman.example42.training
+  - foreman.betadots.training
   server_user: puppet
   server_group: puppet
   server_dir: /etc/puppetlabs/puppet
@@ -330,7 +330,7 @@ puppet:
   server_ca_auth_required: true
   server_ca_client_whitelist:
   - localhost
-  - foreman.example42.training
+  - foreman.betadots.training
   server_http: false
   server_http_port: 8139
   server_http_allow: []
@@ -396,7 +396,7 @@ puppet:
   server_ssl_chain_filepath: /etc/puppetlabs/puppet/ssl/ca/ca_crt.pem
   server_package:
   server_version:
-  server_certname: foreman.example42.training
+  server_certname: foreman.betadots.training
   server_enc_api: v2
   server_report_api: v2
   server_request_timeout: 60
@@ -405,7 +405,7 @@ puppet:
   server_additional_settings: {}
   server_rack_arguments: []
   server_foreman: true
-  server_foreman_url: https://foreman.example42.training
+  server_foreman_url: https://foreman.betadots.training
   server_foreman_ssl_ca:
   server_foreman_ssl_cert:
   server_foreman_ssl_key:
@@ -460,8 +460,8 @@ foreman::plugin::puppetdb:
   address: https://localhost:8081/pdb/cmd/v1
   dashboard_address: http://localhost:8080/pdb/dashboard
   ssl_ca_file: /etc/puppetlabs/puppet/ssl/certs/ca.pem
-  ssl_certificate: /etc/puppetlabs/puppet/ssl/certs/foreman.example42.training.pem
-  ssl_private_key: /etc/puppetlabs/puppet/ssl/private_keys/foreman.example42.training.pem
+  ssl_certificate: /etc/puppetlabs/puppet/ssl/certs/foreman.betadots.training.pem
+  ssl_private_key: /etc/puppetlabs/puppet/ssl/private_keys/foreman.betadots.training.pem
 foreman::plugin::remote_execution: {}
 foreman::plugin::salt: false
 foreman::plugin::setup: {}
@@ -501,7 +501,7 @@ foreman_proxy::plugin::pulp:
   pulpnode_enabled: false
   version:
   group:
-  pulp_url: https://foreman.example42.training/pulp
+  pulp_url: https://foreman.betadots.training/pulp
   pulp_dir: /var/lib/pulp
   pulp_content_dir: /var/lib/pulp/content
   puppet_content_dir: /etc/puppetlabs/code/environments

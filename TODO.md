@@ -33,7 +33,7 @@ PDF Dokument:
 03 Configmanagement:
 
 - Initialer Puppet Lauf an neue umgebung anpassen
- vorher vagrant up docker.example42.training
+ vorher vagrant up docker.betadots.training
  und integration in Katello/Foreman
 
 04 provisioning

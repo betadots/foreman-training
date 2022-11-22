@@ -35,11 +35,11 @@ Auf allen anderen Systemen:
 
 Einmal auf Cockpit zugreifen (vorher root passwort in der vagrantbox setzen):
 
-https://foreman.example42.training:9090
+https://foreman.betadots.training:9090
 
 Dann in Foreman cockpit verwenden:
 
-Foreman-Login -> Hosts -> All Hosts -> foreman.example42.training
+Foreman-Login -> Hosts -> All Hosts -> foreman.betadots.training
 
 ## DHCP Browser
 
