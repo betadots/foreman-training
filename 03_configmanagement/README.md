@@ -53,9 +53,9 @@ Im Tab "Parameter" koennen Rollenspezifische Daten gesetzt werden.
 
 Host Parameter -> Add Parameter
 
-Name: chrony_ntp_servers
-Type: Array
-Value: ['pool.ntp.org']
+Name: `chrony_ntp_servers`
+Type: `Array`
+Value: `['pool.ntp.org']`
 
 Submit
 
@@ -72,28 +72,34 @@ Foreman Login -> Configure -> Smart Class Parameters
 
 search:  `puppetclass =  docker and  parameter =  tcp_bind`
 
-Klick auf tcp_bind
+Klick auf `tcp_bind`
 
 Default behavior:
 
-- Override: OK
-- Key type: string
+- Override: `OK`
+- Key type: `string`
 - Default value: `'tcp://0.0.0.0:4243'`
 
 Submit
 
 ### Config Management starten
 
-Achtung: SSH Zugang muss eingerichtet werden fuer dei remote command execution:
+Achtung: SSH Zugang muss eingerichtet werden fuer die remote command execution:
 
     mkdir /root/.ssh
     cat /var/lib/foreman-proxy/ssh/id_rsa_foreman_proxy.pub >> /root/.ssh/authorized_keys
 
-In der Host Ansicht (Foreman Login -> All Hosts -> Edit) kann man unter "Schedule Remote Job" wahlweise das Starten des Puppet Agent ("Run Puppet Once") oder das Abarbeiten des Ansible Codes ("Run Ansible Roles") starten.
+In der Host Ansicht (Foreman Login -> All Hosts) den Host auswählen (Haken in der ersten Spalte) dann kann man unter "Select Action" den Punkt "Schedule Remote Job" auswählen.
+
+In der Job Übersicht kann man den gewünschten Job auswählen.
+
+z.B. das Starten des Puppet Agent (Job categrory "Puppet" -> Job template "Run Puppet Once")
+
+Für Ansible geht der Weg direkt über den Host: Forman Login -> Hosts -> All hosts) den Host auswählen (Haken in der ersten Spalte, dann mann man unter "Select action" den Punkt "Run all Ansible roles" auswählen.
 
 Achtung: wenn man Ansible UND Puppet verwendet, dann muss man Foreman mitteilen, welcher Job fuer Puppet Agent Lauf verwendet werden soll: Ansible oder SSH.
 
-Foireman Login -> Administer -> Remote Execution Features -> puppet_run_host auswaehlen
+Foreman Login -> Administer -> Remote Execution Features -> puppet_run_host auswaehlen
 
 Job Template: Puppet Run Once - SSH Default auswaehlen.
 
@@ -214,17 +220,18 @@ Beispiel:
       "stage": "prod"
     }
 
+## Initialer Puppet Lauf
+
+    vagrant up docker.betadots.training
+    vagrant ssh docker.betadots.training
+    sudo -i
+    puppet agent --test 
+
 ## Puppet Zertifikat signieren
 
 Foreman Login -> Infrastructure -> Smart Proxies -> foreman.betadots.training
 
 Puppet CA -> Orange Klicken -> Sign
-
-## Initialer Puppet Lauf
-
-    vagrant ssh docker.betadots.training
-    sudo -i
-    puppet agent --test 
 
 ## Apache
 
