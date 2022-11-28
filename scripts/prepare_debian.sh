@@ -20,5 +20,5 @@ vagrant plugin install vagrant-hostmanager
 vagrant plugin install vagrant-vbguest
 
 echo "Wenn nach dem Provider grfragt wird, bitte VirtualBox auswaehlen"
-vagrant box add centos/7
+vagrant box add centos/8
 

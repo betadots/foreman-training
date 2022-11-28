@@ -23,6 +23,7 @@ settings = YAML::load_file config_file
 network_obj = IPAddr.new settings['network']['range']
 network_ip_range = network_obj.to_range.to_a
 network_range_start_offset = settings['network']['ip_start_offset'] ? settings['network']['ip_start_offset'] : 101
+
 code_dir = '/vagrant_foreman'
 
 # Define vms settings
@@ -99,26 +100,11 @@ Vagrant.configure("2") do |config|
         node_config.vbguest.installer_options = { allow_kernel_upgrade: true } if vm_box.start_with?('centos')
       end
 
+      node_config.vm.synced_folder "../", code_dir, mount_options: ["ro"]
       # bootstrap foreman server
       if node['role'] == 'foreman'
-        node_config.vm.synced_folder "../", code_dir, mount_options: ["ro"]
         node_config.vm.provision "shell", path: "../scripts/bootstrap_foreman.sh"
-      end
-
-      if node['role'] == 'katello'
-        node_config.vm.synced_folder "../", code_dir, mount_options: ["ro"]
-        node_config.vm.provision "shell", path: "../scripts/bootstrap_katello.sh"
-      end
-
-      # bootstrap docker server
-      if node['role'] == 'docker'
-        node_config.vm.synced_folder "../", code_dir, mount_options: ["ro"]
-        node_config.vm.provision "shell", path: "../scripts/bootstrap_system.sh"
-      end
-
-      # bootstrap apache server
-      if node['role'] == 'apache'
-        node_config.vm.synced_folder "../", code_dir, mount_options: ["ro"]
+      else
         node_config.vm.provision "shell", path: "../scripts/bootstrap_system.sh"
       end
 

@@ -13,7 +13,7 @@ Minimale Anforderungen:
 - min 16 GB RAM
 - min 50 GB freien Festplattenplatz
 
-Als Betriebssystem koennen Mac OS oder Linux eingesetzt werden. Mit Windows wurde das Training noch nicht getestet.
+Als Host-Betriebssystem koennen Mac OS oder Linux eingesetzt werden. Mit Windows wurde das Training noch nicht getestet.
 
 Es werden die folgenden Softwarekomponenten genutzt:
 
@@ -64,7 +64,7 @@ Wenn nicht: Je nach OS bitte installieren:
 
 Nun das GitHub repository auf die Workstation/das Trainingslaptop herunterladen:
 
-    git clone https://github.com/tuxmea/foreman-training
+    git clone https://github.com/betadots/foreman-training
     cd foreman-training
 
 Weiter geht es mit Teil1: [Installation](01_installation)

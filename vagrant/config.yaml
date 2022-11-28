@@ -3,7 +3,7 @@
 vm:
   memory: 1612                  # MB or RAM to assign
   cpu: 1                       # Number of vCPU to assign to the VM
-  box: centos7                 # Box used for the VM, from the boxes list below
+  box: centos8                 # Box used for the VM, from the boxes list below
 
 # A local network is created among the VM. Here is configured.
 network:
@@ -23,26 +23,17 @@ nodes:
   - role: foreman
     memory: 8192
     cpu: 4
-    box: centos7
-  - role: katello
-    memory: 8192
-    cpu: 4
-    box: centos7
   - role: docker
     count: 1
-    box: centos7
   - role: apache
     count: 1
-    box: centos7
   - role: host
     count: 1
     box: empty
 
 # List of available Vagrant boxes with different OS to test on
 boxes:
-  centos7:
-    box: centos/7
-    breed: puppetlabs
+  centos8:
+    box: centos/8
   empty:
     box: sridhav/empty
-

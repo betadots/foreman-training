@@ -6,11 +6,17 @@ Achtung: eine so erzeugt VM kann nicht fuer das Training verwendet werden!
 
 ## Vagrant Installation
 
-Bitte eine aktuelle Version von Vagrant installieren: [https://www.vagrantup.com/downloads](https://www.vagrantup.com/downloads)
+Bitte eine aktuelle Version von Vagrant installieren: [https://developer.hashicorp.com/vagrant/downloads](https://developer.hashicorp.com/vagrant/downloads)
 Achtung: wenn Vagrant schon installiert ist, dann unbedingt pruefen, ob die Version aktuell ist!
 
-Debian: deb Paket runterladen und installieren: `sudo dpkg -i ~/Downloads/vagrant*.deb`
-CentOS: RPM Paket herunterladen und installieren: `sudo rpm -ihv ~/Downloads/vagrant*.rpm`
+Debian:
+    wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor | sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg
+    echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
+    sudo apt update && sudo apt install vagrant
+CentOS:
+    sudo yum install -y yum-utils
+    sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo
+    sudo yum -y install vagrant
 
 Falls Vargant vorher schon installiert war, muss man die Plugins reaktivieren: `vagrant plugin expunge --reinstall`
 
@@ -33,12 +39,12 @@ Falls die Plugins schon installiert waren, kann man prüfen, ob Aktualisierungen
 
 ## Vagrant Box
 
-Vagrant arbeitet mit vorbereiteten VM Images. Wir muessen das CentOS/7 Image lokal ablegen:
+Vagrant arbeitet mit vorbereiteten VM Images. Wir muessen das CentOS/8 Image lokal ablegen:
 
-    vagrant box add centos/7
+    vagrant box add centos/8
 
-    ==> box: Loading metadata for box 'centos/7'
-        box: URL: https://vagrantcloud.com/centos/7
+    ==> box: Loading metadata for box 'centos/8'
+        box: URL: https://vagrantcloud.com/centos/8
     This box can work with multiple providers! The providers that it
     can work with are listed below. Please review the list and choose
     the provider you will be working with.
@@ -49,10 +55,10 @@ Vagrant arbeitet mit vorbereiteten VM Images. Wir muessen das CentOS/7 Image lok
     4) vmware_desktop
 
     Enter your choice: 3
-    ==> box: Adding box 'centos/7' (v1905.1) for provider: virtualbox
-        box: Downloading: https://vagrantcloud.com/centos/boxes/7/versions/1905.1/providers/virtualbox.box
+    ==> box: Adding box 'centos/8' (vxxx.y) for provider: virtualbox
+        box: Downloading: https://vagrantcloud.com/centos/boxes/8/versions/xxxx.y/providers/virtualbox.box
         box: Download redirected to host: cloud.centos.org
-    ==> box: Successfully added box 'centos/7' (v1905.1) for 'virtualbox'!
+    ==> box: Successfully added box 'centos/8' (vxxxx.y) for 'virtualbox'!
 
 ## VirtualBox Vorbereitung
 
@@ -143,7 +149,7 @@ Falls diese Datei nicht mehr vorhanden ist, kann man ein neues Admin Passwort se
 
 ## Konfiguration von Diensten
 
-Nun muessen die Dienste konfiguriert werden.
+Nun muessen die Infrastruktur-Dienste konfiguriert werden.
 Wir nutzen im Training dafuer Puppet Manifeste, die lokal deployed werden:
 
     puppet apply /vagrant_foreman/scripts/00_router_config.pp
@@ -157,7 +163,7 @@ Achtung: bei 01\_install\_service\_bind können Fehler auftreten.
 Diese können ignoriert werden.
 
 Achtung! Dieses Setup kann nur einmal durchgefuehrt werden.
-Spaetestens das Provisionierungs Setup aendert diese Einstellungen grundlegend.
+Spaetestens das Provisionierungs Setup von Vagrant aendert diese Einstellungen grundlegend.
 
 Wenn man die Vargant Instanz neu starten muss, muss die Router config und die resolv.conf neu gesetzt werden. Dazu muss erst das Flagfile geloescht werden, dann muss die Konfiguration wieder hergestellt werden:
 

@@ -2,7 +2,7 @@
 # Foreman Training - Teil 1 - Installation VM
 
 In diesem Dokument wird eine Installation unter CentOS 7 beschrieben.
-CwentOS 7 oder RHEL 7 sind die einzigen unterstuetzten Betriebssysteme fuer eine Katello/Foreman Installation!
+CentOS oder RHEL sind die einzigen unterstuetzten Betriebssysteme fuer eine Katello/Foreman Installation!
 
 ## VM pruefen
 
