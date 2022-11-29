@@ -1,8 +1,8 @@
 
 # Foreman Training - Teil 1 - Installation
 
-In diesem Dokument wird eine Installation unter CentOS 8 mit Hilfe von VirtualBox und vagrant beschrieben.
-CentOS oder RHEL sind die einzigen unterstuetzten Betriebssysteme fuer eine Katello/Foreman Installation!
+In diesem Dokument wird eine Installation unter CentOS 8 Stream mit Hilfe von VirtualBox und vagrant beschrieben.
+CentOS 8 Stream oder RHEL 8 sind die einzigen unterstuetzten Betriebssysteme fuer eine Katello4.6/Foreman3.4 Installation (https://docs.theforeman.org/release/3.4/).
 
 Eine Foreman Installation ohne Katello kann auch auf Debian 11 oder Ubuntu 20 erfolgen.
 
@@ -123,18 +123,30 @@ Wenn man sich von einem Apple System aus eingeloggt hat, muss man eine Umgebungs
 
 Jetzt kann der Foreman Installer gestartet werden:
 
-    foreman-installer --scenario katello -i
+Achtung! Tuning parameter!
+
+https://github.com/theforeman/foreman-installer/blob/develop/hooks/pre_commit/13-tuning.rb#L3
+
+    'development' => { cpu_cores: 1, memory: 6 },
+    'default' => { cpu_cores: 4, memory: 20 },
+    'medium' => { cpu_cores: 8, memory: 32 },
+    'large' => { cpu_cores: 16, memory: 64 },
+    'extra-large' => { cpu_cores: 32, memory: 128 },
+
+    foreman-installer --scenario katello -i --tuning development
 
     4. [✓] Configure foreman_cli_ansible
-    9. [✓] Configure foreman_cli_remote_execution
-    10. [✓] Configure foreman_cli_tasks
-    19. [✓] Configure foreman_plugin_ansible
-    35. [✓] Configure foreman_plugin_remote_execution
-    42. [✓] Configure foreman_plugin_tasks
-    47. [✓] Configure foreman_proxy_plugin_ansible
-    56. [✓] Configure foreman_proxy_plugin_remote_execution_ssh
+    10. [✓] Configure foreman_cli_puppet
+    12. [✓] Configure foreman_cli_tasks
+    23. [✓] Configure foreman_plugin_ansible
+    41. [✓] Configure foreman_plugin_puppet
+    43. [✓] Configure foreman_plugin_remote_execution
+    52. [✓] Configure foreman_plugin_tasks
+    61. [✓] Configure foreman_proxy_plugin_ansible
+    73. [✓] Configure puppet
 
-Nun Punkt `61 Save and run` auswaehlen.
+
+Nun Punkt `75 Save and run` auswaehlen.
 
 Die Installation dauert.
 Nach einiger Zeit kommt eine Abschlussmeldung:

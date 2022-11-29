@@ -1,9 +1,9 @@
 ---
 # Default settings for all vms (they can be overridden on each node)
 vm:
-  memory: 1612                  # MB or RAM to assign
-  cpu: 1                       # Number of vCPU to assign to the VM
-  box: centos8                 # Box used for the VM, from the boxes list below
+  memory: 1612          # MB or RAM to assign - CentOS Installer needs at leas 1512 MB
+  cpu: 1                # Number of vCPU to assign to the VM
+  box: centos8stream    # Box used for the VM, from the boxes list below
 
 # A local network is created among the VM. Here is configured.
 network:
@@ -33,7 +33,7 @@ nodes:
 
 # List of available Vagrant boxes with different OS to test on
 boxes:
-  centos8:
-    box: centos/8
+  centos8stream:
+    box: centos/stream8
   empty:
     box: sridhav/empty

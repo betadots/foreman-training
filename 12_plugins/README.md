@@ -55,3 +55,9 @@ Foreman-Login -> Hosts -> All Hosts -> foreman.betadots.training
     systemctl restart foreman-proxy
 
     ssh-copy-id -i ~foreman-proxy/.ssh/id_rsa_foreman_proxy.pub root@<target>
+
+## Forklift
+
+Voraussetzungen: Vagrant, libvirt, Ansible
+
+https://github.com/theforeman/forklift

@@ -1,5 +1,27 @@
 # Foreman Training - Teil 10 - Backup und Recovery (optional)
 
+## Upgrade
+
+Prüfen, welche Versionen zur Verfügug stehen
+
+    foreman-maintain upgrade list-versions
+
+Upgrade checks ausführen
+
+    foreman-maintain upgrade check --target-version TARGET_VERSION
+
+Upgrade starten
+
+    foreman-maintain upgrade run --target-version TARGET_VERSION
+
+Upgrade Schritte
+
+1. pre-upgrade check
+1. pre-migrations
+1. migrations 
+1. post-migrations
+1. post-upgrade checks
+
 ## Backup
 
 Generell bestehen 2 Moeglichkeiten fuer ein Backup:
