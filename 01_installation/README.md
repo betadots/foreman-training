@@ -1,6 +1,11 @@
 
 # Foreman Training - Teil 1 - Installation
 
+In diesem Dokument wird eine Installation unter CentOS 8 mit Hilfe von VirtualBox und vagrant beschrieben.
+CentOS oder RHEL sind die einzigen unterstuetzten Betriebssysteme fuer eine Katello/Foreman Installation!
+
+Eine Foreman Installation ohne Katello kann auch auf Debian 11 oder Ubuntu 20 erfolgen.
+
 Fuer eine Installation auf einer existierenden VM bitte das Dokument [../01_installation_vm](../01_installation_vm) verwenden.
 Achtung: eine so erzeugt VM kann nicht fuer das Training verwendet werden!
 
@@ -10,13 +15,20 @@ Bitte eine aktuelle Version von Vagrant installieren: [https://developer.hashico
 Achtung: wenn Vagrant schon installiert ist, dann unbedingt pruefen, ob die Version aktuell ist!
 
 Debian:
+
     wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor | sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg
     echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
     sudo apt update && sudo apt install vagrant
+
 CentOS:
+
     sudo yum install -y yum-utils
     sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo
     sudo yum -y install vagrant
+
+Windows:
+
+    choco install vagrant
 
 Falls Vargant vorher schon installiert war, muss man die Plugins reaktivieren: `vagrant plugin expunge --reinstall`
 
@@ -28,7 +40,7 @@ Es werden zwei Vagrant Plugins eingesetzt:
 - vagrant-vbguest
 
 Das Hostmanager Plugin erzeugt auf dem Trainings Laptop Einträge in /etc/hosts, so dass man mit dem Browser direkt auf die VM zugreiffen kann.
-Das VBGuest Plugin installiert automatisch die VirtualBox Guest Extensions in einer VM, damit wir Inhalte als ein Volume in die VM mounten können.
+Das VBGuest Plugin installiert automatisch die VirtualBox Guest Extensions in einer VM, damit wir dieses GIT Repository als ein Volume in die VM mounten können.
 
     vagrant plugin install vagrant-hostmanager
     vagrant plugin install vagrant-vbguest
@@ -93,7 +105,7 @@ Am naechsten Tag kann die VM wieder geladen werden:
 
 ## VM pruefen
 
-Pruefen, ob eth1 Interface eine IP hat, ```ip a```. Wenn nein: ```ifup eth1```
+Pruefen, ob eth1 Interface eine IP hat, `ip a`. Wenn nein: `ifup eth1`
 
 Achtung:
 
@@ -162,9 +174,6 @@ Wir nutzen im Training dafuer Puppet Manifeste, die lokal deployed werden:
 Achtung: bei 01\_install\_service\_bind können Fehler auftreten.
 Diese können ignoriert werden.
 
-Achtung! Dieses Setup kann nur einmal durchgefuehrt werden.
-Spaetestens das Provisionierungs Setup von Vagrant aendert diese Einstellungen grundlegend.
-
 Wenn man die Vargant Instanz neu starten muss, muss die Router config und die resolv.conf neu gesetzt werden. Dazu muss erst das Flagfile geloescht werden, dann muss die Konfiguration wieder hergestellt werden:
 
     rm -f /etc/gateway_config
@@ -202,12 +211,13 @@ Einloggen als Admin mit dem Brwoser: [https://foreman.betadots.training](https:/
 Smart-Proxy ist ein Service, der auf einem System laeuft, welches Infrastruktur Komponenenten bereitstellt.
 Dazu gehoeren zum Beispiel:
 
-- Repository Server
+- Repository Server (pulp)
 - Puppet Server
 - Ansible Executor
 - DHCP Server
 - TFTP Server
 - DNS Server
+- Remote Execution
 
 Die Einstellungen für Smart Proxies koennen im Webinterface analysiert werden:
 

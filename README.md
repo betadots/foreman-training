@@ -13,7 +13,7 @@ Minimale Anforderungen:
 - min 16 GB RAM
 - min 50 GB freien Festplattenplatz
 
-Als Host-Betriebssystem koennen Mac OS oder Linux eingesetzt werden. Mit Windows wurde das Training noch nicht getestet.
+Als Host-Betriebssystem koennen Mac OS, Linux oder Windows eingesetzt werden.
 
 Es werden die folgenden Softwarekomponenten genutzt:
 
@@ -61,6 +61,7 @@ Wenn nicht: Je nach OS bitte installieren:
 
 - Debian: `sudo apt-get install git`
 - CentOS: `sudo yum install git`
+- Windows: `choco install git` <- Erfordet [Chocolatey](https://chocolatey.org/)
 
 Nun das GitHub repository auf die Workstation/das Trainingslaptop herunterladen:
 

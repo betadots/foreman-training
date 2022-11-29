@@ -8,13 +8,16 @@ vagrantfile_dir = File.expand_path File.dirname(__FILE__)
 config_file = File.join(vagrantfile_dir, 'config.yaml')
 
 if !File.exist?(config_file)
-  throw("File config.yaml not found. Must be in same dir of Vagrantfile")
+  puts"File config.yaml not found. Must be in same dir of Vagrantfile"
+  abort
 end
 if !Vagrant.has_plugin?("vagrant-hostmanager")
-  throw('Wir benoetigen das plugin vagrant-hostmanager: vagrant plugin install vagrant-hostmanager')
+  puts 'Wir benoetigen das plugin vagrant-hostmanager: vagrant plugin install vagrant-hostmanager'
+  abort
 end
 if !Vagrant.has_plugin?("vagrant-vbguest")
-  throw('Wir benoetigen das plugin vagrant-vbguest: vagrant plugin install vagrant-vbguest')
+  puts 'Wir benoetigen das plugin vagrant-vbguest: vagrant plugin install vagrant-vbguest'
+  abort
 end
 
 settings = YAML::load_file config_file
