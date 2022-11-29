@@ -45,7 +45,7 @@ Tag 3:
 
 08 - Verwalten bestehender Systeme
 
-09 - Hammer CLI
+09 - Hammer CLI/API
 
 10 - Wartung - Backup, Restore, Update
 

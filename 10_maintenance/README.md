@@ -21,11 +21,11 @@ Hier sollte folgendes Ergebnis angezeigt werden:
 
 Nun kann Foreman gestoppt werden:
 
-    systemctl stop foreman
+    formain-maintain service stop
 
 Snapshot der VM erzeugen, danach kann Foreman wieder gestartet werden:
 
-    systemctl start foreman
+    foremain-maintain service start
 
 2. Bare Metall:
 
