@@ -3,7 +3,15 @@
 
 (c) 2022 - betadots GmbH
 
-# Hard- und Software Anforderungen
+## Versionen
+
+Das Training basiert auf Foreman 3.3 und Katello 4.5.
+
+Diese Versionskombination ist mit EL7 und EL8 kompatibel.
+
+Die aktuelle Versionen (Stand 12/2022) sind: Foreman 3.4 und Katello 4.6
+
+## Hard- und Software Anforderungen
 
 Im Rahmen dieses Trainings werden VM's gestartet. Fuer diese muss genug RAM und CPU und Festplatte vorhanden sein.
 
@@ -21,7 +29,7 @@ Es werden die folgenden Softwarekomponenten genutzt:
 - vagrant
 - git
 
-# Inhalt
+## Inhalt
 
 Tag 1:
 
@@ -53,7 +61,7 @@ Tag 3:
 
 12 - Plugins
 
-# Trainings Unterlagen holen
+## Trainings Unterlagen holen
 
 Zuerst brauchen wir einen GIT Client. Mit `which git` oder `git --version` prüfen, ob GIT installiert ist.
 

@@ -56,10 +56,10 @@ Falls die Plugins schon installiert waren, kann man prüfen, ob Aktualisierungen
 
 Vagrant arbeitet mit vorbereiteten VM Images. Wir muessen das CentOS/8 Image lokal ablegen:
 
-    vagrant box add centos/8
+    vagrant box add centos/stream8
 
-    ==> box: Loading metadata for box 'centos/8'
-        box: URL: https://vagrantcloud.com/centos/8
+    ==> box: Loading metadata for box 'centos/stream8'
+        box: URL: https://vagrantcloud.com/centos/stream8
     This box can work with multiple providers! The providers that it
     can work with are listed below. Please review the list and choose
     the provider you will be working with.
@@ -70,10 +70,10 @@ Vagrant arbeitet mit vorbereiteten VM Images. Wir muessen das CentOS/8 Image lok
     4) vmware_desktop
 
     Enter your choice: 3
-    ==> box: Adding box 'centos/8' (vxxx.y) for provider: virtualbox
-        box: Downloading: https://vagrantcloud.com/centos/boxes/8/versions/xxxx.y/providers/virtualbox.box
+    ==> box: Adding box 'stream8' (vxxx.y) for provider: virtualbox
+        box: Downloading: https://vagrantcloud.com/centos/boxes/stream8/versions/xxxx.y/providers/virtualbox.box
         box: Download redirected to host: cloud.centos.org
-    ==> box: Successfully added box 'centos/8' (vxxxx.y) for 'virtualbox'!
+    ==> box: Successfully added box 'centos/stream8' (vxxxx.y) for 'virtualbox'!
 
 ## VirtualBox Vorbereitung
 

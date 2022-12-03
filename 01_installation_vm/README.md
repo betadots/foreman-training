@@ -19,16 +19,11 @@ Wenn man sich von einem Apple System aus eingeloggt hat, muss man eine Umgebungs
 
 ## Vorbereitung
 
-Am einfaschsten ist es, wenn man das foreman-trainign Repository auf die VM kopiert (clont):
+Wenn man Foreman 3.3 und Katello 4.5 verwenden möchte, kann man ein Script in diesem Repository verwenden.
 
     git clone https://github.com/betadots/foreman-training
     cd foreman-training
-
-Danach kann man das bootstrap script ausfuehren:
-
     scripts/bootstrap_foreman.sh
-
-Dieses Script nimmt die im folgenden aufgelisteten Konfiguration vor:
 
 ### Repositories
 
@@ -49,7 +44,7 @@ Fuer ein Katello/Foreman System werden die folgenden Repositories benoetigt:
 #### Powertools und Modules
 
     sudo dnf config-manager --set-enabled powertools
-    sudo dnf module enable katello:el8 pulpcore:el8
+    sudo dnf -y module enable katello:el8 pulpcore:el8
     sudo dnf -y update
 
 ## Basis Installation
@@ -85,4 +80,4 @@ Falls diese Datei nicht mehr vorhanden ist, kann man ein neues Admin Passwort se
 
 ## Foreman Web Interface
 
-Einloggen als Admin mit dem Browser: [https://[VM FQDN]](https://[VM FQDN])
+Einloggen als Admin mit dem Browser: [<https://[VM> FQDN]](<https://[VM> FQDN])

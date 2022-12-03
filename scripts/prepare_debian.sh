@@ -1,5 +1,5 @@
 #!/bin/bash
-sudo cat <<EOF > /etc/apt/sources.list
+sudo cat <<EOF >/etc/apt/sources.list
 deb http://ftp.de.debian.org/debian buster main contrib non-free
 #deb-src http://ftp.de.debian.org/debian buster main contrib non-free
 
@@ -19,6 +19,5 @@ sudo dpkg -i vagrant_2.2.14_x86_64.deb
 vagrant plugin install vagrant-hostmanager
 vagrant plugin install vagrant-vbguest
 
-echo "Wenn nach dem Provider grfragt wird, bitte VirtualBox auswaehlen"
-vagrant box add centos/8
-
+echo "Wenn nach dem Provider gefragt wird, bitte VirtualBox auswaehlen"
+vagrant box add centos/stream8
