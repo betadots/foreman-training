@@ -7,60 +7,68 @@ Das Provisionieren besteht aus:
 - Installations Medium (Repository Server)
 - Provisionierungstemplates
 
-Zusaetlich lassen wir mit Foreman die Vergabe von IP Adressen (DHCP) und die Namensaufloesung (DNS) verwalten.
+Zusätzlich lassen wir mit Foreman die Vergabe von IP Adressen (DHCP) und die Namensauflösung (DNS) verwalten.
 
 ## Domain
 
-Foreman Login -> Infrastructure -> Domains -> 'betadots.training'
+    Foreman Login
+      -> Infrastructure
+        -> Domains
+          -> 'betadots.training'
 
-- Tab Domain: DNS domain: 'betadots.training'
-- Tab Domain: DNS Proxy: 'foreman.betadots.training'
+- Tab Domain: DNS domain: `betadots.training`
+- Tab Domain: DNS Proxy: `foreman.betadots.training`
 
 Submit
 
 ## Netzwerk
 
-Foreman Login -> Infrastructure -> Subnets -> Create Subnet
+    Foreman Login
+      -> Infrastructure
+        -> Subnets
+          -> Create Subnet
 
-- Tab Subnet: Name: betadots.training
-- Tab Subnet: Network Address: 10.100.10.0
-- Tab Subnet: Network Prefix: 24
-- Tab Subnet: Gateway Address: 10.100.10.101
-- Tab Subnet: Primary DNS Server: 10.100.10.101
-- Tab Subnet: IPAM: DHCP
-- Tab Subnet: Start of IP Range: 10.100.10.120
-- Tab Subnet: End of IP Range: 10.100.10.240
+- Tab Subnet: Name: `betadots.training`
+- Tab Subnet: Network Address: `10.100.10.0`
+- Tab Subnet: Network Prefix: `24`
+- Tab Subnet: Gateway Address: `10.100.10.101`
+- Tab Subnet: Primary DNS Server: `10.100.10.101`
+- Tab Subnet: IPAM: `DHCP`
+- Tab Subnet: Start of IP Range: `10.100.10.120`
+- Tab Subnet: End of IP Range: `10.100.10.240`
 
-- Tab Domains: betadots.training ausaehlen
+- Tab Domains: `betadots.training` auswählen
 
-- Tab Proxies: foreman.betadots.training bei DHCP, TFTP, HTTPBoot und Reverse DNS auswaehlen
+- Tab Proxies: `foreman.betadots.training` bei DHCP, TFTP, HTTPBoot und Reverse DNS auswählen
 
 Submit
 
 ## Provisioning OS
 
-Es koennen meherere OS ausgewaehlt werden.
-Das OS mit Version und Architektur der Foreman Instanz ist automatisch hinzugefuegt worden.
+Es können meherere OS ausgewählt werden.
+Das OS mit Version und Architektur der Foreman Instanz ist automatisch hinzugefügt worden.
 
 ## Provisioning Repository Server
 
-Default Repository Server fuer unterschiedliche Betriebssysteme sind bereits standardmaessig angelegt.
-Hier eventuell die Lifecycle Environment Repositories auswaehlen.
+Default Repository Server für unterschiedliche Betriebssysteme sind bereits standardmässig angelegt.
+Hier eventuell die Lifecycle Environment Repositories auswählen.
 
 ## Provisioning Templates
 
-Foreman Login -> Hosts -> Provisioning Templates
+    Foreman Login
+      -> Hosts
+        -> Provisioning Templates
 
-Templates unterscheiden sich nach Funktionalitaet:
+Templates unterscheiden sich nach Funktionalität:
 
 - PXELinux, PXEGrub, PXEGrub2 : werden auf den TFTP Server deployed
-- Provision : Kickstart oder Preseed fuer unattended Installation
+- Provision : Kickstart oder Preseed für unattended Installation
 - Finish : Post-Install Scripts
-- user_data: Post-Install fuer Cloud VMs
+- user_data: Post-Install für Cloud VMs
 - Script : generische Skripte
 - iPXE : {g,i}PXE anstelle von PXE
 
-Normalerweise werden nur die ersten 3 benoetigt.
+Normalerweise werden nur die ersten 3 benötigt.
 
 Standard Templates sind "Locked". Niemals Standard Templates editieren, immer Klonen!
 
@@ -68,21 +76,23 @@ Beispiel Suchen: kind=PXELinux
 
 ### Provisionierungs Templates mit OS Assoziieren
 
-Foreman Login -> Hosts -> Provisioning Templates
+    Foreman Login
+      -> Hosts
+        -> Provisioning Templates
 
 1. Stelle: Templates mit OS Assoziieren
 
 1.a. kind = PXELinux
 
-"Kickstart default PXELinux" auswaehlen -> Association -> OS auswaehlen
+"Kickstart default PXELinux" auswählen -> Association -> OS auswählen
 
 1.b. kind = provision
 
-"Kickstart default" auswaehlen -> Association -> OS auswaehlen
+"Kickstart default" auswählen -> Association -> OS auswählen
 
 1.c. kind = finish
 
-"Kickstart default finish" auswaehlen -> Association -> OS auswaehlen
+"Kickstart default finish" auswählen -> Association -> OS auswählen
 
 1.d. PXE bauen
 
@@ -90,38 +100,46 @@ Foreman Login -> Hosts -> Provisioning Templates
 
 ### Installation media
 
-Wenn man einen eigenen anstelle der CentOS Mirror verwenden moechte:
+Wenn man einen eigenen anstelle der CentOS Mirror verwenden möchte:
 
-Foreman Login -> Hosts -> Installation Media -> Create medium
+    Foreman Login
+      -> Hosts
+        -> Installation Media
+          -> Create medium
 
 Name eintragen, bei "Path" den http Pfad eintragen.
-Achtung: auf Namensaufloesung achten!
+Achtung: auf Namensauflösung achten!
 
-Wichtig: im Linuxhotel bitte unbedingt den Mirror verwenden: path: `http://centos.linuxhotel.de/7/os/x86_64`
+Wichtig: im Linuxhotel bitte unbedingt den Mirror verwenden: path: `http://centos.linuxhotel.de/8/os/x86_64`
 
 Operatingsystem Family angeben!
 
 #### lokalen Repo Mirror bekannt machen (nur wenn man das CentOS Repository als Content erzeugt hat.)
 
-Katello Login -> Hosts -> Installation Media -> Create Installation Medium
+    Katello Login
+      -> Hosts
+        -> Installation Media
+          -> Create Installation Medium
 
 - Name: CentOS Katello
-- Path: `http://foreman.betadots.training/pulp/repos/Default_Organization/Library/custom/CentOS7/os_x86_64/`
+- Path: `http://foreman.betadots.training/pulp/repos/Default_Organization/Library/custom/CentOS8/os_x86_64/`
 - Operating System Family: RedHat
 
 Submit
 
 ### OS mit Provisionierungs Templates assoziieren
 
-Foreman Login -> Hosts -> Operating Systems
+    Foreman Login
+      -> Hosts
+        -> Operating Systems
 
-OS auswaehlen
+OS auswählen
 
 2. Stelle: OS mit Templates Assoziieren
 
-- Partition Table -> "Kickstart default" auswaehlen
-- Installation media -> "CentOS 7 mirror" auswaehlen (oder das vorher angelegten Installation media auswaehlen)
-- Templates -> alle Templates auswaehlen, die man auswaehlen kann.
+- Partition Table -> "Kickstart default" auswählen
+- Installation media -> "CentOS 7 mirror" auswählen (oder das vorher angelegten Installation media auswählen)
+- Templates -> alle Templates auswählen, die man auswählen kann.
 
 Submit
 
@@ -129,17 +147,20 @@ Submit
 
 Wenn man Puppet einsetzen will, brauchen Host Groups das Puppet Environment
 
-Foreman Login -> Configure -> Host Groups -> Create Host Group
+    Foreman Login
+      -> Configure
+        -> Host Groups
+          -> Create Host Group
 
 Tab Host Group:
 
-- Name: Hostgruppe auswaehlen
+- Name: Hostgruppe auswählen
 
-Die folgenden Eintraege werden nur bei der Verwendung von Puppet benoetigt:
+Die folgenden Einträge werden nur bei der Verwendung von Puppet benötigt:
 
-- Environment: Production
-- Puppet Proxy: foreman.betadots.training
-- Puppet CA Proxy: foreman.betadots.training
+- Environment: `production`
+- Puppet Proxy: `foreman.betadots.training`
+- Puppet CA Proxy: `foreman.betadots.training`
 
 Tab Puppet Classes
 
@@ -147,58 +168,63 @@ keine Klasse auswählen !!
 
 Tab Network
 
-- Domain: betadots.training
-- IPv4 Subnet: betadots.training
+- Domain: `betadots.training`
+- IPv4 Subnet: `betadots.training`
 
 Tab Operating System
 
-- Architecture: x86_64
-- Operatingsystem: CentOS...
-- Media: CentOS Mirror (oder den vorher angelegten auswählen)
-- Partition Table: Kickstart
-- PXE Loader: PXELinux BIOS
-- Root Password: 'eines setzen'
+- Architecture: `x86_64`
+- Operatingsystem: `CentOS...`
+- Media: `CentOS Mirror` (oder den vorher angelegten auswählen)
+- Partition Table: `Kickstart`
+- PXE Loader: `PXELinux BIOS`
+- Root Password: `eines setzen`
 
 Wenn Puppet explizit ausgeschaltet werden soll:
 
 Tab Parameters:
-
-Host Group Parameters: Add Parameter:
+  Host Group Parameters:
+    Add Parameter:
 
 enable-puppet: boolean: false
 
-Wenn Puppet 6 aktiviert werden soll:
+Wenn Puppet 7 aktiviert werden soll:
 
-enable-puppetlabs-puppet6-repo: boolean: true
+enable-puppetlabs-puppet7-repo: boolean: true
 
 Submit
 
 ## Host erzeugen in VirtualBox
 
-Hinweis: die Images werden initial in eine RAM Disk geladen. Deshalb benoetigt die VM mindesten 1516 MB RAM.
+Hinweis: die Images werden initial in eine RAM Disk geladen. Deshalb benötigt die VM mindesten 1516 MB RAM.
 
-New -> Host -> 2048 MB RAM -> 8 GB HDD
+    New
+      -> Host
+        -> 2048 MB RAM
+          -> 8 GB HDD
 
-Boot Einstellungen aendern: 1. Festplatte -> 2. Netzwerk
+Boot Einstellungen ändern: 1. Festplatte -> 2. Netzwerk
 
-Netzwerk aendern: gleiches vboxnet, wie foreman.betadots.training
+Netzwerk ändern: gleiches vboxnet, wie foreman.betadots.training
 
 MAC Adresse notieren
 
 ## Host in Foreman anlegen
 
-Foreman Login -> Hosts -> Create Host
+    Foreman Login
+      -> Hosts
+        -> Create Host
 
-ACHTUNG: nicht docker als hostname nehmen. Dieser Name wird in Teil 4 verwendet.
+ACHTUNG: nicht docker als Hostname nehmen. Dieser Name wird in Teil 7 verwendet.
 
 Host Tab:
 
-- Name: hostname (ohne Domain)
-- Hostgroup: Training
+- Name: `hostname` (ohne Domain)
+- Hostgroup: `Training`
 
 Die folgende Einstellung ist nur vorhanden, wenn man in der Hostgruppe Puppet aktiviert hat.
 
-- Environment: Production (sollte automatisch aus der Hostgroup rausfallen)
+- Environment: `production` (sollte automatisch aus der Hostgroup rausfallen)
 
 Interfaces Tab:
 
@@ -209,8 +235,8 @@ ACHTUNG: MAC Adresse mit Doppelpunkten eintragen!!! aa:bb:cc:dd:ee
 
 Operating System Tab:
 
-- Operating System: auswaehlen (CentOS Linux 7.3...)
-- Media: Mirror waehlen
+- Operating System: auswählen (CentOS Linux 7.3...)
+- Media: Mirror wählen
 - Partition Table: Kickstart default
 - PXE Loader: PXELinux BIOS
 

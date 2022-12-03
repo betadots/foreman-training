@@ -9,10 +9,3 @@ zone "10.100.10.in-addr.arpa" IN {
         allow-update { key "rndc-key"; };
         file "foreman_ip";
 };
-
-zone "provision.betadots.training" IN {
-        type master;
-        allow-update { key "rndc-key"; };
-        file "foreman_provision_domain";
-};
-

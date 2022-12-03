@@ -12,13 +12,16 @@ Unter Content Credentials kann man GPG Keys und/oder SSL Zertifikate hinterlegen
 
 ### GPG Key einbinden
 
-Foreman Login -> Content -> Content Credentials -> Create Content Credential
+    Foreman Login
+      -> Content
+        -> Content Credentials
+          -> Create Content Credential
 
 Name: CentOS7
 
 CentOS GPG Key kopieren vom mirror [http://mirror.centos.org/centos/RPM-GPG-KEY-CentOS-7](http://mirror.centos.org/centos/RPM-GPG-KEY-CentOS-7)
 
-Save
+    Save
 
 Wiederholen fuer PostgreSQL GPG Key mit [https://download.postgresql.org/pub/repos/yum/RPM-GPG-KEY-PGDG-11](https://download.postgresql.org/pub/repos/yum/RPM-GPG-KEY-PGDG-11)
 
@@ -34,27 +37,31 @@ Diese Schritte sollten nur gemacht werden, wenn man:
 - eine schnelle Internetanbindung hat (min 50 MBit)
 - genug Plattenplatz verfuegbar ist (min 20 GB)
 
-Idealerweise legen die Teilnehmer nur das "kleine" Foreman Client Repository an.
+Idealerweise legen die Teilnehmer nur das "kleine" Foreman Client und evtl das PostgreSQL Repository an.
 
 ### Repository anlegen
 
 #### Foreman Client Repository - klein (1 GB - Dauer: ca 5-10 Minuten)
 
-Foreman Login -> Content -> Products -> Repo Discovery
+    Foreman Login
+      -> Content
+        -> Products
+          -> Repo Discovery
 
-Repository Type: Yum Repositories
+Repository Type: `Yum Repositories`
 
-URL: https://yum.theforeman.org/client/2.3
+URL: `https://yum.theforeman.org/client/2.3`
 
 Click Discover
 
-`/el-7/x86_64` auswaehlen
+Dieser Vorgang kann etwas dauern, da hier die Verzeichnisstruktur eingelesen wird.
+Danach nur x86_64 für el-8 auswählen: `/el-8/x86_64`
 
 Klick: Create selected
 
-Name: Foreman Client 2.3
+    Name: Foreman Client 2.3
 
-GPG Key: aus Liste auswaehlen
+    GPG Key: aus Liste auswaehlen
 
 Verify SSL: nur aktivieren, wenn man eine eigen CA verwendet. Ansonsten muss die Self-signed CA und das Katello HTTPS Zertifikat allen Systemen bekannt gemacht werden.
 
@@ -62,22 +69,26 @@ Run Repository Creation
 
 #### CentOS Repository - gross (20 GB - Dauer: ca 1 Stunde)
 
-Foreman Login -> Content -> Products -> Repo Discovery
+    Foreman Login
+      -> Content
+        -> Products
+          -> Repo Discovery
 
 Repository Type: Yum Repositories
 
-URL: http://mirror.centos.org/centos/7 (oder lokaler Mirror)
+URL: `http://mirror.centos.org/centos/8` (oder lokaler Mirror)
 
+Im Linuxhotel: `http://centos/8`
 Click Discover
 
 Das kann einige Zeit dauern (5 min und mehr).
-Katello holt sich dabei die Metainformationen der gesamten CentOS 7 Repositories.
+Katello holt sich dabei die Metainformationen der gesamten CentOS 8 Repositories.
 
 `os/x86_64` und `updates/x86_64` auswaehlen.
 
 Klick: Create selected
 
-Name: CentOS7
+Name: CentOS8
 
 GPG Key: aus Liste auswaehlen
 
@@ -95,7 +106,10 @@ Hier muss zuerst ein Produkt und beim Repository eine URL angegeben werden.
 
 Zusätzlich muss die Distribution und Komponente sowie Architektur angegeben werden.
 
-Foreman Login -> Content -> Product -> Create Product
+    Foreman Login
+      -> Content
+        -> Product
+          -> Create Product
 
 Name angeben -> Save
 
@@ -105,7 +119,9 @@ Name angeben: Debian 10
 
 Bei "Type" `deb` auswaehlen und die Repo Informationen eintragen:
 
-Upstream URL: http://ftp.de.debian.org
+Upstream URL: `http://ftp.de.debian.org`
+
+Im Linuxhotel: `http://debian/`
 
 Release: stable/unstable/buster, ...
 
@@ -137,7 +153,7 @@ Wenn SMT Server genutzt wird, dann wird ein normales Repository angelegt.
 
 Installation: `yum install -y tfm-rubygem-foreman_scc_manager`
 Datenbank aktualisieren: `foreman-rake db:migrate`
-Neustart Foreman: `systemctl restart foreman`
+Neustart Foreman: `forman-maintain service restart --only foreman`
 
 Nun hat man unter Content einen neuen Eintrag: SuSE Subscription
 Hier kann man einen SCCM Account angeben.
@@ -146,7 +162,10 @@ Hier kann man einen SCCM Account angeben.
 
 ## Docker (optional)
 
-Katello Login -> Content -> Products -> Create Product
+    Katello Login
+      -> Content
+        -> Products
+          -> Create Product
 
 Name: Fedora
 
@@ -160,7 +179,7 @@ Name: Fedora SSH
 
 Type: Docker
 
-URL: https://registry.hub.docker.com
+URL: `https://registry.hub.docker.com`
 
 Upstream Repository Name: fedora/ssh
 
@@ -174,7 +193,9 @@ Dafuer benoetigt man einen Sync Plan
 
 ### Sync Plan
 
-Foreman Login -> Content -> Sync Plans
+    Foreman Login
+      -> Content
+        -> Sync Plans
 
 Create Sync Plan
 
@@ -194,13 +215,19 @@ Add auswählen
 
 Ein Repository auswählen und Klick auf "Add selected"
 
-Foreman Login -> Content -> Sync Status
+    Foreman Login
+      -> Content
+        -> Sync Status
 
 Repository auswaehlen und sync starten
 
 ### Initiales Syncen
 
-Katello Login -> Content -> Products -> CentOS7 -> os x86\_64
+    Katello Login
+      -> Content
+        -> Products
+          -> CentOS8
+            -> os x86_64
 
 Download Policy: Immediate
 
@@ -212,17 +239,22 @@ Mit content views koennen verschiedene Konstellationen und Versionen von Repos v
 
 z.B. Basis OS Repo + Monitoring + eigenes Repo
 
-Foreman Login -> Content -> Content Views
+    Foreman Login
+      -> Content
+        -> Content Views
 
 Content Views koennen versioniert werden und man kann neue Versionen ueber das Webinterface erzeugen.
 
-Content Views -> Create Content View
+    Content Views
+      -> Create Content View
 
 Name: Katello Client
 
 Repo hinzufuegen:
 
-Yum Content -> Repositories -> Add
+    Yum Content
+      -> Repositories
+        -> Add
 
 Repository auswaehlen
 
@@ -243,9 +275,13 @@ z.B. Production, Testing, Pre-Prod
 
 Ueber die Content Views kann man nun Content an ein Lifecycle Environment "promoten".
 
-Foreman Login -> Content -> Lifecycle -> Lifecycle Environments -> Create Environment Path
+    Foreman Login
+      -> Content
+        -> Lifecycle
+          -> Lifecycle Environments
+            -> Create Environment Path
 
-Name: Production
+Name: Development
 
 Save
 
@@ -253,7 +289,11 @@ Save
 
 Eine Content View Version kann man an ein Lifecycle Environmetn verknuepfen:
 
-Foreman Login -> Content -> Content Views -> Katello Client -> Promote
+    Foreman Login
+      -> Content
+        -> Content Views
+          -> Katello Client
+            -> Promote
 
 Lifecycle Environment(s) auswaehlen (hier: Production)
 
@@ -263,10 +303,14 @@ Wir machen das mit einem Activation Key:
 
 ## Activation Key
 
-Foreman Login -> Content -> Lifecycle -> Activation Keys -> Create Activation Key
+  Foreman Login
+    -> Content
+      -> Lifecycle
+        -> Activation Keys
+          -> Create Activation Key
 
 Name: Katello-Client
-Environment: Production auswaehlen
+Environment: Development auswaehlen
 Content View: Katello Client auswaehlen
 
 oder: keine Content View angeben und nach dem Erzeugen des Activation Keys unter Subscriptions die gewuenschten Repositories asuwaehlen.
@@ -277,7 +321,9 @@ Save
 
 Unter dem Eintrag Content Host kann man den Stand der Pakete auf einzelnen Systemen pruefen und modifizieren.
 
-Foreman Login -> Hosts -> Content Hosts
+    Foreman Login
+      -> Hosts
+        -> Content Hosts
 
 Hier wird bei "Subscription Status" ein Rotes Kreuz stehen.
 
@@ -300,7 +346,10 @@ Innerhalb von Host Collections werden die folgenden Komponenten in Zusammenhang 
 - Products (Repositories)
 - Nodes
 
-Foreman Login -> Hosts -> Host Collections -> Create Host Collection
+    Foreman Login
+      -> Hosts
+        -> Host Collections
+          -> Create Host Collection
 
 Name angeben (Host Collection 1) und den neu angelegten Host hinzufügen.
 

@@ -2,7 +2,7 @@
 # Foreman Training - Teil 1 - Installation
 
 In diesem Dokument wird eine Installation unter CentOS 8 Stream mit Hilfe von VirtualBox und vagrant beschrieben.
-CentOS 8 Stream oder RHEL 8 sind die einzigen unterstuetzten Betriebssysteme fuer eine Katello4.6/Foreman3.4 Installation (https://docs.theforeman.org/release/3.4/).
+CentOS 8 Stream oder RHEL 8 sind die einzigen unterstuetzten Betriebssysteme fuer eine Katello4.6/Foreman3.4 Installation (<https://docs.theforeman.org/release/3.4/>).
 
 Eine Foreman Installation ohne Katello kann auch auf Debian 11 oder Ubuntu 20 erfolgen.
 
@@ -13,6 +13,9 @@ Achtung: eine so erzeugt VM kann nicht fuer das Training verwendet werden!
 
 Bitte eine aktuelle Version von Vagrant installieren: [https://developer.hashicorp.com/vagrant/downloads](https://developer.hashicorp.com/vagrant/downloads)
 Achtung: wenn Vagrant schon installiert ist, dann unbedingt pruefen, ob die Version aktuell ist!
+
+    which vagrant
+    vagrant --version
 
 Debian:
 
@@ -83,6 +86,11 @@ Wenn im DHCP Server Daten hinterlegt sind, diese bitte durch '0.0.0.0' ersetzen 
 
 Wenn man den DHCP Server deaktivieren musste, muss das Linux System neu gestartet werden! Don't ask.
 
+## Virtualbox
+
+Als Virtualisierungsbackend wird [Virtualbox](https://virtualbox.org) genutzt.
+Bitte prüfen, ob Virtualbox installiert ist, notfalls nachinstallieren.
+
 ## VM starten
 
 Jetzt kann die VM instantiiert werden:
@@ -121,17 +129,17 @@ Wenn man sich von einem Apple System aus eingeloggt hat, muss man eine Umgebungs
 
 ## Foreman Installer
 
-Jetzt kann der Foreman Installer gestartet werden:
-
 Achtung! Tuning parameter!
 
-https://github.com/theforeman/foreman-installer/blob/develop/hooks/pre_commit/13-tuning.rb#L3
+<https://github.com/theforeman/foreman-installer/blob/develop/hooks/pre_commit/13-tuning.rb#L3>
 
     'development' => { cpu_cores: 1, memory: 6 },
     'default' => { cpu_cores: 4, memory: 20 },
     'medium' => { cpu_cores: 8, memory: 32 },
     'large' => { cpu_cores: 16, memory: 64 },
     'extra-large' => { cpu_cores: 32, memory: 128 },
+
+Jetzt kann der Foreman Installer gestartet werden:
 
     foreman-installer --scenario katello -i --tuning development
 
@@ -144,7 +152,6 @@ https://github.com/theforeman/foreman-installer/blob/develop/hooks/pre_commit/13
     52. [✓] Configure foreman_plugin_tasks
     61. [✓] Configure foreman_proxy_plugin_ansible
     73. [✓] Configure puppet
-
 
 Nun Punkt `75 Save and run` auswaehlen.
 
@@ -180,10 +187,10 @@ Wir nutzen im Training dafuer Puppet Manifeste, die lokal deployed werden:
     puppet apply /vagrant_foreman/scripts/01_install_service_dhcp.pp
     puppet apply /vagrant_foreman/scripts/02_install_service_bind.pp
     puppet apply /vagrant_foreman/scripts/03_foreman_proxy.pp
-    puppet apply /vagrant_foreman/scripts/05_katello_services.pp
-    puppet apply /vagrant_foreman/scripts/06_tftp.pp
+    puppet apply /vagrant_foreman/scripts/04_katello_services.pp
+    puppet apply /vagrant_foreman/scripts/05_tftp.pp
 
-Achtung: bei 01\_install\_service\_bind können Fehler auftreten.
+Achtung: bei 02\_install\_service\_bind können Fehler auftreten.
 Diese können ignoriert werden.
 
 Wenn man die Vargant Instanz neu starten muss, muss die Router config und die resolv.conf neu gesetzt werden. Dazu muss erst das Flagfile geloescht werden, dann muss die Konfiguration wieder hergestellt werden:
@@ -233,9 +240,14 @@ Dazu gehoeren zum Beispiel:
 
 Die Einstellungen für Smart Proxies koennen im Webinterface analysiert werden:
 
-Foreman Login -> Infrastructure -> Smart proxies
+    Foreman Login
+      -> Infrastructure
+        -> Smart proxies
 
-Actions -> Refresh
+Im Menu rechts oben finde macn Actions:
+
+    Actions
+      -> Refresh
 
 Klick auf 'foreman.betadots.training'
 

@@ -17,7 +17,7 @@ file { $dirs:
   owner   => 'foreman-proxy',
   group   => 'foreman-proxy'
 }
-service { 'tftp':
+service { 'tftp.service':
   ensure => running,
   enable => true,
 }

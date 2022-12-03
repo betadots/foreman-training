@@ -61,9 +61,10 @@ Wenn nicht: Je nach OS bitte installieren:
 
 - Debian: `sudo apt-get install git`
 - CentOS: `sudo yum install git`
-- Windows: `choco install git` <- Erfordet [Chocolatey](https://chocolatey.org/)
+- SuSE: `sudo zypper in git-core`
+- Windows: `choco install git` # <- Erfordet [Chocolatey](https://chocolatey.org/)
 
-Nun das GitHub repository auf die Workstation/das Trainingslaptop herunterladen:
+Nun das GitHub Repository auf die Workstation/das Trainingslaptop herunterladen:
 
     git clone https://github.com/betadots/foreman-training
     cd foreman-training
