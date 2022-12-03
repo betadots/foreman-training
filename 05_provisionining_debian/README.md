@@ -1,24 +1,27 @@
 # Foreman Training - Teil 3 - Provisionieren Debian
 
 TFTP images werden von folgender URL heruntergeladen:
-http://ftp.debian.org/debian/dists/buster/main/installer-amd64/current/images/netboot/debian-installer/amd64/
+<http://ftp.debian.org/debian/dists/buster/main/installer-amd64/current/images/netboot/debian-installer/amd64/>
 
-Der host wird anhand des Mirrors gesetzt.
+Der Host wird anhand des Mirrors gesetzt.
 Bei lokalen Mirrorn unbedingt beachten, dass die Installer Images mit gemirrort werden.
 
 ## OS anlegen
 
-Foreman Login -> Hosts -> Operating System -> Create Operating System
+    Foreman Login
+      -> Hosts
+        -> Operating System
+          -> Create Operating System
 
 Tab Operating System -> Name: Debian
 
-Tab Operating System -> Major: 10
+Tab Operating System -> Major: 11
 
-Tab Operating System -> Minor: 3
+Tab Operating System -> Minor: 5
 
-Tab Operating System -> Release Name: buster
+Tab Operating System -> Release Name: bullseye
 
-Tab Operating System -> Description: Debian 10.3
+Tab Operating System -> Description: Debian 11.5
 
 Tab Operating System -> Architecture: x86_64
 
@@ -32,21 +35,23 @@ Submit
 
 ### Provisionierungs Templates mit OS Assoziieren
 
-Foreman Login -> Hosts -> Provisioning Templates
+    Foreman Login
+      -> Hosts
+        -> Provisioning Templates
 
 1. Stelle: Templates mit OS Assoziieren
 
 1.a. kind = PXELinux
 
-"Preseed default PXELinux" auswaehlen -> Association -> OS auswaehlen
+"Preseed default PXELinux" auswählen -> Association -> OS auswählen
 
 1.b. kind = provision
 
-"Preseed default" auswaehlen -> Association -> OS auswaehlen
+"Preseed default" auswählen -> Association -> OS auswählen
 
 1.c. kind = finish
 
-"Preseed default finish" auswaehlen -> Association -> OS auswaehlen
+"Preseed default finish" auswählen -> Association -> OS auswählen
 
 1.d. PXE bauen
 
@@ -54,44 +59,51 @@ Foreman Login -> Hosts -> Provisioning Templates
 
 ### Installation media
 
-Wenn man einen eigenen anstelle der Debian Mirror verwenden moechte:
+Wenn man einen eigenen anstelle der Debian Mirror verwenden möchte:
 
-Foreman Login -> Hosts -> Installation Media -> Create medium
+    Foreman Login
+      -> Hosts
+        -> Installation Media
+          -> Create medium
 
 Name eintragen, bei "Path" den http Pfad eintragen.
-Achtung: auf Namensaufloesung achten!
+Achtung: auf Namensauflösung achten!
 
 Operatingsystem Family angeben!
 
-Wenn man ein Lifecycle Environment nutzen moecht,e kann man dies hier auswaehlen.
+Wenn man ein Lifecycle Environment nutzen möchte, kann man dies hier auswählen.
 
 ### OS mit Provisionierungs Templates assoziieren
 
-Foreman Login -> Hosts -> Operating Systems
+    Foreman Login
+      -> Hosts
+        -> Operating Systems
 
 OS auswaehlen
 
 2. Stelle: OS mit Templates Assoziieren
 
-- Partition Table -> "Preseed default" auswaehlen
-- Installation media -> "Debian mirror" auswaehlen (oder das vorher angelegten Installation media auswaehlen)
-- Templates -> alle Templates auswaehlen, die man auswaehlen kann.
+- Partiäon Table -> "Preseed default" auswaehlen
+- Installation media -> "Debian mirror" auswählen (oder das vorher angelegten Installation media auswählen)
+- Templates -> alle Templates auswählen, die man auswählen kann.
 
 Submit
 
 ## Host erzeugen in VirtualBox
 
-Hinweis: die Images werden initial in eine RAM Disk geladen. Deshalb benoetigt die VM mindesten 1516 MB RAM.
+Hinweis: die Images werden initial in eine RAM Disk geladen. Deshalb benötigt die VM mindesten 1516 MB RAM.
 
 New -> Host -> 2048 MB RAM -> 8 GB HDD
 
-Boot Einstellungen aendern: 1. Festplatte -> 2. Netzwerk
-Netzwerk aendern: gleiches vboxnet, wie foreman.betadots.training
+Boot Einstellungen ändern: 1. Festplatte -> 2. Netzwerk
+Netzwerk ändern: gleiches vboxnet, wie foreman.betadots.training
 MAC Adresse notieren
 
 ## Host in Foreman anlegen
 
-Foreman Login -> Hosts -> Create Host
+    Foreman Login
+      -> Hosts
+        -> Create Host
 
 Host Tab:
 
@@ -106,7 +118,7 @@ Interfaces Tab:
 
 Operating System Tab:
 
-- Operating System: auswaehlen (Debian 10.3...)
+- Operating System: auswählen (Debian 11.5...)
 - Media: Mirror waehlen
 - Partition Table: Preeseed default
 - PXE Loader: PXELinux BIOS

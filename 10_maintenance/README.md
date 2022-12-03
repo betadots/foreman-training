@@ -18,20 +18,20 @@ Upgrade Schritte
 
 1. pre-upgrade check
 1. pre-migrations
-1. migrations 
+1. migrations
 1. post-migrations
 1. post-upgrade checks
 
 ## Backup
 
-Generell bestehen 2 Moeglichkeiten fuer ein Backup:
+Generell bestehen 2 Möglichkeiten fuer ein Backup:
 
 1. VM basiertes System:
 
-Bei Vms kann man ueblicherweise mit Mitteln des Hypervisors Snapshots erueugen.
-Empfohlen wir ein Snapshot im Offline Modus. Dadurch verhindert man Inkonsistenzen, wenn waehrend des Backups Aenderungen vorgenommen werden.
+Bei Vms kann man üblicherweise mit Mitteln des Hypervisors Snapshots erzeugen.
+Empfohlen wird ein Snapshot im Offline Modus. Dadurch verhindert man Inkonsistenzen, wenn während des Backups Änderungen vorgenommen werden.
 
-Bevor Foreman gestoppt wird, sollte man pruefen, ob aktuell Tasks laufen. Dafuer kann man die upgrade_check Task verwenden:
+Bevor Foreman gestoppt wird, sollte man pruefen, ob aktuell Tasks laufen. Dafür kann man die upgrade_check Task verwenden:
 
     foreman-rake katello:upgrade_check
 
