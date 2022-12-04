@@ -33,7 +33,7 @@ file { '/etc/named.foreman.zones':
   source => "${cfg_base_dir}/named.foreman.zones",
   notify => Service['named'],
 }
-$zones = [ 'domain', 'ip', 'provision_domain']
+$zones = [ 'domain', 'ip' ]
 $zones.each |$zone| {
   file { "/var/named/foreman_${zone}":
     ensure => file,

@@ -129,7 +129,7 @@ Wenn man sich von einem Apple System aus eingeloggt hat, muss man eine Umgebungs
 
 ## Foreman Installer
 
-Achtung! Tuning parameter!
+Achtung ab Version Foreman 3.4 and Katello 4.6! Tuning parameter!
 
 <https://github.com/theforeman/foreman-installer/blob/develop/hooks/pre_commit/13-tuning.rb#L3>
 
@@ -141,33 +141,25 @@ Achtung! Tuning parameter!
 
 Jetzt kann der Foreman Installer gestartet werden:
 
-    foreman-installer --scenario katello -i --tuning development
+    foreman-installer --scenario katello -i # --tuning default
 
-    4. [✓] Configure foreman_cli_ansible
-    10. [✓] Configure foreman_cli_puppet
-    12. [✓] Configure foreman_cli_tasks
-    23. [✓] Configure foreman_plugin_ansible
-    41. [✓] Configure foreman_plugin_puppet
-    43. [✓] Configure foreman_plugin_remote_execution
-    52. [✓] Configure foreman_plugin_tasks
-    61. [✓] Configure foreman_proxy_plugin_ansible
-    73. [✓] Configure puppet
+Im interaktiven Modus können Komponenten hinzugefügt oder entfernt werden:
 
-Nun Punkt `75 Save and run` auswaehlen.
+    63. [✓] Configure foreman_proxy_plugin_remote_execution_script
+
+Dann Punkt `70. Save and run` auswaehlen.
 
 Die Installation dauert.
 Nach einiger Zeit kommt eine Abschlussmeldung:
 
-    Upgrade Step 15/15: katello:upgrades:3.18:add_cvv_export_history_metadata.   Success!
-      * Foreman is running at https://foreman.betadots.training
-          Initial credentials are admin / LpobAfv5XTW6pVx7
-      * To install an additional Foreman proxy on separate machine continue by running:
-    
-          foreman-proxy-certs-generate --foreman-proxy-fqdn "$FOREMAN_PROXY"
-    --certs-tar "/root/$FOREMAN_PROXY-certs.tar"
-      * Foreman Proxy is running at https://foreman.betadots.training:9090
-    
-      The full log is at /var/log/foreman-installer/katello.log
+    * Foreman is running at <https://foreman.betadots.training>
+        Initial credentials are admin / iwhECcnoGS4sqGDc
+    * To install an additional Foreman proxy on separate machine continue by running:
+
+        foreman-proxy-certs-generate --foreman-proxy-fqdn "$FOREMAN_PROXY" --certs-tar "/root/$FOREMAN_PROXY-certs.tar"
+    * Foreman Proxy is running at <https://foreman.betadots.training:9090>
+
+    The full log is at /var/log/foreman-installer/katello.log
 
 Falls man diese Ausgabe nicht gesichert hat und das Passwort verloren hat, kann man das initiale Passwort aus der Answer-Datei auslesen:
 
@@ -177,6 +169,113 @@ Falls man diese Ausgabe nicht gesichert hat und das Passwort verloren hat, kann 
 Falls diese Datei nicht mehr vorhanden ist, kann man ein neues Admin Passwort setzen:
 
     foreman-rake permissions:reset
+
+## Greenfield <-> Brownfield
+
+Im Training gehen wir davon aus, dass Infrastruktur Komponentne, wie DHCP, DNS, TFTP bereits vorhanden sind.
+Die Integration erfolgt üblicherweise über Parameter für den `foreman-installer`.
+
+Im Training nehmen wir die Integration erst nach der Installation vor.
+
+## Foreman Web Interface
+
+Einloggen als Admin mit dem Browser: [https://foreman.betadots.training](https://foreman.betadots.training)
+
+## Trainings Erweiterungen: Foreman/Ansible
+
+    foreman-installer --enable-foreman-plugin-puppet \
+      --enable-foreman-cli-puppet \
+      --foreman-proxy-puppet true \
+      --foreman-proxy-puppetca true \
+      --foreman-proxy-content-puppet true \
+      --enable-puppet \
+      --puppet-server true \
+      --puppet-server-foreman-ssl-ca /etc/pki/katello/puppet/puppet_client_ca.crt \
+      --puppet-server-foreman-ssl-cert /etc/pki/katello/puppet/puppet_client.crt \
+      --puppet-server-foreman-ssl-key /etc/pki/katello/puppet/puppet_client.key \
+      --enable-foreman-plugin-ansible \
+      --enable-foreman-proxy-plugin-ansible
+
+## Foreman/Puppet
+
+Aktivierung von Puppet auf dem Foreman Server mit Hilfe von installer Optionen:
+
+    foreman-installer --enable-foreman-plugin-puppet \
+      --enable-foreman-cli-puppet \
+      --foreman-proxy-puppet true \
+      --foreman-proxy-puppetca true \
+      --foreman-proxy-content-puppet true \
+      --enable-puppet \
+      --puppet-server true \
+      --puppet-server-foreman-ssl-ca /etc/pki/katello/puppet/puppet_client_ca.crt \
+      --puppet-server-foreman-ssl-cert /etc/pki/katello/puppet/puppet_client.crt \
+      --puppet-server-foreman-ssl-key /etc/pki/katello/puppet/puppet_client.key
+
+Aktivierung von Puppet auf einem Smart-Proxy:
+
+    foreman-installer --foreman-proxy-puppet true \
+      --foreman-proxy-puppetca true \
+      --foreman-proxy-content-puppet true \
+      --enable-puppet \
+      --puppet-server true \
+      --puppet-server-foreman-ssl-ca /etc/pki/katello/puppet/puppet_client_ca.crt \
+      --puppet-server-foreman-ssl-cert /etc/pki/katello/puppet/puppet_client.crt \
+      --puppet-server-foreman-ssl-key /etc/pki/katello/puppet/puppet_client.key \
+      --puppet-server-foreman-url "foreman.example.com"
+
+## Foreman/Ansible
+
+Auf dem Foreman Server:
+
+    foreman-installer --enable-foreman-plugin-ansible \
+      --enable-foreman-proxy-plugin-ansible
+
+Auf einem Smart-Proxy:
+
+    foreman-installer --scenario foreman-proxy-content \
+      --enable-foreman-proxy-plugin-ansible
+
+## SSH Remote Execution
+
+Für die Verwendung von SSH Remote Execution muss der Foreman SSH Key auf die Zielsysteme gebracht werden.
+
+1. manuelles kopieren
+
+    ssh-copy-id -i ~foreman-proxy/.ssh/id_rsa_foreman_proxy.pub root@target.example.com
+    ssh -i ~foreman-proxy/.ssh/id_rsa_foreman_proxy root@target.example.com
+
+2. Foreman API
+
+    mkdir ~/.ssh
+    curl <https://foreman.betadots.training:9090/ssh/pubkey> >> ~/.ssh/authorized_keys
+    chmod 700 ~/.ssh
+    chmod 600 ~/.ssh/authorized_keys
+
+3. Kickstart Template
+
+Das machen wir, wenn wir zum Thema 'Provisioning' kommen.
+
+## Installation Foreman Smart-Proxy
+
+Für die Installation eines Systems als Foreman Smart-Proxy benötigen wir Content und einen Activation Key.
+
+Dies wird unter Punkt 02_content durchgeführt.
+
+Generelle Anleitung:
+
+Im Fireman Web UI:
+
+    Hosts
+      -> Register Host
+        -> Generate
+
+Hier wird ein Kommando erzeugt, welches kopiert und auf dem Smart-Proxy ausgeführt wird.
+
+Danach muss die Subscription konfiguriert werden:
+
+    subscription-manager config \
+      --rhsm.baseurl=<https://loadbalancer.example.com/pulp/content> \
+      --server.hostname=loadbalancer.example.com
 
 ## Konfiguration von Diensten
 

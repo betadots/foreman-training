@@ -12,11 +12,11 @@ unless File.exist?(config_file)
   abort
 end
 unless Vagrant.has_plugin?('vagrant-hostmanager')
-  puts 'ERROR! Wir benötigen das plugin vagrant-hostmanager: vagrant plugin install vagrant-hostmanager'
+  puts 'ERROR! Wir benoetigen das plugin vagrant-hostmanager: vagrant plugin install vagrant-hostmanager'
   abort
 end
 unless Vagrant.has_plugin?('vagrant-vbguest')
-  puts 'ERROR! Wir benötigen das plugin vagrant-vbguest: vagrant plugin install vagrant-vbguest'
+  puts 'ERROR! Wir benoetigen das plugin vagrant-vbguest: vagrant plugin install vagrant-vbguest'
   abort
 end
 

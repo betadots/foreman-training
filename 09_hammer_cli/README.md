@@ -34,9 +34,14 @@ Beispiel:
     1  | foreman.betadots.training | CentOS 7.9.2009  |            | 10.0.2.15     | 52:54:00:4d:77:d3 | OK            | Composite View | Produktion
     ---|----------------------------|------------------|------------|---------------|-------------------|---------------|----------------|----------------------
 
+### Anlegen eines Smart-Proxy registration command
+
+    hammer host-registration generate-command \
+      --activation-keys "My_Activation_Key"
+
 ## API
 
-https://apidocs.theforeman.org/foreman/3.4/apidoc/v2.html
+<https://apidocs.theforeman.org/foreman/3.4/apidoc/v2.html>
 
     curl --user admin:changeme -H "Content-Type:application/json" -H "Accept:application/json" -k -X GET -d '{"search":"build = true and os = CentOS"}' https://foreman.betadots.training/api/v2/hosts
 

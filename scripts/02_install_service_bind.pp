@@ -9,6 +9,11 @@ file { '/etc/named.conf':
   source => "${cfg_base_dir}/named.conf",
   notify => Service['named'],
 }
+file { '/etc/named.foreman.zones':
+  ensure => file,
+  source => "${cfg_base_dir}/named.foreman.zones",
+  notify => Service['named'],
+}
 file { '/var/named/foreman_domain':
   ensure => file,
   source => "${cfg_base_dir}/foreman_domain",
