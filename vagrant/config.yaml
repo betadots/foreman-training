@@ -1,22 +1,21 @@
 ---
 # Default settings for all vms (they can be overridden on each node)
-vm:
+default:
   memory: 1612 # MB or RAM to assign - CentOS Installer needs at leas 1512 MB
   cpu: 1 # Number of vCPU to assign to the VM
   box: centos/stream8 # Box used for the VM
-
-# A local network is created among the VM. Here is configured.
-network:
-  range: 10.100.10.0/24
-  ip_start_offset: 101
   domain: betadots.training # Name of DNS domain for the created machines
 
 # List of nodes shown in vagrant status
 nodes:
-  - role: foreman
+  foreman:
     memory: 8192
     cpu: 4
-  - role: docker
-  - role: apache
-  - role: host
+    ip: 10.100.10.101
+  docker:
+    ip: 10.100.10.102
+  apache:
+    ip: 10.100.10.103
+  host:
+    ip: 10.100.10.104
     box: sridhav/empty

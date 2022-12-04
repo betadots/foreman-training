@@ -2,99 +2,76 @@
 
 require 'yaml'
 require 'ipaddr'
-
+# Required Vagrant plugins
+plugins = [
+  'hostmanager',
+  'vbguest',
+  'disksize',
+]
 # Nodes configuration is defined in config.yaml
-vagrantfile_dir = __dir__
-config_file = File.join(vagrantfile_dir, 'config.yaml')
+config_file = File.join(__dir__, 'config.yaml')
+# mount path for repo on VMs
+code_dir = '/vagrant_foreman'
+# Initial vms hash
+vms = {}
 
+# Sanity checks
 unless File.exist?(config_file)
   puts 'File config.yaml not found. Must be in same dir of Vagrantfile'
   abort
 end
-unless Vagrant.has_plugin?('vagrant-hostmanager')
-  puts 'ERROR! Wir benoetigen das plugin vagrant-hostmanager: vagrant plugin install vagrant-hostmanager'
-  abort
-end
-unless Vagrant.has_plugin?('vagrant-vbguest')
-  puts 'ERROR! Wir benoetigen das plugin vagrant-vbguest: vagrant plugin install vagrant-vbguest'
-  abort
-end
-
-settings = YAML.load_file config_file
-
-# Network
-network_obj = IPAddr.new settings['network']['range']
-network_ip_range = network_obj.to_range.to_a
-network_range_start_offset = settings['network']['ip_start_offset']
-
-code_dir = '/vagrant_foreman'
-
-# Define vms settings
-# here we defined a new hash (vm) which gets populated by reading the config.yaml file
-# and merging nodes and defaults.
-# example result:
-# vms = {
-#   'role' => 'docker',
-#   'ip' => '10.100.10.102',
-#   'fqdn' => 'docker.betadots.training',
-#   'memory' => 1512
-#   'box' => 'centos/stream8'
-# }
-vms = []
-if settings['nodes'].is_a?(Array)
-  network_ip_index = network_range_start_offset
-  settings['nodes'].each_with_index do |node, _index|
-    node['hostname_base'] = node['role']
-    node['hostname'] = format('%<hostname_base>s', hostname_base: node['hostname_base'])
-    node['fqdn'] =
-      format('%<hostname_base>s.%<domain>s', hostname_base: node['hostname_base'],
-                                             domain: settings['network']['domain'])
-
-    node['ip'] = network_ip_range[network_ip_index].to_s
-    network_ip_index += 1
-
-    node['aliases'] = [
-      format('%<hostname>s.%<domain>s %<hostname>s', hostname: node['hostname'], domain: settings['network']['domain'])
-    ]
-
-    node['box'] = settings['vm']['box'] if node['box'].nil?
-    node['cpu'] = settings['vm']['cpu'] if node['cpu'].nil?
-    node['memory'] = settings['vm']['memory'] if node['memory'].nil?
-
-    vms.push(node)
+plugins.each do |plugin|
+  unless Vagrant.has_plugin?("vagrant-#{plugin}")
+    puts "ERROR! Wir benoetigen das plugin vagrant-#{plugin}: vagrant plugin install vagrant-#{plugin}"
+    abort
   end
+end
+
+# read config
+config = YAML.load_file config_file
+
+# parse config, merge defaults, add required data
+config['nodes'].each do |node, conf|
+  vms[node] = {}
+  vms[node] = config['default'].merge conf
+  vms[node]['fqdn'] = format('%<role>s.%<domain>s', role: node, domain: vms[node]['domain'])
+  vms[node]['aliases'] = [
+    format('%<role>s.%<domain>s %<role>s', role: node, domain: vms[node]['domain'])
+  ]
 end
 
 # Vagrant configuration
 Vagrant.configure('2') do |config|
+  # defaults for all vms
   config.hostmanager.enabled = true
   config.hostmanager.manage_host = true
   config.hostmanager.ignore_private_ip = false
   config.hostmanager.include_offline = true
+  config.vm.synced_folder '../', code_dir, mount_options: ['ro']
 
   # See https://github.com/mitchellh/vagrant/issues/1673
   config.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'"
 
-  vms.each do |node|
-    config.vm.define node['fqdn'] do |node_config|
-      node_config.vm.box = node['box']
-      node_config.vm.hostname = node['fqdn']
-      node_config.vm.network :private_network, ip: node['ip']
-      # configure all vm's
-      node_config.vm.provision 'shell', path: '../scripts/vagrant-sethostname.sh', args: node['fqdn'].to_s
-      node_config.hostmanager.aliases = node['aliases']
-      node_config.vbguest.installer_options = { allow_kernel_upgrade: true } if node['box'].start_with?('centos')
-      node_config.vm.synced_folder '../', code_dir, mount_options: ['ro']
+  # config per vm
+  vms.each do |node, settings|
+    config.vm.define settings['fqdn'] do |setting|
+      setting.vm.box = settings['box']
+      setting.vm.hostname = settings['fqdn']
+      setting.vm.network :private_network, ip: settings['ip']
+      setting.vbguest.installer_options = { allow_kernel_upgrade: true } if settings['box'].start_with?('centos')
+      setting.vm.provision 'shell', path: '../scripts/vagrant-sethostname.sh', args: settings['fqdn'].to_s
+      setting.hostmanager.aliases = settings['aliases']
       # bootstrap foreman server
-      if node['role'] == 'foreman'
-        node_config.vm.provision 'shell', path: '../scripts/bootstrap_foreman.sh'
+      if node == 'foreman'
+        setting.disksize.size = '20GB'
+        setting.vm.provision 'shell', path: '../scripts/bootstrap_foreman.sh'
       else
-        node_config.vm.provision 'shell', path: '../scripts/bootstrap_system.sh'
+        setting.vm.provision 'shell', path: '../scripts/bootstrap_system.sh'
       end
-      node_config.vm.provider 'virtualbox' do |v|
-        v.customize ['modifyvm', :id, '--name', node['fqdn']]
-        v.customize ['modifyvm', :id, '--cpus', node['cpu'].to_s]
-        v.customize ['modifyvm', :id, '--memory', node['memory'].to_s]
+      setting.vm.provider 'virtualbox' do |v|
+        v.customize ['modifyvm', :id, '--name', settings['fqdn']]
+        v.customize ['modifyvm', :id, '--cpus', settings['cpu'].to_s]
+        v.customize ['modifyvm', :id, '--memory', settings['memory'].to_s]
       end
     end
   end
