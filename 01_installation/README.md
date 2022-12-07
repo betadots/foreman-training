@@ -41,12 +41,17 @@ Es werden zwei Vagrant Plugins eingesetzt:
 
 - vagrant-hostmanager
 - vagrant-vbguest
+- vagrant-disksize
 
 Das Hostmanager Plugin erzeugt auf dem Trainings Laptop Einträge in /etc/hosts, so dass man mit dem Browser direkt auf die VM zugreiffen kann.
+
 Das VBGuest Plugin installiert automatisch die VirtualBox Guest Extensions in einer VM, damit wir dieses GIT Repository als ein Volume in die VM mounten können.
+
+Das Disksize Plugin passt die Standardgröße (10 GB) an die Bedürfnisse an. In unserem Fall bekommt der Foreman Server eine root-Disk mit 50 GB.
 
     vagrant plugin install vagrant-hostmanager
     vagrant plugin install vagrant-vbguest
+    vagrant plugin install vagrant-disksize
 
 Falls die Plugins schon installiert waren, kann man prüfen, ob Aktualisierungen vorliegen:
 
@@ -56,20 +61,10 @@ Falls die Plugins schon installiert waren, kann man prüfen, ob Aktualisierungen
 
 Vagrant arbeitet mit vorbereiteten VM Images. Wir muessen das CentOS/8 Image lokal ablegen:
 
-    vagrant box add centos/stream8
+    vagrant box add centos/stream8 --provider virtualbox
 
     ==> box: Loading metadata for box 'centos/stream8'
         box: URL: https://vagrantcloud.com/centos/stream8
-    This box can work with multiple providers! The providers that it
-    can work with are listed below. Please review the list and choose
-    the provider you will be working with.
-    
-    1) hyperv
-    2) libvirt
-    3) virtualbox
-    4) vmware_desktop
-
-    Enter your choice: 3
     ==> box: Adding box 'stream8' (vxxx.y) for provider: virtualbox
         box: Downloading: https://vagrantcloud.com/centos/boxes/stream8/versions/xxxx.y/providers/virtualbox.box
         box: Download redirected to host: cloud.centos.org
@@ -84,12 +79,13 @@ VirtualBox -> Datei -> Host-Only Netzwerk -> DHCP Server
 Wenn der Host-Only DHCP Server aktiv ist: deaktivieren.
 Wenn im DHCP Server Daten hinterlegt sind, diese bitte durch '0.0.0.0' ersetzen (auch wenn man DHCP danach ausschaltet.
 
-Wenn man den DHCP Server deaktivieren musste, muss das Linux System neu gestartet werden! Don't ask.
+Wenn man den DHCP Server deaktivieren musste, muss das Linux System neu gestartet werden! Unbedingt neu starten!
 
 ## Virtualbox
 
 Als Virtualisierungsbackend wird [Virtualbox](https://virtualbox.org) genutzt.
 Bitte prüfen, ob Virtualbox installiert ist, notfalls nachinstallieren.
+Ausserdem werden die VirtualBox Guest Extensoins benötigt.
 
 ## VM starten
 
@@ -119,7 +115,13 @@ Achtung:
 
 Der Foreman Installer erwartet eine Namensauflösung innerhalb der VM.
 
-In `/etc/hosts` sicherstellen, dass folgender Eintrag weg kommt `127.0.1.1 foreman.betadots.training foreman` und folgender Eintrag hinzugefügt wird: `10.100.10.101 foreman.betadots.training foreman`
+In `/etc/hosts` sicherstellen, dass folgender Eintrag entfernt wird:
+
+    127.0.1.1 foreman.betadots.training foreman
+
+Der folgender Eintrag muss vorhanden sein:
+
+    10.100.10.101 foreman.betadots.training foreman
 
 Achtung 2:
 
@@ -133,11 +135,14 @@ Achtung ab Version Foreman 3.4 and Katello 4.6! Tuning parameter!
 
 <https://github.com/theforeman/foreman-installer/blob/develop/hooks/pre_commit/13-tuning.rb#L3>
 
-    'development' => { cpu_cores: 1, memory: 6 },
-    'default' => { cpu_cores: 4, memory: 20 },
-    'medium' => { cpu_cores: 8, memory: 32 },
-    'large' => { cpu_cores: 16, memory: 64 },
-    'extra-large' => { cpu_cores: 32, memory: 128 },
+| Tuning Policy     | min CPU Cores | min RAM | wie viele Hosts? |
+|-------------------|--------------:|--------:|-----------------:|
+| development       | 1             | 6       | ein paar         |
+| default           | 4             | 20      | bis 5.000        |
+| medium            | 8             | 32      | bis 10.000       |
+| large             | 16            | 64      | bis 20.000       |
+| extra-large       | 32            | 128     | bis 60.000       |
+| extra-extra-large | 48+           | 256     | mehr als 60.000  |
 
 Jetzt kann der Foreman Installer gestartet werden:
 
@@ -175,28 +180,27 @@ Falls diese Datei nicht mehr vorhanden ist, kann man ein neues Admin Passwort se
 Im Training gehen wir davon aus, dass Infrastruktur Komponentne, wie DHCP, DNS, TFTP bereits vorhanden sind.
 Die Integration erfolgt üblicherweise über Parameter für den `foreman-installer`.
 
+    foreman-installer --help
+
 Im Training nehmen wir die Integration erst nach der Installation vor.
 
-## Foreman Web Interface
+## Foreman
 
 Einloggen als Admin mit dem Browser: [https://foreman.betadots.training](https://foreman.betadots.training)
 
-## Trainings Erweiterungen: Foreman/Ansible
+## Trainings Erweiterungen
 
-    foreman-installer --enable-foreman-plugin-puppet \
-      --enable-foreman-cli-puppet \
-      --foreman-proxy-puppet true \
-      --foreman-proxy-puppetca true \
-      --foreman-proxy-content-puppet true \
-      --enable-puppet \
-      --puppet-server true \
-      --puppet-server-foreman-ssl-ca /etc/pki/katello/puppet/puppet_client_ca.crt \
-      --puppet-server-foreman-ssl-cert /etc/pki/katello/puppet/puppet_client.crt \
-      --puppet-server-foreman-ssl-key /etc/pki/katello/puppet/puppet_client.key \
-      --enable-foreman-plugin-ansible \
+### Foreman/Ansible
+
+    foreman-installer --enable-foreman-plugin-ansible \
       --enable-foreman-proxy-plugin-ansible
 
-## Foreman/Puppet
+Auf einem Smart-Proxy:
+
+    foreman-installer --scenario foreman-proxy-content \
+      --enable-foreman-proxy-plugin-ansible
+
+### Foreman/Puppet
 
 Aktivierung von Puppet auf dem Foreman Server mit Hilfe von installer Optionen:
 
@@ -213,7 +217,8 @@ Aktivierung von Puppet auf dem Foreman Server mit Hilfe von installer Optionen:
 
 Aktivierung von Puppet auf einem Smart-Proxy:
 
-    foreman-installer --foreman-proxy-puppet true \
+    foreman-installer --scenario foreman-proxy-content \
+      --foreman-proxy-puppet true \
       --foreman-proxy-puppetca true \
       --foreman-proxy-content-puppet true \
       --enable-puppet \
@@ -223,35 +228,38 @@ Aktivierung von Puppet auf einem Smart-Proxy:
       --puppet-server-foreman-ssl-key /etc/pki/katello/puppet/puppet_client.key \
       --puppet-server-foreman-url "foreman.example.com"
 
-## Foreman/Ansible
-
-Auf dem Foreman Server:
-
-    foreman-installer --enable-foreman-plugin-ansible \
-      --enable-foreman-proxy-plugin-ansible
-
-Auf einem Smart-Proxy:
-
-    foreman-installer --scenario foreman-proxy-content \
-      --enable-foreman-proxy-plugin-ansible
-
 ## SSH Remote Execution
 
-Für die Verwendung von SSH Remote Execution muss der Foreman SSH Key auf die Zielsysteme gebracht werden.
+Die Remote Execution erfolgt über Smart Proxy.
 
-1. manuelles kopieren
+Dazu muss der Foreman-Proxy User einen SSH Key haben, der in der Infrastruktur vertile wurde.
 
+1. manuelles kopieren vom Smart-Proxy
+
+    su - foreman-proxy
     ssh-copy-id -i ~foreman-proxy/.ssh/id_rsa_foreman_proxy.pub root@target.example.com
+    exit
+
+Prüfen der Verbindung:
+
+    su - foreman-proxy
     ssh -i ~foreman-proxy/.ssh/id_rsa_foreman_proxy root@target.example.com
+    exit
 
 2. Foreman API
 
+Auf dem Ziel System:
+
+    su -
     mkdir ~/.ssh
     curl <https://foreman.betadots.training:9090/ssh/pubkey> >> ~/.ssh/authorized_keys
     chmod 700 ~/.ssh
     chmod 600 ~/.ssh/authorized_keys
+    exit
 
 3. Kickstart Template
+
+Bei einer Neuinstallation über Netzwerk (PXE Boot) kann man das hinterlegen des SSH Keys automatisieren.
 
 Das machen wir, wenn wir zum Thema 'Provisioning' kommen.
 
@@ -263,7 +271,7 @@ Dies wird unter Punkt 02_content durchgeführt.
 
 Generelle Anleitung:
 
-Im Fireman Web UI:
+Im Foreman Web UI:
 
     Hosts
       -> Register Host
@@ -282,21 +290,7 @@ Danach muss die Subscription konfiguriert werden:
 Nun muessen die Infrastruktur-Dienste konfiguriert werden.
 Wir nutzen im Training dafuer Puppet Manifeste, die lokal deployed werden:
 
-    puppet apply /vagrant_foreman/scripts/00_router_config.pp
-    puppet apply /vagrant_foreman/scripts/01_install_service_dhcp.pp
-    puppet apply /vagrant_foreman/scripts/02_install_service_bind.pp
-    puppet apply /vagrant_foreman/scripts/03_foreman_proxy.pp
-    puppet apply /vagrant_foreman/scripts/04_katello_services.pp
-    puppet apply /vagrant_foreman/scripts/05_tftp.pp
-
-Achtung: bei 02\_install\_service\_bind können Fehler auftreten.
-Diese können ignoriert werden.
-
-Wenn man die Vargant Instanz neu starten muss, muss die Router config und die resolv.conf neu gesetzt werden. Dazu muss erst das Flagfile geloescht werden, dann muss die Konfiguration wieder hergestellt werden:
-
-    rm -f /etc/gateway_config
-    puppet apply /vagrant_foreman/scripts/00_router_config.pp
-    puppet apply /vagrant_foreman/scripts/02_install_service_bind.pp
+    puppet apply /vagrant_foreman/scripts/foreman_config.pp
 
 ## Konfiguration Namensaufloesung
 
@@ -322,7 +316,7 @@ Weitermachen, wenn die Namensauflösung funktioniert.
 
 ## Foreman Web Interface
 
-Einloggen als Admin mit dem Brwoser: [https://foreman.betadots.training](https://foreman.betadots.training)
+Einloggen als Admin mit dem Browser: [https://foreman.betadots.training](https://foreman.betadots.training)
 
 # Foreman Smart Proxies
 
