@@ -20,7 +20,7 @@ sudo dnf -y update
 echo "installing some tools: tree vim net-tools"
 sudo dnf -y install tree vim net-tools
 
-echo "Katello installation part 2"
+echo "Katello installation part"
 sudo dnf -y install foreman-installer-katello
 
 if [ ! -d /var/lib/tftpboot/boot ]; then
@@ -32,4 +32,4 @@ fi
 echo "Jetzt einloggen, root user werden und installer starten"
 echo "vagrant ssh foreman.betadots.training"
 echo "sudo -i"
-echo "foreman-installer --scenario katello -i --tuning development"
+echo "foreman-installer --scenario katello -i # --tuning development"

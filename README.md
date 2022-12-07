@@ -19,7 +19,7 @@ Minimale Anforderungen:
 
 - min 4 CPU Cores
 - min 16 GB RAM
-- min 50 GB freien Festplattenplatz
+- min 70 GB freien Festplattenplatz
 
 Als Host-Betriebssystem koennen Mac OS, Linux oder Windows eingesetzt werden.
 
