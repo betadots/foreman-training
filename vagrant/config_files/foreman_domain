@@ -9,5 +9,4 @@ $TTL 60
         NS  foreman.betadots.training.
 
 foreman IN  A 10.100.10.101
-provision IN NS foreman.betadots.training.
 

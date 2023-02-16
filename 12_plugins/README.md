@@ -8,7 +8,7 @@ Eine Uebersicht ueber vorhandene Plugins findet man auf der Webseite von Foreman
 
 ### Plugins als Paket
 
-YUM Repositoriy fuer Plugins aktivieren (wurde durch den Installer bereits erledigt:
+YUM Repositoriy für Plugins aktivieren (wurde durch den Installer bereits erledigt:
 
     # /etc/yum.repos.d/foreman-plugins.repo
     [foreman-plugins]
@@ -26,7 +26,7 @@ Vorhandene Plugins anschauen:
 Auf der foreman instanz:
 
     yum install -y tfm-rubygem-foreman_cockpit
-    systemctl restart foreman
+    foreman-maintain servcie restart --only foreman
 
 Auf allen anderen Systemen:
 
@@ -35,11 +35,14 @@ Auf allen anderen Systemen:
 
 Einmal auf Cockpit zugreifen (vorher root passwort in der vagrantbox setzen):
 
-https://foreman.betadots.training:9090
+<https://foreman.betadots.training:9090>
 
 Dann in Foreman cockpit verwenden:
 
-Foreman-Login -> Hosts -> All Hosts -> foreman.betadots.training
+    Foreman-Login
+      -> Hosts
+        -> All Hosts
+          -> foreman.betadots.training
 
 ## DHCP Browser
 
@@ -51,7 +54,13 @@ Foreman-Login -> Hosts -> All Hosts -> foreman.betadots.training
     foreman-installer --enable-foreman-plugin-remote-execution\
                       --enable-foreman-proxy-plugin-remote-execution-ssh
 
-    systemctl restart foreman
+    foreman-maintain service restart --only foreman
     systemctl restart foreman-proxy
 
     ssh-copy-id -i ~foreman-proxy/.ssh/id_rsa_foreman_proxy.pub root@<target>
+
+## Forklift
+
+Voraussetzungen: Vagrant, libvirt, Ansible
+
+<https://github.com/theforeman/forklift>

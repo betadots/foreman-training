@@ -2,7 +2,6 @@
 # Enable DHCP management
 # Can be true, false, or http/https to enable just one of the protocols
 :enabled: true
-
 # valid providers:
 #   - dhcp_isc (ISC dhcp server)
 #   - dhcp_native_ms (Microsoft native implementation)

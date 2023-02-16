@@ -3,7 +3,15 @@
 
 (c) 2022 - betadots GmbH
 
-# Hard- und Software Anforderungen
+## Versionen
+
+Das Training basiert auf Foreman 3.3 und Katello 4.5.
+
+Diese Versionskombination ist mit EL7 und EL8 kompatibel.
+
+Die aktuelle Versionen (Stand 12/2022) sind: Foreman 3.4 und Katello 4.6
+
+## Hard- und Software Anforderungen
 
 Im Rahmen dieses Trainings werden VM's gestartet. Fuer diese muss genug RAM und CPU und Festplatte vorhanden sein.
 
@@ -11,9 +19,9 @@ Minimale Anforderungen:
 
 - min 4 CPU Cores
 - min 16 GB RAM
-- min 50 GB freien Festplattenplatz
+- min 70 GB freien Festplattenplatz
 
-Als Betriebssystem koennen Mac OS oder Linux eingesetzt werden. Mit Windows wurde das Training noch nicht getestet.
+Als Host-Betriebssystem koennen Mac OS, Linux oder Windows eingesetzt werden.
 
 Es werden die folgenden Softwarekomponenten genutzt:
 
@@ -21,7 +29,7 @@ Es werden die folgenden Softwarekomponenten genutzt:
 - vagrant
 - git
 
-# Inhalt
+## Inhalt
 
 Tag 1:
 
@@ -45,7 +53,7 @@ Tag 3:
 
 08 - Verwalten bestehender Systeme
 
-09 - Hammer CLI
+09 - Hammer CLI/API
 
 10 - Wartung - Backup, Restore, Update
 
@@ -53,7 +61,7 @@ Tag 3:
 
 12 - Plugins
 
-# Trainings Unterlagen holen
+## Trainings Unterlagen holen
 
 Zuerst brauchen wir einen GIT Client. Mit `which git` oder `git --version` prüfen, ob GIT installiert ist.
 
@@ -61,10 +69,12 @@ Wenn nicht: Je nach OS bitte installieren:
 
 - Debian: `sudo apt-get install git`
 - CentOS: `sudo yum install git`
+- SuSE: `sudo zypper in git-core`
+- Windows: `choco install git` # <- Erfordet [Chocolatey](https://chocolatey.org/)
 
-Nun das GitHub repository auf die Workstation/das Trainingslaptop herunterladen:
+Nun das GitHub Repository auf die Workstation/das Trainingslaptop herunterladen:
 
-    git clone https://github.com/tuxmea/foreman-training
+    git clone https://github.com/betadots/foreman-training
     cd foreman-training
 
 Weiter geht es mit Teil1: [Installation](01_installation)

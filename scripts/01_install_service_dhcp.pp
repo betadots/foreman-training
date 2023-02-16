@@ -1,7 +1,7 @@
 $cfg_base_dir = '/vagrant_foreman/vagrant/config_files'
 
 # dhcp
-package { 'dhcp':
+package { 'dhcp-server':
   ensure => present,
 }
 file { '/etc/dhcp':

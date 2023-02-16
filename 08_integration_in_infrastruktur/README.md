@@ -8,4 +8,4 @@
 
 ## DNS delegation
 
-Weiter mit Teil 9 [Hammer CLI](../09_hammer_cli)
+Weiter mit Teil 9 [Hammer CLI/API](../09_hammer_cli)

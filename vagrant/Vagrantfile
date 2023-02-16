@@ -1,131 +1,77 @@
-# This Vagrantfile is shared by different Vagrant environments.
-# Handle with care.
+# frozen_string_literal: true
+
 require 'yaml'
 require 'ipaddr'
-
+# Required Vagrant plugins
+plugins = [
+  'hostmanager',
+  'vbguest',
+  'disksize',
+]
 # Nodes configuration is defined in config.yaml
-vagrantfile_dir = File.expand_path File.dirname(__FILE__)
-config_file = File.join(vagrantfile_dir, 'config.yaml')
-
-if !File.exist?(config_file)
-  throw("File config.yaml not found. Must be in same dir of Vagrantfile")
-end
-if !Vagrant.has_plugin?("vagrant-hostmanager")
-  throw('Wir benoetigen das plugin vagrant-hostmanager: vagrant plugin install vagrant-hostmanager')
-end
-if !Vagrant.has_plugin?("vagrant-vbguest")
-  throw('Wir benoetigen das plugin vagrant-vbguest: vagrant plugin install vagrant-vbguest')
-end
-
-settings = YAML::load_file config_file
-
-# Network
-network_obj = IPAddr.new settings['network']['range']
-network_ip_range = network_obj.to_range.to_a
-network_range_start_offset = settings['network']['ip_start_offset'] ? settings['network']['ip_start_offset'] : 101
+config_file = File.join(__dir__, 'config.yaml')
+# mount path for repo on VMs
 code_dir = '/vagrant_foreman'
+# Initial vms hash
+vms = {}
 
-# Define vms settings
-vms = []
-if settings['nodes'].is_a?(Array)
-  network_ip_index = network_range_start_offset
-  settings['nodes'].each_with_index do |node, _role_index|
-    count = node['count'] ? node['count'] : 1
-
-    (1..count).each do |vm_index|
-      vm = node.clone
-      vm['hostname_base'] = vm['hostname_base'] ? vm['hostname_base'] : vm['role']
-      vm['hostname'] = "%s" % [vm['hostname_base']]
-      vm['fqdn'] = vm['fqdn'] ? vm['fqdn'] : "%s.%s" % [vm['hostname_base'], settings['network']['domain']]
-
-      if vm['ip_address']
-        vm['ip'] = vm['ip_address']
-      else
-        vm['ip'] = network_ip_range[network_ip_index].to_s
-        network_ip_index+=1
-      end
-
-      vm['aliases'] = [
-          "%s.%s" % [vm['hostname'], settings['network']['domain']],
-          "%s-%02d" % [vm['hostname_base'], vm_index]
-      ]
-
-      vm['box'] = node['box'] ? node['box'] : settings['vm']['box']
-      vm['cpu'] = node['cpu'] ? node['cpu'] : settings['vm']['cpu']
-      vm['memory'] = node['memory'] ? node['memory'] : settings['vm']['memory']
-
-      vms.push(vm)
-    end
+# Sanity checks
+unless File.exist?(config_file)
+  puts 'File config.yaml not found. Must be in same dir of Vagrantfile'
+  abort
+end
+plugins.each do |plugin|
+  unless Vagrant.has_plugin?("vagrant-#{plugin}")
+    puts "ERROR! Wir benoetigen das plugin vagrant-#{plugin}: vagrant plugin install vagrant-#{plugin}"
+    abort
   end
 end
 
+# read config
+config = YAML.load_file config_file
+
+# parse config, merge defaults, add required data
+config['nodes'].each do |node, conf|
+  vms[node] = {}
+  vms[node] = config['default'].merge conf
+  vms[node]['fqdn'] = format('%<role>s.%<domain>s', role: node, domain: vms[node]['domain'])
+  vms[node]['aliases'] = [
+    format('%<role>s.%<domain>s %<role>s', role: node, domain: vms[node]['domain'])
+  ]
+end
 
 # Vagrant configuration
-Vagrant.configure("2") do |config|
-
-  # hostmanager config
-  if Vagrant.has_plugin?("vagrant-hostmanager")
-    config.hostmanager.enabled = settings['vagrant']['hostmanager.enabled'] ? settings['vagrant']['hostmanager.enabled'] : true
-    config.hostmanager.manage_host = settings['vagrant']['hostmanager.manage_host'] ? settings['vagrant']['hostmanager.manage_host'] : false
-    config.hostmanager.ignore_private_ip = settings['vagrant']['hostmanager.ignore_private_ip'] ? settings['vagrant']['hostmanager.ignore_private_ip'] : false
-    config.hostmanager.include_offline = settings['vagrant']['hostmanager.include_offline'] ? settings['vagrant']['hostmanager.include_offline'] : true
-  end
+Vagrant.configure('2') do |config|
+  # defaults for all vms
+  config.hostmanager.enabled = true
+  config.hostmanager.manage_host = true
+  config.hostmanager.ignore_private_ip = false
+  config.hostmanager.include_offline = true
+  config.vm.synced_folder '../', code_dir, mount_options: ['ro']
 
   # See https://github.com/mitchellh/vagrant/issues/1673
   config.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'"
 
-  vms.each do |node|
-    role = node['role'].clone
-    hostname = node['hostname'].clone
-    fqdn = node['fqdn'].clone
-    box = node['box'].clone
-    aliases = node['aliases'].clone + node['aliases']
-    vm_box = settings['boxes']["#{box}"]['box']
-
-    config.vm.define fqdn do |node_config|
-      node_config.vm.box = vm_box
-      node_config.vm.hostname = fqdn
-      node_config.vm.network :private_network, ip: node['ip']
-
-      # configure all vm's
-      node_config.vm.provision "shell", path: '../scripts/vagrant-sethostname.sh', args: "#{fqdn}"
-
-      if Vagrant.has_plugin?("vagrant-hostmanager")
-        node_config.hostmanager.aliases = aliases
-        node_config.hostmanager.manage_host = settings['vagrant']['hostmanager.manage_host']
-      end
-
-      if Vagrant.has_plugin?('vagrant-vbguest')
-        node_config.vbguest.installer_options = { allow_kernel_upgrade: true } if vm_box.start_with?('centos')
-      end
-
+  # config per vm
+  vms.each do |node, settings|
+    config.vm.define settings['fqdn'] do |setting|
+      setting.vm.box = settings['box']
+      setting.vm.hostname = settings['fqdn']
+      setting.vm.network :private_network, ip: settings['ip']
+      setting.vbguest.installer_options = { allow_kernel_upgrade: true } if settings['box'].start_with?('centos')
+      setting.vm.provision 'shell', path: '../scripts/vagrant-sethostname.sh', args: settings['fqdn'].to_s
+      setting.hostmanager.aliases = settings['aliases']
       # bootstrap foreman server
-      if node['role'] == 'foreman'
-        node_config.vm.synced_folder "../", code_dir, mount_options: ["ro"]
-        node_config.vm.provision "shell", path: "../scripts/bootstrap_foreman.sh"
+      if node == 'foreman'
+        setting.disksize.size = '50GB'
+        setting.vm.provision 'shell', path: '../scripts/bootstrap_foreman.sh'
+      else
+        setting.vm.provision 'shell', path: '../scripts/bootstrap_system.sh'
       end
-
-      if node['role'] == 'katello'
-        node_config.vm.synced_folder "../", code_dir, mount_options: ["ro"]
-        node_config.vm.provision "shell", path: "../scripts/bootstrap_katello.sh"
-      end
-
-      # bootstrap docker server
-      if node['role'] == 'docker'
-        node_config.vm.synced_folder "../", code_dir, mount_options: ["ro"]
-        node_config.vm.provision "shell", path: "../scripts/bootstrap_system.sh"
-      end
-
-      # bootstrap apache server
-      if node['role'] == 'apache'
-        node_config.vm.synced_folder "../", code_dir, mount_options: ["ro"]
-        node_config.vm.provision "shell", path: "../scripts/bootstrap_system.sh"
-      end
-
-      node_config.vm.provider "virtualbox" do |v|
-        v.customize ['modifyvm', :id, '--name', fqdn]
-        v.customize ['modifyvm', :id, '--cpus', node['cpu'].to_s]
-        v.customize ['modifyvm', :id, '--memory', node['memory'].to_s]
+      setting.vm.provider 'virtualbox' do |v|
+        v.customize ['modifyvm', :id, '--name', settings['fqdn']]
+        v.customize ['modifyvm', :id, '--cpus', settings['cpu'].to_s]
+        v.customize ['modifyvm', :id, '--memory', settings['memory'].to_s]
       end
     end
   end
