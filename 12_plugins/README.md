@@ -51,8 +51,20 @@ Dann in Foreman cockpit verwenden:
 
 ## Remote execution
 
+Foreman 3.4:
+
     foreman-installer --enable-foreman-plugin-remote-execution\
                       --enable-foreman-proxy-plugin-remote-execution-ssh
+
+Foreman 3.5:
+
+Achtung: bei Foreman 3.5 und neuer muss es `enable-foreman-proxy-plugin-remote-execution-script` heissen.
+Ausserdem muss zusätzlich foreman tasks installiert werden:
+
+    foreman-installer --enable-foreman-plugin-remote-execution\
+                      --enable-foreman-proxy-plugin-remote-execution-script\
+                      --enable-foreman-plugin-task
+
 
     foreman-maintain service restart --only foreman
     systemctl restart foreman-proxy
