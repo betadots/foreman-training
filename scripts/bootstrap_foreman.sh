@@ -4,9 +4,9 @@ echo "DNF: Clean metadata"
 sudo dnf clean all
 echo "Installing Repo Packages"
 echo "foreman"
-sudo dnf -y localinstall https://yum.theforeman.org/releases/3.3/el8/x86_64/foreman-release.rpm
+sudo dnf -y localinstall https://yum.theforeman.org/releases/3.4/el8/x86_64/foreman-release.rpm
 echo "Katello"
-sudo dnf -y localinstall https://yum.theforeman.org/katello/4.5/katello/el8/x86_64/katello-repos-latest.rpm
+sudo dnf -y localinstall https://yum.theforeman.org/katello/4.6/katello/el8/x86_64/katello-repos-latest.rpm
 echo "Puppet 7"
 sudo dnf -y localinstall https://yum.puppet.com/puppet7-release-el-8.noarch.rpm
 echo "Enable powertools"
@@ -25,7 +25,7 @@ sudo dnf -y install foreman-installer-katello
 
 if [ ! -d /var/lib/tftpboot/boot ]; then
   echo "fix for https://github.com/theforeman/puppet-foreman/issues/580"
-  echo "creating boot directory foir tftpserver"
+  echo "creating boot directory for tftpserver"
   sudo mkdir -p /var/lib/tftpboot/boot
 fi
 

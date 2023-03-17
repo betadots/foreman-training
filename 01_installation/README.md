@@ -59,16 +59,16 @@ Falls die Plugins schon installiert waren, kann man prüfen, ob Aktualisierungen
 
 ## Vagrant Box
 
-Vagrant arbeitet mit vorbereiteten VM Images. Wir muessen das CentOS/8 Image lokal ablegen:
+Vagrant arbeitet mit vorbereiteten VM Images. Wir muessen das betadots/centos8p7 Image lokal ablegen:
 
-    vagrant box add centos/stream8 --provider virtualbox
+    vagrant box add betadots/centos8p7 --provider virtualbox
 
-    ==> box: Loading metadata for box 'centos/stream8'
-        box: URL: https://vagrantcloud.com/centos/stream8
+    ==> box: Loading metadata for box 'betadots/centos8p7'
+        box: URL: https://vagrantcloud.com/betadots/centos8p7
     ==> box: Adding box 'stream8' (vxxx.y) for provider: virtualbox
-        box: Downloading: https://vagrantcloud.com/centos/boxes/stream8/versions/xxxx.y/providers/virtualbox.box
+        box: Downloading: https://vagrantcloud.com/betadots/boxes/centos8p7/versions/xxxx.y/providers/virtualbox.box
         box: Download redirected to host: cloud.centos.org
-    ==> box: Successfully added box 'centos/stream8' (vxxxx.y) for 'virtualbox'!
+    ==> box: Successfully added box 'betadots/centos8p7' (vxxxx.y) for 'virtualbox'!
 
 ## VirtualBox Vorbereitung
 
@@ -146,13 +146,21 @@ Achtung ab Version Foreman 3.4 and Katello 4.6! Tuning parameter!
 
 Jetzt kann der Foreman Installer gestartet werden:
 
-    foreman-installer --scenario katello -i # --tuning default
+    foreman-installer --scenario katello -i --tuning development
 
 Im interaktiven Modus können Komponenten hinzugefügt oder entfernt werden:
 
-    63. [✓] Configure foreman_proxy_plugin_remote_execution_script
+    69. [✓] Configure foreman_proxy_plugin_remote_execution_script
 
-Dann Punkt `70. Save and run` auswaehlen.
+Dann Punkt `76. Cancel` auswaehlen.
+
+Jetzt kann der Installer richtig gestartet werden:
+
+    foreman-installer --scenario katello \
+        --enable-foreman-plugin-remote-execution \
+        --enable-foreman-proxy-plugin-remote-execution-script \
+        --enable-foreman-cli-remote-execution \
+        --tuning development
 
 Die Installation dauert.
 Nach einiger Zeit kommt eine Abschlussmeldung:
@@ -232,18 +240,18 @@ Aktivierung von Puppet auf einem Smart-Proxy:
 
 Die Remote Execution erfolgt über Smart Proxy.
 
-Dazu muss der Foreman-Proxy User einen SSH Key haben, der in der Infrastruktur vertile wurde.
+Dazu muss der Foreman-Proxy User einen SSH Key haben, der in der Infrastruktur verteilt werden muss.
 
 1. manuelles kopieren vom Smart-Proxy
 
     su - foreman-proxy
-    ssh-copy-id -i ~foreman-proxy/.ssh/id_rsa_foreman_proxy.pub root@target.example.com
+    ssh-copy-id -i /var/lib/foreman-proxy/ssh/id_rsa_foreman_proxy.pub root@target.example.com
     exit
 
 Prüfen der Verbindung:
 
     su - foreman-proxy
-    ssh -i ~foreman-proxy/.ssh/id_rsa_foreman_proxy root@target.example.com
+    ssh -i /var/lib/foreman-proxy/ssh/id_rsa_foreman_proxy root@target.example.com
     exit
 
 2. Foreman API
@@ -330,6 +338,37 @@ Dazu gehoeren zum Beispiel:
 - TFTP Server
 - DNS Server
 - Remote Execution
+
+## Konfiguration Smart Proxy
+
+Die Einrichtung erfolgt mit Hilfe des Foreman Installers.Im nächsten Schritt werden wir verschiedene Basis Dienste am Smart Proxy integrieren.
+
+### DHCPD
+
+    foreman-installer --foreman-proxy-dhcp true \n
+        --foreman-proxy-dhcp-config /etc/dhcp/dhcpd.conf \n
+        --foreman-proxy-dhcp-leases /var/lib/dhcpd/dhcpd.leases \n
+        --foreman-proxy-dhcp-omapi-port 7911 \n
+        --foreman-proxy-dhcp-server 10.100.10.101 \n
+        --foreman-proxy-dhcp-interface eth1 \n
+        --foreman-proxy-dhcp-managed false \n # Do not manage dhcpd !
+        --foreman-proxy-dhcp-provider isc
+
+### DNS
+
+    foreman-installer --foreman-proxy-dns true \n
+        --foreman-proxy-dns-provider nsupdate \n
+        --foreman-proxy-dns-ttl 86400 \n
+        --foreman-proxy-dns-managed false \n
+        --foreman-proxy-dns-server 127.0.0.1 \n
+        --foreman-proxy-keyfile /etc/rndc.key
+
+### TFTP
+
+    foreman-installer --foreman-proxy-tftp true \n
+        --foreman-proxy-tftp-managed false \n
+        --foreman-proxy-tftp-root /var/lib/tftpboot/ \n
+        --foreman-proxy-tftp-servername foreman.betadots.training
 
 Die Einstellungen für Smart Proxies koennen im Webinterface analysiert werden:
 

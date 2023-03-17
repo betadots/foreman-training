@@ -56,9 +56,19 @@ Vagrant.configure('2') do |config|
   vms.each do |node, settings|
     config.vm.define settings['fqdn'] do |setting|
       setting.vm.box = settings['box']
+      setting.vm.box_url = settings['box_url'] unless settings['box_url'].nil?
       setting.vm.hostname = settings['fqdn']
       setting.vm.network :private_network, ip: settings['ip']
-      setting.vbguest.installer_options = { allow_kernel_upgrade: true } if settings['box'].start_with?('centos')
+      setting.vbguest.auto_update = false
+      #setting.vbguest.installer_options = {
+      #  allow_kernel_upgrade: true,
+      #} # if settings['box'].start_with?('centos')
+      #setting.vbguest.installer_hooks[:before_install] = [
+      #  "for file in $(ls /etc/yum.repos.d/); do sed -i  -E 's/^mirrorlist.*$//' /etc/yum.repos.d/$file; done ",
+      #  "for file in $(ls /etc/yum.repos.d/); do sed -i  -e 's/#baseurl/baseurl/' /etc/yum.repos.d/$file; done ",
+      #  "for file in $(ls /etc/yum.repos.d/); do sed -i  -e 's/mirror.centos.org\/$contentdir\/$releasever/vault.centos.org\/8\.4\.2105/' /etc/yum.repos.d/$file; done ",
+      #  "sleep 1"
+      #]
       setting.vm.provision 'shell', path: '../scripts/vagrant-sethostname.sh', args: settings['fqdn'].to_s
       setting.hostmanager.aliases = settings['aliases']
       # bootstrap foreman server
