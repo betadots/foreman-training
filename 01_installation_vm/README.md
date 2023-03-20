@@ -19,7 +19,7 @@ Wenn man sich von einem Apple System aus eingeloggt hat, muss man eine Umgebungs
 
 ## Vorbereitung
 
-Wenn man Foreman 3.3 und Katello 4.5 verwenden möchte, kann man ein Script in diesem Repository verwenden.
+Wenn man Foreman 3.4 und Katello 4.6 verwenden möchte, kann man ein Script in diesem Repository verwenden.
 
     git clone https://github.com/betadots/foreman-training
     cd foreman-training

@@ -1,15 +1,15 @@
 
 # Foreman/Katello Training
 
-(c) 2022 - betadots GmbH
+(c) 2022-2023 - betadots GmbH
 
 ## Versionen
 
-Das Training basiert auf Foreman 3.3 und Katello 4.5.
+Das Training basiert auf Foreman 3.4 und Katello 4.6.
 
-Diese Versionskombination ist mit EL7 und EL8 kompatibel.
+Diese Versionskombination ist nur mit EL8 kompatibel.
 
-Die aktuelle Versionen (Stand 12/2022) sind: Foreman 3.4 und Katello 4.6
+Die aktuelle Versionen (Stand 03/2023) sind: Foreman 3.5 Katello 4.7
 
 ## Hard- und Software Anforderungen
 

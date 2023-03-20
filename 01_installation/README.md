@@ -129,6 +129,30 @@ Der Foreman Installer erwartet eine sauber konfigurierte locale: `export LANG=en
 
 Wenn man sich von einem Apple System aus eingeloggt hat, muss man eine Umgebungsvariable löschen: `unset LC_CTYPE`
 
+## Storage
+
+Wir brauchen Festplatzenplatz für Repos. Dafür wurde die Festplatte vergößert.
+
+    fdisk /dev/sda
+    n
+    p
+    2
+    <first sector: default>
+    <last sector default>
+    w
+    q
+
+Filesystem:
+
+    mkfs.xfs /dev/sda2
+    mkdir -p /var/lib/pulp
+
+edit `/etc/fstab`
+
+    echo "\n/dev/sda2 /var/lib/pulp	xfs	defaults	1 1\n" >> /etc/fstab
+    mount -a
+    df
+
 ## Foreman Installer
 
 Achtung ab Version Foreman 3.4 and Katello 4.6! Tuning parameter!
@@ -148,11 +172,12 @@ Jetzt kann der Foreman Installer gestartet werden:
 
     foreman-installer --scenario katello -i --tuning development
 
-Im interaktiven Modus können Komponenten hinzugefügt oder entfernt werden:
+Im interaktiven Modus können Komponenten hinzugefügt oder entfernt werden.
+Wir nutzen den interkativen Modus nur, um eine Übersicht über die Möglichkeiten uz erhalten.
 
     69. [✓] Configure foreman_proxy_plugin_remote_execution_script
 
-Dann Punkt `76. Cancel` auswaehlen.
+Dann Punkt `76. Cancel run without Saving` auswaehlen.
 
 Jetzt kann der Installer richtig gestartet werden:
 
@@ -183,6 +208,10 @@ Falls diese Datei nicht mehr vorhanden ist, kann man ein neues Admin Passwort se
 
     foreman-rake permissions:reset
 
+Man kann auch ein Passwort bei der Installation angeben:
+
+    --foreman-initial-admin-password p4ssw0rd
+
 ## Greenfield <-> Brownfield
 
 Im Training gehen wir davon aus, dass Infrastruktur Komponentne, wie DHCP, DNS, TFTP bereits vorhanden sind.
@@ -196,14 +225,18 @@ Im Training nehmen wir die Integration erst nach der Installation vor.
 
 Einloggen als Admin mit dem Browser: [https://foreman.betadots.training](https://foreman.betadots.training)
 
+Falls man die Sprache im Webinterface anpassen möchte, muss man Rechts Oben auf "Admin User" -> "Mein Account" klicken und "Sprache" neu setzen
+
 ## Trainings Erweiterungen
 
 ### Foreman/Ansible
 
+Auf dem Foreman Server:
+
     foreman-installer --enable-foreman-plugin-ansible \
       --enable-foreman-proxy-plugin-ansible
 
-Auf einem Smart-Proxy:
+Auf einem zusätzlichen Smart-Proxy (NICHT im Training!):
 
     foreman-installer --scenario foreman-proxy-content \
       --enable-foreman-proxy-plugin-ansible
@@ -223,7 +256,7 @@ Aktivierung von Puppet auf dem Foreman Server mit Hilfe von installer Optionen:
       --puppet-server-foreman-ssl-cert /etc/pki/katello/puppet/puppet_client.crt \
       --puppet-server-foreman-ssl-key /etc/pki/katello/puppet/puppet_client.key
 
-Aktivierung von Puppet auf einem Smart-Proxy:
+Aktivierung von Puppet auf einem zusätzlichen Smart-Proxy (NICHT im Training!):
 
     foreman-installer --scenario foreman-proxy-content \
       --foreman-proxy-puppet true \
@@ -242,7 +275,7 @@ Die Remote Execution erfolgt über Smart Proxy.
 
 Dazu muss der Foreman-Proxy User einen SSH Key haben, der in der Infrastruktur verteilt werden muss.
 
-1. manuelles kopieren vom Smart-Proxy
+1. manuelles kopieren vom Smart-Proxy - NICHT im Training
 
     su - foreman-proxy
     ssh-copy-id -i /var/lib/foreman-proxy/ssh/id_rsa_foreman_proxy.pub root@target.example.com
@@ -254,16 +287,14 @@ Prüfen der Verbindung:
     ssh -i /var/lib/foreman-proxy/ssh/id_rsa_foreman_proxy root@target.example.com
     exit
 
-2. Foreman API
+2. Foreman API - das willen wir machen!
 
-Auf dem Ziel System:
+Auf dem Ziel System (in unserem Fall der Foreman Server):
 
-    su -
     mkdir ~/.ssh
-    curl <https://foreman.betadots.training:9090/ssh/pubkey> >> ~/.ssh/authorized_keys
+    curl https://foreman.betadots.training:9090/ssh/pubkey >> ~/.ssh/authorized_keys
     chmod 700 ~/.ssh
     chmod 600 ~/.ssh/authorized_keys
-    exit
 
 3. Kickstart Template
 
@@ -271,11 +302,12 @@ Bei einer Neuinstallation über Netzwerk (PXE Boot) kann man das hinterlegen des
 
 Das machen wir, wenn wir zum Thema 'Provisioning' kommen.
 
-## Installation Foreman Smart-Proxy
+## Installation Foreman Content Smart-Proxy
 
-Für die Installation eines Systems als Foreman Smart-Proxy benötigen wir Content und einen Activation Key.
+Für die Installation eines Systems als Foreman Content Smart-Proxy benötigen wir Content und einen Activation Key.
 
 Dies wird unter Punkt 02_content durchgeführt.
+Hier sind nur ein paar Schritte aufgelistet.
 
 Generelle Anleitung:
 
@@ -341,7 +373,7 @@ Dazu gehoeren zum Beispiel:
 
 ## Konfiguration Smart Proxy
 
-Die Einrichtung erfolgt mit Hilfe des Foreman Installers.Im nächsten Schritt werden wir verschiedene Basis Dienste am Smart Proxy integrieren.
+Die Einrichtung erfolgt mit Hilfe des Foreman Installers. Im nächsten Schritt werden wir verschiedene Basis Dienste am Smart Proxy integrieren.
 
 ### DHCPD
 
