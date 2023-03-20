@@ -4,7 +4,7 @@ Mit Foreman kann man Konfigurationsmanagement verwalten.
 Es werden die folgenden CfgMgmt Tools unterstützt:
 
 - Puppet
-- Ansible
+- Ansible (Achtung: Stand März 2023 - Ansible Task ist broken "no module name psutil")
 - Chef
 - Salt
 

@@ -50,7 +50,7 @@ Idealerweise legen die Teilnehmer nur das "kleine" Foreman Client und evtl das P
 
 Repository Type: `Yum Repositories`
 
-URL: `https://yum.theforeman.org/client/2.3`
+URL: `https://yum.theforeman.org/client/3.5`
 
 Click Discover
 
@@ -59,7 +59,7 @@ Danach nur x86_64 für el-8 auswählen: `/el-8/x86_64`
 
 Klick: Create selected
 
-    Name: Foreman Client 2.3
+    Name: Foreman Client 3.5
 
     GPG Key: aus Liste auswaehlen
 
@@ -287,7 +287,7 @@ Save
 
 ## Alles zusammen bringen
 
-Eine Content View Version kann man an ein Lifecycle Environmetn verknuepfen:
+Eine Content View Version kann man an ein Lifecycle Environment verknuepfen:
 
     Foreman Login
       -> Content
@@ -325,19 +325,20 @@ Unter dem Eintrag Content Host kann man den Stand der Pakete auf einzelnen Syste
       -> Hosts
         -> Content Hosts
 
-Hier wird bei "Subscription Status" ein Rotes Kreuz stehen.
+Host auswählen, Register auswählen.
 
-Auf dem Foreman Server (als Root User):
+OS und Content View und Activation Key angeben.
 
-    curl --insecure --output katello-ca-consumer-latest.noarch.rpm https://foreman.betadots.training/pub/katello-ca-consumer-latest.noarch.rpm
-    yum localinstall -y katello-ca-consumer-latest.noarch.rpm
-    subscription-manager register --org="Default_Organization" --activationkey="Katello-Client"
-    subscription-manager list --available
-    yum install -y katello-agent
+Shell command copy-paste.
+
+Beispiel:
+
+    curl -sS  'https://foreman.betadots.training/register?activation_keys=Library&location_id=2&operatingsystem_id=1&organization_id=1&update_packages=false' -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo0LCJpYXQiOjE2NzkzMjEzMzcsImp0aSI6IjJiNTQ3YjBiNGU1ZDkyNmZlYTgyNTczMTIwYjYyMmRlODdiNDg5ZDFlNzg2ZTgwOGYxYzIzMDcxNWMzYTM5N2UiLCJleHAiOjE2NzkzMzU3MzcsInNjb3BlIjoicmVnaXN0cmF0aW9uI2dsb2JhbCByZWdpc3RyYXRpb24jaG9zdCJ9.zc_eRJ0zUF6K-49BpfD03sC9iiAU_kt1pryYVxrOx84' | bash
+
 
 Weitere Informationen: [https://theforeman.org/plugins/katello/3.14/installation/clients.html#manual](https://theforeman.org/plugins/katello/3.14/installation/clients.html#manual)
 
-ACHTUNG: in Katello 4 wird von katello-agent auf Remote Execution gewechselt!!
+ACHTUNG: in Katello 4 wurde von katello-agent auf Remote Execution gewechselt!!
 
 ## Host Collections
 

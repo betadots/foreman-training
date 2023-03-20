@@ -185,6 +185,7 @@ Jetzt kann der Installer richtig gestartet werden:
         --enable-foreman-plugin-remote-execution \
         --enable-foreman-proxy-plugin-remote-execution-script \
         --enable-foreman-cli-remote-execution \
+        --enable-foreman-cli-tasks --enable-foreman-plugin-tasks \
         --tuning development
 
 Die Installation dauert.
@@ -234,7 +235,8 @@ Falls man die Sprache im Webinterface anpassen möchte, muss man Rechts Oben auf
 Auf dem Foreman Server:
 
     foreman-installer --enable-foreman-plugin-ansible \
-      --enable-foreman-proxy-plugin-ansible
+      --enable-foreman-proxy-plugin-ansible \
+      --enable-foreman-cli-ansible
 
 Auf einem zusätzlichen Smart-Proxy (NICHT im Training!):
 
