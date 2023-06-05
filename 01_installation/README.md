@@ -379,29 +379,29 @@ Die Einrichtung erfolgt mit Hilfe des Foreman Installers. Im nächsten Schritt w
 
 ### DHCPD
 
-    foreman-installer --foreman-proxy-dhcp true \n
-        --foreman-proxy-dhcp-config /etc/dhcp/dhcpd.conf \n
-        --foreman-proxy-dhcp-leases /var/lib/dhcpd/dhcpd.leases \n
-        --foreman-proxy-dhcp-omapi-port 7911 \n
-        --foreman-proxy-dhcp-server 10.100.10.101 \n
-        --foreman-proxy-dhcp-interface eth1 \n
-        --foreman-proxy-dhcp-managed false \n # Do not manage dhcpd !
+    foreman-installer --foreman-proxy-dhcp true \
+        --foreman-proxy-dhcp-config /etc/dhcp/dhcpd.conf \
+        --foreman-proxy-dhcp-leases /var/lib/dhcpd/dhcpd.leases \
+        --foreman-proxy-dhcp-omapi-port 7911 \
+        --foreman-proxy-dhcp-server 10.100.10.101 \
+        --foreman-proxy-dhcp-interface eth1 \
+        --foreman-proxy-dhcp-managed false \ # Do not manage dhcpd ! \
         --foreman-proxy-dhcp-provider isc
 
 ### DNS
 
-    foreman-installer --foreman-proxy-dns true \n
-        --foreman-proxy-dns-provider nsupdate \n
-        --foreman-proxy-dns-ttl 86400 \n
-        --foreman-proxy-dns-managed false \n
-        --foreman-proxy-dns-server 127.0.0.1 \n
+    foreman-installer --foreman-proxy-dns true \
+        --foreman-proxy-dns-provider nsupdate \
+        --foreman-proxy-dns-ttl 86400 \
+        --foreman-proxy-dns-managed false \
+        --foreman-proxy-dns-server 127.0.0.1 \
         --foreman-proxy-keyfile /etc/rndc.key
 
 ### TFTP
 
-    foreman-installer --foreman-proxy-tftp true \n
-        --foreman-proxy-tftp-managed false \n
-        --foreman-proxy-tftp-root /var/lib/tftpboot/ \n
+    foreman-installer --foreman-proxy-tftp true \
+        --foreman-proxy-tftp-managed false \
+        --foreman-proxy-tftp-root /var/lib/tftpboot/ \
         --foreman-proxy-tftp-servername foreman.betadots.training
 
 Die Einstellungen für Smart Proxies koennen im Webinterface analysiert werden:
