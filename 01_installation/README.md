@@ -385,7 +385,7 @@ Die Einrichtung erfolgt mit Hilfe des Foreman Installers. Im nächsten Schritt w
         --foreman-proxy-dhcp-omapi-port 7911 \
         --foreman-proxy-dhcp-server 10.100.10.101 \
         --foreman-proxy-dhcp-interface eth1 \
-        --foreman-proxy-dhcp-managed false \ # Do not manage dhcpd ! \
+        --foreman-proxy-dhcp-managed false # Do not manage dhcpd ! \
         --foreman-proxy-dhcp-provider isc
 
 ### DNS
