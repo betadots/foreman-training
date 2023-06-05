@@ -19,7 +19,7 @@ Unter Content Credentials kann man GPG Keys und/oder SSL Zertifikate hinterlegen
 
 Name: CentOS7
 
-CentOS GPG Key kopieren vom mirror [http://mirror.centos.org/centos/RPM-GPG-KEY-CentOS-7](http://mirror.centos.org/centos/RPM-GPG-KEY-CentOS-7)
+CentOS GPG Key kopieren vom mirror [http://mirror.centos.org/centos/RPM-GPG-KEY-CentOS-Official](http://mirror.centos.org/centos/RPM-GPG-KEY-CentOS-Official)
 
     Save
 
