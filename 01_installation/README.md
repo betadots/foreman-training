@@ -57,6 +57,15 @@ Falls die Plugins schon installiert waren, kann man prüfen, ob Aktualisierungen
 
     vagrant plugin update
 
+Achtung: Nach einem Update von Vagrant kann es zu einem SSL Fehler kommen.
+In diesem Fall muss das folgende Kommando ausgeführt werden:
+
+```bash
+vagrant plugin install --plugin-clean-sources --plugin-source https://rubygems.org vagrant-hostmanager
+vagrant plugin install --plugin-clean-sources --plugin-source https://rubygems.org vagrant-vbguest
+vagrant plugin install --plugin-clean-sources --plugin-source https://rubygems.org vagrant-disksize
+```
+
 ## Vagrant Box
 
 Vagrant arbeitet mit vorbereiteten VM Images. Wir muessen das betadots/centos8p7 Image lokal ablegen:
