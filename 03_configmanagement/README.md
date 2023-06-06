@@ -4,7 +4,7 @@ Mit Foreman kann man Konfigurationsmanagement verwalten.
 Es werden die folgenden CfgMgmt Tools unterstützt:
 
 - Puppet
-- Ansible (Achtung: Stand März 2023 - Ansible Task ist broken "no module name psutil")
+- Ansible
 - Chef
 - Salt
 
@@ -110,6 +110,40 @@ In der Job Übersicht kann man den gewünschten Job auswählen.
 z.B. das Starten des Puppet Agent (Job categrory "Puppet" -> Job template "Run Puppet Once")
 
 Für Ansible geht der Weg direkt über den Host: Forman Login -> Hosts -> All hosts) den Host auswählen (Haken in der ersten Spalte, dann mann man unter "Select action" den Punkt "Run all Ansible roles" auswählen.
+
+Bug in Ansible/Foreman: "ERROR! Unexpected Exception, this is probably a bug: No module named psutil"
+
+[https://community.theforeman.org/t/error-unexpected-exception-this-is-probably-a-bug-no-module-named-psutil/16965](https://community.theforeman.org/t/error-unexpected-exception-this-is-probably-a-bug-no-module-named-psutil/16965)
+[https://github.com/ansible/ansible-runner/issues/54](https://github.com/ansible/ansible-runner/issues/54)
+
+Lösung:
+
+    dnf install python3.11-pip
+    python3.11 -m pip install psutil
+
+Bug in Foreman: call back (Ansible Reporting)
+
+Es fehlt die Python 'request' Erweiterung:
+
+    python3.11 -m pip install requests
+
+Ausserdem muss die Ansible Konfiguratoinsdatei bearbeitet werden:
+
+    # /etc/ansible/ansible.cfg
+    [defaults]
+    roles_path = /etc/ansible/roles:/usr/share/ansible/roles
+    collections_paths = /etc/ansible/collections:/usr/share/ansible/collections
+    callback_whitelist = theforeman.foreman.foreman
+    stdout_callback = theforeman.foreman.foreman
+    bin_ansible_callbacks = true
+
+    [callback_foreman]
+    report_type = foreman
+    proxy_url = https://foreman.betadots.training:9090
+    url = https://foreman.betadots.training
+    ssl_cert = /etc/foreman-proxy/foreman_ssl_cert.pem
+    ssl_key = /etc/foreman-proxy/foreman_ssl_key.pem
+    verify_certs = /etc/foreman-proxy/foreman_ssl_ca.pem
 
 Achtung: wenn man Ansible UND Puppet verwendet, dann muss man Foreman mitteilen, welcher Job für Puppet Agent Lauf verwendet werden soll: Ansible oder SSH.
 
