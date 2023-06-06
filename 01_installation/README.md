@@ -158,9 +158,11 @@ Filesystem:
 
 edit `/etc/fstab`
 
-    echo "\n/dev/sda2 /var/lib/pulp	xfs	defaults	1 1\n" >> /etc/fstab
-    mount -a
-    df
+```bash
+echo -e "\n/dev/sda2 /var/lib/pulp\txfs\tdefaults\t1\t1\n" >> /etc/fstab
+mount -a
+df
+```
 
 ## Foreman Installer
 
