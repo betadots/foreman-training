@@ -118,6 +118,15 @@ Am naechsten Tag kann die VM wieder geladen werden:
 
 ## VM pruefen
 
+Pruefen, ob VirtualBox Guest Extensions geladen sind.
+
+```bash
+df -kh | grep vagrant
+```
+
+Wenn hier keine Ausgabe erscheint, dann muss de VM neu instantiiert werden.
+Bitte abmelden von der Vagrant Box und die Ausgabe analysieren.
+
 Pruefen, ob eth1 Interface eine IP hat, `ip a`. Wenn nein: `ifup eth1`
 
 Achtung:
