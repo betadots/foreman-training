@@ -138,7 +138,7 @@ OS auswählen
 2. Stelle: OS mit Templates Assoziieren
 
 - Partition Table -> "Kickstart default" auswählen
-- Installation media -> "CentOS 7 mirror" auswählen (oder das vorher angelegten Installation media auswählen)
+- Installation media -> "CentOS 8 stream mirror" auswählen (oder das vorher angelegten Installation media auswählen)
 - Templates -> alle Templates auswählen, die man auswählen kann.
 
 Submit
@@ -196,11 +196,11 @@ Submit
 
 ## Host erzeugen in VirtualBox
 
-Hinweis: die Images werden initial in eine RAM Disk geladen. Deshalb benötigt die VM mindesten 1516 MB RAM.
+Hinweis: die Images werden initial in eine RAM Disk geladen. Deshalb benötigt die VM mindesten 2500 MB RAM (CentOS 8 Stream, Stand Juni 2023).
 
     New
       -> Host
-        -> 2048 MB RAM
+        -> 2548 MB RAM
           -> 8 GB HDD
 
 Boot Einstellungen ändern: 1. Festplatte -> 2. Netzwerk
@@ -214,8 +214,6 @@ MAC Adresse notieren
     Foreman Login
       -> Hosts
         -> Create Host
-
-ACHTUNG: nicht docker als Hostname nehmen. Dieser Name wird in Teil 7 verwendet.
 
 Host Tab:
 
@@ -243,6 +241,10 @@ Operating System Tab:
 Submit
 
 Es erscheint ein "New in progress" Balken.
+
+Bevor die VM gestartet wird, bitte unbedingt prüfen, ob die Router Konfiguration noch aktiv ist:
+
+    iptables -L -n -t nat
 
 ## Host in VirtualBox starten
 
