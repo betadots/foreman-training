@@ -246,6 +246,20 @@ Bevor die VM gestartet wird, bitte unbedingt prüfen, ob die Router Konfiguratio
 
     iptables -L -n -t nat
 
+Es kann vorkommen (Ursache noch unbekannt, Stand Juni 2023), dass die tftpboot loader nicht im richtigen Verzeichnis abgelegt werden.
+
+Prüfen
+
+  ls /var/lib/tftpboot/pxelinux.0
+
+Wenn diese Datei nicht vorhanden ist, dann bitte anderen Ort prüfen:
+
+  ls /tftpboot/pxelinux.0
+
+Wenn diese zweite Datei vorhandne ist, dann bitte alle Dateien kopieren:
+
+  cp /tftpboot/* /var/lib/tftpboot/
+
 ## Host in VirtualBox starten
 
 Achtung: bitte mit dem Starten der VM etwas warten. (ca 5 min!!!!!!!)
