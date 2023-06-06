@@ -117,7 +117,7 @@ file { $dirs:
   ensure  => directory,
   recurse => true,
   owner   => 'foreman-proxy',
-  group   => 'foreman-proxy'
+  group   => 'foreman-proxy',
 }
 service { 'tftp.service':
   ensure => running,

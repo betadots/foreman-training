@@ -60,11 +60,9 @@ Falls die Plugins schon installiert waren, kann man prüfen, ob Aktualisierungen
 Achtung: Nach einem Update von Vagrant kann es zu einem SSL Fehler kommen.
 In diesem Fall muss das folgende Kommando ausgeführt werden:
 
-```bash
-vagrant plugin install --plugin-clean-sources --plugin-source https://rubygems.org vagrant-hostmanager
-vagrant plugin install --plugin-clean-sources --plugin-source https://rubygems.org vagrant-vbguest
-vagrant plugin install --plugin-clean-sources --plugin-source https://rubygems.org vagrant-disksize
-```
+    vagrant plugin install --plugin-clean-sources --plugin-source https://rubygems.org vagrant-hostmanager
+    vagrant plugin install --plugin-clean-sources --plugin-source https://rubygems.org vagrant-vbguest
+    vagrant plugin install --plugin-clean-sources --plugin-source https://rubygems.org vagrant-disksize
 
 ## Vagrant Box
 
@@ -120,9 +118,7 @@ Am naechsten Tag kann die VM wieder geladen werden:
 
 Pruefen, ob VirtualBox Guest Extensions geladen sind.
 
-```bash
-df -kh | grep vagrant
-```
+    df -kh | grep vagrant
 
 Wenn hier keine Ausgabe erscheint, dann muss de VM neu instantiiert werden.
 Bitte abmelden von der Vagrant Box und die Ausgabe analysieren.
@@ -167,11 +163,9 @@ Filesystem:
 
 edit `/etc/fstab`
 
-```bash
-echo -e "\n/dev/sda2 /var/lib/pulp\txfs\tdefaults\t1\t1\n" >> /etc/fstab
-mount -a
-df
-```
+    echo -e "\n/dev/sda2 /var/lib/pulp\txfs\tdefaults\t1\t1\n" >> /etc/fstab
+    mount -a
+    df
 
 ## Foreman Installer
 
@@ -309,7 +303,7 @@ Prüfen der Verbindung:
     ssh -i /var/lib/foreman-proxy/ssh/id_rsa_foreman_proxy root@target.example.com
     exit
 
-2. Foreman API - das willen wir machen!
+2. Foreman API - das wollen wir machen!
 
 Auf dem Ziel System (in unserem Fall der Foreman Server):
 
