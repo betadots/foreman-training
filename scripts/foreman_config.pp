@@ -12,12 +12,19 @@ exec { 'sysctl reload':
   refreshonly => true,
 }
 
+packge { 'dos2unix':
+  ensure => present,
+}
 file { '/etc/sysconfig/iptables':
   ensure => file,
   source => "${cfg_base_dir}/iptables.sysconfig",
-  notify => Exec['restore iptables'],
+  notify => Exec['dos2unix iptables'],
 }
-
+exec { 'dos2unix iptables':
+  command     => '/bin/dos2unix /etc/sysconfig/iptables',
+  refreshonly => true,
+  notify      => Exec['restore iptables'],
+}
 exec { 'restore iptables':
   command     => '/bin/cat /etc/sysconfig/iptables | /sbin/iptables-restore',
   refreshonly => true,
