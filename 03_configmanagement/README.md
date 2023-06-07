@@ -201,25 +201,7 @@ Damit Nodes autoatmisch in eine Hostgruppe aufgenommen werden, benötigen wir ei
 
 Installation:
 
-    foreman-installer --scenario katello -i
-
-Auswaehlen des Plugins:
-
-    24. [✗] Configure foreman_plugin_default_hostgroup
-
-`61. Save and run` aswaehlen.
-
-Wenn hier ein Fahler kommt:
-
-    Error while evaluating a Method call, Class[Foreman::Plugin::Default_hostgroup]: parameter 'hostgroups' index 0 entry '[]' expects a Hash value, got Undef
-
-Bug bei Foreman: <https://projects.theforeman.org/issues/31462>
-
-Dann das RPM Paket installieren:
-
-    yum install tfm-rubygem-foreman_default_hostgroup.noarch
-    foreman-rake db:migrate
-    foreman-maintain service restart --only foreman
+    foreman-installer --scenario katello --enable-foreman-plugin-default-hostgroup
 
 Nach der Installation muss das Plugin konfiguriert werden:
 
@@ -245,6 +227,10 @@ Beispiel:
           "stage": "prod"
         "Default":
           "hostname": ".*"
+
+Achtung: Bei Ansible wird der Name des Facts anders erstellt und kann hier nicht verwendet werden. Siehe [https://github.com/betadots/foreman-training/issues/9](https://github.com/betadots/foreman-training/issues/9).
+
+Ansibe external Fact Name: `ansible_local::<filename>::<fact>`
 
 Wichtig: nach Änderungen an der Datei muss der Foreman Service neu gestartet werden: `foreman-maintain service restart --only foreman`.
 
