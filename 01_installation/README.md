@@ -94,12 +94,21 @@ Als Virtualisierungsbackend wird [Virtualbox](https://virtualbox.org) genutzt.
 Bitte prüfen, ob Virtualbox installiert ist, notfalls nachinstallieren.
 Ausserdem werden die VirtualBox Guest Extensoins benötigt.
 
+Achtung: auf Linux pruefen, dass der lokale User in der Gruppe `vboxusers` aufgenommen wurde: `id`
+Wenn die Gruppe fehlt: `usermod -a -G vboxusers <username>` ausfuehren und neu einloggen.
+
 ## VM starten
 
 Jetzt kann die VM instantiiert werden:
 
     cd vagrant
     vagrant up foreman.betadots.training --provider virtualbox
+
+Achtung: wenn es hier zu einer Fehlermeldung kommt: `VBoxManage error: Code E_ACCESSDENIED (0x80070005)` dann muss Virtualbox konfiguriert werden (meist nur Linux).
+
+Anlegen der Datei `/etc/vbox/networks.conf`:
+
+    * 0.0.0.0/0 ::/0
 
 Danach Login:
 
@@ -254,7 +263,10 @@ Auf dem Foreman Server:
 
 Auf einem zusätzlichen Smart-Proxy (NICHT im Training!):
 
-    foreman-installer --scenario foreman-proxy-content \
+    foreman-installer
+      --no-enable-foreman \
+      --no-enable-katello \
+      --scenario foreman-proxy-content \
       --enable-foreman-proxy-plugin-ansible
 
 ### Foreman/Puppet
@@ -391,15 +403,17 @@ Dazu gehoeren zum Beispiel:
 
 Die Einrichtung erfolgt mit Hilfe des Foreman Installers. Im nächsten Schritt werden wir verschiedene Basis Dienste am Smart Proxy integrieren.
 
+Hinweis: wir aktivieren den Smart Proxy auf dem Foreman Server. Wenn man weitere Content Proxies einrichten möchte muss man auf dem System das Foreman und das Katello Repository einbinden und das `foreman-installer` Paket installieren.
+
 ### DHCPD
 
     foreman-installer --foreman-proxy-dhcp true \
         --foreman-proxy-dhcp-config /etc/dhcp/dhcpd.conf \
         --foreman-proxy-dhcp-leases /var/lib/dhcpd/dhcpd.leases \
         --foreman-proxy-dhcp-omapi-port 7911 \
-        --foreman-proxy-dhcp-server 10.100.10.101 \
+        --foreman-proxy-dhcp-server 10.100.10.101 \ # Der DHCP Server laeuft nur auf dem internen Interface \
         --foreman-proxy-dhcp-interface eth1 \
-        --foreman-proxy-dhcp-managed false # Do not manage dhcpd ! \
+        --foreman-proxy-dhcp-managed false \ # Do not manage dhcpd ! \
         --foreman-proxy-dhcp-provider isc
 
 ### DNS
@@ -415,7 +429,7 @@ Die Einrichtung erfolgt mit Hilfe des Foreman Installers. Im nächsten Schritt w
 
     foreman-installer --foreman-proxy-tftp true \
         --foreman-proxy-tftp-managed false \
-        --foreman-proxy-tftp-root /var/lib/tftpboot/ \
+        --foreman-proxy-tftp-root /tftpboot/ \
         --foreman-proxy-tftp-servername foreman.betadots.training
 
 Die Einstellungen für Smart Proxies koennen im Webinterface analysiert werden:

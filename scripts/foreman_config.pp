@@ -12,7 +12,7 @@ exec { 'sysctl reload':
   refreshonly => true,
 }
 
-packge { 'dos2unix':
+package { 'dos2unix':
   ensure => present,
 }
 file { '/etc/sysconfig/iptables':
@@ -106,18 +106,6 @@ $packages = [
 ]
 package { $packages:
   ensure => present,
-}
-$dirs = [
-  '/var/lib/tftpboot/grub2',
-  '/var/lib/tftpboot/grub',
-  '/var/lib/tftpboot/boot',
-  '/var/lib/tftpboot/pxelinux.cfg',
-]
-file { $dirs:
-  ensure  => directory,
-  recurse => true,
-  owner   => 'foreman-proxy',
-  group   => 'foreman-proxy',
 }
 service { 'tftp.service':
   ensure => running,
