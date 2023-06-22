@@ -246,8 +246,10 @@ Bevor die VM gestartet wird, bitte unbedingt prüfen, ob die Router Konfiguratio
 
     iptables -L -n -t nat
 
-Es kann vorkommen (Ursache noch unbekannt, Stand Juni 2023), dass die tftpboot loader nicht im richtigen Verzeichnis abgelegt werden.
+ACHTUNG: CentOS 8 Stream: das Paket `syslinux-tftpboot` installiert die tftp Boot Images nach `/tftpboot`.
+Der tftp Service erwartet die Dateien allerdings in `/var/lib/tftpboot`.
 
+Loesung: in `/usr/lib/systemd/system/tftp.service` den Pfad anpassen.
 Prüfen
 
   ls /var/lib/tftpboot/pxelinux.0

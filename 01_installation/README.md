@@ -99,6 +99,10 @@ Wenn die Gruppe fehlt: `usermod -a -G vboxusers <username>` ausfuehren und neu e
 
 ## VM starten
 
+ACHTUNG: die Foreman/Katello Instanz bekommt eine zweite Festplatte mit 100 GB Groesse.
+Diese Festapltte kann dann für Debian Mirror in Katello eingesetzt werden.
+Bei Systemen mit wenig Festplattenplatz, bitte in der Datei `vagrant/Vagrantfile` die Groesse anpassen, wenn man nicht genug Platz hat.
+
 Jetzt kann die VM instantiiert werden:
 
     cd vagrant

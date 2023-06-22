@@ -75,7 +75,7 @@ Vagrant.configure('2') do |config|
       # setting.vm.provision :shell, path: '../scripts/vagrant-auto-root-login.sh'
       # bootstrap foreman server
       if node == 'foreman'
-        setting.disksize.size = '50GB'
+        setting.disksize.size = '100GB'
         setting.vm.provision 'shell', path: '../scripts/bootstrap_foreman.sh'
       else
         setting.vm.provision 'shell', path: '../scripts/bootstrap_system.sh'

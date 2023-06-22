@@ -197,6 +197,13 @@ Anlegen der Hostgroups "Development" und "Development/Container".
 
 ## Automatisch Nodes in Hostgruppen hinterlegen
 
+### Variante 1: `foreman_hostgroup` fact
+
+Wenn ein System den Fact `foreman_hostgroup` mitliefert, wird das Sstem in die angegebene Hostgruppe automatisch aufgenommen.
+Bedingung ist, dass die Hostgroup bereits existiert.
+
+### Variante 2: Default Host Group Plugin
+
 Damit Nodes autoatmisch in eine Hostgruppe aufgenommen werden, benötigen wir ein Plugin: default hostgroup
 
 Installation:
@@ -218,7 +225,7 @@ Beispiel:
     ---
     :default_hostgroup:
       :facts_map:
-        "Development/Container"
+        "Development/Container":
           "stage": "dev"
           "role": "docker"
         "Development":
@@ -286,11 +293,5 @@ Beispiel:
     Puppet CA
       -> Orange Klicken
         -> Sign
-
-## Apache
-
-    vagrant up apache.betadots.training
-
-Schritte von vorher wiederholen.
 
 Weiter geht es mit [Teil 4 Provisionierung CentOS](../04_provisioning_centos)
