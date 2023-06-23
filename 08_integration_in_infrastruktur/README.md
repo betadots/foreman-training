@@ -6,6 +6,9 @@
 
 siehe [Installing an External Smart Proxy Server 3.4](https://docs.theforeman.org/3.4/Installing_Proxy/index-foreman-el.html)
 
+ACHTUNG! LOCALE!
+
+    export LANG=en_US.UTF-8
     dnf install https://yum.theforeman.org/releases/3.4/el8/x86_64/foreman-release.rpm
     dnf install https://yum.puppet.com/puppet7-release-el-8.noarch.rpm
     dnf module enable foreman:el8
@@ -36,7 +39,9 @@ Mount nach `/var/lib/pulp`
 Optional kann der neue Smart Proxy am Katello als Content Host registriert werden.
 
 Installation:
+ACHTUNG: LOCALE
 
+    export LANG=en_US.UTF-8
     dnf install https://yum.theforeman.org/releases/3.4/el8/x86_64/foreman-release.rpm
     dnf -y localinstall https://yum.theforeman.org/katello/4.6/katello/el8/x86_64/katello-repos-latest.rpm
     dnf install https://yum.puppet.com/puppet7-release-el-8.noarch.rpm
