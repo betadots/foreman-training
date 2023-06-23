@@ -55,6 +55,7 @@ Dieses Kommando zeigt danach an, was man als nächste machen muss:
 1. Cert Tar Archiv uf Ziel System kopieren
 2. foreman-installer aufrufen
 
+    # Commands
     scp /root/<FQDN>-certs.tar root@<FQDN>:/root/<FQDN>-certs.tar
     foreman-installer --scenario foreman-proxy-content \
       --certs-tar-file "/root/<FQDN>-certs.tar" \
