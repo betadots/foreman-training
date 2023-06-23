@@ -43,7 +43,7 @@ Beispiel:
 
 <https://apidocs.theforeman.org/foreman/3.4/apidoc/v2.html>
 
-    curl --user admin:changeme -H "Content-Type:application/json" -H "Accept:application/json" -k -X GET -d '{"search":"build = true and os = CentOS"}' https://foreman.betadots.training/api/v2/hosts
+    curl --user admin:changeme -H "Content-Type:application/json" -H "Accept:application/json" -k -X GET -d '{"search":"build = true and os = CentOS"}' https://foreman.betadots.training/api/v2/hosts | python3 -m json.tool | less
 
 Die 'search' Argumente am Besten aus dem Foreman Webinterface erzeugen.
 
