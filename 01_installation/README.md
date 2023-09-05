@@ -307,7 +307,7 @@ Die Remote Execution erfolgt über Smart Proxy.
 
 Dazu muss der Foreman-Proxy User einen SSH Key haben, der in der Infrastruktur verteilt werden muss.
 
-1. manuelles kopieren vom Smart-Proxy - NICHT im Training
+Lösung 1: manuelles kopieren vom Smart-Proxy - NICHT im Training
 
     su - foreman-proxy
     ssh-copy-id -i /var/lib/foreman-proxy/ssh/id_rsa_foreman_proxy.pub `root@target.example.com`
@@ -319,7 +319,7 @@ Prüfen der Verbindung:
     ssh -i /var/lib/foreman-proxy/ssh/id_rsa_foreman_proxy root@target.example.com
     exit
 
-2. Foreman SmartProxy API - das wollen wir machen!
+Lösung 2: Foreman SmartProxy API - das wollen wir machen!
 
 Auf dem Ziel System (in unserem Fall der Foreman Server):
 
@@ -328,7 +328,7 @@ Auf dem Ziel System (in unserem Fall der Foreman Server):
     chmod 700 ~/.ssh
     chmod 600 ~/.ssh/authorized_keys
 
-3. Kickstart Template
+Lösung 3: Kickstart Template
 
 Bei einer Neuinstallation über Netzwerk (PXE Boot) kann man das hinterlegen des SSH Keys automatisieren.
 
