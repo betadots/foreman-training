@@ -99,9 +99,7 @@ Submit
 ### Config Management starten
 
 Achtung: SSH Zugang muss eingerichtet werden für die remote command execution:
-
-    mkdir /root/.ssh
-    cat /var/lib/foreman-proxy/ssh/id_rsa_foreman_proxy.pub >> /root/.ssh/authorized_keys
+siehe [../01_installation/README.md](01 Installation)
 
 In der Host Ansicht (Foreman Login -> All Hosts) den Host auswählen (Haken in der ersten Spalte) dann kann man unter "Select Action" den Punkt "Schedule Remote Job" auswählen.
 
@@ -127,7 +125,7 @@ Es fehlt die Python 'request' Erweiterung:
 
     python3.11 -m pip install requests
 
-Ausserdem muss die Ansible Konfiguratoinsdatei bearbeitet werden:
+Ausserdem muss die Ansible Konfigurationsdatei bearbeitet werden:
 
     # /etc/ansible/ansible.cfg
     [defaults]
@@ -199,7 +197,7 @@ Anlegen der Hostgroups "Development" und "Development/Container".
 
 ### Variante 1: `foreman_hostgroup` fact
 
-Wenn ein System den Fact `foreman_hostgroup` mitliefert, wird das Sstem in die angegebene Hostgruppe automatisch aufgenommen.
+Wenn ein System den Fact `foreman_hostgroup` mitliefert, wird das System in die angegebene Hostgruppe automatisch aufgenommen.
 Bedingung ist, dass die Hostgroup bereits existiert.
 
 ### Variante 2: Default Host Group Plugin

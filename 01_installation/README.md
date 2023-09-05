@@ -167,7 +167,6 @@ Wir brauchen Festplatzenplatz für Repos. Dafür wurde die Festplatte vergößer
     <first sector: default>
     <last sector default>
     w
-    q
 
 Filesystem:
 
@@ -177,6 +176,7 @@ Filesystem:
 edit `/etc/fstab`
 
     echo -e "\n/dev/sda2 /var/lib/pulp\txfs\tdefaults\t1\t1\n" >> /etc/fstab
+    systemctl daemon-reload
     mount -a
     df
 
@@ -242,7 +242,7 @@ Man kann auch ein Passwort bei der Installation angeben:
 
 ## Greenfield <-> Brownfield
 
-Im Training gehen wir davon aus, dass Infrastruktur Komponentne, wie DHCP, DNS, TFTP bereits vorhanden sind.
+Im Training gehen wir davon aus, dass Infrastruktur Komponenten, wie DHCP, DNS, TFTP bereits vorhanden sind.
 Die Integration erfolgt üblicherweise über Parameter für den `foreman-installer`.
 
     foreman-installer --help
@@ -310,7 +310,7 @@ Dazu muss der Foreman-Proxy User einen SSH Key haben, der in der Infrastruktur v
 1. manuelles kopieren vom Smart-Proxy - NICHT im Training
 
     su - foreman-proxy
-    ssh-copy-id -i /var/lib/foreman-proxy/ssh/id_rsa_foreman_proxy.pub root@target.example.com
+    ssh-copy-id -i /var/lib/foreman-proxy/ssh/id_rsa_foreman_proxy.pub `root@target.example.com`
     exit
 
 Prüfen der Verbindung:
@@ -319,7 +319,7 @@ Prüfen der Verbindung:
     ssh -i /var/lib/foreman-proxy/ssh/id_rsa_foreman_proxy root@target.example.com
     exit
 
-2. Foreman API - das wollen wir machen!
+2. Foreman SmartProxy API - das wollen wir machen!
 
 Auf dem Ziel System (in unserem Fall der Foreman Server):
 
@@ -351,7 +351,7 @@ Im Foreman Web UI:
 
 Hier wird ein Kommando erzeugt, welches kopiert und auf dem Smart-Proxy ausgeführt wird.
 
-Danach muss die Subscription konfiguriert werden:
+Danach muss die Subscription konfiguriert werden (nur Demo, kommt später):
 
     subscription-manager config \
       --rhsm.baseurl=<https://loadbalancer.example.com/pulp/content> \
@@ -360,7 +360,7 @@ Danach muss die Subscription konfiguriert werden:
 ## Konfiguration von Diensten
 
 Nun muessen die Infrastruktur-Dienste konfiguriert werden.
-Wir nutzen im Training dafuer Puppet Manifeste, die lokal deployed werden:
+Wir nutzen im Training dafuer Puppet Manifeste, die lokal deployed werden (machen!!):
 
     puppet apply /vagrant_foreman/scripts/foreman_config.pp
 
@@ -407,6 +407,10 @@ Dazu gehoeren zum Beispiel:
 
 Die Einrichtung erfolgt mit Hilfe des Foreman Installers. Im nächsten Schritt werden wir verschiedene Basis Dienste am Smart Proxy integrieren.
 
+In diesem Setup simulieren wir eine bestehende Infrastruktur!
+Aus diesem Grund werden die Basis-Dienste NICHT vom Foreman Installer installiert und konfiguriert.
+Dies erreichen wir bei jedem Dienst über den Schalter `--foreman-proxy-<service>-managed false`.
+
 Hinweis: wir aktivieren den Smart Proxy auf dem Foreman Server. Wenn man weitere Content Proxies einrichten möchte muss man auf dem System das Foreman und das Katello Repository einbinden und das `foreman-installer` Paket installieren.
 
 ### DHCPD
@@ -415,9 +419,9 @@ Hinweis: wir aktivieren den Smart Proxy auf dem Foreman Server. Wenn man weitere
         --foreman-proxy-dhcp-config /etc/dhcp/dhcpd.conf \
         --foreman-proxy-dhcp-leases /var/lib/dhcpd/dhcpd.leases \
         --foreman-proxy-dhcp-omapi-port 7911 \
-        --foreman-proxy-dhcp-server 10.100.10.101 \ # Der DHCP Server laeuft nur auf dem internen Interface \
+        --foreman-proxy-dhcp-server 10.100.10.101 \
         --foreman-proxy-dhcp-interface eth1 \
-        --foreman-proxy-dhcp-managed false \ # Do not manage dhcpd ! \
+        --foreman-proxy-dhcp-managed false \
         --foreman-proxy-dhcp-provider isc
 
 ### DNS
@@ -442,7 +446,7 @@ Die Einstellungen für Smart Proxies koennen im Webinterface analysiert werden:
       -> Infrastructure
         -> Smart proxies
 
-Im Menu rechts oben finde macn Actions:
+Im Menu rechts oben finde man Actions:
 
     Actions
       -> Refresh
