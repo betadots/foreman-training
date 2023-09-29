@@ -17,6 +17,7 @@ Zuerst installieren wir Puppet Module:
     puppet module install puppetlabs-docker
     puppet module install puppetlabs-apache
     puppet module install puppetlabs-ntp
+    puppet module install puppet-hdm
 
 Jetzt werden die Module in Foreman bekannt gemacht:
 
@@ -49,7 +50,7 @@ Haken setzen -> Update
 ## Hosts Konfigurieren
 
 Mit Puppet oder Ansible können Systeme eingerichtet werden.
-Dazu gehören zu Beispiel die Installation und Konfiruation von Paketen und Diensten.
+Dazu gehören zu Beispiel die Installation und Konfiguration von Paketen und Diensten.
 
     Foreman Login
       -> Hosts
@@ -105,9 +106,9 @@ In der Host Ansicht (Foreman Login -> All Hosts) den Host auswählen (Haken in d
 
 In der Job Übersicht kann man den gewünschten Job auswählen.
 
-z.B. das Starten des Puppet Agent (Job categrory "Puppet" -> Job template "Run Puppet Once")
+z.B. das Starten des Puppet Agent (Job category "Puppet" -> Job template "Run Puppet Once")
 
-Für Ansible geht der Weg direkt über den Host: Forman Login -> Hosts -> All hosts) den Host auswählen (Haken in der ersten Spalte, dann mann man unter "Select action" den Punkt "Run all Ansible roles" auswählen.
+Für Ansible geht der Weg direkt über den Host: Foreman Login -> Hosts -> All hosts) den Host auswählen (Haken in der ersten Spalte, dann man man unter "Select action" den Punkt "Run all Ansible roles" auswählen.
 
 Bug in Ansible/Foreman: "ERROR! Unexpected Exception, this is probably a bug: No module named psutil"
 
@@ -166,7 +167,7 @@ Ein Host kann nur in eine Hostgruppe aufgenommen werden!!
 
 Generell gibt es 4 grobe Ansätze zum Erzeugen von Hostgruppen:
 
-- Flache Sturktur
+- Flache Struktur
 - Lifecycle Environment basierte Struktur
 - Applikationsbasierte Struktur
 - Lokationsbasierte Struktur
@@ -188,7 +189,7 @@ Alternativ kann man auch die Foreman Locations nutzen. Aktuell haben wir nur ein
 Jeder Hostgruppe können dann Ansible Rollen, Puppet Klassen und die dazugehörigen Parameter hinterlegen.
 Daten in übergeordneten Gruppen werden an untergeordnete Gruppen vererbt und können auf der Ebene von untergeordneten Gruppen überschrieben werden.
 
-Generell kann man Ansible UND Puppet gleichzeitg verwenden.
+Generell kann man Ansible UND Puppet gleichzeitig verwenden.
 Hier sollte sichergestellt sein, dass sich Einstellungen nicht überschneiden oder inkompatibel zueinander sind.
 
 Anlegen der Hostgroups "Development" und "Development/Container".
@@ -202,7 +203,7 @@ Bedingung ist, dass die Hostgroup bereits existiert.
 
 ### Variante 2: Default Host Group Plugin
 
-Damit Nodes autoatmisch in eine Hostgruppe aufgenommen werden, benötigen wir ein Plugin: default hostgroup
+Damit Nodes automatisch in eine Hostgruppe aufgenommen werden, benötigen wir ein Plugin: default hostgroup
 
 Installation:
 

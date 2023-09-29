@@ -70,7 +70,7 @@ Wenn nicht: Je nach OS bitte installieren:
 - Debian: `sudo apt-get install git`
 - CentOS: `sudo yum install git`
 - SuSE: `sudo zypper in git-core`
-- Windows: `choco install git` # <- Erfordet [Chocolatey](https://chocolatey.org/)
+- Windows: `choco install git` # <- Erfordert [Chocolatey](https://chocolatey.org/)
 
 Nun das GitHub Repository auf die Workstation/das Trainingslaptop herunterladen:
 

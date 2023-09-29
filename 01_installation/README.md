@@ -33,7 +33,11 @@ Windows:
 
     choco install vagrant
 
-Falls Vargant vorher schon installiert war, muss man die Plugins reaktivieren: `vagrant plugin expunge --reinstall`
+Mac OS:
+
+    brew install vagrant
+
+Falls Vagrant vorher schon installiert war, muss man die Plugins reaktivieren: `vagrant plugin expunge --reinstall`
 
 ## Vagrant Erweiterungen
 
@@ -119,7 +123,7 @@ Danach Login:
     vagrant ssh foreman.betadots.training
     sudo -i
 
-Wenn man am Abend das Laptop auschalten will, muss man die VM vorher sichern (nicht runterfahren!):
+Wenn man am Abend das Laptop ausschalten will, muss man die VM vorher sichern (nicht herunterfahren!):
 
     vagrant suspend foreman.betadots.training
 
@@ -158,7 +162,7 @@ Wenn man sich von einem Apple System aus eingeloggt hat, muss man eine Umgebungs
 
 ## Storage
 
-Wir brauchen Festplatzenplatz für Repos. Dafür wurde die Festplatte vergößert.
+Wir brauchen Festplattenplatz für Repos. Dafür wurde die Festplatte vergrößert.
 
     fdisk /dev/sda
     n
@@ -200,7 +204,7 @@ Jetzt kann der Foreman Installer gestartet werden:
     foreman-installer --scenario katello -i --tuning development
 
 Im interaktiven Modus können Komponenten hinzugefügt oder entfernt werden.
-Wir nutzen den interkativen Modus nur, um eine Übersicht über die Möglichkeiten uz erhalten.
+Wir nutzen den interaktiven Modus nur, um eine Übersicht über die Möglichkeiten uz erhalten.
 
     69. [✓] Configure foreman_proxy_plugin_remote_execution_script
 
@@ -392,7 +396,7 @@ Einloggen als Admin mit dem Browser: [https://foreman.betadots.training](https:/
 
 # Foreman Smart Proxies
 
-Smart-Proxy ist ein Service, der auf einem System laeuft, welches Infrastruktur Komponenenten bereitstellt.
+Smart-Proxy ist ein Service, der auf einem System laeuft, welches Infrastruktur Komponenten bereitstellt.
 Dazu gehoeren zum Beispiel:
 
 - Repository Server (pulp)

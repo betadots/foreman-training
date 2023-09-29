@@ -37,7 +37,7 @@ Diese Schritte sollten nur gemacht werden, wenn man:
 - eine schnelle Internetanbindung hat (min 50 MBit)
 - genug Plattenplatz verfuegbar ist (min 20 GB)
 
-Idealerweise legen die Teilnehmer nur das "kleine" Foreman Client und evtl das PostgreSQL Repository an.
+Idealerweise legen die Teilnehmer nur das "kleine" Foreman Client und eventuell das PostgreSQL Repository an.
 
 ### Repository anlegen
 
@@ -101,7 +101,7 @@ Run Repository Creation
 ACHTUNG: das Debian Repository ist zu gross fuer die Training VM!!!!
 Der Sync bricht ab mit `no space left on device`!
 
-Debian Repositories werden anders behandet.
+Debian Repositories werden anders behandelt.
 Hier muss zuerst ein Produkt und beim Repository eine URL angegeben werden.
 
 Zusätzlich muss die Distribution und Komponente sowie Architektur angegeben werden.
@@ -125,7 +125,7 @@ Im Linuxhotel: `http://debian/`
 
 Release: stable/unstable/buster, ...
 
-Componentes: main, free, non-free, ...
+Components: main, free, non-free, ...
 
 Architectures: amd64, arm, i386, ...
 
@@ -269,7 +269,7 @@ Bevor wir diese Content View "promoten" koennen muessen wir die Lifecycle Enviro
 ## Lifecycle Environments
 
 Mit Lifecycle Environments verwaltet man Content Views (hinzufuegen, promoten, entfernen).
-Das Default Lifecycle Environment nennt sich Library. Innerhalb dieser Library koennen weitere Environments angeegt werden.
+Das Default Lifecycle Environment nennt sich Library. Innerhalb dieser Library koennen weitere Environments angelegt werden.
 
 z.B. Production, Testing, Pre-Prod
 
@@ -334,7 +334,6 @@ Shell command copy-paste.
 Beispiel:
 
     curl -sS  'https://foreman.betadots.training/register?activation_keys=Library&location_id=2&operatingsystem_id=1&organization_id=1&update_packages=false' -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo0LCJpYXQiOjE2NzkzMjEzMzcsImp0aSI6IjJiNTQ3YjBiNGU1ZDkyNmZlYTgyNTczMTIwYjYyMmRlODdiNDg5ZDFlNzg2ZTgwOGYxYzIzMDcxNWMzYTM5N2UiLCJleHAiOjE2NzkzMzU3MzcsInNjb3BlIjoicmVnaXN0cmF0aW9uI2dsb2JhbCByZWdpc3RyYXRpb24jaG9zdCJ9.zc_eRJ0zUF6K-49BpfD03sC9iiAU_kt1pryYVxrOx84' | bash
-
 
 Weitere Informationen: [https://theforeman.org/plugins/katello/3.14/installation/clients.html#manual](https://theforeman.org/plugins/katello/3.14/installation/clients.html#manual)
 
