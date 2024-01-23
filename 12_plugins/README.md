@@ -90,7 +90,7 @@ cat > /etc/puppetlabs/code/environment/production/manifests/site.pp << EOF
 File {
   backup => false,
 }
-lookup('classes', Array, 'unique' []).contain
+lookup('classes', Array, 'unique', []).contain
 EOF
 cat > /etc/puppetlabs/code/environments/production/data/nodes/foreman/betadots.training.yaml << EOF2
 ---
