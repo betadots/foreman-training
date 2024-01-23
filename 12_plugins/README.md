@@ -86,13 +86,13 @@ puppet module install puppetlabs-puppetdb
 puppet module install puppet-hdm
 mkdir -p /etc/puppetlabs/code/environments/production/data/nodes
 mkdir -p /etc/puppetlabs/code/environments/production/manifests
-cat > /etc/puppetlabs/code/environment/production/manifests/site.pp << EOF
+cat > /etc/puppetlabs/code/environments/production/manifests/site.pp << EOF
 File {
   backup => false,
 }
 lookup('classes', Array, 'unique', []).contain
 EOF
-cat > /etc/puppetlabs/code/environments/production/data/nodes/foreman/betadots.training.yaml << EOF2
+cat > /etc/puppetlabs/code/environments/production/data/nodes/foreman.betadots.training.yaml << EOF2
 ---
 classes:
   - 'hdm'
@@ -117,7 +117,7 @@ http://foreman.betadots.training:3000
 Install HDM Plugin and HDM Smart-Proxy
 
 ```shell
-dnf install rubygem-foreman-hdm rubygem-smart-proxy-hdm
+dnf install rubygem-foreman_hdm rubygem-smart_proxy_hdm
 ```
 
 Now configure HDM Smart-Proxy:
@@ -126,11 +126,13 @@ Now configure HDM Smart-Proxy:
 cat > /etc/foreman-proxy/settings.d/hdm.yml << EOF3
 # HDM Smart Proxy
 :enabled: https
-:hdm_url: 'http://localhost:3000'
+:hdm_url: 'http://10.100.10.101:3000'
 :hdm_user: 'api@domain.tld'
 :hdm_password: '1234567890'
 EOF3
 
 systemctl restart foreman-proxy
 ```
+
+Now switch to a node, go to edit mode and set the hdm smart-proxy.
 
