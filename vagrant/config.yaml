@@ -17,6 +17,3 @@ nodes:
     ip: 10.100.10.102
   apache:
     ip: 10.100.10.103
-  host:
-    ip: 10.100.10.104
-    box: sridhav/empty

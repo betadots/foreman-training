@@ -8,12 +8,12 @@ Eine Uebersicht ueber vorhandene Plugins findet man auf der Webseite von Foreman
 
 ### Plugins als Paket
 
-YUM Repositoriy für Plugins aktivieren (wurde durch den Installer bereits erledigt:
+YUM Repositoriy für Plugins aktivieren (wurde durch den Installer bereits erledigt):
 
     # /etc/yum.repos.d/foreman-plugins.repo
     [foreman-plugins]
     name=Foreman plugins
-    baseurl=http://yum.theforeman.org/plugins/1.15/el7/x86_64/
+    baseurl=http://yum.theforeman.org/plugins/3.8/el8/x86_64/
     enabled=1
     gpgcheck=0
 
@@ -76,3 +76,61 @@ Ausserdem muss zusätzlich foreman tasks installiert werden:
 Voraussetzungen: Vagrant, libvirt, Ansible
 
 <https://github.com/theforeman/forklift>
+
+## HDM Hiera Data Manager
+
+create puppet repo structure and install required module:
+
+```shell
+puppet module install puppetlabs-puppetdb
+puppet module install puppet-hdm
+mkdir -p /etc/puppetlabs/code/environments/production/data/nodes
+mkdir -p /etc/puppetlabs/code/environments/manifests
+cat > /etc/puppetlabs/code/environment/manifests/site.pp << EOF
+File {
+  backup => false,
+}
+lookup('classes', Array, 'unique' []).contain
+EOF
+cat > /etc/puppetlabs/code/environments/production/data/nodes/foreman/betadots.training.yaml << EOF2
+---
+classes:
+  - 'hdm'
+  - 'puppetdb'
+  - 'puppetdb::master::config'
+
+hdm::version: '1.4.0'
+postgresql::globals::manage_dnf_module: true
+puppetdb::manage_firewall: false
+puppetdb::postgres_version: '12'
+EOF2
+
+# Run puppet agent on foreman
+puppet agent -t
+```
+
+Now open HDM and create admin and api user.
+
+http://foreman.betadots.training:3000
+
+
+Install HDM Plugin and HDM Smart-Proxy
+
+```shell
+dnf install rubygem-foreman-hdm rubygem-smart-proxy-hdm
+```
+
+Now configure HDM Smart-Proxy:
+
+```shell
+cat > /etc/foreman-proxy/settings.d/hdm.yml << EOF3
+# HDM Smart Proxy
+:enabled: https
+:hdm_url: 'http://localhost:3000'
+:hdm_user: 'api@domain.tld'
+:hdm_password: '1234567890'
+EOF3
+
+systemctl restart foreman-proxy
+```
+
