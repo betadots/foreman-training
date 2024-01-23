@@ -85,8 +85,8 @@ create puppet repo structure and install required module:
 puppet module install puppetlabs-puppetdb
 puppet module install puppet-hdm
 mkdir -p /etc/puppetlabs/code/environments/production/data/nodes
-mkdir -p /etc/puppetlabs/code/environments/manifests
-cat > /etc/puppetlabs/code/environment/manifests/site.pp << EOF
+mkdir -p /etc/puppetlabs/code/environments/production/manifests
+cat > /etc/puppetlabs/code/environment/production/manifests/site.pp << EOF
 File {
   backup => false,
 }

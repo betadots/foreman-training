@@ -285,7 +285,6 @@ Aktivierung von Puppet auf dem Foreman Server mit Hilfe von installer Optionen:
       --enable-foreman-cli-puppet \
       --foreman-proxy-puppet true \
       --foreman-proxy-puppetca true \
-      --foreman-proxy-content-puppet true \
       --enable-puppet \
       --puppet-server true \
       --puppet-server-foreman-ssl-ca /etc/pki/katello/puppet/puppet_client_ca.crt \
@@ -297,7 +296,6 @@ Aktivierung von Puppet auf einem zusätzlichen Smart-Proxy (NICHT im Training!):
     foreman-installer --scenario foreman-proxy-content \
       --foreman-proxy-puppet true \
       --foreman-proxy-puppetca true \
-      --foreman-proxy-content-puppet true \
       --enable-puppet \
       --puppet-server true \
       --puppet-server-foreman-ssl-ca /etc/pki/katello/puppet/puppet_client_ca.crt \
