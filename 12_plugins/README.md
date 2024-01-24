@@ -77,9 +77,11 @@ Voraussetzungen: Vagrant, libvirt, Ansible
 
 <https://github.com/theforeman/forklift>
 
-## HDM Hiera Data Manager
+## Puppet HDM - Hiera Data Manager
 
-create puppet repo structure and install required module:
+Web UI zum Analysieren und Bearbeiten von Hiera Daten.
+Herunterladen der notwendigen Puppet Module,
+erzeugen der notwendigen Daten Struktur:
 
 ```shell
 puppet module install puppetlabs-puppetdb
@@ -99,7 +101,7 @@ classes:
   - 'puppetdb'
   - 'puppetdb::master::config'
 
-hdm::version: '1.4.0'
+hdm::version: 'v1.4.1'
 postgresql::globals::manage_dnf_module: true
 puppetdb::manage_firewall: false
 puppetdb::postgres_version: '12'
@@ -109,24 +111,28 @@ EOF2
 puppet agent -t
 ```
 
-Now open HDM and create admin and api user.
+HDB Web UI öffnen, Admin User anlegen, API User anlegen.
+Passwörter merken!!!
 
 http://foreman.betadots.training:3000
 
-
-Install HDM Plugin and HDM Smart-Proxy
+Installation des Foreman HDM Plugin und des Foreman HDM Smart-Proxy
 
 ```shell
-dnf install rubygem-foreman_hdm rubygem-smart_proxy_hdm
+dnf install -y rubygem-foreman_hdm rubygem-smart_proxy_hdm
+foreman-rake db:migrate
+systemctl restart foreman.service
+# or
+# foremain-maintain service restart
 ```
 
-Now configure HDM Smart-Proxy:
+HDM Smart-Proxy Konfiguration:
 
 ```shell
 cat > /etc/foreman-proxy/settings.d/hdm.yml << EOF3
 # HDM Smart Proxy
 :enabled: https
-:hdm_url: 'http://10.100.10.101:3000'
+:hdm_url: 'http://foreman.betadots.training:3000'
 :hdm_user: 'api@domain.tld'
 :hdm_password: '1234567890'
 EOF3
@@ -134,5 +140,6 @@ EOF3
 systemctl restart foreman-proxy
 ```
 
-Now switch to a node, go to edit mode and set the hdm smart-proxy.
+In Foreman `Infrastructure -> Smart Proxies -> foreman.betadots.training -> Refresh`.
 
+Danach kann der HDM Smart Proxy aktiviert werden:  `Hosts -> All Hosts -> foreman.betadots.training -> Edit -> HDM Smart Proxy` den HDM Smart Proxy aktivieren.
