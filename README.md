@@ -1,7 +1,6 @@
-
 # Foreman/Katello Training
 
-(c) 2022-2023 - betadots GmbH
+(c) 2022-2024 - betadots GmbH
 
 ## Versionen
 
