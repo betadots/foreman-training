@@ -101,7 +101,8 @@ classes:
   - 'puppetdb'
   - 'puppetdb::master::config'
 
-hdm::version: 'v1.4.1'
+hdm::version: 'v2.1.0'
+hdm::disable_authentication: true
 postgresql::globals::manage_dnf_module: true
 puppetdb::manage_firewall: false
 puppetdb::postgres_version: '12'
@@ -110,9 +111,6 @@ EOF2
 # Run puppet agent on foreman
 puppet agent -t
 ```
-
-HDB Web UI öffnen, Admin User anlegen, API User anlegen.
-Passwörter merken!!!
 
 http://foreman.betadots.training:3000
 
