@@ -4,11 +4,11 @@
 
 ## Versionen
 
-Das Training basiert auf Foreman 3.4 und Katello 4.6.
+Das Training basiert auf Foreman 3.10 und Katello 4.12.
 
-Diese Versionskombination ist nur mit EL8 kompatibel.
+Diese Versionskombination ist mit EL 8 und 9 kompatibel.
 
-Die aktuelle Versionen (Stand 03/2023) sind: Foreman 3.5 Katello 4.7
+Die aktuelle Versionen (Stand 06/2024) sind: Foreman 3.11 Katello 4.13
 
 ## Hard- und Software Anforderungen
 

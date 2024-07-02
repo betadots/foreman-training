@@ -85,7 +85,8 @@ erzeugen der notwendigen Daten Struktur:
 
 ```shell
 puppet module install puppetlabs-puppetdb
-puppet module install puppet-hdm
+puppet module install puppet-hdm --ignore-dependencies
+puppet module install puppetlabs-docker --ignore-dependencies
 mkdir -p /etc/puppetlabs/code/environments/production/data/nodes
 mkdir -p /etc/puppetlabs/code/environments/production/manifests
 cat > /etc/puppetlabs/code/environments/production/manifests/site.pp << EOF
@@ -105,8 +106,17 @@ hdm::version: 'v2.1.0'
 hdm::disable_authentication: true
 postgresql::globals::manage_dnf_module: true
 puppetdb::manage_firewall: false
-puppetdb::postgres_version: '12'
+puppetdb::postgres_version: '16'
+
 EOF2
+```
+
+Edit puppet.conf file and add puppetdb to reports:
+```
+vi /etc/puppetlabs/puppet/puppet.conf
+reports = foreman,puppetdb
+# restart puppetserver
+systemctl restart puppetserver
 
 # Run puppet agent on foreman
 puppet agent -t
@@ -121,7 +131,7 @@ dnf install -y rubygem-foreman_hdm rubygem-smart_proxy_hdm
 foreman-rake db:migrate
 systemctl restart foreman.service
 # or
-# foremain-maintain service restart
+# foreman-maintain service restart
 ```
 
 HDM Smart-Proxy Konfiguration:

@@ -4,15 +4,13 @@ echo "DNF: Clean metadata"
 sudo dnf clean all
 echo "Installing Repo Packages"
 echo "foreman"
-sudo dnf -y localinstall https://yum.theforeman.org/releases/3.8/el8/x86_64/foreman-release.rpm
+sudo dnf -y localinstall https://yum.theforeman.org/releases/3.10/el9/x86_64/foreman-release.rpm
 echo "Katello"
-sudo dnf -y localinstall https://yum.theforeman.org/katello/4.10/katello/el8/x86_64/katello-repos-latest.rpm
+sudo dnf -y localinstall https://yum.theforeman.org/katello/4.12/katello/el9/x86_64/katello-repos-latest.rpm
 echo "Puppet 7"
-sudo dnf -y localinstall https://yum.puppet.com/puppet7-release-el-8.noarch.rpm
-echo "Enable powertools"
-sudo dnf config-manager --set-enabled powertools
+sudo dnf -y install https://yum.puppet.com/puppet7-release-el-9.noarch.rpm
 echo "Enable DNF Modules"
-sudo dnf -y module enable katello:el8 pulpcore:el8
+sudo dnf -y repolist enabled
 
 echo "DNF update"
 sudo dnf -y update
