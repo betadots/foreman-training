@@ -70,16 +70,9 @@ In diesem Fall muss das folgende Kommando ausgeführt werden:
 
 ## Vagrant Box
 
-Vagrant arbeitet mit vorbereiteten VM Images. Wir muessen das betadots/centos8p7 Image lokal ablegen:
+Vagrant arbeitet mit vorbereiteten VM Images. Wir muessen das boxomatic/centos-stream-9 Image lokal ablegen:
 
-    vagrant box add betadots/centos8p7 --provider virtualbox
-
-    ==> box: Loading metadata for box 'betadots/centos8p7'
-        box: URL: https://vagrantcloud.com/betadots/centos8p7
-    ==> box: Adding box 'stream8' (vxxx.y) for provider: virtualbox
-        box: Downloading: https://vagrantcloud.com/betadots/boxes/centos8p7/versions/xxxx.y/providers/virtualbox.box
-        box: Download redirected to host: cloud.centos.org
-    ==> box: Successfully added box 'betadots/centos8p7' (vxxxx.y) for 'virtualbox'!
+    vagrant box add boxomatic/centos-stream-9 --provider virtualbox
 
 ## VirtualBox Vorbereitung
 

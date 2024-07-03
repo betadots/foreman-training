@@ -104,12 +104,15 @@ classes:
 
 hdm::version: 'v2.1.0'
 hdm::disable_authentication: true
-postgresql::globals::manage_dnf_module: true
+postgresql::globals::manage_dnf_module: false
 puppetdb::manage_firewall: false
-puppetdb::postgres_version: '16'
+puppetdb::postgres_version: '13'
+puppetdb::manage_package_repo: false
 
 EOF2
 ```
+
+Run `puppet agent -t`
 
 Edit puppet.conf file and add puppetdb to reports:
 ```
@@ -141,8 +144,6 @@ cat > /etc/foreman-proxy/settings.d/hdm.yml << EOF3
 # HDM Smart Proxy
 :enabled: https
 :hdm_url: 'http://foreman.betadots.training:3000'
-:hdm_user: 'api@domain.tld'
-:hdm_password: '1234567890'
 EOF3
 
 systemctl restart foreman-proxy
