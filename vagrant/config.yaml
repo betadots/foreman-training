@@ -12,7 +12,7 @@ nodes:
     memory: 12288
     cpu: 6
     ip: 10.100.10.101
-  docker:
-    ip: 10.100.10.102
-  apache:
-    ip: 10.100.10.103
+  # docker:
+  #   ip: 10.100.10.102
+  # apache:
+  #   ip: 10.100.10.103
