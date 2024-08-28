@@ -76,12 +76,16 @@ Nun das GitHub Repository auf die Workstation/das Trainingslaptop herunterladen:
     git clone https://github.com/betadots/foreman-training
     cd foreman-training
 
+## Browser
+
+Achtung: es muss ein aktueller Browser genutzt werden. Firefox auf Ubuntu 22 ist zu alt!
+
 Weiter geht es mit Teil1: [Installation](01_installation)
 
-# License
+## License
 
 Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License
 
-# Contributing
+## Contributing
 
 Contributing to this repository is possible as long as the original author is always referenced.

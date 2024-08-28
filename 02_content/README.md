@@ -17,17 +17,15 @@ Unter Content Credentials kann man GPG Keys und/oder SSL Zertifikate hinterlegen
         -> Content Credentials
           -> Create Content Credential
 
-Name: CentOS7
+Name: CentOS 9 Stream
 
 CentOS GPG Key kopieren vom mirror [http://mirror.centos.org/centos/RPM-GPG-KEY-CentOS-Official](http://mirror.centos.org/centos/RPM-GPG-KEY-CentOS-Official)
 
     Save
 
-Wiederholen fuer PostgreSQL GPG Key mit [https://download.postgresql.org/pub/repos/yum/RPM-GPG-KEY-PGDG-11](https://download.postgresql.org/pub/repos/yum/RPM-GPG-KEY-PGDG-11)
+Wiederholen fuer PostgreSQL GPG Key mit [https://download.postgresql.org/pub/repos/yum/keys/PGDG-RPM-GPG-KEY-RHEL](https://download.postgresql.org/pub/repos/yum/keys/PGDG-RPM-GPG-KEY-RHEL)
 
-Wiederholen fuer Foreman Client: [https://theforeman.org/static/keys/643253F71B82B1BEAF2E1D4FA439BD55AC2AD9F1.pub](https://theforeman.org/static/keys/643253F71B82B1BEAF2E1D4FA439BD55AC2AD9F1.pub)
-
-Wiederholen für Debian 10: [https://ftp-master.debian.org/keys/archive-key-10.asc](https://ftp-master.debian.org/keys/archive-key-10.asc)
+Wiederholen für Debian 12: [https://ftp-master.debian.org/keys/archive-key-10.asc](https://ftp-master.debian.org/keys/archive-key-10.asc)
 
 ## Repository erzeugen
 
@@ -37,35 +35,30 @@ Diese Schritte sollten nur gemacht werden, wenn man:
 - eine schnelle Internetanbindung hat (min 50 MBit)
 - genug Plattenplatz verfuegbar ist (min 20 GB)
 
-Idealerweise legen die Teilnehmer nur das "kleine" Foreman Client und eventuell das PostgreSQL Repository an.
+Idealerweise legen die Teilnehmer nur das "kleine" PostgreSQL Repository an.
 
 ### Repository anlegen
 
-#### Foreman Client Repository - klein (1 GB - Dauer: ca 5-10 Minuten)
+#### PostgreSQL 14 Repositories - klein (ca 2 GB - Dauer: ca 5 Minuten)
 
     Foreman Login
       -> Content
         -> Products
-          -> Repo Discovery
+          -> Create Product
 
-Repository Type: `Yum Repositories`
+Name: PSQL
 
-URL: `https://yum.theforeman.org/client/3.5`
+GPG Key: Auswählen
 
-Click Discover
+Save
 
-Dieser Vorgang kann etwas dauern, da hier die Verzeichnisstruktur eingelesen wird.
-Danach nur x86_64 für el-8 auswählen: `/el-8/x86_64`
+    -> New Repository
 
-Klick: Create selected
+Name: 14-RHEL9
 
-    Name: Foreman Client 3.5
+Type: yum
 
-    GPG Key: aus Liste auswaehlen
-
-Verify SSL: nur aktivieren, wenn man eine eigen CA verwendet. Ansonsten muss die Self-signed CA und das Katello HTTPS Zertifikat allen Systemen bekannt gemacht werden.
-
-Run Repository Creation
+Upstream URL: https://download.postgresql.org/pub/repos/yum/14/redhat/rhel-9-x86_64/
 
 #### CentOS Repository - gross (20 GB - Dauer: ca 1 Stunde)
 
@@ -78,7 +71,6 @@ Repository Type: Yum Repositories
 
 URL: `http://mirror.centos.org/centos/8` (oder lokaler Mirror)
 
-Im Linuxhotel: `http://centos/8`
 Click Discover
 
 Das kann einige Zeit dauern (5 min und mehr).
@@ -123,7 +115,7 @@ Upstream URL: `http://ftp.de.debian.org`
 
 Im Linuxhotel: `http://debian/`
 
-Release: stable/unstable/buster, ...
+Release: stable/unstable/buster/bookworm/trixie/...
 
 Components: main, free, non-free, ...
 

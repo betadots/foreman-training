@@ -27,6 +27,10 @@ if [ ! -d /var/lib/tftpboot/boot ]; then
   sudo mkdir -p /var/lib/tftpboot/boot
 fi
 
+echo "Neue Festplattengröße - Partition und FS anpassen"
+sudo growpart /dev/sda 1
+sudo resize2fs /dev/sda1
+
 echo "Jetzt einloggen, root user werden und installer starten"
 echo "vagrant ssh foreman.betadots.training"
 echo "sudo -i"

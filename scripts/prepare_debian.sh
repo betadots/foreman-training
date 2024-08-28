@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # Dieses Script bereitet ein Linux System auf die Nutzung des Trainings vor.
-# Hier werden VirtualBox, Vagrnat und die erforderlichen Plugins installiert.
+# Hier werden VirtualBox, Vagrant und die erforderlichen Plugins installiert.
 # Ausserdem wird die notwendige Vagrant Box heruntergeladen.
 
 # falls keine sources.list vorhanden ist:

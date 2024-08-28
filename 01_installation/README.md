@@ -1,10 +1,10 @@
 
 # Foreman Training - Teil 1 - Installation
 
-In diesem Dokument wird eine Installation unter CentOS 8 Stream mit Hilfe von VirtualBox und vagrant beschrieben.
-CentOS 8 Stream oder RHEL 8 sind die einzigen unterstuetzten Betriebssysteme fuer eine Katello4.6/Foreman3.4 Installation (<https://docs.theforeman.org/release/3.4/>).
+In diesem Dokument wird eine Installation unter CentOS 9 Stream mit Hilfe von VirtualBox und vagrant beschrieben.
+CentOS 9 Stream oder RHEL 9 sind die einzigen unterstuetzten Betriebssysteme fuer eine Katello4.13/Foreman3.11 Installation (<https://docs.theforeman.org/release/3.11/>).
 
-Eine Foreman Installation ohne Katello kann auch auf Debian 11 oder Ubuntu 20 erfolgen.
+Eine Foreman Installation ohne Katello kann auch auf Debian 11 oder Ubuntu 20 oder 22 erfolgen.
 
 Fuer eine Installation auf einer existierenden VM bitte das Dokument [../01_installation_vm](../01_installation_vm) verwenden.
 Achtung: eine so erzeugt VM kann nicht fuer das Training verwendet werden!
@@ -157,25 +157,11 @@ Wenn man sich von einem Apple System aus eingeloggt hat, muss man eine Umgebungs
 
 Wir brauchen Festplattenplatz für Repos. Dafür wurde die Festplatte vergrößert.
 
-    fdisk /dev/sda
-    n
-    p
-    2
-    <first sector: default>
-    <last sector default>
-    w
+    growpart /dev/sda 1
 
 Filesystem:
 
-    mkfs.xfs /dev/sda2
-    mkdir -p /var/lib/pulp
-
-edit `/etc/fstab`
-
-    echo -e "\n/dev/sda2 /var/lib/pulp\txfs\tdefaults\t1\t1\n" >> /etc/fstab
-    systemctl daemon-reload
-    mount -a
-    df
+    resize2fs /dev/sda1
 
 ## Foreman Installer
 
@@ -201,7 +187,7 @@ Wir nutzen den interaktiven Modus nur, um eine Übersicht über die Möglichkeit
 
     69. [✓] Configure foreman_proxy_plugin_remote_execution_script
 
-Dann Punkt `76. Cancel run without Saving` auswaehlen.
+Dann Punkt `Cancel run without Saving` auswaehlen.
 
 Jetzt kann der Installer richtig gestartet werden:
 
