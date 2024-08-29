@@ -2,7 +2,7 @@
 
 ## Upgrade
 
-Prüfen, welche Versionen zur Verfügug stehen
+Prüfen, welche Versionen zur Verfügung stehen
 
     foreman-maintain upgrade list-versions
 
@@ -21,6 +21,11 @@ Upgrade Schritte
 1. migrations
 1. post-migrations
 1. post-upgrade checks
+
+Bei Problemen Alternative:
+
+    dnf upgrade
+    foreman-installer
 
 ## Backup
 

@@ -16,8 +16,7 @@ Zuerst installieren wir Puppet Module:
 
     puppet module install puppetlabs-docker
     puppet module install puppetlabs-apache
-    puppet module install puppetlabs-ntp
-    puppet module install puppet-hdm
+    puppet module install puppet-chrony
 
 Jetzt werden die Module in Foreman bekannt gemacht:
 
@@ -61,7 +60,7 @@ Dazu gehören zu Beispiel die Installation und Konfiguration von Paketen und Die
 
 Im Tab "Ansible Roles" die Ansible Rollen auswählen, die der Host bekommen soll (hier: frzk.chrony)
 
-Im Tab "Parameter" koennen Rollenspezifische Daten gesetzt werden.
+Im Tab "Parameter" können Rollenspezifische Daten gesetzt werden.
 
     Host Parameter
       -> Add Parameter
@@ -75,7 +74,7 @@ Submit
 ### Puppet
 
 Im Tab "Host" muss das gewünschte Puppet Environment (Produktion), der Puppet Proxy und Puppet CA Proxy ausgewählt werden.
-Im Tab "Puppet Classes" können dann Puppet Klassen ausgewählt werden (Docker Baum öffnen, Docker auswählen).
+Im Tab "Puppet Classes" können dann Puppet Klassen ausgewählt werden (Chrony Baum öffnen, chrony auswählen).
 
 Submit
 
@@ -85,22 +84,22 @@ Submit
       -> Configure
         -> Smart Class Parameters
 
-search:  `puppetclass =  docker and  parameter =  tcp_bind`
+search:  `puppetclass =  chrony and  parameter =  servers`
 
-Klick auf `tcp_bind`
+Klick auf `servers`
 
 Default behavior:
 
 - Override: `OK`
-- Key type: `string`
-- Default value: `'tcp://0.0.0.0:4243'`
+- Key type: `array`
+- Default value: `['ntp1.ptb.de']`
 
 Submit
 
 ### Config Management starten
 
 Achtung: SSH Zugang muss eingerichtet werden für die remote command execution:
-siehe [../01_installation/README.md](01 Installation)
+siehe [01 Installation](../01_installation/README.md)
 
 In der Host Ansicht (Foreman Login -> All Hosts) den Host auswählen (Haken in der ersten Spalte) dann kann man unter "Select Action" den Punkt "Schedule Remote Job" auswählen.
 
@@ -110,7 +109,7 @@ z.B. das Starten des Puppet Agent (Job category "Puppet" -> Job template "Run Pu
 
 Für Ansible geht der Weg direkt über den Host: Foreman Login -> Hosts -> All hosts) den Host auswählen (Haken in der ersten Spalte, dann man man unter "Select action" den Punkt "Run all Ansible roles" auswählen.
 
-Bug in Ansible/Foreman: "ERROR! Unexpected Exception, this is probably a bug: No module named psutil"
+Bug in Ansible/Foreman 3.6: "ERROR! Unexpected Exception, this is probably a bug: No module named psutil"
 
 [https://community.theforeman.org/t/error-unexpected-exception-this-is-probably-a-bug-no-module-named-psutil/16965](https://community.theforeman.org/t/error-unexpected-exception-this-is-probably-a-bug-no-module-named-psutil/16965)
 [https://github.com/ansible/ansible-runner/issues/54](https://github.com/ansible/ansible-runner/issues/54)
@@ -120,7 +119,7 @@ Lösung:
     dnf install python3.11-pip
     python3.11 -m pip install psutil
 
-Bug in Foreman: call back (Ansible Reporting)
+Bug in Foreman 3.6: call back (Ansible Reporting)
 
 Es fehlt die Python 'request' Erweiterung:
 
@@ -200,6 +199,8 @@ Anlegen der Hostgroups "Development" und "Development/Container".
 
 Wenn ein System den Fact `foreman_hostgroup` mitliefert, wird das System in die angegebene Hostgruppe automatisch aufgenommen.
 Bedingung ist, dass die Hostgroup bereits existiert.
+
+Das machen wir als manuelles Beispiel im Rahmen der Provisionierung.
 
 ### Variante 2: Default Host Group Plugin
 

@@ -21,11 +21,11 @@ sudo dnf -y install tree vim net-tools
 echo "Katello installation part"
 sudo dnf -y install foreman-installer-katello
 
-if [ ! -d /var/lib/tftpboot/boot ]; then
-  echo "fix for https://github.com/theforeman/puppet-foreman/issues/580"
-  echo "creating boot directory for tftpserver"
-  sudo mkdir -p /var/lib/tftpboot/boot
-fi
+# if [ ! -d /var/lib/tftpboot/boot ]; then
+#   echo "fix for https://github.com/theforeman/puppet-foreman/issues/580"
+#   echo "creating boot directory for tftpserver"
+#   sudo mkdir -p /var/lib/tftpboot/boot
+# fi
 
 echo "Neue Festplattengröße - Partition und FS anpassen"
 sudo growpart /dev/sda 1

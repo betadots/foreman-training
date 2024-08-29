@@ -13,17 +13,52 @@ YUM Repositoriy fuer Plugins aktivieren (wurde durch den Installer bereits erled
     # /etc/yum.repos.d/foreman-plugins.repo
     [foreman-plugins]
     name=Foreman plugins
-    baseurl=http://yum.theforeman.org/plugins/1.15/el7/x86_64/
+    baseurl=http://yum.theforeman.org/plugins/<version>/el9/x86_64/
     enabled=1
     gpgcheck=0
 
 Vorhandene Plugins anschauen:
 
-    yum search tfm-rubygem-foreman
+    foreman-installer --full-help | grep compute
 
 Erweiterungen installieren:
 
-NEIN! Deprecated! Aktuell gibt es kein Docker Plugin fuer Foreman/Katello!
+#### libvirt
+
+Im Linuxhotel:
+
+Auf dem Laptop KVM/QEMU installieren. Am Foreman Server als User foreman einen SSH Key erzeugen:
+
+    su - foreman -s /bin/bash
+    ssh-keygen -t ed25519
+    cat .ssh/id_ed25519.pub
+
+SSH Key notieren.
+
+Am Linuxhotel Laptop den Key als **root** User hinterlegen
+
+    sudo vi ~/.ssh/authorized_keys
+    # Key hinzufügen
+    sudo systemctl enable libvirtd-tcp.socket
+
+Auf dem Foreman Server:
+
+    foreman-installer --enable-foreman-compute-* # Auslesen mit --full-help
+
+Im Webinterface
+
+    Foreman
+    -> Infrastructure
+      -> Compute
+        -> Add
+
+KVM auswählen. URL: `qemu+ssh:root@<fqdn linuxhotel laptop>/system`. Verbindung testen.
+
+Auf dem Linuxhotel Laptop eine KVM Instanz erzeugen. In der Foreman Compute WebUI erscheint diese.
+
+#### Docker - deprecated
+
+Deprecated! Aktuell gibt es kein Docker Plugin fuer Foreman/Katello!
 
     yum install -y tfm-rubygem-foreman_docker
 

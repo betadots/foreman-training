@@ -15,13 +15,13 @@ Bei lokalen Mirrorn unbedingt beachten, dass die Installer Images mit gemirrort 
 
 Tab Operating System -> Name: Debian
 
-Tab Operating System -> Major: 11
+Tab Operating System -> Major: 12
 
-Tab Operating System -> Minor: 5
+Tab Operating System -> Minor: 6
 
-Tab Operating System -> Release Name: bullseye
+Tab Operating System -> Release Name: bookworm
 
-Tab Operating System -> Description: Debian 11.5
+Tab Operating System -> Description: Debian 12.6
 
 Tab Operating System -> Architecture: x86_64
 
@@ -98,6 +98,10 @@ New -> Host -> 2048 MB RAM -> 8 GB HDD
 Boot Einstellungen ändern: 1. Festplatte -> 2. Netzwerk
 Netzwerk ändern: gleiches vboxnet, wie foreman.betadots.training
 MAC Adresse notieren
+
+### ACHTUNG
+
+Nach dem Anlegen der VM in Virtual Box unbedingt den Status des VirtualBox-internen DHCP Servers prüfen! Dieser muss deaktiviert sein. Die in der VirtualBox UI angegebene IP Adresse ist egal.
 
 ## Host in Foreman anlegen
 

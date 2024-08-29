@@ -180,17 +180,17 @@ Tab Operating System
 - PXE Loader: `PXELinux BIOS`
 - Root Password: `eines setzen`
 
-Wenn Puppet explizit ausgeschaltet werden soll:
+Puppe tmuss explizit aktiviert werden (ab Foreman 3.10):
 
 Tab Parameters:
   Host Group Parameters:
     Add Parameter:
 
-enable-puppet: boolean: false
+    enable-puppet: boolean: true
 
-Wenn Puppet 7 aktiviert werden soll:
+Wenn die PuppetLabs Puppet 7 Repositories genutzt werden sollen::
 
-enable-puppetlabs-puppet7-repo: boolean: true
+    enable-puppetlabs-puppet7-repo: boolean: true
 
 Submit
 
@@ -208,6 +208,10 @@ Boot Einstellungen ändern: 1. Festplatte -> 2. Netzwerk
 Netzwerk ändern: gleiches vboxnet, wie foreman.betadots.training
 
 MAC Adresse notieren
+
+### ACHTUNG
+
+Nach dem Anlegen der VM in Virtual Box unbedingt den Status des VirtualBox-internen DHCP Servers prüfen! Dieser muss deaktiviert sein. Die in der VirtualBox UI angegebene IP Adresse ist egal.
 
 ## Host in Foreman anlegen
 
@@ -229,11 +233,11 @@ Interfaces Tab:
 - Edit
   - Mac Adresse eintragen und OK zum speichern
 
-ACHTUNG: MAC Adresse mit Doppelpunkten eintragen!!! aa:bb:cc:dd:ee
+ACHTUNG vor Foreman 3.10: MAC Adresse mit Doppelpunkten eintragen!!! aa:bb:cc:dd:ee
 
 Operating System Tab:
 
-- Operating System: auswählen (CentOS Linux 7.3...)
+- Operating System: auswählen (CentOS Linux 9 Streams...)
 - Media: Mirror wählen
 - Partition Table: Kickstart default
 - PXE Loader: PXELinux BIOS
@@ -245,22 +249,6 @@ Es erscheint ein "New in progress" Balken.
 Bevor die VM gestartet wird, bitte unbedingt prüfen, ob die Router Konfiguration noch aktiv ist:
 
     iptables -L -n -t nat
-
-ACHTUNG: CentOS 8 Stream: das Paket `syslinux-tftpboot` installiert die tftp Boot Images nach `/tftpboot`.
-Der tftp Service erwartet die Dateien allerdings in `/var/lib/tftpboot`.
-
-Loesung: in `/usr/lib/systemd/system/tftp.service` den Pfad anpassen.
-Prüfen
-
-  ls /var/lib/tftpboot/pxelinux.0
-
-Wenn diese Datei nicht vorhanden ist, dann bitte anderen Ort prüfen:
-
-  ls /tftpboot/pxelinux.0
-
-Wenn diese zweite Datei vorhandne ist, dann bitte alle Dateien kopieren:
-
-  cp /tftpboot/* /var/lib/tftpboot/
 
 ## Host in VirtualBox starten
 
