@@ -5,7 +5,7 @@ sudo dnf update -y
 
 echo "Installing Repo Packages"
 echo "Puppet 7"
-sudo dnf localinstall https://yum.puppet.com/puppet7-release-el-8.noarch.rpm
+sudo dnf -y localinstall https://yum.puppet.com/puppet7-release-el-9.noarch.rpm
 
 echo "installing some tools: tree vim net-tools"
 sudo dnf -y install tree vim net-tools
