@@ -78,7 +78,8 @@ Vagrant arbeitet mit vorbereiteten VM Images. Wir muessen das boxomatic/centos-s
 
 Unbedingt pruefen, ob die Host-only Netzwerke einen DHCP Server aktiviert haben !!
 
-VirtualBox -> Datei -> Host-Only Netzwerk -> DHCP Server
+VirtualBox -> Datei -> Werkzeuge -> Netzwerk -> Host-Only Netzwerk -> vboxnet0 -> DHCP Server
+VirtualBox -> File -> Tools -> Network -> Hot-only Networks -> vboxnet0 -> DHCP-Server
 
 Wenn der Host-Only DHCP Server aktiv ist: deaktivieren.
 Wenn im DHCP Server Daten hinterlegt sind, diese bitte durch '0.0.0.0' ersetzen (auch wenn man DHCP danach ausschaltet.
