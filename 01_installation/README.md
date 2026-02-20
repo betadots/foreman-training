@@ -153,16 +153,6 @@ Der Foreman Installer erwartet eine sauber konfigurierte locale: `export LANG=en
 
 Wenn man sich von einem Apple System aus eingeloggt hat, muss man eine Umgebungsvariable löschen: `unset LC_CTYPE`
 
-## Storage
-
-Wir brauchen Festplattenplatz für Repos. Dafür wurde die Festplatte vergrößert.
-
-    growpart /dev/sda 1
-
-Filesystem:
-
-    resize2fs /dev/sda1
-
 ## Foreman Installer
 
 Achtung ab Version Foreman 3.4 and Katello 4.6! Tuning parameter!
@@ -351,7 +341,7 @@ Namensauflösung prüfen: `ping -c1 heise.de`
 
 Wenn das Kommando keine IP zurückliefert, muss in `/etc/named.conf` der Forwarder Eintrag geprüft und passend gesetzt werden.
 
-z.B. (Auszug)
+z.B. (Auszug) [vagrant/config_files/named.conf](vagrant/config_files/named.conf)
 
     ...
     options {
@@ -359,7 +349,7 @@ z.B. (Auszug)
       directory       "/var/named";
       allow-query     { any; };
       dnssec-enable   no;
-      forwarders      { 8.8.8.8; }; <- Anpassen z.B. auf Google DNS Server
+      forwarders      { 192.168.1.5; }; <- Anpassen z.B. auf internen DNS Server
     };
     ...
 
