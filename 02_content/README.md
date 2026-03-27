@@ -25,7 +25,7 @@ CentOS GPG Key kopieren vom mirror [http://mirror.centos.org/centos/RPM-GPG-KEY-
 
 Wiederholen fuer PostgreSQL GPG Key mit [https://download.postgresql.org/pub/repos/yum/keys/PGDG-RPM-GPG-KEY-RHEL](https://download.postgresql.org/pub/repos/yum/keys/PGDG-RPM-GPG-KEY-RHEL)
 
-Wiederholen für Debian 12: [https://ftp-master.debian.org/keys/archive-key-10.asc](https://ftp-master.debian.org/keys/archive-key-10.asc)
+Wiederholen für Debian 12: [https://ftp-master.debian.org/keys/release-12.asc](https://ftp-master.debian.org/keys/release-12.asc)
 
 ## Repository erzeugen
 
@@ -39,14 +39,14 @@ Idealerweise legen die Teilnehmer nur das "kleine" PostgreSQL Repository an.
 
 ### Repository anlegen
 
-#### PostgreSQL 14 Repositories - klein (ca 2 GB - Dauer: ca 5 Minuten)
+#### PostgreSQL 18 Repositories - klein (ca 2 GB - Dauer: ca 5 Minuten)
 
     Foreman Login
       -> Content
         -> Products
           -> Create Product
 
-Name: PSQL
+Name: PSQL 18
 
 GPG Key: Auswählen
 
@@ -58,7 +58,7 @@ Name: 14-RHEL9
 
 Type: yum
 
-Upstream URL: https://download.postgresql.org/pub/repos/yum/14/redhat/rhel-9-x86_64/
+Upstream URL: https://download.postgresql.org/pub/repos/yum/18/redhat/rhel-9-x86_64/
 
 #### CentOS Repository - gross (20 GB - Dauer: ca 1 Stunde)
 
@@ -69,7 +69,7 @@ Upstream URL: https://download.postgresql.org/pub/repos/yum/14/redhat/rhel-9-x86
 
 Repository Type: Yum Repositories
 
-URL: `http://mirror.centos.org/centos/8` (oder lokaler Mirror)
+URL: `http://mirror.centos.org/centos/9` (oder lokaler Mirror)
 
 Click Discover
 
@@ -80,7 +80,7 @@ Katello holt sich dabei die Metainformationen der gesamten CentOS 8 Repositories
 
 Klick: Create selected
 
-Name: CentOS8
+Name: CentOS9
 
 GPG Key: aus Liste auswaehlen
 
@@ -107,7 +107,7 @@ Name angeben -> Save
 
 In der Uebersicht: "New Repository" auswaehlen.
 
-Name angeben: Debian 10
+Name angeben: Debian 12
 
 Bei "Type" `deb` auswaehlen und die Repo Informationen eintragen:
 
@@ -127,7 +127,7 @@ Mirror on Sync: an
 
 Publish via HTTP: an
 
-GPG Key: NICHT auswaehlen, der oben erzeugte GPG Key scheint verkehrt zu sein.
+GPG Key: auswaehlen
 
 Save
 
@@ -240,13 +240,13 @@ Content Views koennen versioniert werden und man kann neue Versionen ueber das W
     Content Views
       -> Create Content View
 
-Name: Katello Client
+Name: Database
+
+Save
 
 Repo hinzufuegen:
 
-    Yum Content
-      -> Repositories
-        -> Add
+Shoiw repositories
 
 Repository auswaehlen
 
@@ -282,12 +282,13 @@ Save
 Eine Content View Version kann man an ein Lifecycle Environment verknuepfen:
 
     Foreman Login
-      -> Content
+      -> Lifecycle
         -> Content Views
-          -> Katello Client
-            -> Promote
+          -> Database
+            -> Ganz am Ende die 3 Punkte
+              -> Promote
 
-Lifecycle Environment(s) auswaehlen (hier: Production)
+Lifecycle Environment(s) auswaehlen (hier: Development)
 
 Bevor wir nun einen Host an diese Lifecycle Environment anbinden koennen brauchen wir einen Activation Key oder muessen uns mit User/Password am Katello Server authentifizieren.
 
@@ -301,9 +302,9 @@ Wir machen das mit einem Activation Key:
         -> Activation Keys
           -> Create Activation Key
 
-Name: Katello-Client
+Name: Database
 Environment: Development auswaehlen
-Content View: Katello Client auswaehlen
+Content View: Database auswaehlen
 
 oder: keine Content View angeben und nach dem Erzeugen des Activation Keys unter Subscriptions die gewuenschten Repositories asuwaehlen.
 
@@ -317,15 +318,17 @@ Unter dem Eintrag Content Host kann man den Stand der Pakete auf einzelnen Syste
       -> Hosts
         -> Content Hosts
 
-Host auswählen, Register auswählen.
+Host auswählen, am Ende die 3 Punkte: Legacy content host UI auswählen.
 
-OS und Content View und Activation Key angeben.
+Register Host auswählen -> Generate
 
 Shell command copy-paste.
 
 Beispiel:
 
     curl -sS  'https://foreman.betadots.training/register?activation_keys=Library&location_id=2&operatingsystem_id=1&organization_id=1&update_packages=false' -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo0LCJpYXQiOjE2NzkzMjEzMzcsImp0aSI6IjJiNTQ3YjBiNGU1ZDkyNmZlYTgyNTczMTIwYjYyMmRlODdiNDg5ZDFlNzg2ZTgwOGYxYzIzMDcxNWMzYTM5N2UiLCJleHAiOjE2NzkzMzU3MzcsInNjb3BlIjoicmVnaXN0cmF0aW9uI2dsb2JhbCByZWdpc3RyYXRpb24jaG9zdCJ9.zc_eRJ0zUF6K-49BpfD03sC9iiAU_kt1pryYVxrOx84' | bash
+
+Wenn hier ein Fehler bezüglich Puppet 7 kommt, dann fehlt der Globale Parmeter `enable-puppet8`.
 
 Weitere Informationen: [https://theforeman.org/plugins/katello/3.14/installation/clients.html#manual](https://theforeman.org/plugins/katello/3.14/installation/clients.html#manual)
 

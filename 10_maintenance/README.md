@@ -12,20 +12,50 @@ Upgrade checks ausführen
 
 Upgrade starten
 
-    foreman-maintain upgrade run --target-version TARGET_VERSION
+1. Aktuelle Repos einbinden
 
-Upgrade Schritte
+z.B.
 
-1. pre-upgrade check
-1. pre-migrations
-1. migrations
-1. post-migrations
-1. post-upgrade checks
+```shell
+dnf upgrade https://yum.theforeman.org/releases/3.18/el9/x86_64/foreman-release.rpm \
+https://yum.theforeman.org/katello/4.20/katello/el9/x86_64/katello-repos-latest.rpm
+```
 
-Bei Problemen Alternative:
+2. Upgrade check ausführen
 
-    dnf upgrade
-    foreman-installer
+```shell
+foreman-rake katello:upgrade_check
+```
+
+3. Foreman stoppen
+
+```shell
+foreman-maintain service stop
+```
+
+4. Pakete aktualisieren
+
+```shell
+dnf upgrade
+```
+
+Wenn hier ein Fehler kommt, z.B. `package foreman-redis-3.18.1-1.el9.noarch from foreman requires (rubygem(redis) >= 4.5.0 with rubygem(redis) < 4.6.0), but none of the providers can be installed` dann müssen die EPEL Repositories entfernt werden!
+
+```shell
+rm -f /etc/yum.repos.d/epel*
+dnf clean all
+dnf makecache
+```
+
+Danach nochmals das `dnf  upgrade` starten.
+
+5. Foreman Setup aktualisieren
+
+```shell
+formean-installer
+```
+
+siehe auch https://docs.theforeman.org/3.18/Upgrading_Project/index-katello.html
 
 ## Backup
 
