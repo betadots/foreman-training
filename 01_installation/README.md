@@ -256,6 +256,8 @@ Aktivierung von Puppet auf dem Foreman Server mit Hilfe von installer Optionen:
       --foreman-proxy-puppetca true \
       --enable-puppet \
       --puppet-server true \
+      --puppet-client-package openvox-agent \
+      --puppet-server-package openvox-server \
       --puppet-server-foreman-ssl-ca /etc/pki/katello/puppet/puppet_client_ca.crt \
       --puppet-server-foreman-ssl-cert /etc/pki/katello/puppet/puppet_client.crt \
       --puppet-server-foreman-ssl-key /etc/pki/katello/puppet/puppet_client.key
@@ -271,6 +273,7 @@ Aktivierung von Puppet auf einem zusätzlichen Smart-Proxy (NICHT im Training!):
       --puppet-server-foreman-ssl-cert /etc/pki/katello/puppet/puppet_client.crt \
       --puppet-server-foreman-ssl-key /etc/pki/katello/puppet/puppet_client.key \
       --puppet-server-foreman-url "foreman.example.com"
+
 
 ## SSH Remote Execution
 
@@ -430,15 +433,6 @@ Hinweis: wir aktivieren den Smart Proxy auf dem Foreman Server. Wenn man weitere
         --foreman-proxy-tftp-managed false \
         --foreman-proxy-tftp-root /tftpboot/ \
         --foreman-proxy-tftp-servername foreman.betadots.training
-
-#Nach dem Setup prüfen:
-#
-#```shell
-#ls -la /var/lib/tftpboot/ # hier müssen Dateien erscheinen
-#ls -la /tftpboot # Hie rmuss ein Fehler kommen (existiert nicht)
-#```
-#
-#Wenn die Kommandos und die Beschreibungen passen, kann man weitermachen. Ansonsten muss man ein systrmd tftp.socket override anlegen, in dem man beim ExecStart den passenden tftpboot Pfad angibt. systemctl daemon.reload, systemctl restart tftp
 
 Die Einstellungen für Smart Proxies koennen im Webinterface analysiert werden:
 

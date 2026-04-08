@@ -39,7 +39,7 @@ Idealerweise legen die Teilnehmer nur das "kleine" PostgreSQL Repository an.
 
 ### Repository anlegen
 
-#### PostgreSQL 18 Repositories - klein (ca 2 GB - Dauer: ca 5 Minuten)
+#### PostgreSQL 18 Repositories - klein (ca 2 GB - Dauer: ca 10 Minuten)
 
     Foreman Login
       -> Content
@@ -54,13 +54,13 @@ Save
 
     -> New Repository
 
-Name: 14-RHEL9
+Name: 18-RHEL9
 
 Type: yum
 
 Upstream URL: https://download.postgresql.org/pub/repos/yum/18/redhat/rhel-9-x86_64/
 
-#### CentOS Repository - gross (20 GB - Dauer: ca 1 Stunde)
+#### CentOS Repository - gross (20 GB - Dauer: ca 45-60 Minuten)
 
     Foreman Login
       -> Content
@@ -69,18 +69,20 @@ Upstream URL: https://download.postgresql.org/pub/repos/yum/18/redhat/rhel-9-x86
 
 Repository Type: Yum Repositories
 
-URL: `http://mirror.centos.org/centos/9` (oder lokaler Mirror)
+URL: `https://ftp-stud.hs-esslingen.de/pub/Mirrors/centos-stream/9-stream/` (oder lokaler Mirror)
 
 Click Discover
 
 Das kann einige Zeit dauern (5 min und mehr).
 Katello holt sich dabei die Metainformationen der gesamten CentOS 8 Repositories.
 
-`os/x86_64` und `updates/x86_64` auswaehlen.
+`BaseOS/x86_64/os` auswaehlen.
 
 Klick: Create selected
 
-Name: CentOS9
+Product: New Product
+
+Name: CentOS9-stream
 
 GPG Key: aus Liste auswaehlen
 
@@ -88,7 +90,7 @@ Verify SSL: nur aktivieren, wenn man upstream SSL pruefen moechte.
 
 Run Repository Creation
 
-#### Debian Repository - gross (min 30GB - Dauer: ca 3 Stunden)
+#### Debian Repository - gross (min 30GB - Dauer: ca 3 Stunden) - (optional)
 
 ACHTUNG: das Debian Repository ist zu gross fuer die Training VM!!!!
 Der Sync bricht ab mit `no space left on device`!
@@ -107,7 +109,7 @@ Name angeben -> Save
 
 In der Uebersicht: "New Repository" auswaehlen.
 
-Name angeben: Debian 12
+Name angeben: Debian 13
 
 Bei "Type" `deb` auswaehlen und die Repo Informationen eintragen:
 
@@ -115,11 +117,11 @@ Upstream URL: `http://ftp.de.debian.org`
 
 Im Linuxhotel: `http://debian/`
 
-Release: stable/unstable/buster/bookworm/trixie/...
+Release: stable/unstable/buster/bookworm/**trixie**/...
 
-Components: main, free, non-free, ...
+Components: **main**, free, non-free, ...
 
-Architectures: amd64, arm, i386, ...
+Architectures: **amd64**, arm, i386, ...
 
 Verify SSL: aus
 
@@ -246,7 +248,7 @@ Save
 
 Repo hinzufuegen:
 
-Shoiw repositories
+Show repositories
 
 Repository auswaehlen
 
