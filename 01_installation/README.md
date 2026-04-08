@@ -2,9 +2,9 @@
 # Foreman Training - Teil 1 - Installation
 
 In diesem Dokument wird eine Installation unter CentOS 9 Stream mit Hilfe von VirtualBox und vagrant beschrieben.
-CentOS 9 Stream oder RHEL 9 sind die einzigen unterstuetzten Betriebssysteme fuer eine Katello4.13/Foreman3.11 Installation (<https://docs.theforeman.org/release/3.11/>).
+CentOS 9 Stream oder RHEL 9 sind die einzigen unterstuetzten Betriebssysteme fuer eine Katello4.19/Foreman3.17 Installation (<https://docs.theforeman.org/release/3.17/>).
 
-Eine Foreman Installation ohne Katello kann auch auf Debian 11 oder Ubuntu 20 oder 22 erfolgen.
+Eine Foreman Installation ohne Katello kann auch auf Debian 12 oder Ubuntu 22 erfolgen.
 
 Fuer eine Installation auf einer existierenden VM bitte das Dokument [../01_installation_vm](../01_installation_vm) verwenden.
 Achtung: eine so erzeugt VM kann nicht fuer das Training verwendet werden!
@@ -256,6 +256,8 @@ Aktivierung von Puppet auf dem Foreman Server mit Hilfe von installer Optionen:
       --foreman-proxy-puppetca true \
       --enable-puppet \
       --puppet-server true \
+      --puppet-client-package openvox-agent \
+      --puppet-server-package openvox-server \
       --puppet-server-foreman-ssl-ca /etc/pki/katello/puppet/puppet_client_ca.crt \
       --puppet-server-foreman-ssl-cert /etc/pki/katello/puppet/puppet_client.crt \
       --puppet-server-foreman-ssl-key /etc/pki/katello/puppet/puppet_client.key
@@ -271,6 +273,7 @@ Aktivierung von Puppet auf einem zusätzlichen Smart-Proxy (NICHT im Training!):
       --puppet-server-foreman-ssl-cert /etc/pki/katello/puppet/puppet_client.crt \
       --puppet-server-foreman-ssl-key /etc/pki/katello/puppet/puppet_client.key \
       --puppet-server-foreman-url "foreman.example.com"
+
 
 ## SSH Remote Execution
 
@@ -294,10 +297,12 @@ Lösung 2: Foreman SmartProxy API - das wollen wir machen!
 
 Auf dem Ziel System (in unserem Fall der Foreman Server):
 
+    su - foreman-proxy
     mkdir ~/.ssh
     curl https://foreman.betadots.training:9090/ssh/pubkey >> ~/.ssh/authorized_keys
     chmod 700 ~/.ssh
     chmod 600 ~/.ssh/authorized_keys
+    exit
 
 Lösung 3: Kickstart Template
 
@@ -337,7 +342,9 @@ Wir nutzen im Training dafuer Puppet Manifeste, die lokal deployed werden (mache
 
 ## Konfiguration Namensaufloesung
 
-Namensauflösung prüfen: `ping -c1 heise.de`
+Namensauflösung prüfen: `dig heise.de`
+
+Bitte prüfen, dass relativ am Ende die folgende Ausgabe steht: `SERVER: 10.100.10.101#53(10.100.10.101)`
 
 Wenn das Kommando keine IP zurückliefert, muss in `/etc/named.conf` der Forwarder Eintrag geprüft und passend gesetzt werden.
 
@@ -353,13 +360,29 @@ z.B. (Auszug) [vagrant/config_files/named.conf](vagrant/config_files/named.conf)
     };
     ...
 
-Nach der Änderung an `/etc/named.conf` muss der DNS Service neu gestartet werden: `systemctl restart named`
+Nach der Änderung an der Config Datei muss das `puppet apply /vagrant_foreman/scripts/foreman_config.pp` erneut ausgeführt werden.
 
 Weitermachen, wenn die Namensauflösung funktioniert.
 
 ## Foreman Web Interface
 
 Einloggen als Admin mit dem Browser: [https://foreman.betadots.training](https://foreman.betadots.training)
+
+### Puppet 8 konfigurieren
+
+Wir möchten gerne Puppet 8 nutzen.
+Dafür muss eine globale Variable gesetzt werden:
+
+    Foreman Login
+      -> Configure
+        -> Global Parameters
+          -> Create Parameter
+
+Name: enable-puppet8
+
+Type: Boolean
+
+Value: true
 
 # Foreman Smart Proxies
 
@@ -408,17 +431,8 @@ Hinweis: wir aktivieren den Smart Proxy auf dem Foreman Server. Wenn man weitere
 
     foreman-installer --foreman-proxy-tftp true \
         --foreman-proxy-tftp-managed false \
-        --foreman-proxy-tftp-root /var/lib/tftpboot/ \
+        --foreman-proxy-tftp-root /tftpboot/ \
         --foreman-proxy-tftp-servername foreman.betadots.training
-
-Nach dem Setup prüfen:
-
-```shell
-ls -la /var/lib/tftpboot/ # hier müssen Dateien erscheinen
-ls -la /tftpboot # Hie rmuss ein Fehler kommen (existiert nicht)
-```
-
-Wenn die Kommandos und die Beschrebungen passen, kann man weitermachen. Ansonsten muss man ein systrmd tftp.socket override anlegen, in dem man beim ExecStart den passenden tftpboot Pfad angibt. systemctl daemon.reload, systemctl restart tftp
 
 Die Einstellungen für Smart Proxies koennen im Webinterface analysiert werden:
 
