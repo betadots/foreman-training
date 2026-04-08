@@ -25,7 +25,7 @@ CentOS GPG Key kopieren vom mirror [http://mirror.centos.org/centos/RPM-GPG-KEY-
 
 Wiederholen fuer PostgreSQL GPG Key mit [https://download.postgresql.org/pub/repos/yum/keys/PGDG-RPM-GPG-KEY-RHEL](https://download.postgresql.org/pub/repos/yum/keys/PGDG-RPM-GPG-KEY-RHEL)
 
-Wiederholen für Debian 12: [https://ftp-master.debian.org/keys/release-12.asc](https://ftp-master.debian.org/keys/release-12.asc)
+Wiederholen für Debian 13: [https://ftp-master.debian.org/keys/release-13.asc](https://ftp-master.debian.org/keys/release-13.asc)
 
 ## Repository erzeugen
 
