@@ -15,7 +15,7 @@ echo "Enable DNF Modules"
 sudo dnf -y repolist enabled
 
 echo "DNF update"
-sudo dnf -y update
+sudo dnf -y upgrade
 
 echo "installing some tools: tree vim net-tools"
 sudo dnf -y install tree vim net-tools
