@@ -2,10 +2,13 @@
 # Foreman Training - Teil 1 - Installation
 
 In diesem Dokument wird eine Installation unter CentOS 9 Stream mit Hilfe von VirtualBox und vagrant beschrieben.
-CentOS 9 Stream oder RHEL 9 sind die einzigen unterstuetzten Betriebssysteme fuer eine Katello4.19/Foreman3.17 Installation (<https://docs.theforeman.org/release/3.17/>).
 
-Eine Foreman Installation ohne Katello kann auch auf Debian 12 oder Ubuntu 22 erfolgen.
+CentOS 9 Stream oder RHEL 9 sind die einzigen unterstuetzten Betriebssysteme fuer eine Katello4.20/Foreman3.18 Installation (<https://docs.theforeman.org/release/3.11/>).
 
+Eine Foreman Installation ohne Katello kann auch auf RHEL 9 / CentOS Stream 9, Debian 12 oder Ubuntu 22 erfolgen.
+
+Seit Foreman 3.19 besteht ausserdem die Moeglichkeit Foreman/Katello auf Basis von Containern auszurollen. Siehe https://docs.theforeman.org/3.19/Quickstart/index-containerized-katello.html
+ 
 Fuer eine Installation auf einer existierenden VM bitte das Dokument [../01_installation_vm](../01_installation_vm) verwenden.
 Achtung: eine so erzeugt VM kann nicht fuer das Training verwendet werden!
 

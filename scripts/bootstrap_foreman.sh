@@ -4,9 +4,9 @@ echo "DNF: Clean metadata"
 sudo dnf clean all
 echo "Installing Repo Packages"
 echo "foreman"
-sudo dnf -y localinstall https://yum.theforeman.org/releases/3.17/el9/x86_64/foreman-release.rpm
+sudo dnf -y localinstall https://yum.theforeman.org/releases/3.18/el9/x86_64/foreman-release.rpm
 echo "Katello"
-sudo dnf -y localinstall https://yum.theforeman.org/katello/4.19/katello/el9/x86_64/katello-repos-latest.rpm
+sudo dnf -y localinstall https://yum.theforeman.org/katello/4.20/katello/el9/x86_64/katello-repos-latest.rpm
 # echo "Puppet 8"
 # sudo dnf -y install https://yum.puppet.com/puppet8-release-el-9.noarch.rpm
 echo "OpenVox 8"
