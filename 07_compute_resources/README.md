@@ -6,6 +6,8 @@ Hier geht es um VMware, AWS, GCE, ....
 
 Einige Erweiterungen sind nicht Bestandteil der allgemeinen Installation.
 
+https://projects.theforeman.org/projects/foreman/wiki/List_of_Plugins
+
 ### Plugins als Paket
 
 YUM Repositoriy fuer Plugins aktivieren (wurde durch den Installer bereits erledigt:
@@ -55,6 +57,10 @@ Im Webinterface
 KVM auswählen. URL: `qemu+ssh:root@<fqdn linuxhotel laptop>/system`. Verbindung testen.
 
 Auf dem Linuxhotel Laptop eine KVM Instanz erzeugen. In der Foreman Compute WebUI erscheint diese.
+
+#### Proxmox
+
+https://github.com/theforeman/foreman_fog_proxmox
 
 #### Docker - deprecated
 

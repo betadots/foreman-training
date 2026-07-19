@@ -272,6 +272,8 @@ Aktivierung von Puppet auf einem zusätzlichen Smart-Proxy (NICHT im Training!):
       --foreman-proxy-puppetca true \
       --enable-puppet \
       --puppet-server true \
+      --puppet-client-package openvox-agent \
+      --puppet-server-package openvox-server \
       --puppet-server-foreman-ssl-ca /etc/pki/katello/puppet/puppet_client_ca.crt \
       --puppet-server-foreman-ssl-cert /etc/pki/katello/puppet/puppet_client.crt \
       --puppet-server-foreman-ssl-key /etc/pki/katello/puppet/puppet_client.key \
@@ -300,7 +302,7 @@ Lösung 2: Foreman SmartProxy API - das wollen wir machen!
 
 Auf dem Ziel System (in unserem Fall der Foreman Server):
 
-    su - foreman-proxy
+    su - foreman-proxy -s /bin/bash
     mkdir ~/.ssh
     curl https://foreman.betadots.training:9090/ssh/pubkey >> ~/.ssh/authorized_keys
     chmod 700 ~/.ssh

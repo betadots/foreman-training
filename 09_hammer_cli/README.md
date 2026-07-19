@@ -6,19 +6,26 @@ Foreman Config von der Kommandozeile
 
 ### Konfiguration
 
-Die Konfiruration wird pro User hinterlegt.
+Die Konfiguration wird pro User hinterlegt.
 
 `.hammer/cli.modules.d/foreman.yml`
     :foreman:
       # Credentials. You'll be asked for the interactively if you leave them blank here
       :username: 'admin'
-      :password: '12345678'
+      :password: '12345678' # besser: Token!!!!
 
       # Check API documentation cache status on each request
       :refresh_cache: false
 
       # API request timeout in seconds, set -1 for infinity
       :request_timeout: 120
+
+#### Bash Completion
+
+    sudo yum install bash-completion
+    hammer prebuild-bash-completion
+    exit
+    sudo -i
 
 ### hammer Kommando
 
@@ -27,12 +34,12 @@ Die Konfiruration wird pro User hinterlegt.
 Beispiel:
 
     hammer host list
-    ---|----------------------------|------------------|------------|---------------|-------------------|---------------|----------------|----------------------
-    ID | NAME                       | OPERATING SYSTEM | HOST GROUP | IP            | MAC               | GLOBAL STATUS | CONTENT VIEW   | LIFECYCLE ENVIRONMENT
-    ---|----------------------------|------------------|------------|---------------|-------------------|---------------|----------------|----------------------
-    2  | apache.betadots.training  | CentOS 7.9       |            | 10.100.10.104 | 08:00:27:75:19:a8 |  Warning       | Composite View | Produktion
-    1  | foreman.betadots.training | CentOS 7.9.2009  |            | 10.0.2.15     | 52:54:00:4d:77:d3 | OK            | Composite View | Produktion
-    ---|----------------------------|------------------|------------|---------------|-------------------|---------------|----------------|----------------------
+| -----| ---------------------------| ------------------| ------------| ---------------| -------------------| ---------------| ----------------| -----------------------|
+| ID  | NAME                      | OPERATING SYSTEM | HOST GROUP | IP            | MAC               | GLOBAL STATUS | CONTENT VIEW   | LIFECYCLE ENVIRONMENT |
+| -----| ---------------------------| ------------------| ------------| ---------------| -------------------| ---------------| ----------------| -----------------------|
+| 2   | apache.betadots.training  | CentOS 7.9       |            | 10.100.10.104 | 08:00:27:75:19:a8 | Warning       | Composite View | Produktion            |
+| 1   | foreman.betadots.training | CentOS 7.9.2009  |            | 10.0.2.15     | 52:54:00:4d:77:d3 | OK            | Composite View | Produktion            |
+| -----| ---------------------------| ------------------| ------------| ---------------| -------------------| ---------------| ----------------| -----------------------|
 
 ### Anlegen eines Smart-Proxy registration command
 

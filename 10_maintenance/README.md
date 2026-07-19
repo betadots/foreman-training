@@ -2,10 +2,6 @@
 
 ## Upgrade
 
-Prüfen, welche Versionen zur Verfügung stehen
-
-    foreman-maintain upgrade list-versions
-
 Upgrade checks ausführen
 
     foreman-maintain upgrade check --target-version TARGET_VERSION

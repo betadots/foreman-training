@@ -71,7 +71,11 @@ Repository Type: Yum Repositories
 
 URL: `https://ftp-stud.hs-esslingen.de/pub/Mirrors/centos-stream/9-stream/` (oder lokaler Mirror)
 
-Click Discover
+    -> Sync now
+
+Aeltere Foreman/Katello Versionen:
+
+Angabe des Repo Pfades, dann "Discover".
 
 Das kann einige Zeit dauern (5 min und mehr).
 Katello holt sich dabei die Metainformationen der gesamten CentOS 8 Repositories.
@@ -122,8 +126,6 @@ Release: stable/unstable/buster/bookworm/**trixie**/...
 Components: **main**, free, non-free, ...
 
 Architectures: **amd64**, arm, i386, ...
-
-Verify SSL: aus
 
 Mirror on Sync: an
 
@@ -235,7 +237,8 @@ z.B. Basis OS Repo + Monitoring + eigenes Repo
 
     Foreman Login
       -> Content
-        -> Content Views
+        -> Lifecycle
+          -> Content Views
 
 Content Views koennen versioniert werden und man kann neue Versionen ueber das Webinterface erzeugen.
 
@@ -284,11 +287,12 @@ Save
 Eine Content View Version kann man an ein Lifecycle Environment verknuepfen:
 
     Foreman Login
-      -> Lifecycle
-        -> Content Views
-          -> Database
-            -> Ganz am Ende die 3 Punkte
-              -> Promote
+      -> Content
+        -> Lifecycle
+          -> Content Views
+            -> Database
+              -> Ganz am Ende die 3 Punkte
+                -> Promote
 
 Lifecycle Environment(s) auswaehlen (hier: Development)
 
