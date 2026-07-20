@@ -318,6 +318,8 @@ Save
 
 ## Content Hosts
 
+Deprecated seit Foreman 3.18/Katello 4.20.
+
 Unter dem Eintrag Content Host kann man den Stand der Pakete auf einzelnen Systemen pruefen und modifizieren.
 
     Foreman Login
@@ -336,9 +338,27 @@ Beispiel:
 
 Wenn hier ein Fehler bezüglich Puppet 7 kommt, dann fehlt der Globale Parmeter `enable-puppet8`.
 
-Weitere Informationen: [https://theforeman.org/plugins/katello/3.14/installation/clients.html#manual](https://theforeman.org/plugins/katello/3.14/installation/clients.html#manual)
-
 ACHTUNG: in Katello 4 wurde von katello-agent auf Remote Execution gewechselt!!
+
+## Register Host
+
+Wenn man ein existierendes System mit Subscriptoins vrsehen will, muss das System in Foreman/Katello registriert werden.
+Dafür gibt es mehrere Wege, die zum Ziel führen:
+
+    Content
+      -> Activation Keys
+        -> Key auswählen
+          -> system registration anklicken
+
+oder
+
+    Hosts
+      -> Register Host
+
+## Subscription Manager für Nicht-EL Systeme
+
+Unter Debian, Ubuntu und SLES gibt es die notwendigen Pakete nicht in den Standard Repositories.
+Hier stellt die ATIX AG ein Repository und eine Dokumentation zur Verfügung: https://oss.atix.de/html/
 
 ## Host Collections
 
