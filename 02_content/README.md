@@ -323,7 +323,7 @@ Name: Database
 Environment: Development auswaehlen
 Content View: Database auswaehlen
 
-oder: keine Content View angeben und nach dem Erzeugen des Activation Keys unter Subscriptions die gewuenschten Repositories asuwaehlen.
+oder: keine Content View angeben und nach dem Erzeugen des Activation Keys unter Repository Sets die gewuenschten Repositories auswaehlen.
 
 Save
 
@@ -332,22 +332,6 @@ Save
 Deprecated seit Foreman 3.18/Katello 4.20.
 
 Unter dem Eintrag Content Host kann man den Stand der Pakete auf einzelnen Systemen pruefen und modifizieren.
-
-    Foreman Login
-      -> Hosts
-        -> Content Hosts
-
-Host auswählen, am Ende die 3 Punkte: Legacy content host UI auswählen.
-
-Register Host auswählen -> Generate
-
-Shell command copy-paste.
-
-Beispiel:
-
-    curl -sS  'https://foreman.betadots.training/register?activation_keys=Library&location_id=2&operatingsystem_id=1&organization_id=1&update_packages=false' -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo0LCJpYXQiOjE2NzkzMjEzMzcsImp0aSI6IjJiNTQ3YjBiNGU1ZDkyNmZlYTgyNTczMTIwYjYyMmRlODdiNDg5ZDFlNzg2ZTgwOGYxYzIzMDcxNWMzYTM5N2UiLCJleHAiOjE2NzkzMzU3MzcsInNjb3BlIjoicmVnaXN0cmF0aW9uI2dsb2JhbCByZWdpc3RyYXRpb24jaG9zdCJ9.zc_eRJ0zUF6K-49BpfD03sC9iiAU_kt1pryYVxrOx84' | bash
-
-Wenn hier ein Fehler bezüglich Puppet 7 kommt, dann fehlt der Globale Parmeter `enable-puppet8`.
 
 ACHTUNG: in Katello 4 wurde von katello-agent auf Remote Execution gewechselt!!
 
@@ -365,6 +349,10 @@ oder
 
     Hosts
       -> Register Host
+
+Beispiel:
+
+    curl -sS  'https://foreman.betadots.training/register?activation_keys=Library&location_id=2&operatingsystem_id=1&organization_id=1&update_packages=false' -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo0LCJpYXQiOjE2NzkzMjEzMzcsImp0aSI6IjJiNTQ3YjBiNGU1ZDkyNmZlYTgyNTczMTIwYjYyMmRlODdiNDg5ZDFlNzg2ZTgwOGYxYzIzMDcxNWMzYTM5N2UiLCJleHAiOjE2NzkzMzU3MzcsInNjb3BlIjoicmVnaXN0cmF0aW9uI2dsb2JhbCByZWdpc3RyYXRpb24jaG9zdCJ9.zc_eRJ0zUF6K-49BpfD03sC9iiAU_kt1pryYVxrOx84' | bash
 
 ## Subscription Manager für Nicht-EL Systeme
 

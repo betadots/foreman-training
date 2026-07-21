@@ -201,7 +201,7 @@ Hinweis: die Images werden initial in eine RAM Disk geladen. Deshalb benötigt d
     New
       -> Host
         -> 4096 MB RAM
-          -> 8 GB HDD
+          -> 20 GB HDD
 
 Boot Einstellungen ändern: 1. Festplatte -> 2. Netzwerk
 

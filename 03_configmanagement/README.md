@@ -60,10 +60,9 @@ Dazu gehören zu Beispiel die Installation und Konfiguration von Paketen und Die
 
 Im Tab "Ansible Roles" die Ansible Rollen auswählen, die der Host bekommen soll (hier: frzk.chrony)
 
-Im Tab "Parameter" können Rollenspezifische Daten gesetzt werden.
+Im Tab "Variables" können Rollenspezifische Daten gesetzt werden.
 
-    Host Parameter
-      -> Add Parameter
+Vorbedingung: die zu setzenden Variablen müssen vorher mit dem Override Flag versehen werden.
 
 Name: `chrony_ntp_servers`
 Type: `Array`
@@ -96,6 +95,9 @@ Default behavior:
 
 Submit
 
+Welche Variablen/Smart Class Parameter bei einem System (Host) für einen Nicht-Admin User in Foreman zur Verfügung stehen hängt davon ab, ob die Variable mit dem "Override" Flag versehen hat.
+Nur Variable mit dem Flag sind für Host Verantwortliche sichtbar ud können dort ueberschrieben werden.
+
 ### Config Management starten
 
 Achtung: SSH Zugang muss eingerichtet werden für die remote command execution:
@@ -111,37 +113,42 @@ Für Ansible geht der Weg direkt über den Host: Foreman Login -> Hosts -> All h
 
 Bug in Ansible/Foreman 3.6: "ERROR! Unexpected Exception, this is probably a bug: No module named psutil"
 
-[https://community.theforeman.org/t/error-unexpected-exception-this-is-probably-a-bug-no-module-named-psutil/16965](https://community.theforeman.org/t/error-unexpected-exception-this-is-probably-a-bug-no-module-named-psutil/16965)
-[https://github.com/ansible/ansible-runner/issues/54](https://github.com/ansible/ansible-runner/issues/54)
+<details>
+    <summary><strong>Lösung für Foreman 3.6</strong></summary>
 
-Lösung:
+    [https://community.theforeman.org/t/error-unexpected-exception-this-is-probably-a-bug-no-module-named-psutil/16965](https://community.theforeman.org/t/error-unexpected-exception-this-is-probably-a-bug-no-module-named-psutil/16965)
+    [https://github.com/ansible/ansible-runner/issues/54](https://github.com/ansible/ansible-runner/issues/54)
 
-    dnf install python3.11-pip
-    python3.11 -m pip install psutil
+    Lösung:
 
-Bug in Foreman 3.6: call back (Ansible Reporting)
+        dnf install python3.11-pip
+        python3.11 -m pip install psutil
 
-Es fehlt die Python 'request' Erweiterung:
+    Bug in Foreman 3.6: call back (Ansible Reporting)
 
-    python3.11 -m pip install requests
+    Es fehlt die Python 'request' Erweiterung:
 
-Ausserdem muss die Ansible Konfigurationsdatei bearbeitet werden:
+        python3.11 -m pip install requests
 
-    # /etc/ansible/ansible.cfg
-    [defaults]
-    roles_path = /etc/ansible/roles:/usr/share/ansible/roles
-    collections_paths = /etc/ansible/collections:/usr/share/ansible/collections
-    callback_whitelist = theforeman.foreman.foreman
-    stdout_callback = theforeman.foreman.foreman
-    bin_ansible_callbacks = true
+    Ausserdem muss die Ansible Konfigurationsdatei bearbeitet werden:
 
-    [callback_foreman]
-    report_type = foreman
-    proxy_url = https://foreman.betadots.training:9090
-    url = https://foreman.betadots.training
-    ssl_cert = /etc/foreman-proxy/foreman_ssl_cert.pem
-    ssl_key = /etc/foreman-proxy/foreman_ssl_key.pem
-    verify_certs = /etc/foreman-proxy/foreman_ssl_ca.pem
+        # /etc/ansible/ansible.cfg
+        [defaults]
+        roles_path = /etc/ansible/roles:/usr/share/ansible/roles
+        collections_paths = /etc/ansible/collections:/usr/share/ansible/collections
+        callback_whitelist = theforeman.foreman.foreman
+        stdout_callback = theforeman.foreman.foreman
+        bin_ansible_callbacks = true
+
+        [callback_foreman]
+        report_type = foreman
+        proxy_url = https://foreman.betadots.training:9090
+        url = https://foreman.betadots.training
+        ssl_cert = /etc/foreman-proxy/foreman_ssl_cert.pem
+        ssl_key = /etc/foreman-proxy/foreman_ssl_key.pem
+        verify_certs = /etc/foreman-proxy/foreman_ssl_ca.pem
+
+</details>
 
 Achtung: wenn man Ansible UND Puppet verwendet, dann muss man Foreman mitteilen, welcher Job für Puppet Agent Lauf verwendet werden soll: Ansible oder SSH.
 
