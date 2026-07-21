@@ -96,8 +96,19 @@ Run Repository Creation
 
 #### Debian Repository - gross (min 30GB - Dauer: ca 3 Stunden) - (optional)
 
-ACHTUNG: das Debian Repository ist zu gross fuer die Training VM!!!!
-Der Sync bricht ab mit `no space left on device`!
+**ACHTUNG: das Debian Repository ist zu gross fuer die Training VM!!!!
+Der Sync bricht ab mit `no space left on device`!**
+
+Danach ist Foreman kaputt!!!!
+
+Lösung:
+
+1. Repository in Foreman löschen (oder hammer cli, wenn der Webservice nicht mehr funktioniert)
+2. Foreman aufräumen:
+
+    foreman-maintain service stop
+    rm -fr /var/lib/pulp/media/assets ????
+    foreman-maintain service start
 
 Debian Repositories werden anders behandelt.
 Hier muss zuerst ein Produkt und beim Repository eine URL angegeben werden.

@@ -99,8 +99,6 @@ Wenn die Gruppe fehlt: `usermod -a -G vboxusers <username>` ausfuehren und neu e
 
 ## VM starten
 
-ACHTUNG: die Foreman/Katello Instanz bekommt eine zweite Festplatte mit 100 GB Groesse.
-Diese Festapltte kann dann für Debian Mirror in Katello eingesetzt werden.
 Bei Systemen mit wenig Festplattenplatz, bitte in der Datei `vagrant/Vagrantfile` die Groesse anpassen, wenn man nicht genug Platz hat.
 
 Jetzt kann die VM instantiiert werden:
@@ -113,6 +111,14 @@ Achtung: wenn es hier zu einer Fehlermeldung kommt: `VBoxManage error: Code E_AC
 Anlegen der Datei `/etc/vbox/networks.conf`:
 
     * 0.0.0.0/0 ::/0
+
+Achtung 2: Bei Nutzung von VirtualBox v7 oder neuer, muss das `kvm` und `kvm_intel` Kernel Modul geblacklistet werden:
+
+`/etc/modprobe.d/kvm-blacklist.conf`
+
+    blacklist kvm_intel
+
+Dann unbedingt einen Reboot machen!!
 
 Danach Login:
 
@@ -163,7 +169,7 @@ Achtung ab Version Foreman 3.4 and Katello 4.6! Tuning parameter!
 <https://github.com/theforeman/foreman-installer/blob/develop/hooks/pre_commit/13-tuning.rb#L3>
 
 | Tuning Policy     | min CPU Cores | min RAM | wie viele Hosts? |
-|-------------------|--------------:|--------:|-----------------:|
+| -------------------| --------------:| --------:| -----------------:|
 | development       | 1             | 6       | ein paar         |
 | default           | 4             | 20      | bis 5.000        |
 | medium            | 8             | 32      | bis 10.000       |

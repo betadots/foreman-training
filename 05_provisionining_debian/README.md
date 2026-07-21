@@ -15,13 +15,13 @@ Bei lokalen Mirrorn unbedingt beachten, dass die Installer Images mit gemirrort 
 
 Tab Operating System -> Name: Debian
 
-Tab Operating System -> Major: 12
+Tab Operating System -> Major: 13
 
 Tab Operating System -> Minor: 6
 
-Tab Operating System -> Release Name: bookworm
+Tab Operating System -> Release Name: trixie
 
-Tab Operating System -> Description: Debian 12.6
+Tab Operating System -> Description: Debian 13.6
 
 Tab Operating System -> Architecture: x86_64
 
@@ -83,7 +83,7 @@ OS auswaehlen
 
 2. Stelle: OS mit Templates Assoziieren
 
-- Partiäon Table -> "Preseed default" auswaehlen
+- Partition Table -> "Preseed default" auswaehlen
 - Installation media -> "Debian mirror" auswählen (oder das vorher angelegten Installation media auswählen)
 - Templates -> alle Templates auswählen, die man auswählen kann.
 
@@ -122,7 +122,7 @@ Interfaces Tab:
 
 Operating System Tab:
 
-- Operating System: auswählen (Debian 11.5...)
+- Operating System: auswählen (Debian 13.6...)
 - Media: Mirror waehlen
 - Partition Table: Preeseed default
 - PXE Loader: PXELinux BIOS

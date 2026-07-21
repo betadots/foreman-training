@@ -80,7 +80,7 @@ Nun das GitHub Repository auf die Workstation/das Trainingslaptop herunterladen:
 
 Achtung: es muss ein aktueller Browser genutzt werden. Firefox auf Ubuntu 22 ist zu alt!
 
-Weiter geht es mit Teil1: [Installation](01_installation)
+Weiter geht es mit Teil 1: [Installation](01_installation)
 
 ## License
 
