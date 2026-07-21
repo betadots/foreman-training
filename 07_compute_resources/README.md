@@ -62,6 +62,10 @@ Auf dem Linuxhotel Laptop eine KVM Instanz erzeugen. In der Foreman Compute WebU
 
 https://github.com/theforeman/foreman_fog_proxmox
 
+    yum install rubygems_foreman_compute_proxmox
+    foreman-rake db:migrate
+    foreman-maintain service restart --only foreman
+
 #### Docker - deprecated
 
 Deprecated! Aktuell gibt es kein Docker Plugin fuer Foreman/Katello!
@@ -76,19 +80,5 @@ Nach jeder Plugin Installation die Datenbank Updates einspielen und den Foreman 
 ### Plugins als GEM
 
 Achtung: dies sollte man nur machen, wenn man an Foreman Erweiterungen mit-programmieren möchte.
-
-    scl enable tfm bash
-    gem install <foreman plugin>
-
-## Compute Resource
-
-    Foreman Login
-      -> Infrastructure
-        -> Compute Resource
-          -> Create Compute Resource
-
-- Name: docker from foreman
-- Provider: docker
-- URL: <http://docker.betadots.training:4243>
 
 Weiter mit Teil 8 [Integration in Infrastruktur](../08_integration_in_infrastruktur)

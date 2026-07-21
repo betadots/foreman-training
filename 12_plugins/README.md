@@ -47,7 +47,8 @@ Dann in Foreman cockpit verwenden:
 ## DHCP Browser
 
     yum install -y tfm-rubygem-foreman_dhcp_browser
-    systemctl restart foreman
+    foreman-rake db:migrate
+    foreman-maintain service restart --only foreman
 
 ## Remote execution
 

@@ -91,9 +91,9 @@ Submit
 
 ## Host erzeugen in VirtualBox
 
-Hinweis: die Images werden initial in eine RAM Disk geladen. Deshalb benötigt die VM mindesten 1516 MB RAM.
+Hinweis: die Images werden initial in eine RAM Disk geladen. Deshalb benötigt die VM mindesten 4096 MB RAM.
 
-New -> Host -> 2048 MB RAM -> 8 GB HDD
+New -> Host -> 4096 MB RAM -> 20 GB HDD
 
 Boot Einstellungen ändern: 1. Festplatte -> 2. Netzwerk
 Netzwerk ändern: gleiches vboxnet, wie foreman.betadots.training

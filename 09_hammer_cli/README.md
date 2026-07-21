@@ -9,6 +9,7 @@ Foreman Config von der Kommandozeile
 Die Konfiguration wird pro User hinterlegt.
 
 `.hammer/cli.modules.d/foreman.yml`
+
     :foreman:
       # Credentials. You'll be asked for the interactively if you leave them blank here
       :username: 'admin'
@@ -19,6 +20,9 @@ Die Konfiguration wird pro User hinterlegt.
 
       # API request timeout in seconds, set -1 for infinity
       :request_timeout: 120
+      
+      # Foreman host
+      :host: 'foreman.betadots.training'
 
 #### Bash Completion
 
@@ -26,6 +30,8 @@ Die Konfiguration wird pro User hinterlegt.
     hammer prebuild-bash-completion
     exit
     sudo -i
+
+    hammer <tab<tab>
 
 ### hammer Kommando
 
@@ -48,7 +54,7 @@ Beispiel:
 
 ## API
 
-<https://apidocs.theforeman.org/foreman/3.4/apidoc/v2.html>
+<https://apidocs.theforeman.org/foreman/3.18/apidoc/v2.html>
 
     curl --user admin:changeme -H "Content-Type:application/json" -H "Accept:application/json" -k -X GET -d '{"search":"build = true and os = CentOS"}' https://foreman.betadots.training/api/v2/hosts | python3 -m json.tool | less
 

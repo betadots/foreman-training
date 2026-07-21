@@ -196,11 +196,11 @@ Submit
 
 ## Host erzeugen in VirtualBox
 
-Hinweis: die Images werden initial in eine RAM Disk geladen. Deshalb benötigt die VM mindesten 2500 MB RAM (CentOS 8 Stream, Stand Juni 2023).
+Hinweis: die Images werden initial in eine RAM Disk geladen. Deshalb benötigt die VM mindesten 4096 MB RAM (CentOS 9 Stream, Stand Juli 2026).
 
     New
       -> Host
-        -> 2548 MB RAM
+        -> 4096 MB RAM
           -> 8 GB HDD
 
 Boot Einstellungen ändern: 1. Festplatte -> 2. Netzwerk
