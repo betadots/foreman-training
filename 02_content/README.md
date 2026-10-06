@@ -15,11 +15,11 @@ Unter Content Credentials kann man GPG Keys und/oder SSL Zertifikate hinterlegen
     Foreman Login
       -> Content
         -> Content Credentials
-          -> Create Content Credential
+          -> Create New
 
-Name: CentOS 9 Stream
+Name: Rocky 9
 
-CentOS GPG Key kopieren vom mirror [http://mirror.centos.org/centos/RPM-GPG-KEY-CentOS-Official](http://mirror.centos.org/centos/RPM-GPG-KEY-CentOS-Official)
+Rocky-GPG-Key herunterladen von [https://rockylinux.org/resources/gpg-key-info](https://rockylinux.org/resources/gpg-key-info)
 
     Save
 
