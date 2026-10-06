@@ -9,9 +9,10 @@ CentOS oder RHEL sind die einzigen unterstuetzten Betriebssysteme fuer eine Kate
 Achtung:
 
 Der Foreman Installer erwartet eine Namensauflösung innerhalb der VM.
-Es muss sichergesteltl sein, dass die VM ihren eigenen FQDN korrekt aufloesen kann.
+Es muss sichergestellt sein, dass die VM ihren eigenen FQDN korrekt aufloesen kann.
 
-    ping -c 1 [VM FQDN]
+    hostname -f |grep -F . || echo 'VM-Name enthält keine Domäne!'
+    ping -c 1 $(hostname -f)
 
 Der Foreman Installer erwartet eine sauber konfigurierte locale: `export LANG=en_US.UTF-8`
 
@@ -29,24 +30,19 @@ Wenn man Foreman 3.4 und Katello 4.6 verwenden möchte, kann man ein Script in d
 
 Fuer ein Katello/Foreman System werden die folgenden Repositories benoetigt:
 
+#### OpenVox 8
+
+    dnf -y install https://yum.voxpupuli.org/openvox8-release-el-9.noarch.rpm
+
 #### Foreman
 
-    sudo dnf -y localinstall https://yum.theforeman.org/releases/3.4/el8/x86_64/foreman-release.rpm
+    dnf -y install https://yum.theforeman.org/releases/5.0/el9/x86_64/foreman-release.rpm
 
-#### Katello
+#### Optional: EPEL
 
-    sudo dnf -y localinstall https://yum.theforeman.org/katello/4.6/katello/el8/x86_64/katello-repos-latest.rpm
-
-#### Puppet 7 (auch wenn man nur Ansble machen moechte!)
-
-    sudo dnf -y localinstall https://yum.puppet.com/puppet7-release-el-8.noarch.rpm
-
-#### Powertools und Modules
-
-    sudo dnf config-manager --set-enabled powertools
-    sudo dnf -y module enable katello:el8 pulpcore:el8
-    sudo dnf -y update
-
+    dnf install epel-release -y
+    sed -e 's/enabled=0/enabled=1/' /etc/yum.repos.d/epel.repo
+    
 ## Basis Installation
 
     sudo dnf -y install foreman-installer-katello
