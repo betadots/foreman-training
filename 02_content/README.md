@@ -21,7 +21,8 @@ Name: Rocky 9
 
 Rocky-GPG-Key herunterladen von [https://rockylinux.org/resources/gpg-key-info](https://rockylinux.org/resources/gpg-key-info)
 
-    Save
+    Upload file
+      -> Create
 
 Wiederholen fuer PostgreSQL GPG Key mit [https://download.postgresql.org/pub/repos/yum/keys/PGDG-RPM-GPG-KEY-RHEL](https://download.postgresql.org/pub/repos/yum/keys/PGDG-RPM-GPG-KEY-RHEL)
 
@@ -70,29 +71,21 @@ Upstream URL: https://download.postgresql.org/pub/repos/yum/18/redhat/rhel-9-x86
 Repository Type: Yum Repositories
 
 URL: `https://ftp-stud.hs-esslingen.de/pub/Mirrors/centos-stream/9-stream/` (oder lokaler Mirror)
+Username: any
+Password: any
 
-    -> Sync now
+    -> Discover
+    
+Haken setzen bei
 
-Aeltere Foreman/Katello Versionen:
+/AppStream/x86_64/os/
+/BaseOS/x86_64/os/
 
-Angabe des Repo Pfades, dann "Discover".
+    -> Create Selected
+      -> Run Repository Creation
 
 Das kann einige Zeit dauern (5 min und mehr).
-Katello holt sich dabei die Metainformationen der gesamten CentOS 8 Repositories.
-
-`BaseOS/x86_64/os` auswaehlen.
-
-Klick: Create selected
-
-Product: New Product
-
-Name: CentOS9-stream
-
-GPG Key: aus Liste auswaehlen
-
-Verify SSL: nur aktivieren, wenn man upstream SSL pruefen moechte.
-
-Run Repository Creation
+Katello holt sich dabei die Metainformationen der gesamten CentOS 9 Repositories.
 
 #### Debian Repository - gross (min 30GB - Dauer: ca 3 Stunden) - (optional)
 
@@ -107,7 +100,7 @@ Lösung:
 2. Foreman aufräumen:
 
     foreman-maintain service stop
-    rm -fr /var/lib/pulp/media/assets ????
+    rm -fr /var/lib/pulp/media/artifact
     foreman-maintain service start
 
 Debian Repositories werden anders behandelt.
@@ -117,7 +110,7 @@ Zusätzlich muss die Distribution und Komponente sowie Architektur angegeben wer
 
     Foreman Login
       -> Content
-        -> Product
+        -> Products
           -> Create Product
 
 Name angeben -> Save
@@ -128,7 +121,7 @@ Name angeben: Debian 13
 
 Bei "Type" `deb` auswaehlen und die Repo Informationen eintragen:
 
-Upstream URL: `http://ftp.de.debian.org`
+Upstream URL: `http://ftp.de.debian.org/debian`
 
 Im Linuxhotel: `http://debian/`
 
