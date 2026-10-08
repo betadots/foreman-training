@@ -162,7 +162,7 @@ Hier kann man einen SCCM Account angeben.
 
 ## Docker (optional)
 
-    Katello Login
+    Foreman Login
       -> Content
         -> Products
           -> Create Product
