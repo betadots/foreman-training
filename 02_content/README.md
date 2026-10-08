@@ -151,9 +151,9 @@ Weitere Details findet man auf der Webseite von Foreman: [https://theforeman.org
 Wir beschreiben den Weg mit SCCM Plugin.
 Wenn SMT Server genutzt wird, dann wird ein normales Repository angelegt.
 
-Installation: `yum install -y tfm-rubygem-foreman_scc_manager`
+Installation: `yum install -y rubygem-foreman_scc_manager`
 Datenbank aktualisieren: `foreman-rake db:migrate`
-Neustart Foreman: `forman-maintain service restart --only foreman`
+Neustart Foreman: `foreman-maintain service restart --only foreman`
 
 Nun hat man unter Content einen neuen Eintrag: SuSE Subscription
 Hier kann man einen SCCM Account angeben.
