@@ -37,11 +37,6 @@ Fuer ein Katello/Foreman System werden die folgenden Repositories benoetigt:
 #### Foreman
 
     dnf -y install https://yum.theforeman.org/releases/5.0/el9/x86_64/foreman-release.rpm
-
-#### Optional: EPEL
-
-    dnf install epel-release -y
-    sed -e 's/enabled=0/enabled=1/' /etc/yum.repos.d/epel.repo
     
 ## Basis Installation
 
