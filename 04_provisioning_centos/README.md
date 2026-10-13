@@ -78,7 +78,8 @@ Beispiel Suchen: kind=PXELinux
 
     Foreman Login
       -> Hosts
-        -> Provisioning Templates
+        -> Templates
+          -> Provisioning Templates
 
 1. Stelle: Templates mit OS Assoziieren
 
