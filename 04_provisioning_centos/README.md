@@ -56,7 +56,8 @@ Hier eventuell die Lifecycle Environment Repositories auswählen.
 
     Foreman Login
       -> Hosts
-        -> Provisioning Templates
+        -> Templates
+          -> Provisioning Templates
 
 Templates unterscheiden sich nach Funktionalität:
 
