@@ -17,7 +17,6 @@ Zusätzlich lassen wir mit Foreman die Vergabe von IP Adressen (DHCP) und die Na
           -> 'betadots.training'
 
 - Tab Domain: DNS domain: `betadots.training`
-- Tab Domain: DNS Proxy: `foreman.betadots.training`
 
 Submit
 
