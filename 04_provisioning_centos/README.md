@@ -105,8 +105,9 @@ Wenn man einen eigenen anstelle der CentOS Mirror verwenden möchte:
 
     Foreman Login
       -> Hosts
-        -> Installation Media
-          -> Create medium
+        -> Provisioning Setup
+          -> Installation Media
+            -> Create medium
 
 Name eintragen, bei "Path" den http Pfad eintragen.
 Achtung: auf Namensauflösung achten!
