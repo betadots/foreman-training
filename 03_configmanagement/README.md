@@ -22,7 +22,7 @@ Jetzt werden die Module in Foreman bekannt gemacht:
 
     Foreman Login
       -> Configure
-        -> Puppet
+        -> Puppet ENC
           -> Environments
             -> 'Import environments from foreman.betadots.training'
 

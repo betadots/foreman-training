@@ -17,7 +17,6 @@ Zusätzlich lassen wir mit Foreman die Vergabe von IP Adressen (DHCP) und die Na
           -> 'betadots.training'
 
 - Tab Domain: DNS domain: `betadots.training`
-- Tab Domain: DNS Proxy: `foreman.betadots.training`
 
 Submit
 
@@ -57,7 +56,8 @@ Hier eventuell die Lifecycle Environment Repositories auswählen.
 
     Foreman Login
       -> Hosts
-        -> Provisioning Templates
+        -> Templates
+          -> Provisioning Templates
 
 Templates unterscheiden sich nach Funktionalität:
 
@@ -78,7 +78,8 @@ Beispiel Suchen: kind=PXELinux
 
     Foreman Login
       -> Hosts
-        -> Provisioning Templates
+        -> Templates
+          -> Provisioning Templates
 
 1. Stelle: Templates mit OS Assoziieren
 
@@ -104,8 +105,9 @@ Wenn man einen eigenen anstelle der CentOS Mirror verwenden möchte:
 
     Foreman Login
       -> Hosts
-        -> Installation Media
-          -> Create medium
+        -> Provisioning Setup
+          -> Installation Media
+            -> Create medium
 
 Name eintragen, bei "Path" den http Pfad eintragen.
 Achtung: auf Namensauflösung achten!

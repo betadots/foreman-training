@@ -15,13 +15,14 @@ Unter Content Credentials kann man GPG Keys und/oder SSL Zertifikate hinterlegen
     Foreman Login
       -> Content
         -> Content Credentials
-          -> Create Content Credential
+          -> Create New
 
-Name: CentOS 9 Stream
+Name: Rocky 9
 
-CentOS GPG Key kopieren vom mirror [http://mirror.centos.org/centos/RPM-GPG-KEY-CentOS-Official](http://mirror.centos.org/centos/RPM-GPG-KEY-CentOS-Official)
+Rocky-GPG-Key herunterladen von [https://rockylinux.org/resources/gpg-key-info](https://rockylinux.org/resources/gpg-key-info)
 
-    Save
+    Upload file
+      -> Create
 
 Wiederholen fuer PostgreSQL GPG Key mit [https://download.postgresql.org/pub/repos/yum/keys/PGDG-RPM-GPG-KEY-RHEL](https://download.postgresql.org/pub/repos/yum/keys/PGDG-RPM-GPG-KEY-RHEL)
 
@@ -70,29 +71,21 @@ Upstream URL: https://download.postgresql.org/pub/repos/yum/18/redhat/rhel-9-x86
 Repository Type: Yum Repositories
 
 URL: `https://ftp-stud.hs-esslingen.de/pub/Mirrors/centos-stream/9-stream/` (oder lokaler Mirror)
+Username: any
+Password: any
 
-    -> Sync now
+    -> Discover
+    
+Haken setzen bei
 
-Aeltere Foreman/Katello Versionen:
+/AppStream/x86_64/os/
+/BaseOS/x86_64/os/
 
-Angabe des Repo Pfades, dann "Discover".
+    -> Create Selected
+      -> Run Repository Creation
 
 Das kann einige Zeit dauern (5 min und mehr).
-Katello holt sich dabei die Metainformationen der gesamten CentOS 8 Repositories.
-
-`BaseOS/x86_64/os` auswaehlen.
-
-Klick: Create selected
-
-Product: New Product
-
-Name: CentOS9-stream
-
-GPG Key: aus Liste auswaehlen
-
-Verify SSL: nur aktivieren, wenn man upstream SSL pruefen moechte.
-
-Run Repository Creation
+Katello holt sich dabei die Metainformationen der gesamten CentOS 9 Repositories.
 
 #### Debian Repository - gross (min 30GB - Dauer: ca 3 Stunden) - (optional)
 
@@ -107,7 +100,7 @@ Lösung:
 2. Foreman aufräumen:
 
     foreman-maintain service stop
-    rm -fr /var/lib/pulp/media/assets ????
+    rm -fr /var/lib/pulp/media/artifact
     foreman-maintain service start
 
 Debian Repositories werden anders behandelt.
@@ -117,7 +110,7 @@ Zusätzlich muss die Distribution und Komponente sowie Architektur angegeben wer
 
     Foreman Login
       -> Content
-        -> Product
+        -> Products
           -> Create Product
 
 Name angeben -> Save
@@ -128,7 +121,7 @@ Name angeben: Debian 13
 
 Bei "Type" `deb` auswaehlen und die Repo Informationen eintragen:
 
-Upstream URL: `http://ftp.de.debian.org`
+Upstream URL: `http://ftp.de.debian.org/debian`
 
 Im Linuxhotel: `http://debian/`
 
@@ -158,9 +151,9 @@ Weitere Details findet man auf der Webseite von Foreman: [https://theforeman.org
 Wir beschreiben den Weg mit SCCM Plugin.
 Wenn SMT Server genutzt wird, dann wird ein normales Repository angelegt.
 
-Installation: `yum install -y tfm-rubygem-foreman_scc_manager`
+Installation: `yum install -y rubygem-foreman_scc_manager`
 Datenbank aktualisieren: `foreman-rake db:migrate`
-Neustart Foreman: `forman-maintain service restart --only foreman`
+Neustart Foreman: `foreman-maintain service restart --only foreman`
 
 Nun hat man unter Content einen neuen Eintrag: SuSE Subscription
 Hier kann man einen SCCM Account angeben.
@@ -169,7 +162,7 @@ Hier kann man einen SCCM Account angeben.
 
 ## Docker (optional)
 
-    Katello Login
+    Foreman Login
       -> Content
         -> Products
           -> Create Product
